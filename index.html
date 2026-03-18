@@ -23,11 +23,15 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
   body {
     font-family: 'Inter', sans-serif;
     background: var(--white);
     color: var(--navy);
-    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -627,7 +631,7 @@
     .event-value { font-size: 20px; }
     .event-card.highlight .event-title { font-size: 15px; }
 
-    .sources-menu { min-width: 220px; max-width: 280px; }
+    .sources-menu { min-width: 0; max-width: calc(100vw - 80px); width: max-content; }
 
     .footer { padding: 0 20px; }
     .footer-inner { flex-direction: column; gap: 12px; align-items: flex-start; }
