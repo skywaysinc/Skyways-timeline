@@ -731,6 +731,7 @@
           var cl = dot.className || '';
           if (cl.indexOf('contracts') !== -1) cards[t].setAttribute('data-category', 'contracts');
           else if (cl.indexOf('product') !== -1) cards[t].setAttribute('data-category', 'product');
+          else if (cl.indexOf('defense') !== -1) cards[t].setAttribute('data-category', 'defense');
           else if (cl.indexOf('milestone') !== -1) cards[t].setAttribute('data-category', 'milestone');
         }
       }
