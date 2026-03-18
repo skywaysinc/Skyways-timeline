@@ -570,6 +570,71 @@
   .year-section:nth-child(10) { animation-delay: 0.5s; }
   .year-section:nth-child(11) { animation-delay: 0.55s; }
 
+  /* ══ TABLET (768px – 1024px) ══ */
+  @media (max-width: 1024px) {
+    .brand-bar-inner { padding: 0 32px; }
+    .hero-inner { padding: 0 32px; }
+    .hero-inner h1 { font-size: 36px; letter-spacing: -1.2px; }
+    .stats-banner-inner { padding: 16px 32px; }
+    .sticky-header.minimized .stats-banner-inner { padding: 10px 32px; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); gap: 12px 0; }
+    .legend-row { flex-wrap: wrap; gap: 8px; }
+    .timeline-wrapper { padding: 40px 32px 48px; }
+    .year-section { grid-template-columns: 80px 1fr; }
+    .year-label { font-size: 26px; }
+    .events-col { padding-left: 28px; }
+    .footer { padding: 0 32px; }
+    .bottom-bar-inner { padding: 16px 32px; }
+  }
+
+  /* ══ MOBILE (<768px) ══ */
+  @media (max-width: 767px) {
+    .brand-bar { height: 64px; }
+    .brand-bar-inner { padding: 0 20px; gap: 10px; }
+    .logo-wrap { height: 42px; margin-left: -10px; }
+    .sticky-header.minimized .logo-wrap { height: 36px; }
+    .sticky-header.minimized .brand-bar { height: 52px; }
+    .brand-bar-inline-title { font-size: 11px; }
+    .brand-bar-label { display: none; }
+
+    .hero-section { padding: 28px 0 16px; }
+    .hero-inner { padding: 0 20px; }
+    .hero-inner h1 { font-size: 28px; letter-spacing: -0.8px; }
+    .hero-inner .subtitle { font-size: 13px; }
+
+    .stats-banner-inner { padding: 14px 20px; }
+    .sticky-header.minimized .stats-banner-inner { padding: 10px 20px; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); gap: 10px 0; }
+    .stat-value { font-size: 18px; }
+    .sticky-header.minimized .stat-value { font-size: 14px; }
+    .stat-label { font-size: 8px; letter-spacing: 1px; }
+
+    .legend-row { flex-wrap: wrap; gap: 6px; }
+    .legend-item { font-size: 9px; padding: 4px 8px; }
+    .legend-item:first-child { padding-left: 0; }
+
+    .timeline-wrapper { padding: 32px 20px 40px; }
+    .year-section { grid-template-columns: 1fr; gap: 0; }
+    .year-label-col { padding-bottom: 8px; }
+    .year-label-col::after { display: none; }
+    .year-label { font-size: 24px; position: relative; }
+    .events-col { padding: 0 0 36px 0; }
+
+    .event-card { grid-template-columns: 10px 1fr; gap: 12px; padding: 12px 16px; }
+    .event-card.highlight { padding: 16px 18px; }
+    .event-title { font-size: 14px; }
+    .event-detail { font-size: 12px; }
+    .event-value { font-size: 20px; }
+    .event-card.highlight .event-title { font-size: 15px; }
+
+    .sources-menu { min-width: 220px; max-width: 280px; }
+
+    .footer { padding: 0 20px; }
+    .footer-inner { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .footer-note { font-size: 10px; }
+    .bottom-bar-inner { padding: 14px 20px; flex-direction: column; gap: 8px; }
+  }
+
   @media print {
     .sticky-header { position: relative !important; }
     .hero-section { transform: none !important; opacity: 1 !important; }
