@@ -23,16 +23,10 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html {
-    overflow-x: clip;
-  }
-
   body {
     font-family: 'Inter', sans-serif;
     background: var(--white);
     color: var(--navy);
-    overflow-x: hidden;
-    width: 100%;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -172,6 +166,7 @@
   .stats-banner {
     background: var(--navy);
     border-top: 1px solid rgba(255,255,255,0.06);
+    overflow-x: clip;
   }
 
   .stats-banner-inner {
@@ -309,7 +304,7 @@
 
 
   /* ══ TIMELINE ══ */
-  .timeline-wrapper { max-width: 1440px; margin: 0 auto; padding: 56px 64px 64px; }
+  .timeline-wrapper { max-width: 1440px; margin: 0 auto; padding: 56px 64px 64px; overflow-x: clip; }
 
   .year-section {
     display: grid; grid-template-columns: 100px 1fr; gap: 0; position: relative;
