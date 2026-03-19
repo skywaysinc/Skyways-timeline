@@ -1660,8 +1660,13 @@
     var card = trigger.closest('[class*="event-card"]');
 
     if (isTouchDevice) {
-      // Touch: toggle on tap
+      // Touch: toggle on tap, but allow source link clicks through
       trigger.addEventListener('click', function(e) {
+        var link = e.target.closest('.source-link');
+        if (link && link.href && link.href !== '#' && !link.href.endsWith('#')) {
+          // Let the link navigate naturally
+          return;
+        }
         e.preventDefault();
         e.stopPropagation();
         var isOpen = menu.classList.contains('active');
