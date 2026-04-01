@@ -337,18 +337,19 @@
     cursor: default;
     opacity: 1;
     position: relative;
-    overflow: hidden;
   }
 
   .event-card-bg {
     position: absolute;
     top: 0; right: 0;
     width: 45%; height: 100%;
+    border-radius: 8px;
     background-size: cover;
     background-position: center;
     opacity: 0.28;
     transition: opacity 0.3s ease;
     pointer-events: none;
+    overflow: hidden;
     -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,1) 100%);
     mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,1) 100%);
   }
@@ -467,7 +468,7 @@
     visibility: hidden;
     transform: translateY(-4px);
     transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
-    z-index: 50;
+    z-index: 10;
     pointer-events: none;
   }
 
