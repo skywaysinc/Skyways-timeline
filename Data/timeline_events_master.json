@@ -23,9 +23,9 @@
     },
     "sort_date": "2017-01",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+      "Skyways (hero)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_hero"
   },
   {
     "id": 2,
@@ -394,9 +394,9 @@
     "source_urls": {},
     "sort_date": "2022-01",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+      "Skyways (hero)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_hero"
   },
   {
     "id": 19,
@@ -610,9 +610,9 @@
     },
     "sort_date": "2024-06",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://cdn.sanity.io/images/zlpq6b94/production/5ed7a8c7e22b777cefa200bf895e574ec21f24db-4080x1884.jpg?rect=246,0,3589,1884&w=1200&h=630&fit=crop&auto=format"
+      "Skyways (hero)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_hero"
   },
   {
     "id": 29,
@@ -631,9 +631,9 @@
     "source_urls": {},
     "sort_date": "2024-07",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
+      "Skyways (V3 hover)": "https://www.skyways.com/_astro/v3-hover.BZwWRBFB_t27Og.webp"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_v3_hover"
   },
   {
     "id": 30,
@@ -652,9 +652,9 @@
     "source_urls": {},
     "sort_date": "2024-10",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
+      "Skyways (about)": "https://www.skyways.com/_astro/image1.CXqs2Yt9_20n9Rg.webp"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_image1"
   },
   {
     "id": 31,
@@ -673,9 +673,9 @@
     "source_urls": {},
     "sort_date": "2024-07",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
+      "Skyways (video still)": "https://www.skyways.com/_astro/video-still.KvHjdBXj_WuHxn.webp"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_video_still"
   },
   {
     "id": 32,
@@ -716,8 +716,9 @@
     },
     "sort_date": "2024-05",
     "source_thumbnails": {
-      "Austin American-Statesman (Feb 2026)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
-    }
+      "Skyways (about 2)": "https://www.skyways.com/_astro/image2.CrwZsZIk_v3iRL.webp"
+    },
+    "thumbnail_status": "fallback_image2"
   },
   {
     "id": 34,
@@ -764,8 +765,10 @@
     },
     "sort_date": "2025-06",
     "source_thumbnails": {
-      "BusinessWire (Jun 2025)": "https://cdn.sanity.io/images/zlpq6b94/production/5ed7a8c7e22b777cefa200bf895e574ec21f24db-4080x1884.jpg?rect=246,0,3589,1884&w=1200&h=630&fit=crop&auto=format"
-    }
+      "Skyways (brand)": "https://www.skyways.com/og.png",
+      "BusinessWire (Jun 2025)": "https://cdn.sanity.io/images/zlpq6b94/production/5ed7a8c7e22b777cefa200bf895e574"
+    },
+    "thumbnail_status": "fallback_og"
   },
   {
     "id": 36,
@@ -805,8 +808,10 @@
     },
     "sort_date": "2025-08",
     "source_thumbnails": {
-      "BusinessWire (Aug 2025)": "https://cdn.sanity.io/images/zlpq6b94/production/a601a8d365910997fd74e00880a3068285182c47-5970x3039.jpg?rect=91,0,5789,3039&w=1200&h=630&fit=crop&auto=format"
-    }
+      "Skyways (V3 hover)": "https://www.skyways.com/_astro/v3-hover.BZwWRBFB_t27Og.webp",
+      "BusinessWire (Aug 2025)": "https://cdn.sanity.io/images/zlpq6b94/production/a601a8d365910997fd74e00880a3068"
+    },
+    "thumbnail_status": "fallback_v3_hover"
   },
   {
     "id": 38,
@@ -974,9 +979,9 @@
     "source_urls": {},
     "sort_date": "2026-06",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://www.skyways.com/_astro/v3-hover.BZwWRBFB_t27Og.webp"
+      "Skyways (V3 hover)": "https://www.skyways.com/_astro/v3-hover.BZwWRBFB_t27Og.webp"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_v3_hover"
   },
   {
     "id": 46,
@@ -994,8 +999,9 @@
     },
     "sort_date": "2026-07",
     "source_thumbnails": {
-      "Austin American-Statesman (Feb 2026)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
-    }
+      "Skyways (video still)": "https://www.skyways.com/_astro/video-still.KvHjdBXj_WuHxn.webp"
+    },
+    "thumbnail_status": "fallback_video_still"
   },
   {
     "id": 47,
@@ -1013,8 +1019,9 @@
     },
     "sort_date": "2027-12",
     "source_thumbnails": {
-      "Austin American-Statesman (Feb 2026)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
-    }
+      "Skyways (hype still)": "https://www.skyways.com/_astro/hype-still.zGCakefh_1kEicT.webp"
+    },
+    "thumbnail_status": "fallback_hype_still"
   },
   {
     "id": 100,
@@ -1036,9 +1043,9 @@
     },
     "sort_date": "2017-07",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+      "Skyways (brand)": "https://www.skyways.com/og.png"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_og"
   },
   {
     "id": 101,
@@ -1055,9 +1062,9 @@
     "source_urls": {},
     "sort_date": "2017-01",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+      "Skyways (about)": "https://www.skyways.com/_astro/image1.CXqs2Yt9_20n9Rg.webp"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_image1"
   },
   {
     "id": 102,
@@ -1074,9 +1081,9 @@
     "source_urls": {},
     "sort_date": "2020-01",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+      "Skyways (V2 aboard ship)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_v2_ship"
   },
   {
     "id": 103,
@@ -1094,9 +1101,9 @@
     },
     "sort_date": "2016-06",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+      "Skyways (video still)": "https://www.skyways.com/_astro/video-still.KvHjdBXj_WuHxn.webp"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_video_still"
   },
   {
     "id": 104,
@@ -1115,9 +1122,9 @@
     "source_urls": {},
     "sort_date": "2017-06",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+      "Skyways (hype still)": "https://www.skyways.com/_astro/hype-still.zGCakefh_1kEicT.webp"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_hype_still"
   },
   {
     "id": 105,
@@ -1136,9 +1143,9 @@
     "source_urls": {},
     "sort_date": "2017-07",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+      "Skyways (about 2)": "https://www.skyways.com/_astro/image2.CrwZsZIk_v3iRL.webp"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_image2"
   },
   {
     "id": 106,
@@ -1157,8 +1164,8 @@
     "source_urls": {},
     "sort_date": "2018-04",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
+      "Skyways (about)": "https://www.skyways.com/_astro/image1.CXqs2Yt9_20n9Rg.webp"
     },
-    "thumbnail_status": "fallback_skyways"
+    "thumbnail_status": "fallback_image1"
   }
 ]
