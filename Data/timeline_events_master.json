@@ -221,8 +221,7 @@
     },
     "sort_date": "2019-10",
     "source_thumbnails": {
-      "Commercial UAV News (May 2020)": "https://s3.divcom.com/www.commercialuavnews.com/images/181%20evtol%20vehicle%20side%20view.JPG.large.1024x1024.jpeg",
-      "The War Zone (Feb 2021)": "https://thedrive.com/content/2021/02/blue-water-top-2.jpg?quality=85&w=1200"
+      "Commercial UAV News (May 2020)": "https://s3.divcom.com/www.commercialuavnews.com/images/181%20evtol%20vehicle%20side%20view.JPG.large.1024x1024.jpeg"
     }
   },
   {
@@ -312,7 +311,7 @@
     },
     "sort_date": "2021-02",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://cdn.sanity.io/images/zlpq6b94/production/5ed7a8c7e22b777cefa200bf895e574ec21f24db-4080x1884.jpg?rect=246,0,3589,1884&w=1200&h=630&fit=crop&auto=format"
+      "Skyways (hype still)": "https://www.skyways.com/_astro/hype-still.zGCakefh_1kEicT.webp"
     },
     "thumbnail_status": "fallback_skyways"
   },
@@ -435,7 +434,7 @@
     },
     "sort_date": "2022-07",
     "source_thumbnails": {
-      "Skyways (fallback)": "https://cdn.sanity.io/images/zlpq6b94/production/5ed7a8c7e22b777cefa200bf895e574ec21f24db-4080x1884.jpg?rect=246,0,3589,1884&w=1200&h=630&fit=crop&auto=format"
+      "Skyways (about 2)": "https://www.skyways.com/_astro/image2.CrwZsZIk_v3iRL.webp"
     },
     "thumbnail_status": "fallback_skyways"
   },
@@ -741,8 +740,7 @@
     },
     "sort_date": "2025-05",
     "source_thumbnails": {
-      "BusinessWire (Jun 2025)": "https://cdn.sanity.io/images/zlpq6b94/production/5ed7a8c7e22b777cefa200bf895e574ec21f24db-4080x1884.jpg?rect=246,0,3589,1884&w=1200&h=630&fit=crop&auto=format",
-      "DroneLife (Jun 2025)": "https://dronelife.com/wp-content/uploads/2025/06/Skyways.jpg"
+      "Skyways (hero)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
     }
   },
   {
@@ -765,8 +763,7 @@
     },
     "sort_date": "2025-06",
     "source_thumbnails": {
-      "Skyways (brand)": "https://www.skyways.com/og.png",
-      "BusinessWire (Jun 2025)": "https://cdn.sanity.io/images/zlpq6b94/production/5ed7a8c7e22b777cefa200bf895e574"
+      "Skyways (brand)": "https://www.skyways.com/og.png"
     },
     "thumbnail_status": "fallback_og"
   },
@@ -788,8 +785,7 @@
     },
     "sort_date": "2025-08",
     "source_thumbnails": {
-      "BusinessWire (Aug 2025)": "https://cdn.sanity.io/images/zlpq6b94/production/a601a8d365910997fd74e00880a3068285182c47-5970x3039.jpg?rect=91,0,5789,3039&w=1200&h=630&fit=crop&auto=format",
-      "DroneLife (Aug 2025)": "https://dronelife.com/wp-content/uploads/2019/03/Airbus-Skyways-drone2.jpg"
+      "Skyways (V2 aboard ship)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
     }
   },
   {
@@ -808,8 +804,7 @@
     },
     "sort_date": "2025-08",
     "source_thumbnails": {
-      "Skyways (V3 hover)": "https://www.skyways.com/_astro/v3-hover.BZwWRBFB_t27Og.webp",
-      "BusinessWire (Aug 2025)": "https://cdn.sanity.io/images/zlpq6b94/production/a601a8d365910997fd74e00880a3068"
+      "Skyways (V3 hover)": "https://www.skyways.com/_astro/v3-hover.BZwWRBFB_t27Og.webp"
     },
     "thumbnail_status": "fallback_v3_hover"
   },
