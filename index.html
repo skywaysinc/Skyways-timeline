@@ -18,6 +18,7 @@
     --teal: #42C6C1;
     --orange: #FF9013;
     --red: #E2334A;
+    --green: #34A853;
     --white: #FFFFFF;
   }
 
@@ -249,6 +250,7 @@
 
   .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; transition: opacity 0.15s ease; }
   .legend-dot.contracts { background: var(--blue); }
+  .legend-dot.funding { background: var(--green); }
   .legend-dot.product { background: var(--purple); }
   .legend-dot.milestone { background: var(--teal); }
   .legend-dot.defense { background: var(--orange); }
@@ -351,6 +353,8 @@
 
   .event-dot.contracts { background: var(--blue); }
   .event-dot.contracts::after { background: var(--blue); }
+  .event-dot.funding { background: var(--green); }
+  .event-dot.funding::after { background: var(--green); }
   .event-dot.product { background: var(--purple); }
   .event-dot.product::after { background: var(--purple); }
   .event-dot.milestone { background: var(--teal); }
@@ -387,6 +391,7 @@
   }
 
   .event-tag.contracts { background: rgba(0,154,235,0.08); color: var(--blue); }
+  .event-tag.funding { background: rgba(52,168,83,0.08); color: var(--green); }
   .event-tag.product { background: rgba(111,82,174,0.08); color: var(--purple); }
   .event-tag.milestone { background: rgba(66,198,193,0.08); color: #2a9e9a; }
   .event-tag.defense { background: rgba(255,144,19,0.08); color: var(--orange); }
@@ -488,9 +493,11 @@
   .event-card.highlight .event-title { color: var(--white); font-size: 17px; }
   .event-card.highlight .event-detail { color: rgba(255,255,255,0.6); }
   .event-card.highlight .event-tag.contracts { background: rgba(0,154,235,0.2); color: var(--blue); }
+  .event-card.highlight .event-tag.funding { background: rgba(52,168,83,0.2); color: var(--green); }
   .event-card.highlight .event-tag.milestone { background: rgba(66,198,193,0.2); color: var(--teal); }
   .event-card.highlight .event-tag.defense { background: rgba(255,144,19,0.2); color: var(--orange); }
   .event-card.highlight .event-dot.contracts { background: var(--blue); }
+  .event-card.highlight .event-dot.funding { background: var(--green); }
   .event-card.highlight .event-dot.milestone { background: var(--teal); }
   .event-card.highlight .event-dot.defense { background: var(--orange); }
   .event-card.highlight .sources-label { color: var(--gray-50); }
@@ -677,19 +684,20 @@
   </div></div>
   <div class="hero-wrapper" id="heroWrapper"><div class="hero-section"><div class="hero-inner">
     <h1>Born in Stealth.<br>Proven in Theater.</h1>
-    <div class="subtitle">Founded 2017 &#183; Stealth exit December 2025 &#183; All publicly verified milestones</div>
+    <div class="subtitle">Founded 2017 &#183; Stealth exit November 2025 &#183; All publicly verified milestones</div>
   </div></div></div>
   <div class="stats-banner"><div class="stats-banner-inner">
     <div class="stats-row">
-      <div class="stat"><div class="stat-value accent">$39M+</div><div class="stat-label">Gov&#8217;t Contracts</div></div>
+      <div class="stat"><div class="stat-value accent">$40M+</div><div class="stat-label">Gov&#8217;t Contracts</div></div>
       <div class="stat"><div class="stat-value">1,100+</div><div class="stat-label">Flights Logged</div></div>
       <div class="stat"><div class="stat-value">20+</div><div class="stat-label">Aircraft Iterations</div></div>
       <div class="stat"><div class="stat-value">3</div><div class="stat-label">Continents</div></div>
       <div class="stat"><div class="stat-value lime-accent">1/30th</div><div class="stat-label">Cost of Helicopter</div></div>
-      <div class="stat"><div class="stat-value">6 yrs</div><div class="stat-label">Navy Relationship</div></div>
+      <div class="stat"><div class="stat-value">7 yrs</div><div class="stat-label">Navy Relationship</div></div>
     </div>
     <div class="legend-row">
-      <div class="legend-item" data-filter="contracts" onclick="toggleFilter('contracts')"><div class="legend-dot contracts"></div>Contracts &amp; Funding<div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
+      <div class="legend-item" data-filter="contracts" onclick="toggleFilter('contracts')"><div class="legend-dot contracts"></div>Contracts<div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
+      <div class="legend-item" data-filter="funding" onclick="toggleFilter('funding')"><div class="legend-dot funding"></div>Funding<div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
       <div class="legend-item" data-filter="product" onclick="toggleFilter('product')"><div class="legend-dot product"></div>Product Development<div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
       <div class="legend-item" data-filter="defense" onclick="toggleFilter('defense')"><div class="legend-dot defense"></div>Defense Milestones<div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
       <div class="legend-item" data-filter="milestone" onclick="toggleFilter('milestone')"><div class="legend-dot milestone"></div>Major Milestones<div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>

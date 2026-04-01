@@ -1,0 +1,1167 @@
+[
+  {
+    "id": 1,
+    "year": "2017",
+    "date": "2017-01",
+    "title": "Skyways Air Transportation Founded",
+    "category": "Major Milestones",
+    "detail": "Charles Acknin, born near Airbus HQ in southern France, co-founded Skyways in Austin, TX with Chris Craighill after nearly 7 years at Google as a senior software engineer on core search. The company began 'not with a fuselage but with code,' reflecting Acknin's software-first philosophy applied to autonomous flight. Delaware incorporation filed February 13, 2017.",
+    "tag": "Internal",
+    "sources": [
+      "Skyways Internal — Charles Acknin",
+      "OpenCorporates — Delaware Filing (Feb 13, 2017)",
+      "Y Combinator — Skyways Company Profile",
+      "SAM.gov — Business Start Date Feb 13, 2017"
+    ],
+    "charles_corrections": [
+      "Round II: Only two co-founders, Anurag Sabbarwal was not a co-founder"
+    ],
+    "source_urls": {
+      "OpenCorporates — Delaware Filing (Feb 13, 2017)": "https://opencorporates.com/companies/us_tx/0802663414",
+      "Y Combinator — Skyways Company Profile": "https://www.ycombinator.com/companies/skyways",
+      "SAM.gov — Business Start Date Feb 13, 2017": "https://opengovus.com/sam-entity/DATMBHX83MN7"
+    },
+    "sort_date": "2017-01",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 2,
+    "year": "2017",
+    "date": "2017-06",
+    "title": "Y Combinator S17 Batch",
+    "category": "Major Milestones",
+    "detail": "Accepted into Y Combinator's Summer 2017 batch. Raised $120K pre-seed from Y Combinator and began building the initial aircraft prototypes in the Bay Area before relocating to Austin, TX.",
+    "tag": "Milestone",
+    "sources": [
+      "Crunchbase",
+      "FlyEye — Innovator Series",
+      "The Drone Girl — Inside Skyways (Nov 2025)"
+    ],
+    "source_urls": {
+      "Crunchbase": "https://www.crunchbase.com/organization/skyways",
+      "FlyEye — Innovator Series": "https://www.flyeye.io/skyways-autonomous-long-range-cargo-drones/",
+      "The Drone Girl — Inside Skyways (Nov 2025)": "https://www.thedronegirl.com/2025/11/21/skyways/"
+    },
+    "sort_date": "2017-06",
+    "source_thumbnails": {
+      "FlyEye — Innovator Series": "https://www.flyeye.io/wp-content/uploads/2025/10/Skyways-1028x685-1-e1760987568908-1000x600.webp",
+      "The Drone Girl — Inside Skyways (Nov 2025)": "https://i0.wp.com/www.thedronegirl.com/wp-content/uploads/2025/11/DSC01482-scaled.jpeg?fit=2560%2C1707&ssl=1"
+    }
+  },
+  {
+    "id": 3,
+    "year": "2017",
+    "date": "2017-01",
+    "title": "Used Firefly's Office & Rocket Test Site, Cedar Park, TX",
+    "category": "Major Milestones",
+    "detail": "Charles Acknin along with co-founder Chris Craighill (formerly at Firefly Aerospace) secured access to Firefly's shop and office in Cedar Park and their rocket test site at Briggs, TX for flight testing.",
+    "tag": "Internal",
+    "sources": [
+      "Skyways Internal — Charles Acknin",
+      "The Drone Girl — Inside Skyways (Nov 2025)"
+    ],
+    "source_urls": {
+      "The Drone Girl — Inside Skyways (Nov 2025)": "https://www.thedronegirl.com/2025/11/21/skyways/"
+    },
+    "sort_date": "2017-01",
+    "source_thumbnails": {
+      "The Drone Girl — Inside Skyways (Nov 2025)": "https://i0.wp.com/www.thedronegirl.com/wp-content/uploads/2025/11/DSC01482-scaled.jpeg?fit=2560%2C1707&ssl=1"
+    }
+  },
+  {
+    "id": 4,
+    "year": "2019",
+    "date": "2019-12",
+    "title": "End of Seed Fundraising | Rolling Close",
+    "category": "Funding",
+    "detail": "Skyways raised its seed round on a rolling basis over the first several years of the company, bringing in capital as needed rather than in a single close. Early seed investors included Capital Factory, Social Capital, NextView Ventures, and others.",
+    "tag": "Funding",
+    "sources": [
+      "Skyways Internal — Charles Acknin",
+      "Crunchbase — Skyways Seed Round (Jul 2017)",
+      "TechCrunch — YC S17 Demo Day (Aug 21, 2017)"
+    ],
+    "charles_corrections": [
+      "Round III: Removed UpHonest. Outlander VC and MVP Ventures came in later (2021+ Series A), not seed."
+    ],
+    "source_urls": {
+      "Crunchbase — Skyways Seed Round (Jul 2017)": "https://www.crunchbase.com/funding_round/skyways-seed--1ab8f93f",
+      "TechCrunch — YC S17 Demo Day (Aug 21, 2017)": "https://techcrunch.com/2017/08/21/y-combinator-summer-2017/"
+    },
+    "sort_date": "2019-12",
+    "source_thumbnails": {
+      "FlyEye — CEO Interview": "https://www.flyeye.io/wp-content/uploads/2025/10/Charles-Acknin-1000x600.webp"
+    }
+  },
+  {
+    "id": 5,
+    "year": "2017",
+    "date": "2017-05",
+    "title": "Moved Into Manor Office, 5,000 Square Feet",
+    "category": "Major Milestones",
+    "detail": "First official Skyways office and shop in Manor, TX at 5,000 square feet. Replaced the temporary Firefly shared space with a dedicated facility for aircraft development.",
+    "tag": "Internal",
+    "sources": [
+      "Skyways Internal — Charles Acknin",
+      "The Drone Girl — Inside Skyways (Nov 2025)"
+    ],
+    "source_urls": {
+      "The Drone Girl — Inside Skyways (Nov 2025)": "https://www.thedronegirl.com/2025/11/21/skyways/"
+    },
+    "sort_date": "2017-05",
+    "source_thumbnails": {
+      "The Drone Girl — Inside Skyways (Nov 2025)": "https://i0.wp.com/www.thedronegirl.com/wp-content/uploads/2025/11/DSC01482-scaled.jpeg?fit=2560%2C1707&ssl=1"
+    }
+  },
+  {
+    "id": 6,
+    "year": "2019",
+    "date": "2019-12",
+    "title": "End of Early Aircraft Prototyping | All-Electric Phase",
+    "category": "Product Development",
+    "detail": "Skyways iterated through initial all-electric Vertical Takeoff and Landing (VTOL) configurations. Aircraft were small-scale, used for proof-of-concept flights, and evolved rapidly through multiple designs before the Navy contract drove the shift to hybrid propulsion.",
+    "tag": "Product",
+    "sources": [
+      "Commercial UAV News — Pursuit of Autonomous Deliveries (May 2020)"
+    ],
+    "source_urls": {
+      "Commercial UAV News — Pursuit of Autonomous Deliveries (May 2020)": "https://www.commercialuavnews.com/infrastructure/skyways-and-the-pursuit-of-fully-autonomous-drone-deliveries"
+    },
+    "sort_date": "2019-12",
+    "source_thumbnails": {
+      "Commercial UAV News — Pursuit of Autonomous Deliveries (May 2020)": "https://s3.divcom.com/www.commercialuavnews.com/images/181%20evtol%20vehicle%20side%20view.JPG.large.1024x1024.jpeg"
+    }
+  },
+  {
+    "id": 7,
+    "year": "2017",
+    "date": "2017-12",
+    "title": "USMC/GTRI | First Purchase Order for Two V2.2 Aircraft",
+    "category": "Contracts",
+    "detail": "The United States Marine Corps (USMC), in partnership with the Georgia Institute of Technology / Georgia Tech Research Institute (GTRI), issued Skyways' very first purchase order for two V2.2 aircraft. This was Skyways' first-ever contract and a critical early validation of the platform's readiness for military customers.",
+    "tag": "Contract — USMC",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: This happened end of 2017 — first ever contract/PO. Navy Blue Water program only happened later in 2019."
+    ],
+    "source_urls": {},
+    "sort_date": "2017-12",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 8,
+    "year": "2019",
+    "date": "2019-03",
+    "title": "ANTX 2019 | Skyways Beats Boeing in Navy Competition",
+    "category": "Defense Milestones",
+    "detail": "Skyways won the Advanced Naval Technology Exercise (ANTX) 2019 competition organized by the U.S. Navy to demonstrate autonomous cargo resupply to a naval vessel on the Patuxent River, MD. The 18.5-ft wingspan drone carried a 20-lb payload 40 miles to a moving vessel, landed, and returned autonomously. Skyways was selected out of 65 companies, beating Boeing's offering.",
+    "tag": "Defense — U.S. Navy",
+    "sources": [
+      "Inside Unmanned Systems",
+      "Commercial UAV News (May 2020)"
+    ],
+    "source_urls": {
+      "Inside Unmanned Systems": "https://insideunmannedsystems.com/autonomous-cargo-resupply-operations-meet-critical-milestone/",
+      "Commercial UAV News (May 2020)": "https://www.commercialuavnews.com/infrastructure/skyways-and-the-pursuit-of-fully-autonomous-drone-deliveries"
+    },
+    "sort_date": "2019-03",
+    "source_thumbnails": {
+      "Inside Unmanned Systems": "https://insideunmannedsystems.com/wp-content/uploads/2019/10/skyways_ship_3.jpg",
+      "Commercial UAV News (May 2020)": "https://s3.divcom.com/www.commercialuavnews.com/images/181%20evtol%20vehicle%20side%20view.JPG.large.1024x1024.jpeg"
+    }
+  },
+  {
+    "id": 9,
+    "year": "2019",
+    "date": "2019-08",
+    "title": "Navy OTA Contract Awarded | Blue Water Maritime Logistics UAS",
+    "category": "Contracts",
+    "detail": "Following the ANTX 2019 competition win, the U.S. Navy awarded an Other Transaction Authority (OTA) contract to Skyways ($575,141) for the Blue Water Maritime Logistics Unmanned Aircraft System (UAS) program. This first Navy contract specifically funded the development of hybrid propulsion for the V2 platform.",
+    "tag": "Contract — U.S. Navy",
+    "sources": [
+      "Janes (2020)",
+      "USNI News (Aug 2021)"
+    ],
+    "charles_corrections": [
+      "Round III: The very first US Navy contract (2019) was specifically to do the hybrid propulsion."
+    ],
+    "source_urls": {
+      "Janes (2020)": "https://www.janes.com/osint-insights/defence-news/update-us-navy-acquires-skyways-aircraft-prototype-for-blue-water-maritime-logistics-uas",
+      "USNI News (Aug 2021)": "https://news.usni.org/2021/08/05/navy-considering-drone-delivery-for-essential-parts-at-sea"
+    },
+    "sort_date": "2019-08",
+    "source_thumbnails": {
+      "Janes (2020)": "https://www.janes.com/images/default-source/news-images/fg_3797467-jni-9077.jpg?sfvrsn=1263cb15_2",
+      "USNI News (Aug 2021)": "https://news.usni.org/wp-content/uploads/2021/08/skyways.jpeg"
+    }
+  },
+  {
+    "id": 10,
+    "year": "2019",
+    "date": "2019-10",
+    "title": "V2 Platform Development Accelerates",
+    "category": "Product Development",
+    "detail": "Navy requirements drive V2 specs: 30-lb payload (one cubic foot cargo volume), approximately 450 to 500 mile range. Hybrid fixed-wing design with 8 electric motors for Vertical Takeoff and Landing (VTOL) plus internal combustion engine for cruise flight. The platform iterates through sub-variants (V2.2, V2.5, V2.6, V2.6b) over subsequent years.",
+    "tag": "Product",
+    "sources": [
+      "Commercial UAV News (May 2020)",
+      "The War Zone (Feb 2021)"
+    ],
+    "source_urls": {
+      "Commercial UAV News (May 2020)": "https://www.commercialuavnews.com/infrastructure/skyways-and-the-pursuit-of-fully-autonomous-drone-deliveries",
+      "The War Zone (Feb 2021)": "https://www.thedrive.com/the-war-zone/39415/navy-tests-autonomous-aerial-supply-drone-from-its-newest-supercarrier"
+    },
+    "sort_date": "2019-10",
+    "source_thumbnails": {
+      "Commercial UAV News (May 2020)": "https://s3.divcom.com/www.commercialuavnews.com/images/181%20evtol%20vehicle%20side%20view.JPG.large.1024x1024.jpeg",
+      "The War Zone (Feb 2021)": "https://thedrive.com/content/2021/02/blue-water-top-2.jpg?quality=85&w=1200"
+    }
+  },
+  {
+    "id": 11,
+    "year": "2022",
+    "date": "2022-12",
+    "title": "End of Navy OTA Spiral Development | Follow-on Contracts",
+    "category": "Contracts",
+    "detail": "After the initial hybrid propulsion contract, the Navy Other Transaction Authority (OTA) expanded through multiple spiral development follow-on awards, growing to approximately four times its original value (approximately $2.3M). These follow-on awards funded progressive capability demonstrations including folding wings development and increasingly complex ship-based operations.",
+    "tag": "Contract — U.S. Navy",
+    "sources": [
+      "Janes (Nov 2021)",
+      "USNI News (Aug 2021)"
+    ],
+    "charles_corrections": [
+      "Round III: Clarified that spiral dev came after the initial hybrid propulsion work."
+    ],
+    "source_urls": {
+      "Janes (Nov 2021)": "https://www.janes.com/osint-insights/defence-news/update-skyways-attempting-autonomous-folding-wings-for-us-navy-blue-water-uas",
+      "USNI News (Aug 2021)": "https://news.usni.org/2021/08/05/navy-considering-drone-delivery-for-essential-parts-at-sea"
+    },
+    "sort_date": "2022-12",
+    "source_thumbnails": {
+      "Janes (Nov 2021)": "https://www.janes.com/images/default-source/news-images/fg_3863707-jni-9880.jpg?sfvrsn=210c72c6_2",
+      "USNI News (Aug 2021)": "https://news.usni.org/wp-content/uploads/2021/08/skyways.jpeg"
+    }
+  },
+  {
+    "id": 12,
+    "year": "2020",
+    "date": "2020-04",
+    "title": "V2 Flight Testing & Continuous Iteration",
+    "category": "Product Development",
+    "detail": "Continuous refinement through sub-variants (V2.2, V2.5, V2.6, V2.6b). Flight testing near Giddings, TX with progressive capability additions driven by Navy operational requirements.",
+    "tag": "Product",
+    "sources": [
+      "Commercial UAV News (May 2020)"
+    ],
+    "charles_corrections": [
+      "Round III: Removed SkyNav reference (SkyNav started Q2 2023, not 2020). Removed Starlink reference (Starlink started end of 2024, not 2020)."
+    ],
+    "source_urls": {
+      "Commercial UAV News (May 2020)": "https://www.commercialuavnews.com/infrastructure/skyways-and-the-pursuit-of-fully-autonomous-drone-deliveries"
+    },
+    "sort_date": "2020-04",
+    "source_thumbnails": {
+      "Commercial UAV News (May 2020)": "https://s3.divcom.com/www.commercialuavnews.com/images/181%20evtol%20vehicle%20side%20view.JPG.large.1024x1024.jpeg"
+    }
+  },
+  {
+    "id": 13,
+    "year": "2021",
+    "date": "2021-02",
+    "title": "Carrier Deck Trials | USS Gerald R. Ford (CVN-78)",
+    "category": "Defense Milestones",
+    "detail": "Two weeks of autonomous Vertical Takeoff and Landing (VTOL) operations on the Navy's newest and most advanced aircraft carrier. V2.2 drone tested on the flight deck of USS Gerald R. Ford. Demonstrated the ability to operate from a carrier environment with hybrid-electric design, AI-driven flight system, 500-mile range, and 30-lb payload capacity.",
+    "tag": "Defense — U.S. Navy",
+    "sources": [
+      "The War Zone (Feb 2021)",
+      "USNI News (Aug 2021)"
+    ],
+    "source_urls": {
+      "The War Zone (Feb 2021)": "https://www.thedrive.com/the-war-zone/39415/navy-tests-autonomous-aerial-supply-drone-from-its-newest-supercarrier",
+      "USNI News (Aug 2021)": "https://news.usni.org/2021/08/05/navy-considering-drone-delivery-for-essential-parts-at-sea"
+    },
+    "sort_date": "2021-02",
+    "source_thumbnails": {
+      "The War Zone (Feb 2021)": "https://thedrive.com/content/2021/02/blue-water-top-2.jpg?quality=85&w=1200",
+      "USNI News (Aug 2021)": "https://news.usni.org/wp-content/uploads/2021/08/skyways.jpeg"
+    }
+  },
+  {
+    "id": 14,
+    "year": "2021",
+    "date": "2021-02",
+    "title": "SBIR Phase I | $47,775",
+    "category": "Contracts",
+    "detail": "Small Business Innovation Research (SBIR) topic AF203-CSO1 awarded by the United States Air Force (USAF). This $47,775 Phase I award began the Air Force Works (AFWERX) SBIR pathway that would eventually lead to the USAF awarding Skyways a $37M contract.",
+    "tag": "Contract — U.S. Air Force",
+    "sources": [
+      "SBIR.gov"
+    ],
+    "charles_corrections": [
+      "Round III: Rephrased from 'lead to $37M' to 'eventually lead to the USAF awarding Skyways a $37M contract'."
+    ],
+    "source_urls": {
+      "SBIR.gov": "https://www.sbir.gov/portfolio/1542801"
+    },
+    "sort_date": "2021-02",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://cdn.sanity.io/images/zlpq6b94/production/5ed7a8c7e22b777cefa200bf895e574ec21f24db-4080x1884.jpg?rect=246,0,3589,1884&w=1200&h=630&fit=crop&auto=format"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 15,
+    "year": "2021",
+    "date": "2021-07",
+    "title": "Ship-to-Ship Autonomous Flights",
+    "category": "Defense Milestones",
+    "detail": "V2 flies between USS Bainbridge (DDG-96) and USNS Joshua Humphreys (T-AO-188). These flights were conducted entirely by U.S. Navy personnel with no Skyways employees on either ship, demonstrating the system's operational maturity and ease of use by military operators.",
+    "tag": "Defense",
+    "sources": [
+      "USNI News (Aug 2021)"
+    ],
+    "charles_corrections": [
+      "Round III: Removed computer vision language — CV approach changed over time and the original description wasn't accurate for this period."
+    ],
+    "source_urls": {
+      "USNI News (Aug 2021)": "https://news.usni.org/2021/08/05/navy-considering-drone-delivery-for-essential-parts-at-sea"
+    },
+    "sort_date": "2021-07",
+    "source_thumbnails": {
+      "USNI News (Aug 2021)": "https://news.usni.org/wp-content/uploads/2021/08/skyways.jpeg"
+    }
+  },
+  {
+    "id": 16,
+    "year": "2021",
+    "date": "2021-04",
+    "title": "Moved Into Austin Cross Park Drive, 10,000 Square Feet",
+    "category": "Major Milestones",
+    "detail": "Facility expansion to 10,000 square feet on Cross Park Drive in Austin to support Navy contract execution and growing team.",
+    "tag": "Internal",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "source_urls": {},
+    "sort_date": "2021-04",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/video-still.KvHjdBXj_WuHxn.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 17,
+    "year": "2021",
+    "date": "2021-01",
+    "title": "V3 Initial Concept",
+    "category": "Product Development",
+    "detail": "Skyways begins initial concept work on the V3 next-generation platform, designed to carry approximately 100 lbs of cargo over 1,000 miles, roughly 3x the payload and range of the V2.",
+    "tag": "Product — V3",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: V3 timeline provided — initial concept started 2021."
+    ],
+    "source_urls": {},
+    "sort_date": "2021-01",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/v3-hover.BZwWRBFB_t27Og.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 18,
+    "year": "2022",
+    "date": "2022-01",
+    "title": "Series A | $13M (Thursday Ventures Lead)",
+    "category": "Funding",
+    "detail": "Skyways raised a $13M Series A led by Thursday Ventures, joined by MVP Ventures, Outlander VC, Defense Angels, Cathexis, Capital Factory, and other follow-on investors. Total raised at the close of the Series A was $17M.",
+    "tag": "Funding",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: Series A was missing entirely from the timeline. Added per Charles."
+    ],
+    "source_urls": {},
+    "sort_date": "2022-01",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 19,
+    "year": "2022",
+    "date": "2022-01",
+    "title": "DIU/USN/NAMD Contract",
+    "category": "Contracts",
+    "detail": "Skyways secured a contract through the Defense Innovation Unit (DIU) in partnership with the U.S. Navy and the Naval Air Systems Command Manned and Unmanned Development (NAMD). The award contract was directly issued by Army Contracting Command, New Jersey (ACC-NJ). Specific scope and value not publicly disclosed.",
+    "tag": "Contract — DIU / U.S. Navy",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: Corrected from ~2023 to 2022. Charles confirmed: 'We won the DIU contract/OTA in 2022.'"
+    ],
+    "source_urls": {},
+    "sort_date": "2022-01",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 20,
+    "year": "2022",
+    "date": "2022-07",
+    "title": "SBIR Phase II | $749,711",
+    "category": "Contracts",
+    "detail": "Air Force Works (AFWERX) Small Business Innovation Research (SBIR) pathway continues with $749,711 Phase II under topic AF203-CSO1. Funds further development along the pathway that would eventually lead to the $37M Strategic Funding Increase (STRATFI) contract.",
+    "tag": "Contract — U.S. Air Force",
+    "sources": [
+      "SBIR.gov"
+    ],
+    "source_urls": {
+      "SBIR.gov": "https://www.sbir.gov/portfolio/1542801"
+    },
+    "sort_date": "2022-07",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://cdn.sanity.io/images/zlpq6b94/production/5ed7a8c7e22b777cefa200bf895e574ec21f24db-4080x1884.jpg?rect=246,0,3589,1884&w=1200&h=630&fit=crop&auto=format"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 21,
+    "year": "2022",
+    "date": "2022-10",
+    "title": "V3 Subscale | First Test Flights",
+    "category": "Product Development",
+    "detail": "Skyways builds and flies a subscale version of the V3 platform, culminating in test flights in October 2022. This validates the aerodynamic design and hybrid propulsion concept before committing to full-scale development.",
+    "tag": "Product — V3",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: V3 subscale with test flights in Oct 2022."
+    ],
+    "source_urls": {},
+    "sort_date": "2022-10",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/v3-hover.BZwWRBFB_t27Og.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 22,
+    "year": "2022",
+    "date": "2022-12",
+    "title": "200+ NM Cargo Delivery Demonstrations",
+    "category": "Defense Milestones",
+    "detail": "Multi-mode operations at Naval Air Station (NAS) Patuxent River: ship-to-ship, ship-to-shore, shore-to-ship cargo delivery over 200 nautical miles. Skyways and Martin UAV demonstrated Vertical Takeoff and Landing (VTOL) cargo delivery capabilities.",
+    "tag": "Defense",
+    "sources": [
+      "DroneDJ (Dec 2022)",
+      "DroneXL (Jan 2023)"
+    ],
+    "source_urls": {
+      "DroneDJ (Dec 2022)": "https://dronedj.com/2022/12/28/us-navy-completes-drone-delivery-trials-to-and-from-ships/",
+      "DroneXL (Jan 2023)": "https://dronexl.co/2023/01/04/navy-drone-delivery-trials-ships-shore/"
+    },
+    "sort_date": "2022-12",
+    "source_thumbnails": {
+      "DroneDJ (Dec 2022)": "https://i0.wp.com/dronedj.com/wp-content/uploads/sites/2/2022/12/combined.jpeg?resize=1200%2C628&quality=82&strip=all&ssl=1",
+      "DroneXL (Jan 2023)": "https://dronexl.co/wp-content/uploads/2023/01/Screenshot-2023-01-04-at-11.21.52-AM.jpg"
+    }
+  },
+  {
+    "id": 23,
+    "year": "2023",
+    "date": "2023-02",
+    "title": "V3 Block 0 | Full-Scale First Flight",
+    "category": "Product Development",
+    "detail": "The first full-scale V3 aircraft (Block 0) achieves its maiden flight. This is a major engineering milestone transitioning from subscale proof-of-concept to a flyable full-size platform.",
+    "tag": "Product — V3",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: V3 Block 0 (full scale) first flew early 2023."
+    ],
+    "source_urls": {},
+    "sort_date": "2023-02",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/v3-hover.BZwWRBFB_t27Og.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 24,
+    "year": "2023",
+    "date": "2023-04",
+    "title": "SkyNav Autonomous Software Platform Launches",
+    "category": "Product Development",
+    "detail": "Skyways launches SkyNav, its proprietary autonomous software platform that coordinates multi-aircraft operations and integrates with third-party Unmanned Traffic Management (UTM) systems. SkyNav becomes the ground control system used across all Skyways operations.",
+    "tag": "Product",
+    "sources": [
+      "Skyways Internal — Charles Acknin",
+      "sUAS News — Arkona Milestone Story (Nov 2025)"
+    ],
+    "charles_corrections": [
+      "Round III: SkyNav started Q2 2023, not 2020 as previously stated."
+    ],
+    "source_urls": {
+      "sUAS News — Arkona Milestone Story (Nov 2025)": "https://www.suasnews.com/2025/11/milestone-story-skyways-delivers-precision-under-pressure-with-historic-long-range-offshore-cargo-drop/"
+    },
+    "sort_date": "2023-04",
+    "source_thumbnails": {
+      "sUAS News — Arkona Milestone Story (Nov 2025)": "https://i0.wp.com/www.suasnews.com/wp-content/uploads/2025/11/skyways-windfarm.webp?fit=1200%2C672&ssl=1"
+    }
+  },
+  {
+    "id": 25,
+    "year": "2023",
+    "date": "2023-06",
+    "title": "Fleet Battle Problem 23-1 | First Logistics Drone in a Fleet Exercise",
+    "category": "Defense Milestones",
+    "detail": "Autonomous flights from USNS Patuxent to Marines at Camp Lejeune, NC during Fleet Battle Problem 23-1. Skyways team worked with Naval Air Warfare Center Aircraft Division (NAWCAD), UX-24 Unmanned Test Squadron, United States Marine Corps (USMC), and Military Sealift Command (MSC). Five test flights with two drones demonstrating autonomous cargo delivery ship-to-shore and shore-to-ship.",
+    "tag": "Defense — U.S. Navy / USMC",
+    "sources": [
+      "DVIDS (Jun 2023)",
+      "Potomac Officers Club (Jun 2023)"
+    ],
+    "source_urls": {
+      "DVIDS (Jun 2023)": "https://www.dvidshub.net/news/447537/",
+      "Potomac Officers Club (Jun 2023)": "https://www.potomacofficersclub.com/us-naval-components-test-skyways-developed-blue-water-logistics-uas/"
+    },
+    "sort_date": "2023-06",
+    "source_thumbnails": {
+      "DVIDS (Jun 2023)": "https://d1ldvf68ux039x.cloudfront.net/thumbs/photos/2306/7870810/1000w_q95.jpg",
+      "Potomac Officers Club (Jun 2023)": "https://media.potomacofficersclub.com/2023/06/US-Naval-Components-Test-Skyways-Developed-Blue-Water-Logistics-UAS.png"
+    }
+  },
+  {
+    "id": 26,
+    "year": "2024",
+    "date": "2024-02",
+    "title": "V3 Block 1 | Full-Scale First Flight",
+    "category": "Product Development",
+    "detail": "V3 Block 1 (full scale) achieves first flight. Significant resources dedicated to V3 from mid-2023 onward. Block 1 incorporates lessons from Block 0 and prepares the platform for customer demonstrations.",
+    "tag": "Product — V3",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: V3 Block 1 (full scale) first flew early 2024."
+    ],
+    "source_urls": {},
+    "sort_date": "2024-02",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/v3-hover.BZwWRBFB_t27Og.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 27,
+    "year": "2024",
+    "date": "2024-06",
+    "title": "RIMPAC 2024 | USS Curtis Wilbur (DDG-54)",
+    "category": "Defense Milestones",
+    "detail": "Three Skyways aircraft launched and recovered from USS Curtis Wilbur (DDG-54) during Trident Warrior at the Rim of the Pacific Exercise (RIMPAC) 2024, the world's largest international maritime exercise. Simulated Just-In-Time Delivery of medical supplies and critical parts.",
+    "tag": "Defense",
+    "sources": [
+      "Defense News (Jul 2024)"
+    ],
+    "charles_corrections": [
+      "Round III: Corrected from 6 UAS to 3 Skyways aircraft on that DDG."
+    ],
+    "source_urls": {
+      "Defense News (Jul 2024)": "https://www.defensenews.com/news/your-navy/2024/07/08/navy-tests-using-drones-for-medical-supply-deliveries-during-rimpac/"
+    },
+    "sort_date": "2024-06",
+    "source_thumbnails": {
+      "Defense News (Jul 2024)": "https://www.armytimes.com/resizer/v2/TCIQQJM5RRHSJMHIWL7VR2L3BI.jpg?width=1200&auth=136829e101906de64b744765ce4615376cfafd42455e6ea8e756c25ac17341e1"
+    }
+  },
+  {
+    "id": 28,
+    "year": "2024",
+    "date": "2024-06",
+    "title": "USAF SBIR Phase 3 IDIQ Contract & STRATFI Selection",
+    "category": "Contracts",
+    "detail": "After submitting the Strategic Funding Increase (STRATFI) package in approximately September 2023, United States Air Force (USAF) Air Force Works (AFWERX) issued a Request for Proposal (RFP) to Skyways in early 2024 to begin V3 development. In June 2024, Skyways was awarded a Small Business Innovation Research (SBIR) Phase 3 Indefinite Delivery/Indefinite Quantity (IDIQ) contract to start turning V3 into a product. In the same month, Skyways received notification it had been selected for STRATFI funding, which would ultimately be awarded as the $37M contract in May 2025.",
+    "tag": "Contract — U.S. Air Force",
+    "sources": [
+      "SBIR.gov"
+    ],
+    "charles_corrections": [
+      "Round III: Cleaned up 'initial millions' language."
+    ],
+    "source_urls": {
+      "SBIR.gov": "https://www.sbir.gov/portfolio/1542801"
+    },
+    "sort_date": "2024-06",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://cdn.sanity.io/images/zlpq6b94/production/5ed7a8c7e22b777cefa200bf895e574ec21f24db-4080x1884.jpg?rect=246,0,3589,1884&w=1200&h=630&fit=crop&auto=format"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 29,
+    "year": "2024",
+    "date": "2024-07",
+    "title": "JSDF | First Resupply to JMSDF Destroyer in the Pacific",
+    "category": "Defense Milestones",
+    "detail": "Skyways conducts the first autonomous cargo resupply to a Japan Maritime Self-Defense Force (JMSDF) destroyer in the Pacific Ocean. Conducted through ANA Holdings and Beyond Visual Line of Sight (BVLOS) throughout. This marks Skyways' first operational engagement with an allied nation's navy.",
+    "tag": "Defense — JSDF (Japan)",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: JSDF operations were entirely missing from the timeline. Added per Charles."
+    ],
+    "source_urls": {},
+    "sort_date": "2024-07",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 30,
+    "year": "2024",
+    "date": "2024-10",
+    "title": "JSDF | Inter-Island Resupply with JASDF",
+    "category": "Defense Milestones",
+    "detail": "Skyways conducts inter-island autonomous cargo resupply with the Japan Air Self-Defense Force (JASDF) through ANA Holdings. All flights conducted Beyond Visual Line of Sight (BVLOS). Demonstrates Skyways' capability for allied nation military logistics across maritime and island environments.",
+    "tag": "Defense — JSDF (Japan)",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: JSDF operations were entirely missing from the timeline. Added per Charles."
+    ],
+    "source_urls": {},
+    "sort_date": "2024-10",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 31,
+    "year": "2024",
+    "date": "2024-07",
+    "title": "DIU Temperature-Controlled Payload Demo with III MEF",
+    "category": "Defense Milestones",
+    "detail": "Under a Defense Innovation Unit (DIU) contract modification, Skyways demonstrated Temperature Controlled Payload (TCP) delivery capability with III Marine Expeditionary Force (III MEF), the U.S. Marine Corps command in Okinawa responsible for Indo-Pacific operations.",
+    "tag": "Defense — USMC / III MEF",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: Reframed from 'III MEF operations' to accurately reflect this was a DIU contract mod for TCP demo. Not direct III MEF ops."
+    ],
+    "source_urls": {},
+    "sort_date": "2024-07",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 32,
+    "year": "2024",
+    "date": "2024-12",
+    "title": "Starlink Connectivity Added",
+    "category": "Product Development",
+    "detail": "Skyways adds Starlink satellite connectivity to its aircraft, transforming real-time operations. CEO Acknin described the improvement: 'Before Starlink, it felt like the AOL days... Now it is like watching Netflix.'",
+    "tag": "Product",
+    "sources": [
+      "The Drone Girl — From cargo to commuters (Dec 2025)"
+    ],
+    "charles_corrections": [
+      "Round III: Starlink started end of 2024, not 2020 as previously listed."
+    ],
+    "source_urls": {
+      "The Drone Girl — From cargo to commuters (Dec 2025)": "https://www.thedronegirl.com/2025/12/02/skyways-roadmap-cargo-drones-human-flight/"
+    },
+    "sort_date": "2024-12",
+    "source_thumbnails": {
+      "The Drone Girl — From cargo to commuters (Dec 2025)": "https://i0.wp.com/www.thedronegirl.com/wp-content/uploads/2025/11/DSC01472-scaled.jpeg?fit=2560%2C1707&ssl=1"
+    }
+  },
+  {
+    "id": 33,
+    "year": "2024",
+    "date": "2024-05",
+    "title": "Moved into Austin Tech Ridge, 25,000 Square Feet",
+    "category": "Major Milestones",
+    "detail": "New 25,000 square foot facility at Tech Ridge in North Austin provides manufacturing space for V3 production ramp. 750-acre test site near Giddings, TX used for flight testing.",
+    "tag": "Internal",
+    "sources": [
+      "Austin American-Statesman (Feb 2026)",
+      "Skyways Internal — Charles Acknin"
+    ],
+    "source_urls": {
+      "Austin American-Statesman (Feb 2026)": "https://www.statesman.com/business/technology/article/austin-skyways-autonomous-drone-aircraft-21311896.php"
+    },
+    "sort_date": "2024-05",
+    "source_thumbnails": {
+      "Austin American-Statesman (Feb 2026)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+    }
+  },
+  {
+    "id": 34,
+    "year": "2025",
+    "date": "2025-05",
+    "title": "$37M U.S. Air Force STRATFI Contract",
+    "category": "Contracts",
+    "detail": "Skyways awarded a $37M contract through Air Force Works (AFWERX) Strategic Funding Increase (STRATFI), one of the largest STRATFI awards ever given to an autonomous drone company. Funds V3 transition from prototype to full-rate production. STRATFI is a pathway to a Program of Record (PoR), a formal Department of Defense (DoD) acquisition designation that unlocks large-scale, long-term procurement. Achieving PoR status would represent a major validation of Skyways as a defense platform and open the door to sustained government contracts at scale.",
+    "tag": "Contract — U.S. Air Force",
+    "sources": [
+      "BusinessWire (Jun 2025)",
+      "DroneLife (Jun 2025)"
+    ],
+    "charles_corrections": [
+      "Round III: Added Program of Record context. STRATFI is a pathway to PoR, which is a big deal for Skyways."
+    ],
+    "source_urls": {
+      "BusinessWire (Jun 2025)": "https://www.businesswire.com/news/home/20250609862238/en/",
+      "DroneLife (Jun 2025)": "https://dronelife.com/2025/06/09/skyways-afwerx-contract/"
+    },
+    "sort_date": "2025-05",
+    "source_thumbnails": {
+      "BusinessWire (Jun 2025)": "https://cdn.sanity.io/images/zlpq6b94/production/5ed7a8c7e22b777cefa200bf895e574ec21f24db-4080x1884.jpg?rect=246,0,3589,1884&w=1200&h=630&fit=crop&auto=format",
+      "DroneLife (Jun 2025)": "https://dronelife.com/wp-content/uploads/2025/06/Skyways.jpg"
+    }
+  },
+  {
+    "id": 35,
+    "year": "2025",
+    "date": "2025-06",
+    "title": "$7M Private Capital Raise + $5M Debt Facility for STRATFI Match",
+    "category": "Funding",
+    "detail": "Skyways raised $7M in private equity capital to meet the Strategic Funding Increase (STRATFI) 1:1:2 Government:Small Business Innovation Research (SBIR):Private matching structure. Additionally, Skyways secured a $5M debt facility from defense-specialist lender Leonid Capital Partners to accelerate V3 production for the Department of Defense (DoD).",
+    "tag": "Funding",
+    "sources": [
+      "BusinessWire (Jun 2025)",
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: Corrected — $7M equity was separate from $5M debt. Not $7M total including debt."
+    ],
+    "source_urls": {
+      "BusinessWire (Jun 2025)": "https://www.businesswire.com/news/home/20250609862238/en/"
+    },
+    "sort_date": "2025-06",
+    "source_thumbnails": {
+      "BusinessWire (Jun 2025)": "https://cdn.sanity.io/images/zlpq6b94/production/5ed7a8c7e22b777cefa200bf895e574ec21f24db-4080x1884.jpg?rect=246,0,3589,1884&w=1200&h=630&fit=crop&auto=format"
+    }
+  },
+  {
+    "id": 36,
+    "year": "2025",
+    "date": "2025-08",
+    "title": "Project ULTRA | 20 Operational Flights for DoD",
+    "category": "Defense Milestones",
+    "detail": "Sole Unmanned Aircraft System (UAS) provider for Project ULTRA (UAS Logistics, Traffic, Response and Autonomy), sponsored by the Office of the Under Secretary of Defense (OUSD). 20 operational flights (10 round trips) between Grand Forks Air Force Base and Cavalier Space Force Station, ND. Delivered 230 lbs of cargo including temperature-controlled blood. First flights without a chase plane on a military installation.",
+    "tag": "Defense — DoD",
+    "sources": [
+      "BusinessWire (Aug 2025)",
+      "DroneLife (Aug 2025)"
+    ],
+    "source_urls": {
+      "BusinessWire (Aug 2025)": "https://www.businesswire.com/news/home/20250821576316/en/",
+      "DroneLife (Aug 2025)": "https://dronelife.com/2025/08/22/skyways-completes-historic-cargo-drone-flights-for-u-s-military/"
+    },
+    "sort_date": "2025-08",
+    "source_thumbnails": {
+      "BusinessWire (Aug 2025)": "https://cdn.sanity.io/images/zlpq6b94/production/a601a8d365910997fd74e00880a3068285182c47-5970x3039.jpg?rect=91,0,5789,3039&w=1200&h=630&fit=crop&auto=format",
+      "DroneLife (Aug 2025)": "https://dronelife.com/wp-content/uploads/2019/03/Airbus-Skyways-drone2.jpg"
+    }
+  },
+  {
+    "id": 37,
+    "year": "2025",
+    "date": "2025-08",
+    "title": "V3 Block 1 | First Customer Flights",
+    "category": "Product Development",
+    "detail": "V3 flies first customer missions during Project ULTRA at GrandSKY, ND. Nearly 200 test flights completed including 8-hour heavy-fuel engine endurance flights. First customer demonstration of V3 Block 1 flying Beyond Visual Line of Sight (BVLOS) in the national airspace.",
+    "tag": "Product — V3",
+    "sources": [
+      "BusinessWire (Aug 2025)"
+    ],
+    "source_urls": {
+      "BusinessWire (Aug 2025)": "https://www.businesswire.com/news/home/20250821576316/en/"
+    },
+    "sort_date": "2025-08",
+    "source_thumbnails": {
+      "BusinessWire (Aug 2025)": "https://cdn.sanity.io/images/zlpq6b94/production/a601a8d365910997fd74e00880a3068285182c47-5970x3039.jpg?rect=91,0,5789,3039&w=1200&h=630&fit=crop&auto=format"
+    }
+  },
+  {
+    "id": 38,
+    "year": "2025",
+    "date": "2025-09",
+    "title": "11 Consecutive Resupply Flights in One Day",
+    "category": "Product Development",
+    "detail": "V2 operational record: 11 flights, 9.4 hrs, 466 NM, zero human intervention, 8-min average turnarounds. Demonstrated the operational tempo required for fleet-scale logistics.",
+    "tag": "Product",
+    "sources": [
+      "DroneVideos.com (Jun 2025)"
+    ],
+    "source_urls": {
+      "DroneVideos.com (Jun 2025)": "https://dronevideos.com/skyways-gets-37-million-to-develop-next-gen-military-drones/"
+    },
+    "sort_date": "2025-09",
+    "source_thumbnails": {
+      "DroneVideos.com (Jun 2025)": "https://dronevideos.com/wp-content/uploads/2025/06/Skyway-V3.jpg"
+    }
+  },
+  {
+    "id": 39,
+    "year": "2025",
+    "date": "2025-02",
+    "title": "First International Aircraft Deliveries",
+    "category": "Major Milestones",
+    "detail": "Skyways delivers aircraft to commercial customers internationally for the first time. Skyports Drone Services takes delivery around February 2025, followed by ANA Holdings in approximately April 2025.",
+    "tag": "Milestone",
+    "sources": [
+      "The Drone Girl — Inside Skyways (Nov 2025)"
+    ],
+    "charles_corrections": [
+      "Round III: Removed last sentence about this being the first time customers operated their own aircraft — the US Navy was flying their own Skyways aircraft for years before 2025."
+    ],
+    "source_urls": {
+      "The Drone Girl — Inside Skyways (Nov 2025)": "https://www.thedronegirl.com/2025/11/21/skyways/"
+    },
+    "sort_date": "2025-02",
+    "source_thumbnails": {
+      "The Drone Girl — Inside Skyways (Nov 2025)": "https://i0.wp.com/www.thedronegirl.com/wp-content/uploads/2025/11/DSC01482-scaled.jpeg?fit=2560%2C1707&ssl=1"
+    }
+  },
+  {
+    "id": 40,
+    "year": "2025",
+    "date": "2025-09",
+    "title": "RWE Offshore Wind Farm, Baltic Sea, Germany",
+    "category": "Contracts",
+    "detail": "Germany's first long-range Beyond Visual Line of Sight (BVLOS) offshore wind drone delivery. Partnered with RWE and Skyports Drone Services at the Arkona wind farm in the Baltic Sea. V2 flew 40km routes, up to 10kg cargo, sub-30-minute flights vs. 1+ hour by boat. Over 2,500km total, 65+ flight hours in 3 weeks.",
+    "tag": "Contract — RWE (Germany)",
+    "sources": [
+      "RWE Press Release (Oct 2025)",
+      "Skyports Press Release (Oct 2025)",
+      "GlobeNewswire (Oct 2025)"
+    ],
+    "source_urls": {
+      "RWE Press Release (Oct 2025)": "https://www.rwe.com/en/press/rwe-offshore-wind-gmbh/2025-10-15-rwe-successfully-pioneers-cargo-drone-operations-at-offshore-wind-farms/",
+      "Skyports Press Release (Oct 2025)": "https://skyportsdroneservices.com/2025/10/skyports-drone-services-rwe-skyways-conduct-germanys-first-long-range-drone-deliveries-offshore-wind-turbines/",
+      "GlobeNewswire (Oct 2025)": "https://www.globenewswire.com/news-release/2025/10/16/3168102/0/en/Skyways-Powers-Historic-Cargo-Deliveries-to-Offshore-Windfarm.html"
+    },
+    "sort_date": "2025-09",
+    "source_thumbnails": {
+      "RWE Press Release (Oct 2025)": "https://www.rwe.com/-/media/RWE/images/07-presse/rwe-offshore-wind-gmbh/open-graph/2025/OG-2025-10-15-rwe-successfully-pioneers-cargo-drone-operations-at-offshore-wind-farms.jpg",
+      "Skyports Press Release (Oct 2025)": "https://skyportsdroneservices.com/wp-content/uploads/2025/10/Screenshot-2025-10-13-135003.png",
+      "GlobeNewswire (Oct 2025)": "https://ml.globenewswire.com/Resource/Download/c73f7c2f-8376-4ad9-8442-d68627929ec6"
+    }
+  },
+  {
+    "id": 41,
+    "year": "2025",
+    "date": "2025-10",
+    "title": "ANA Holdings Partnership & $1M Investment",
+    "category": "Funding",
+    "detail": "ANA Holdings invested $1M through its corporate venture fund and signed a long-term business partnership agreement. Skyways drones fly between Okinawa islands delivering medical supplies. ANA established internal Skyways-specific pilot training.",
+    "tag": "Contract — ANA Holdings (Japan)",
+    "sources": [
+      "The Drone Girl — Inside Skyways (Nov 2025)",
+      "Payload Asia (Mar 2026)"
+    ],
+    "source_urls": {
+      "The Drone Girl — Inside Skyways (Nov 2025)": "https://www.thedronegirl.com/2025/11/21/skyways/",
+      "Payload Asia (Mar 2026)": "https://payloadasia.com/2026/03/ana-hd-completes-long-distance-medical-supply-drone-delivery-trials-okinawa/"
+    },
+    "sort_date": "2025-10",
+    "source_thumbnails": {
+      "The Drone Girl — Inside Skyways (Nov 2025)": "https://i0.wp.com/www.thedronegirl.com/wp-content/uploads/2025/11/DSC01482-scaled.jpeg?fit=2560%2C1707&ssl=1",
+      "Payload Asia (Mar 2026)": "https://payloadasia.com/wp-content/uploads/2026/03/ANA-HD.png"
+    }
+  },
+  {
+    "id": 42,
+    "year": "2025",
+    "date": "2025-11",
+    "title": "Stealth Exit | Public Emergence",
+    "category": "Major Milestones",
+    "detail": "First-ever press Demo Day near Austin. Journalist Sally French of The Drone Girl published the most comprehensive independent profile of Skyways. KXAN Austin (NBC) provided TV coverage. Company emerged from years of operating in relative stealth.",
+    "tag": "Milestone",
+    "sources": [
+      "The Drone Girl (Nov 2025)",
+      "KXAN Austin (Nov 2025)"
+    ],
+    "source_urls": {
+      "The Drone Girl (Nov 2025)": "https://www.thedronegirl.com/2025/11/21/skyways/",
+      "KXAN Austin (Nov 2025)": "https://www.kxan.com/news/austin-aviation-company-looking-to-scale-autonomous-drones/"
+    },
+    "sort_date": "2025-11",
+    "source_thumbnails": {
+      "The Drone Girl (Nov 2025)": "https://i0.wp.com/www.thedronegirl.com/wp-content/uploads/2025/11/DSC01482-scaled.jpeg?fit=2560%2C1707&ssl=1",
+      "KXAN Austin (Nov 2025)": "https://www.kxan.com/wp-content/uploads/sites/40/2025/11/Skyway-aircraft.jpg?w=1280"
+    }
+  },
+  {
+    "id": 43,
+    "year": "2026",
+    "date": "2026-01",
+    "title": "Leadership Team Expansion",
+    "category": "Major Milestones",
+    "detail": "Key hires: Jeff Weinstein (VP Production, 25+ years experience), Bill Wimberley (Chief Commercial Officer), Gabrielle Wain (VP Regulatory, ex-Zipline), Mike Uffelman (Head of Flight Ops, ex-United States Air Force, 2,500+ flight hours). Isaac Roberts transitions from Chief Commercial Officer to Chief Strategy Officer. Company has doubled revenue for three consecutive years.",
+    "tag": "Milestone",
+    "sources": [
+      "GlobeNewswire (Jan 2026)"
+    ],
+    "source_urls": {
+      "GlobeNewswire (Jan 2026)": "https://www.globenewswire.com/news-release/2026/01/22/3223911/0/en/Skyways-Strengthens-Leadership-Team-to-Accelerate-Rapid-Growth.html"
+    },
+    "sort_date": "2026-01",
+    "source_thumbnails": {
+      "GlobeNewswire (Jan 2026)": "https://ml.globenewswire.com/Resource/Download/55d709f3-8d92-416b-91dd-fd6e293f50a0"
+    }
+  },
+  {
+    "id": 44,
+    "year": "2026",
+    "date": "2026-03",
+    "title": "ANA Completes Okinawa Medical Delivery Trials",
+    "category": "Major Milestones",
+    "detail": "Long-distance pharmaceutical and blood sample deliveries across Okinawa Prefecture completed. Routes: Itoman City to Kumejima Town (approximately 100km) and Itoman City to Nago City (approximately 89km). Trials ran October 2025 through January 2026. Selected under Japan's Ministry of Land, Infrastructure, Transport and Tourism (MLIT) Drone Delivery Base Development Promotion Project.",
+    "tag": "Milestone",
+    "sources": [
+      "Payload Asia (Mar 2026)",
+      "TravelMedia India (Mar 2026)"
+    ],
+    "source_urls": {
+      "Payload Asia (Mar 2026)": "https://payloadasia.com/2026/03/ana-hd-completes-long-distance-medical-supply-drone-delivery-trials-okinawa/",
+      "TravelMedia India (Mar 2026)": "https://travelmedia.in/2026/03/05/ANA-HD-completes-long-distance-medical-supply-drone-delivery-trials-in-okinawa.html"
+    },
+    "sort_date": "2026-03",
+    "source_thumbnails": {
+      "Payload Asia (Mar 2026)": "https://payloadasia.com/wp-content/uploads/2026/03/ANA-HD.png",
+      "TravelMedia India (Mar 2026)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
+    }
+  },
+  {
+    "id": 45,
+    "year": "2026",
+    "date": "2026-06",
+    "title": "V3 Block 2 | First Article Build",
+    "category": "Product Development",
+    "detail": "V3 Block 2 (production-intent) first article build scheduled for June 2026. This is the production design variant that will enter full-rate manufacturing.",
+    "tag": "Product — V3 / Upcoming",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: V3 Block 2 first article build scheduled Jun 2026."
+    ],
+    "source_urls": {},
+    "sort_date": "2026-06",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/v3-hover.BZwWRBFB_t27Og.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 46,
+    "year": "2026",
+    "date": "2026-07",
+    "title": "V3 Production Ramp Begins",
+    "category": "Product Development",
+    "detail": "V3 Block 2 (production-intent) expected in service second half of 2026. Program of Record designation underway to unlock large-scale Department of Defense (DoD) procurement.",
+    "tag": "Upcoming",
+    "sources": [
+      "Austin American-Statesman (Feb 2026)"
+    ],
+    "source_urls": {
+      "Austin American-Statesman (Feb 2026)": "https://www.statesman.com/business/technology/article/austin-skyways-autonomous-drone-aircraft-21311896.php"
+    },
+    "sort_date": "2026-07",
+    "source_thumbnails": {
+      "Austin American-Statesman (Feb 2026)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+    }
+  },
+  {
+    "id": 47,
+    "year": "2027",
+    "date": "2027-12",
+    "title": "V3 Full-Rate Production Target",
+    "category": "Product Development",
+    "detail": "Full-rate V3 production targeted with Program of Record designation complete. Per CEO Acknin: 'We are really spending 2026 to build that production capability so that in 2027 we are ready to hit go.'",
+    "tag": "Upcoming",
+    "sources": [
+      "Austin American-Statesman (Feb 2026)"
+    ],
+    "source_urls": {
+      "Austin American-Statesman (Feb 2026)": "https://www.statesman.com/business/technology/article/austin-skyways-autonomous-drone-aircraft-21311896.php"
+    },
+    "sort_date": "2027-12",
+    "source_thumbnails": {
+      "Austin American-Statesman (Feb 2026)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+    }
+  },
+  {
+    "id": 100,
+    "year": "2017",
+    "date": "2017-07",
+    "title": "Start of Seed Fundraising | Rolling Close",
+    "category": "Funding",
+    "detail": "Skyways began raising its seed round on a rolling basis, bringing in early capital to fund aircraft development and operations. $120K pre-seed from Y Combinator, followed by a $1M seed round led by Capital Factory with 12 additional investors.",
+    "tag": "Funding",
+    "sources": [
+      "Skyways Internal — Charles Acknin",
+      "Crunchbase — Skyways Seed Round (Jul 2017)",
+      "TechCrunch — YC S17 Demo Day (Aug 21, 2017)"
+    ],
+    "charles_corrections": [],
+    "source_urls": {
+      "Crunchbase — Skyways Seed Round (Jul 2017)": "https://www.crunchbase.com/funding_round/skyways-seed--1ab8f93f",
+      "TechCrunch — YC S17 Demo Day (Aug 21, 2017)": "https://techcrunch.com/2017/08/21/y-combinator-summer-2017/"
+    },
+    "sort_date": "2017-07",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 101,
+    "year": "2017",
+    "date": "2017-01",
+    "title": "Start of Early Aircraft Prototyping | All-Electric Phase",
+    "category": "Product Development",
+    "detail": "Skyways began iterating through initial all-electric Vertical Takeoff and Landing (VTOL) configurations, building small-scale aircraft for proof-of-concept testing and autonomous flight validation.",
+    "tag": "Product",
+    "sources": [
+      "Skyways Internal — No Source"
+    ],
+    "charles_corrections": [],
+    "source_urls": {},
+    "sort_date": "2017-01",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 102,
+    "year": "2020",
+    "date": "2020-01",
+    "title": "Start of Navy OTA Spiral Development | Follow-on Contracts",
+    "category": "Contracts",
+    "detail": "Following the initial Navy Other Transaction Authority (OTA) contract award, spiral development began with follow-on awards expanding the scope of Skyways' hybrid propulsion logistics Unmanned Aircraft System (UAS) work.",
+    "tag": "Defense",
+    "sources": [
+      "Skyways Internal — No Source"
+    ],
+    "charles_corrections": [],
+    "source_urls": {},
+    "sort_date": "2020-01",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 103,
+    "year": "2016",
+    "date": "2016-06",
+    "title": "Charles Acknin Begins Building Skyways with V1 in San Francisco Apartment",
+    "category": "Major Milestones",
+    "detail": "V1 was Skyways' first aircraft, a Vertical Takeoff and Landing (VTOL) fixed-wing quadplane with 5 electric motors built on a Commercial Off-The-Shelf (COTS) foam wing modified for VTOL propulsion. Despite its simplicity, V1 flew a fully autonomous multi-point cargo mission: takeoff from point A, fly to point B to pick up a small box, deliver it to point C, and return to A, all without human intervention. An onboard Companion Computer ran an early version of Skyways' precision landing code to execute the mission end-to-end. Endurance was under 30 minutes with a 2-lb cargo capacity.\n\nCharles' father, also passionate about aviation, flew to San Francisco multiple times in 2016 to help build V1, serving as an unofficial co-founder during this earliest phase. For flight testing, Charles would drive almost every day to the Pacifica coast near San Francisco, and later to Livermore where there was more open space to fly.",
+    "tag": "Founding",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "source_urls": {
+      "Skyways Internal — Charles Acknin": "https://youtu.be/Gz8sRWUiw7o"
+    },
+    "sort_date": "2016-06",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 104,
+    "year": "2017",
+    "date": "2017-06",
+    "title": "V2.0 Built & Flown | First Carbon Fiber Composite Airframe",
+    "category": "Product Development",
+    "detail": "Skyways built and flew V2.0, a small quadplane X8 with a 12ft wingspan — the company's first carbon fiber composite airframe. V2.0 was demonstrated to investors for fundraising purposes as part of the seed round. The aircraft is still displayed on the ceiling of the Tech Ridge shop.",
+    "tag": "Internal",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: V2.0 built and flown in 2017, small quadplane X8, 12ft wingspan, first composite airframe"
+    ],
+    "source_urls": {},
+    "sort_date": "2017-06",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 105,
+    "year": "2017",
+    "date": "2017-07",
+    "title": "V2.1 & V2.2 Build Phase Begins | 18ft Wingspan, Composite Airframe",
+    "category": "Product Development",
+    "detail": "In the second half of 2017, Skyways started building V2.1 and V2.2, a larger 18ft wingspan, 140-lb All-Up Weight (AUW) composite airframe. The team crashed a lot and learned a lot during this intensive build and test phase.",
+    "tag": "Internal",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: Second half of 2017, started V2.1 and V2.2, 18ft wingspan, 140-lb AUW, crashed a lot"
+    ],
+    "source_urls": {},
+    "sort_date": "2017-07",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/hero.DmMP60zO_Z1mKK4i.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  },
+  {
+    "id": 106,
+    "year": "2018",
+    "date": "2018-04",
+    "title": "USMC V2.2 Delivery & White Sands BVLOS Demo",
+    "category": "Defense Milestones",
+    "detail": "Skyways finished building the first two V2.2 aircraft for the United States Marine Corps (USMC) and drove to New Mexico for flight testing and demonstration at White Sands with New Mexico State University (NMSU), Georgia Tech Research Institute (GTRI), and USMC. This marked the first time Skyways ever flew Beyond Visual Line of Sight (BVLOS) and completed a greater than 60-mile flight, still all-electric at the time.",
+    "tag": "Internal",
+    "sources": [
+      "Skyways Internal — Charles Acknin"
+    ],
+    "charles_corrections": [
+      "Round III: Apr 2018, first two V2.2 for USMC, White Sands NM demo with NMSU + GTRI + USMC, first BVLOS, >60-mile flight, still all electric"
+    ],
+    "source_urls": {},
+    "sort_date": "2018-04",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
+    },
+    "thumbnail_status": "fallback_skyways"
+  }
+]
