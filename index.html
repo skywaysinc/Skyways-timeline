@@ -339,6 +339,15 @@
     position: relative;
   }
 
+  @keyframes filterPulse {
+    0% { opacity: 0.4; transform: scale(0.97); }
+    50% { opacity: 1; transform: scale(1.01); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  .event-card.filter-pulse {
+    animation: filterPulse 0.35s ease-out;
+  }
+
   .event-card-bg {
     position: absolute;
     top: 0; right: 0;
@@ -1051,7 +1060,13 @@
         items[j].className = f === category ? 'legend-item active-filter' : 'legend-item dimmed';
       }
       for (var k = 0; k < cards.length; k++) {
-        cards[k].style.display = cards[k].getAttribute('data-category') === category ? '' : 'none';
+        var isMatch = cards[k].getAttribute('data-category') === category;
+        cards[k].style.display = isMatch ? '' : 'none';
+        cards[k].classList.remove('filter-pulse');
+        if (isMatch) {
+          void cards[k].offsetWidth;
+          cards[k].classList.add('filter-pulse');
+        }
       }
       for (var s = 0; s < sections.length; s++) {
         var visible = sections[s].querySelectorAll('.event-card');
