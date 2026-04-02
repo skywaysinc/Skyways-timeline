@@ -477,6 +477,10 @@
     transform: translateY(0); pointer-events: auto;
   }
 
+  .event-card.sources-open {
+    z-index: 20;
+  }
+
   .sources-menu::before {
     content: '';
     position: absolute;
@@ -973,6 +977,8 @@
           var m = t.querySelector('.sources-menu');
           if (m) m.classList.remove('active');
           t.classList.remove('active');
+          var c = t.closest('.event-card');
+          if (c) c.classList.remove('sources-open');
         }
       });
     }
@@ -992,17 +998,20 @@
           if (!isOpen) {
             menu.classList.add('active');
             trigger.classList.add('active');
+            if (card) card.classList.add('sources-open');
           }
         });
       } else {
         trigger.addEventListener('mouseenter', function() {
           menu.classList.add('active');
           trigger.classList.add('active');
+          if (card) card.classList.add('sources-open');
         });
         if (card) {
           card.addEventListener('mouseleave', function() {
             menu.classList.remove('active');
             trigger.classList.remove('active');
+            card.classList.remove('sources-open');
           });
         }
       }
