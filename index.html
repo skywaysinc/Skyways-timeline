@@ -961,13 +961,14 @@
     var html = '';
     for (var y = 0; y < yearOrder.length; y++) {
       var yr = yearOrder[y];
+      var yrStr = String(yr);
       var cards = '';
       var evts = yearGroups[yr];
       for (var e = 0; e < evts.length; e++) {
         cards += renderCard(evts[e]);
       }
       html += '<div class="year-section">' +
-        '<div class="year-label-col"><div class="year-label">' + yr.substring(0,2) + '<span class="year-suffix">' + yr.substring(2) + '</span></div></div>' +
+        '<div class="year-label-col"><div class="year-label">' + yrStr.substring(0,2) + '<span class="year-suffix">' + yrStr.substring(2) + '</span></div></div>' +
         '<div class="events-col">' + cards + '</div></div>';
     }
 
