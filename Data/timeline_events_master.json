@@ -1162,5 +1162,23 @@
       "Skyways (about)": "https://www.skyways.com/_astro/image1.CXqs2Yt9_20n9Rg.webp"
     },
     "thumbnail_status": "fallback_image1"
+  },
+  {
+    "id": 104,
+    "year": "2026",
+    "date": "2026-04",
+    "title": "Series B Fundraising Begins",
+    "category": "Contracts & Funding",
+    "detail": "Skyways begins its Series B fundraising round to accelerate V3 production scaling and expand commercial operations.",
+    "tag": "Funding",
+    "sources": [
+      "Skyways Internal — No Source"
+    ],
+    "source_urls": {},
+    "sort_date": "2026-04",
+    "source_thumbnails": {
+      "Skyways (fallback)": "https://www.skyways.com/_astro/v3-front.CCe8Cx4z_1Fmvtl.webp"
+    },
+    "thumbnail_status": "fallback_v3_front"
   }
 ]
