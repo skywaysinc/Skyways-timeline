@@ -5,7 +5,7 @@
     "date": "2017-01",
     "title": "Skyways Air Transportation Founded",
     "category": "Major Milestones",
-    "detail": "Charles Acknin, born near Airbus HQ in southern France, co-founded Skyways in Austin, TX with Chris Craighill after nearly 7 years at Google as a senior software engineer on core search. The company began 'not with a fuselage but with code,' reflecting Acknin's software-first philosophy applied to autonomous flight. Delaware incorporation filed February 13, 2017.",
+    "detail": "Charles Acknin, born near Airbus HQ in southern France, co-founded Skyways in Austin, TX with Chris Craighill. Acknin left Google after nearly 7 years as a senior software engineer on core search. The company began 'not with a fuselage but with code,' reflecting Acknin's software-first philosophy applied to autonomous flight. Delaware incorporation filed February 13, 2017.",
     "tag": "Internal",
     "sources": [
       "Skyways Internal — Charles Acknin",
@@ -209,7 +209,7 @@
     "date": "2019-10",
     "title": "V2 Platform Development Accelerates",
     "category": "Product Development",
-    "detail": "Navy requirements drive V2 specs: 30-lb payload (one cubic foot cargo volume), approximately 450 to 500 mile range. Hybrid fixed-wing design with 8 electric motors for Vertical Takeoff and Landing (VTOL) plus internal combustion engine for cruise flight. The platform iterates through sub-variants (V2.2, V2.5, V2.6, V2.6b) over subsequent years.",
+    "detail": "Original Navy requirements drove V2 specs: 20-lb payload (one cubic foot cargo volume) or approximately 400 nautical mile range. Payload and range represent a tradeoff — maximum payload reduces range and vice versa. Hybrid fixed-wing design with 8 electric motors for Vertical Takeoff and Landing (VTOL) plus internal combustion engine for cruise flight. The platform iterates through sub-variants (V2.2, V2.5, V2.6, V2.6b) over subsequent years.",
     "tag": "Product",
     "sources": [
       "Commercial UAV News (May 2020)",
@@ -277,7 +277,7 @@
     "date": "2021-02",
     "title": "Carrier Deck Trials | USS Gerald R. Ford (CVN-78)",
     "category": "Defense Milestones",
-    "detail": "Two weeks of autonomous Vertical Takeoff and Landing (VTOL) operations on the Navy's newest and most advanced aircraft carrier. V2.2 drone tested on the flight deck of USS Gerald R. Ford. Demonstrated the ability to operate from a carrier environment with hybrid-electric design, AI-driven flight system, 500-mile range, and 30-lb payload capacity.",
+    "detail": "Two weeks of autonomous Vertical Takeoff and Landing (VTOL) operations on the Navy's newest and most advanced aircraft carrier. V2.5 drone tested on the flight deck of USS Gerald R. Ford. Demonstrated the ability to operate from a carrier environment with hybrid-electric design, AI-driven flight system, 500-mile range, and 30-lb payload capacity.",
     "tag": "Defense — U.S. Navy",
     "sources": [
       "The War Zone (Feb 2021)",

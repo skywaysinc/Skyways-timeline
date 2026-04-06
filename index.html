@@ -1038,10 +1038,8 @@
       }
     });
 
-    if (isTouchDevice) {
-      document.addEventListener('click', function() { closeAllSourceMenus(); });
-      window.addEventListener('scroll', function() { closeAllSourceMenus(); }, { passive: true });
-    }
+    document.addEventListener('click', function() { closeAllSourceMenus(); });
+    window.addEventListener('scroll', function() { closeAllSourceMenus(); }, { passive: true });
   }
 
   // ═══ FILTER SYSTEM ═══
