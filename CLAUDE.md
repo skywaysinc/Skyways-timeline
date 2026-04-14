@@ -114,6 +114,14 @@ service cloud.firestore {
 }
 ```
 
+## Charles-Only Source Audit Results (April 14, 2026)
+- 16 events had Charles Acknin as sole source
+- 3 upgraded with public sources (IDs 18, 19, 29)
+- 11 are internal milestones with no public coverage (pre-2019 or product dev)
+- 1 pending check (ID 26 — sUAS News)
+- 1 confirmed separate from public coverage (ID 31 — TCP demo is NOT the RIMPAC event)
+- **RIMPAC vs III MEF TCP demo:** These are two separate July 2024 events. RIMPAC was Hawaii/USS Curtis Wilbur/NAWCAD. TCP demo was Okinawa/DIU contract mod/III MEF. Public articles only cover RIMPAC.
+
 ## index.html Stats Banner (verify when data changes)
 | Stat | Value | Source |
 |------|-------|--------|
@@ -155,6 +163,28 @@ service cloud.firestore {
 1. **Data:** dates YYYY-MM, 5 valid categories, non-empty sources, no duplicates, no em dashes in titles, all acronyms spelled out
 2. **Infrastructure:** JSON ↔ Firestore sync (count + titles), REST API public read, all thumbnail URLs 200 OK
 3. **Accuracy:** index.html stats match data, Charles Round III covered, legend categories match data
+
+## Newsroom → Timeline Sync
+- **Action plan:** `ACTION_PLAN_NEWSROOM_SYNC.md`
+- ✅ **DONE:** 5 timeline events enriched with new source links + detail text (April 14, 2026)
+- ✅ **DONE:** Sanity typo fix (250k → 25k sq ft on Austin American-Statesman)
+- ✅ **DONE:** Charles-only source audit — 3 of 16 events upgraded with public sources (April 14, 2026)
+  - ID 29: JMSDF Destroyer Resupply — date corrected Jul→Aug 2024, 3 Japanese sources added
+  - ID 19: DIU contract — renamed to Blue Water, 2 sources added, detail enriched
+  - ID 18: Series A — Crunchbase added (Charles $13M figure remains authoritative over Crunchbase $15M)
+- **ACTION ITEM:** ID 26 (V3 Block 1 First Flight) — check sUAS News March 2024 article for coverage
+- **MEDIUM:** 9 more source links pending (Round 2 Sanity adds)
+- **LOW:** `media_mentions` collection (backend only, NOT used by frontend) needs 12 new articles + status classification
+
+## Firestore Document Management Lessons
+- **`+` in document IDs:** Must URL-encode as `%2B` using `quote(doc_id, safe='')` — otherwise `+` is interpreted as a space, creating ghost documents
+- **Title changes = new document:** When renaming a Firestore doc (title changes the ID), delete the old doc and create a new one — PATCH only updates fields, not the document ID
+- **`|` vs `-` in doc IDs:** Original docs used `|` in IDs; replacement docs should match the format used in the collection. Always search by title field, not assumed ID format
+- **Ghost document cleanup:** If a ghost appears on the live site (year "0", wrong category), it was likely created by a URL encoding bug. Find and delete via REST API
+
+## CSS Lessons
+- **Source dropdown z-index:** `.event-card` needs `z-index: 1` base value so `.event-card.sources-open { z-index: 20 }` properly stacks above siblings
+- **Card shadow:** `box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08)` gives subtle texture without being heavy
 
 ## Spreadsheet Formatting Preferences
 - Related columns must be adjacent
