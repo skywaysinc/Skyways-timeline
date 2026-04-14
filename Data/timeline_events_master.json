@@ -409,17 +409,22 @@
     "id": 19,
     "year": "2022",
     "date": "2022-01",
-    "title": "DIU/USN/NAMD Contract",
+    "title": "DIU/USN Blue Water Maritime Logistics UAS Contract",
     "category": "Contracts",
-    "detail": "Skyways secured a contract through the Defense Innovation Unit (DIU) in partnership with the U.S. Navy and the Naval Air Systems Command Manned and Unmanned Development (NAMD). The award contract was directly issued by Army Contracting Command, New Jersey (ACC-NJ). Specific scope and value not publicly disclosed.",
+    "detail": "Skyways secured a contract through the Defense Innovation Unit (DIU) for the Blue Water Maritime Logistics UAS program in partnership with the U.S. Navy, Naval Air Warfare Center Aircraft Division (NAWCAD), and Military Sealift Command. The award contract was directly issued by Army Contracting Command, New Jersey (ACC-NJ). The Blue Water program targets delivery of payloads up to 50 pounds across distances of 250 miles for ship-based logistics — addressing approximately 95% of critical parts needs by weight. DIU partnered with the 4th Fleet and Marine Corps Warfighting Laboratory to develop computer vision technology enabling autonomous navigation and intelligent landing without beacon assistance.",
     "tag": "Contract — DIU / U.S. Navy",
     "sources": [
-      "Skyways Internal — Charles Acknin"
+      "Skyways Internal — Charles Acknin",
+      "Inside Unmanned Systems — Navy Demonstrating Programs for Drone Delivery at Sea",
+      "Potomac Officers Club — US Naval Components Test Skyways Blue Water Logistics UAS"
     ],
     "charles_corrections": [
       "Round III: Corrected from ~2023 to 2022. Charles confirmed: 'We won the DIU contract/OTA in 2022.'"
     ],
-    "source_urls": {},
+    "source_urls": {
+      "Inside Unmanned Systems — Navy Demonstrating Programs for Drone Delivery at Sea": "https://insideunmannedsystems.com/navy-demonstrating-programs-for-drone-delivery-at-sea/",
+      "Potomac Officers Club — US Naval Components Test Skyways Blue Water Logistics UAS": "https://www.potomacofficersclub.com/us-naval-components-test-skyways-developed-blue-water-logistics-uas/"
+    },
     "sort_date": "2022-01",
     "source_thumbnails": {
       "Skyways (fallback)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
