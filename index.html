@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skyways &#8212; Company Timeline</title>
+<title>Skyways &#8212; History &amp; Timeline</title>
 <style>
   @font-face { font-family: 'Founders Grotesk'; src: url('Founders Grotesk Family/WOFF2/founders-grotesk-light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
   @font-face { font-family: 'Founders Grotesk'; src: url('Founders Grotesk Family/WOFF2/founders-grotesk-light-italic.woff2') format('woff2'); font-weight: 300; font-style: italic; font-display: swap; }
@@ -114,15 +114,6 @@
   .sticky-header.minimized .logo-white { opacity: 0; }
   .sticky-header.minimized .logo-color { opacity: 1; }
 
-  .brand-bar-label {
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-50);
-    transition: color 0.35s ease;
-    margin-left: auto;
-    flex-shrink: 0;
-  }
-
-  .sticky-header.minimized .brand-bar-label { color: var(--gray-75); }
 
   /* ══ SEARCH ══ */
   .search-wrap {
@@ -730,7 +721,6 @@
     .sticky-header.minimized .logo-wrap { height: 36px; }
     .sticky-header.minimized .brand-bar { height: 52px; }
     .brand-bar-inline-title { font-size: 11px; }
-    .brand-bar-label { display: none; }
     .search-wrap { width: 160px; }
     .search-input { font-size: 12px; padding: 6px 28px 6px 10px; }
 
@@ -797,7 +787,6 @@
     </div>
     <div class="brand-bar-divider"></div>
     <div class="brand-bar-inline-title">History & Timeline</div>
-    <div class="brand-bar-label">Company Timeline</div>
     <div class="search-wrap">
       <input type="text" class="search-input" id="searchInput" placeholder="Search events..." oninput="handleSearch()" onkeydown="if(event.key==='Escape')this.blur()">
       <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="Clear search">
