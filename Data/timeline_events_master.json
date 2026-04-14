@@ -277,19 +277,25 @@
     "date": "2021-02",
     "title": "Carrier Deck Trials | USS Gerald R. Ford (CVN-78)",
     "category": "Defense Milestones",
-    "detail": "Two weeks of autonomous Vertical Takeoff and Landing (VTOL) operations on the Navy's newest and most advanced aircraft carrier. V2.5 drone tested on the flight deck of USS Gerald R. Ford. Demonstrated the ability to operate from a carrier environment with hybrid-electric design, AI-driven flight system, 500-mile range, and 30-lb payload capacity.",
+    "detail": "Two weeks of autonomous Vertical Takeoff and Landing (VTOL) operations on the Navy's newest and most advanced aircraft carrier. V2.5 drone tested on the flight deck of USS Gerald R. Ford. Demonstrated the ability to operate from a carrier environment with hybrid-electric design, AI-driven flight system, 500-mile range, and 30-lb payload capacity. After evaluating 65 candidate Unmanned Aircraft Systems (UAS) in 2019, the Navy selected Skyways for its ability to carry 24 pounds of cargo up to 65 miles, covering roughly 80% of critical spare parts needs.",
     "tag": "Defense — U.S. Navy",
     "sources": [
       "The War Zone (Feb 2021)",
-      "USNI News (Aug 2021)"
+      "USNI News (Aug 2021)",
+      "The Maritime Executive (Aug 2021)",
+      "FlightGlobal (Aug 2021)"
     ],
     "source_urls": {
       "The War Zone (Feb 2021)": "https://www.thedrive.com/the-war-zone/39415/navy-tests-autonomous-aerial-supply-drone-from-its-newest-supercarrier",
-      "USNI News (Aug 2021)": "https://news.usni.org/2021/08/05/navy-considering-drone-delivery-for-essential-parts-at-sea"
+      "USNI News (Aug 2021)": "https://news.usni.org/2021/08/05/navy-considering-drone-delivery-for-essential-parts-at-sea",
+      "The Maritime Executive (Aug 2021)": "https://maritime-executive.com/article/video-carrier-uss-ford-tests-out-air-cargo-drone",
+      "FlightGlobal (Aug 2021)": "https://www.flightglobal.com/military-uavs/us-navy-eyes-programme-of-record-for-cargo-drones-to-resupply-ships/144983.article"
     },
     "sort_date": "2021-02",
     "source_thumbnails": {
-      "USNI News (Aug 2021)": "https://news.usni.org/wp-content/uploads/2021/08/skyways.jpeg"
+      "USNI News (Aug 2021)": "https://news.usni.org/wp-content/uploads/2021/08/skyways.jpeg",
+      "The Maritime Executive (Aug 2021)": "https://maritime-executive.com/media/images/article/Photos/Warships/Aircraft-Carriers/ford-skyways.3f7ab6.jpg",
+      "FlightGlobal (Aug 2021)": "https://www.flightglobal.com/military-uavs/us-navy-eyes-programme-of-record-for-cargo-drones-to-resupply-ships/144776.article"
     }
   },
   {
@@ -324,13 +330,15 @@
     "detail": "V2 flies between USS Bainbridge (DDG-96) and USNS Joshua Humphreys (T-AO-188). These flights were conducted entirely by U.S. Navy personnel with no Skyways employees on either ship, demonstrating the system's operational maturity and ease of use by military operators.",
     "tag": "Defense",
     "sources": [
-      "USNI News (Aug 2021)"
+      "USNI News (Aug 2021)",
+      "Breaking Defense (Nov 2021)"
     ],
     "charles_corrections": [
       "Round III: Removed computer vision language — CV approach changed over time and the original description wasn't accurate for this period."
     ],
     "source_urls": {
-      "USNI News (Aug 2021)": "https://news.usni.org/2021/08/05/navy-considering-drone-delivery-for-essential-parts-at-sea"
+      "USNI News (Aug 2021)": "https://news.usni.org/2021/08/05/navy-considering-drone-delivery-for-essential-parts-at-sea",
+      "Breaking Defense (Nov 2021)": "https://breakingdefense.com/2021/11/navy-conducts-live-test-of-resupply-drones-for-ashore-at-sea-missions/"
     },
     "sort_date": "2021-07",
     "source_thumbnails": {
@@ -465,15 +473,21 @@
     "date": "2022-12",
     "title": "200+ NM Cargo Delivery Demonstrations",
     "category": "Defense Milestones",
-    "detail": "Multi-mode operations at Naval Air Station (NAS) Patuxent River: ship-to-ship, ship-to-shore, shore-to-ship cargo delivery over 200 nautical miles. Skyways and Martin UAV demonstrated Vertical Takeoff and Landing (VTOL) cargo delivery capabilities.",
+    "detail": "Multi-mode operations at Naval Air Station (NAS) Patuxent River: ship-to-ship, ship-to-shore, shore-to-ship cargo delivery over 200 nautical miles. Skyways and Martin UAV demonstrated Vertical Takeoff and Landing (VTOL) cargo delivery capabilities. The Naval Air Warfare Center Aircraft Division (NAWCAD) found that 90% of critical mission failures can be repaired with payloads under 20 pounds, well within the capacity of the Skyways platform.",
     "tag": "Defense",
     "sources": [
       "DroneDJ (Dec 2022)",
-      "DroneXL (Jan 2023)"
+      "DroneXL (Jan 2023)",
+      "FlightGlobal (Dec 2022)",
+      "The Maritime Executive (Dec 2022)",
+      "USNI News (Apr 2022)"
     ],
     "source_urls": {
       "DroneDJ (Dec 2022)": "https://dronedj.com/2022/12/28/us-navy-completes-drone-delivery-trials-to-and-from-ships/",
-      "DroneXL (Jan 2023)": "https://dronexl.co/2023/01/04/navy-drone-delivery-trials-ships-shore/"
+      "DroneXL (Jan 2023)": "https://dronexl.co/2023/01/04/navy-drone-delivery-trials-ships-shore/",
+      "FlightGlobal (Dec 2022)": "https://www.flightglobal.com/military-uavs/uavs-deliver-cargo-to-us-navy-ship-at-sea-for-first-time/151492.article",
+      "The Maritime Executive (Dec 2022)": "https://maritime-executive.com/article/video-u-s-navy-s-drone-logistics-trials-take-flight",
+      "USNI News (Apr 2022)": "https://news.usni.org/2022/04/12/navy-to-deploy-four-cargo-drones-on-an-aircraft-carrier-this-year"
     },
     "sort_date": "2022-12",
     "source_thumbnails": {
@@ -616,19 +630,27 @@
   {
     "id": 29,
     "year": "2024",
-    "date": "2024-07",
+    "date": "2024-08",
     "title": "JSDF | First Resupply to JMSDF Destroyer in the Pacific",
     "category": "Defense Milestones",
-    "detail": "Skyways conducts the first autonomous cargo resupply to a Japan Maritime Self-Defense Force (JMSDF) destroyer in the Pacific Ocean. Conducted through ANA Holdings and Beyond Visual Line of Sight (BVLOS) throughout. This marks Skyways' first operational engagement with an allied nation's navy.",
+    "detail": "Skyways conducts the first autonomous cargo resupply to a Japan Maritime Self-Defense Force (JMSDF) destroyer in the Pacific Ocean, August 15–25, 2024 in Minami-Boso, Chiba Prefecture. The Skyways V2.6, operated by ANA Holdings, delivered cargo to a JMSDF vessel 23 kilometers offshore — Japan's first Vertical Takeoff and Landing (VTOL) drone supply delivery to a naval vessel at sea. All flights conducted Beyond Visual Line of Sight (BVLOS). This marks Skyways' first operational engagement with an allied nation's navy.",
     "tag": "Defense — JSDF (Japan)",
     "sources": [
-      "Skyways Internal — Charles Acknin"
+      "Skyways Internal — Charles Acknin",
+      "JMSDF Public Affairs Office (X/Twitter)",
+      "drone.jp",
+      "Traffic News (trafficnews.jp)"
     ],
     "charles_corrections": [
-      "Round III: JSDF operations were entirely missing from the timeline. Added per Charles."
+      "Round III: JSDF operations were entirely missing from the timeline. Added per Charles.",
+      "Date corrected from 2024-07 to 2024-08 per JMSDF official post confirming Aug 15-25, 2024"
     ],
-    "source_urls": {},
-    "sort_date": "2024-07",
+    "source_urls": {
+      "JMSDF Public Affairs Office (X/Twitter)": "https://x.com/JMSDF_PAO/status/1850764432063819880",
+      "drone.jp": "https://www.drone.jp/news/20241028182919101826.html",
+      "Traffic News (trafficnews.jp)": "https://trafficnews.jp/post/135816"
+    },
+    "sort_date": "2024-08",
     "source_thumbnails": {
       "Skyways (V3 hover)": "https://www.skyways.com/_astro/v3-hover.BZwWRBFB_t27Og.webp"
     },
@@ -941,18 +963,21 @@
     "date": "2026-03",
     "title": "ANA Completes Okinawa Medical Delivery Trials",
     "category": "Major Milestones",
-    "detail": "Long-distance pharmaceutical and blood sample deliveries across Okinawa Prefecture completed. Routes: Itoman City to Kumejima Town (approximately 100km) and Itoman City to Nago City (approximately 89km). Trials ran October 2025 through January 2026. Selected under Japan's Ministry of Land, Infrastructure, Transport and Tourism (MLIT) Drone Delivery Base Development Promotion Project.",
+    "detail": "Long-distance pharmaceutical and blood sample deliveries across Okinawa Prefecture completed using Skyways Vertical Takeoff and Landing (VTOL) drones. Routes: Itoman City to Kumejima Town (approximately 100km in 1 hour 4 minutes) and Itoman City to Nago City (approximately 89km in 1 hour 1 minute). Cargo included prescription pharmaceuticals and research blood samples in temperature-controlled containers. Trials ran October 2025 through January 2026. Selected under Japan's Ministry of Land, Infrastructure, Transport and Tourism (MLIT) Drone Delivery Base Development Promotion Project.",
     "tag": "Milestone",
     "sources": [
+      "ANA Holdings Press Release (Mar 2026)",
       "Payload Asia (Mar 2026)",
       "TravelMedia India (Mar 2026)"
     ],
     "source_urls": {
+      "ANA Holdings Press Release (Mar 2026)": "https://www.anahd.co.jp/group/en/pr/202603/20260305.html",
       "Payload Asia (Mar 2026)": "https://payloadasia.com/2026/03/ana-hd-completes-long-distance-medical-supply-drone-delivery-trials-okinawa/",
       "TravelMedia India (Mar 2026)": "https://travelmedia.in/2026/03/05/ANA-HD-completes-long-distance-medical-supply-drone-delivery-trials-in-okinawa.html"
     },
     "sort_date": "2026-03",
     "source_thumbnails": {
+      "ANA Holdings Press Release (Mar 2026)": "https://www.anahd.co.jp/group/en/pr/202603/img/20260305-001.png",
       "Payload Asia (Mar 2026)": "https://payloadasia.com/wp-content/uploads/2026/03/ANA-HD.png",
       "TravelMedia India (Mar 2026)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
     }
@@ -1062,18 +1087,43 @@
     "thumbnail_status": "fallback_image1"
   },
   {
+    "id": 104,
+    "year": "2021",
+    "date": "2021-10",
+    "title": "Orbital UAV Partnership | Heavy Fuel Engine MoU",
+    "category": "Product Development",
+    "detail": "Skyways signed a Memorandum of Understanding (MoU) with Orbital Corporation (ASX: OEC), a Perth, Australia-based propulsion company, for a pre-production heavy fuel engine to be integrated into Skyways' next-generation Unmanned Aircraft System (UAS) for the U.S. Navy cargo transportation program. The engine was scheduled for delivery in Q1 2022. Orbital CEO Todd Alder called it 'an exciting new development within the unmanned market,' while Skyways CEO Charles Acknin noted the company was 'continuing to develop our offering to ensure we meet the rigorous demands of ship-to-ship and shore-to-ship logistics.'",
+    "tag": "Product",
+    "sources": [
+      "sUAS News (Oct 2021)"
+    ],
+    "charles_corrections": [],
+    "source_urls": {
+      "sUAS News (Oct 2021)": "https://www.suasnews.com/2021/10/orbital-uav-to-support-skyways-unmanned-cargo/"
+    },
+    "sort_date": "2021-10",
+    "source_thumbnails": {
+      "sUAS News (Oct 2021)": "https://i0.wp.com/www.suasnews.com/wp-content/uploads/2021/10/us-navy-cargo.jpg?fit=1200%2C801&ssl=1"
+    }
+  },
+  {
     "id": 102,
     "year": "2020",
     "date": "2020-01",
     "title": "Start of Navy OTA Spiral Development | Follow-on Contracts",
     "category": "Contracts",
-    "detail": "Following the initial Navy Other Transaction Authority (OTA) contract award, spiral development began with follow-on awards expanding the scope of Skyways' hybrid propulsion logistics Unmanned Aircraft System (UAS) work.",
+    "detail": "Following the initial Navy Other Transaction Authority (OTA) contract award, spiral development began with follow-on awards expanding the scope of Skyways' hybrid propulsion logistics Unmanned Aircraft System (UAS) work. The Naval Air Warfare Center Aircraft Division (NAWCAD) acquired a Skyways prototype to demonstrate long-range ship-to-ship and ship-to-shore cargo transport at Naval Air Station (NAS) Patuxent River.",
     "tag": "Defense",
     "sources": [
-      "Skyways Internal — No Source"
+      "Skyways Internal — Charles Acknin",
+      "FlightGlobal (Nov 2020)",
+      "Inside Unmanned Systems (Nov 2020)"
     ],
     "charles_corrections": [],
-    "source_urls": {},
+    "source_urls": {
+      "FlightGlobal (Nov 2020)": "https://www.flightglobal.com/military-uavs/us-navy-studies-resupplying-ships-and-submarines-using-small-uavs/141199.article",
+      "Inside Unmanned Systems (Nov 2020)": "https://insideunmannedsystems.com/small-uav-takes-on-big-sea-missions-resupply-warships-and-submarines/"
+    },
     "sort_date": "2020-01",
     "source_thumbnails": {
       "Skyways (V2 aboard ship)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
