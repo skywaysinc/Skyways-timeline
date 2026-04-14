@@ -1261,32 +1261,40 @@
 
   // ═══ YEAR LABEL SCROLL TRANSITION ═══
   function updateYearLabels() {
-    var sections = document.querySelectorAll('.year-section');
-    if (!sections.length) return;
-    var headerBottom = header.getBoundingClientRect().bottom + 16;
-    var labelHeight = 38; // approx height of year label
-    var fadeZone = 50; // pixels over which the fade happens
+    var labels = document.querySelectorAll('.year-label');
+    if (!labels.length) return;
+    var stickyTop = header.getBoundingClientRect().bottom + 16;
+    var fadeZone = 50;
 
-    for (var i = 0; i < sections.length; i++) {
-      var label = sections[i].querySelector('.year-label');
-      if (!label) continue;
-      var sectionRect = sections[i].getBoundingClientRect();
-      var sectionBottom = sectionRect.bottom;
-      var distFromPush = sectionBottom - headerBottom - labelHeight;
+    for (var i = 0; i < labels.length; i++) {
+      if (i === labels.length - 1) {
+        // Last year — never needs to fade out
+        labels[i].style.opacity = '1';
+        labels[i].style.transform = 'translateY(0) scale(1)';
+        continue;
+      }
 
-      if (distFromPush < 0) {
-        // Section fully scrolled past — label gone
-        label.style.opacity = '0';
-        label.style.transform = 'translateY(-12px) scale(0.92)';
-      } else if (distFromPush < fadeZone) {
-        // In the fade zone — animate out
-        var progress = distFromPush / fadeZone;
-        label.style.opacity = progress;
-        label.style.transform = 'translateY(' + (-12 * (1 - progress)) + 'px) scale(' + (0.92 + 0.08 * progress) + ')';
+      // Get the next year label's natural (non-sticky) position
+      var nextLabelRect = labels[i + 1].getBoundingClientRect();
+      var nextLabelTop = nextLabelRect.top;
+
+      // The current label is stuck at stickyTop. When the next label
+      // scrolls up to meet it, the gap closes to 0.
+      var gap = nextLabelTop - stickyTop;
+
+      if (gap < 0) {
+        // Next label has passed — this one is fully gone
+        labels[i].style.opacity = '0';
+        labels[i].style.transform = 'translateY(-12px) scale(0.92)';
+      } else if (gap < fadeZone) {
+        // In the fade zone
+        var progress = gap / fadeZone;
+        labels[i].style.opacity = progress;
+        labels[i].style.transform = 'translateY(' + (-12 * (1 - progress)) + 'px) scale(' + (0.92 + 0.08 * progress) + ')';
       } else {
         // Fully visible
-        label.style.opacity = '1';
-        label.style.transform = 'translateY(0) scale(1)';
+        labels[i].style.opacity = '1';
+        labels[i].style.transform = 'translateY(0) scale(1)';
       }
     }
   }
