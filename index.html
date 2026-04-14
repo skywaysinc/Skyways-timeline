@@ -114,6 +114,66 @@
 
   .sticky-header.minimized .brand-bar-label { color: var(--gray-75); }
 
+  /* ══ SEARCH ══ */
+  .search-wrap {
+    position: relative;
+    margin-left: auto;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-toggle {
+    background: none; border: none; cursor: pointer; padding: 6px;
+    color: var(--gray-50); display: flex; align-items: center;
+    transition: color 0.2s ease;
+  }
+  .search-toggle:hover { color: var(--white); }
+  .sticky-header.minimized .search-toggle:hover { color: var(--navy); }
+  .search-toggle svg { width: 20px; height: 20px; }
+
+  .search-input-wrap {
+    position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+    width: 0; opacity: 0; overflow: hidden;
+    transition: width 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.2s ease;
+    display: flex; align-items: center;
+  }
+
+  .search-input-wrap.open {
+    width: 260px; opacity: 1;
+  }
+
+  .search-input {
+    width: 100%; padding: 8px 36px 8px 12px;
+    border: 1px solid var(--gray-15); border-radius: 6px;
+    font-family: 'Founders Grotesk', sans-serif;
+    font-size: 14px; font-weight: 400;
+    background: var(--white); color: var(--navy);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .search-input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(0,154,235,0.15);
+  }
+  .search-input::placeholder { color: var(--gray-50); }
+
+  .search-clear {
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; padding: 4px;
+    color: var(--gray-50); display: none; align-items: center; justify-content: center;
+  }
+  .search-clear.visible { display: flex; }
+  .search-clear:hover { color: var(--navy); }
+  .search-clear svg { width: 14px; height: 14px; }
+
+  .search-count {
+    position: absolute; right: 0; top: calc(100% + 4px);
+    font-size: 11px; font-weight: 500; color: var(--gray-50);
+    white-space: nowrap; opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .search-count.visible { opacity: 1; }
 
 
   .brand-bar-inline-title {
@@ -676,6 +736,8 @@
     .sticky-header.minimized .brand-bar { height: 52px; }
     .brand-bar-inline-title { font-size: 11px; }
     .brand-bar-label { display: none; }
+    .search-input-wrap.open { width: 200px; }
+    .search-toggle svg { width: 18px; height: 18px; }
 
     .hero-section { padding: 28px 0 16px; }
     .hero-inner { padding: 0 20px; }
@@ -738,6 +800,18 @@
     <div class="brand-bar-divider"></div>
     <div class="brand-bar-inline-title">9 Years of Flying. Built for the Mission.</div>
     <div class="brand-bar-label">Company Timeline</div>
+    <div class="search-wrap">
+      <button class="search-toggle" onclick="toggleSearch()" aria-label="Search timeline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <div class="search-input-wrap" id="searchWrap">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search events..." oninput="handleSearch()" onkeydown="if(event.key==='Escape')toggleSearch()">
+        <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="Clear search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <div class="search-count" id="searchCount"></div>
+      </div>
+    </div>
   </div></div>
   <div class="hero-wrapper" id="heroWrapper"><div class="hero-section"><div class="hero-inner">
     <h1>9 Years of Flying.<br>Built for the Mission.</h1>
@@ -1053,10 +1127,80 @@
     window.addEventListener('scroll', function() { closeAllSourceMenus(); }, { passive: true });
   }
 
+  // ═══ SEARCH SYSTEM ═══
+  var searchOpen = false;
+
+  function toggleSearch() {
+    var wrap = document.getElementById('searchWrap');
+    var input = document.getElementById('searchInput');
+    searchOpen = !searchOpen;
+    if (searchOpen) {
+      wrap.classList.add('open');
+      setTimeout(function() { input.focus(); }, 100);
+    } else {
+      clearSearch();
+      wrap.classList.remove('open');
+    }
+  }
+
+  function handleSearch() {
+    var query = document.getElementById('searchInput').value.toLowerCase().trim();
+    var clearBtn = document.getElementById('searchClear');
+    var countEl = document.getElementById('searchCount');
+    var cards = document.querySelectorAll('.event-card');
+    var sections = document.querySelectorAll('.year-section');
+
+    clearBtn.classList.toggle('visible', query.length > 0);
+
+    if (!query) {
+      cards.forEach(function(c) { c.style.display = ''; c.style.opacity = ''; });
+      sections.forEach(function(s) { s.style.display = ''; });
+      countEl.classList.remove('visible');
+      return;
+    }
+
+    var matchCount = 0;
+    cards.forEach(function(card) {
+      var title = (card.querySelector('.event-title') || {}).textContent || '';
+      var detail = (card.querySelector('.event-detail') || {}).textContent || '';
+      var tag = (card.querySelector('.event-tag') || {}).textContent || '';
+      var date = (card.querySelector('.event-date') || {}).textContent || '';
+      var text = (title + ' ' + detail + ' ' + tag + ' ' + date).toLowerCase();
+
+      if (text.indexOf(query) !== -1) {
+        card.style.display = '';
+        card.style.opacity = '1';
+        matchCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Hide year sections with no visible cards
+    sections.forEach(function(section) {
+      var visibleCards = section.querySelectorAll('.event-card:not([style*="display: none"])');
+      section.style.display = visibleCards.length === 0 ? 'none' : '';
+    });
+
+    countEl.textContent = matchCount + ' result' + (matchCount !== 1 ? 's' : '');
+    countEl.classList.add('visible');
+  }
+
+  function clearSearch() {
+    var input = document.getElementById('searchInput');
+    input.value = '';
+    handleSearch();
+    if (searchOpen) input.focus();
+  }
+
   // ═══ FILTER SYSTEM ═══
   var activeFilter = null;
 
   function toggleFilter(category) {
+    // Clear search when filtering
+    if (searchOpen) { toggleSearch(); }
+    else { clearSearch(); }
+
     var cards = document.querySelectorAll('.event-card');
     var sections = document.querySelectorAll('.year-section');
     var items = document.querySelectorAll('[data-filter]');
