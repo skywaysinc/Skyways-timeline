@@ -640,24 +640,31 @@
     "id": 29,
     "year": "2024",
     "date": "2024-08",
-    "title": "JSDF | First Resupply to JMSDF Destroyer in the Pacific",
+    "title": "JMSDF | First Autonomous Resupply to Destroyer Akizuki",
     "category": "Defense Milestones",
-    "detail": "Skyways conducts the first autonomous cargo resupply to a Japan Maritime Self-Defense Force (JMSDF) destroyer in the Pacific Ocean, August 15–25, 2024 in Minami-Boso, Chiba Prefecture. The Skyways V2.6, operated by ANA Holdings, delivered cargo to a JMSDF vessel 23 kilometers offshore — Japan's first Vertical Takeoff and Landing (VTOL) drone supply delivery to a naval vessel at sea. All flights conducted Beyond Visual Line of Sight (BVLOS). This marks Skyways' first operational engagement with an allied nation's navy.",
+    "detail": "Skyways conducts Japan's first autonomous Vertical Takeoff and Landing (VTOL) drone cargo resupply to a naval vessel at sea. From August 15–25, 2024, the Skyways V2.6, operated by ANA Holdings, delivered cargo including food supplies to the JMSDF destroyer DD-115 Akizuki, operating 23 kilometers offshore Minami-Boso, Chiba Prefecture. The V2.6 completed the fully autonomous round trip — launch, transit, deck landing on a moving ship, and return — in approximately 40 minutes with no human intervention. All flights conducted Beyond Visual Line of Sight (BVLOS). This marks Skyways' first operational engagement with an allied nation's navy.",
     "tag": "Defense — JSDF (Japan)",
     "sources": [
       "Skyways Internal — Charles Acknin",
+      "Skyways LinkedIn (video, Sep 25, 2024)",
       "JMSDF Public Affairs Office (X/Twitter)",
-      "drone.jp",
-      "Traffic News (trafficnews.jp)"
+      "drone.jp — JMSDF Japan's First VTOL Drone Supply to Vessel",
+      "Yahoo! Japan News (drone.jp syndication)",
+      "Traffic News (trafficnews.jp)",
+      "Asagumo Shimbun (Japan defense newspaper)"
     ],
     "charles_corrections": [
       "Round III: JSDF operations were entirely missing from the timeline. Added per Charles.",
-      "Date corrected from 2024-07 to 2024-08 per JMSDF official post confirming Aug 15-25, 2024"
+      "Date corrected from 2024-07 to 2024-08 per JMSDF official post confirming Aug 15-25, 2024",
+      "Ship identified as DD-115 Akizuki (Akizuki-class destroyer) per Japanese-language sources"
     ],
     "source_urls": {
+      "Skyways LinkedIn (video, Sep 25, 2024)": "https://www.linkedin.com/posts/skyways-air-transportation-inc_skyways-v26-aircraft-autonomously-resupplying-activity-7244709502019604483-_F8Q",
       "JMSDF Public Affairs Office (X/Twitter)": "https://x.com/JMSDF_PAO/status/1850764432063819880",
-      "drone.jp": "https://www.drone.jp/news/20241028182919101826.html",
-      "Traffic News (trafficnews.jp)": "https://trafficnews.jp/post/135816"
+      "drone.jp — JMSDF Japan's First VTOL Drone Supply to Vessel": "https://www.drone.jp/news/20241028182919101826.html",
+      "Yahoo! Japan News (drone.jp syndication)": "https://article.yahoo.co.jp/detail/442b94c0a9ff357f1315efb5d75a11f18d9bfd48",
+      "Traffic News (trafficnews.jp)": "https://trafficnews.jp/post/135816",
+      "Asagumo Shimbun (Japan defense newspaper)": "https://www.asagumo-news.com/homepage/htdocs/news/newsflash/202411/241118/24111801.html"
     },
     "sort_date": "2024-08",
     "source_thumbnails": {
@@ -669,7 +676,7 @@
     "id": 30,
     "year": "2024",
     "date": "2024-10",
-    "title": "JSDF | Inter-Island Resupply with JASDF",
+    "title": "[NOT PUBLIC / NO EXTERNAL SOURCES] JSDF | Inter-Island Resupply with JASDF",
     "category": "Defense Milestones",
     "detail": "Skyways conducts inter-island autonomous cargo resupply with the Japan Air Self-Defense Force (JASDF) through ANA Holdings. All flights conducted Beyond Visual Line of Sight (BVLOS). Demonstrates Skyways' capability for allied nation military logistics across maritime and island environments.",
     "tag": "Defense — JSDF (Japan)",
@@ -677,7 +684,8 @@
       "Skyways Internal — Charles Acknin"
     ],
     "charles_corrections": [
-      "Round III: JSDF operations were entirely missing from the timeline. Added per Charles."
+      "Round III: JSDF operations were entirely missing from the timeline. Added per Charles.",
+      "AUDIT NOTE (Apr 14, 2026): Exhaustive search in English and Japanese found zero public sources. JASDF has no known cargo drone program. October 2024 date matches the JMSDF announcement date (Oct 28) for the separate Aug 2024 destroyer resupply (ID 29). Needs verification with Charles — may be a separate undisclosed operation or possible conflation with ID 29."
     ],
     "source_urls": {},
     "sort_date": "2024-10",
