@@ -389,15 +389,6 @@
     letter-spacing: -1px; position: -webkit-sticky; position: sticky; line-height: 1;
   }
 
-  .year-suffix {
-    display: inline-block;
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
-
-  .year-suffix.flash {
-    color: var(--lime);
-    transform: scale(1.15);
-  }
 
 
   .events-col { padding: 0 0 48px 40px; display: flex; flex-direction: column; gap: 16px; }
@@ -1047,7 +1038,7 @@
         cards += renderCard(evts[e]);
       }
       html += '<div class="year-section">' +
-        '<div class="year-label-col"><div class="year-label">' + yrStr.substring(0,2) + '<span class="year-suffix">' + yrStr.substring(2) + '</span></div></div>' +
+        '<div class="year-label-col"><div class="year-label">' + yrStr + '</div></div>' +
         '<div class="events-col">' + cards + '</div></div>';
     }
 
@@ -1285,35 +1276,6 @@
     }
     renderTimeline(events);
 
-    // ═══ YEAR LABEL FLASH AT YEAR BOUNDARY ═══
-    var lastVisibleYear = null;
-    var yearSections = document.querySelectorAll('.year-section');
-
-    function checkYearBoundary() {
-      var headerBottom = header.getBoundingClientRect().bottom + 20;
-      var currentYear = null;
-
-      for (var i = 0; i < yearSections.length; i++) {
-        var rect = yearSections[i].getBoundingClientRect();
-        if (rect.top <= headerBottom && rect.bottom > headerBottom) {
-          var label = yearSections[i].querySelector('.year-label');
-          currentYear = label ? label.textContent : null;
-          if (currentYear && currentYear !== lastVisibleYear) {
-            var suffix = yearSections[i].querySelector('.year-suffix');
-            if (suffix) {
-              suffix.classList.add('flash');
-              setTimeout(function(s) { return function() { s.classList.remove('flash'); }; }(suffix), 500);
-            }
-            lastVisibleYear = currentYear;
-          }
-          break;
-        }
-      }
-    }
-
-    window.addEventListener('scroll', function() {
-      requestAnimationFrame(checkYearBoundary);
-    }, { passive: true });
   });
 </script>
 
