@@ -584,7 +584,7 @@
   }
 
   .event-card.sources-open {
-    z-index: 20;
+    z-index: 110;
   }
 
   .sources-menu::before {
@@ -1190,21 +1190,22 @@
     });
   }
 
+  // ═══ GLOBAL SOURCE CLOSER ═══
+  function closeAllSourceMenus(except) {
+    document.querySelectorAll('.sources-trigger').forEach(function(t) {
+      if (t !== except) {
+        var m = t.querySelector('.sources-menu');
+        if (m) m.classList.remove('active');
+        t.classList.remove('active');
+        var c = t.closest('.event-card');
+        if (c) c.classList.remove('sources-open');
+      }
+    });
+  }
+
   // ═══ BIND SOURCE MENUS (after dynamic render) ═══
   function bindSourceMenus() {
     var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-    function closeAllSourceMenus(except) {
-      document.querySelectorAll('.sources-trigger').forEach(function(t) {
-        if (t !== except) {
-          var m = t.querySelector('.sources-menu');
-          if (m) m.classList.remove('active');
-          t.classList.remove('active');
-          var c = t.closest('.event-card');
-          if (c) c.classList.remove('sources-open');
-        }
-      });
-    }
 
     document.querySelectorAll('.sources-trigger').forEach(function(trigger) {
       var menu = trigger.querySelector('.sources-menu');
@@ -1264,6 +1265,9 @@
     if (currentMatchIdx >= 0 && searchMatches[currentMatchIdx]) {
       searchMatches[currentMatchIdx].classList.remove('active');
     }
+
+    // Close all source menus before opening a new one
+    closeAllSourceMenus();
     
     currentMatchIdx += dir;
     if (currentMatchIdx >= searchMatches.length) currentMatchIdx = 0;
