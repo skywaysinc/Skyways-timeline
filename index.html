@@ -1030,20 +1030,19 @@
         <div class="telemetry-grid">
           <div class="telemetry-item">
             <div class="tel-label">FLIGHTS LOGGED</div>
-            <div class="tel-value thrust" id="flightsLoggedCounter">2,950</div>
+            <div class="tel-value thrust" id="flightsLoggedCounter">---</div>
           </div>
           <div class="telemetry-item">
-            <div class="tel-label">ACTIVE FLEET</div>
-            <div class="tel-value">07</div>
-            <div class="tel-sub">V3.2 AIRFRAMES</div>
+            <div class="tel-label">CUMULATIVE FLIGHT HRS</div>
+            <div class="tel-value" id="flightHoursCounter">---</div>
           </div>
           <div class="telemetry-item">
-            <div class="tel-label">NETWORK RESP.</div>
-            <div class="tel-value small" id="msCounter">42ms</div>
+            <div class="tel-label">TOTAL DISTANCE (KM)</div>
+            <div class="tel-value" id="distanceKmCounter">---</div>
           </div>
         </div>
         <div class="telemetry-footer">
-          // AIRTABLE API LINK: SECURE &#183; CONNECTED
+          // SYS: ACTIVE FLEET [07] V3.2 AIRFRAMES <span style="opacity:0.5; margin-left: 12px; font-variant-numeric: tabular-nums;">NET: <span id="msCounter">42ms</span></span>
         </div>
       </div>
 
@@ -1772,11 +1771,18 @@
     fetch('/api/airtable')
       .then(r => r.json())
       .then(data => {
-        var val = data.flightsLogged || 3142;
-        animateCounter('flightsLoggedCounter', 2950, val, 2000);
+        var flights = data.flightsLogged || 1382;
+        var hours = data.flightHours || 387;
+        var dist = data.distanceKm || 32552;
+        
+        animateCounter('flightsLoggedCounter', 1100, flights, 2000);
+        animateCounter('flightHoursCounter', 0, hours, 2100);
+        animateCounter('distanceKmCounter', 20000, dist, 2200);
       })
       .catch(e => {
-        animateCounter('flightsLoggedCounter', 2950, 3142, 2000);
+        animateCounter('flightsLoggedCounter', 1100, 1382, 2000);
+        animateCounter('flightHoursCounter', 0, 387, 2100);
+        animateCounter('distanceKmCounter', 20000, 32552, 2200);
       });
   }
 
