@@ -1770,16 +1770,16 @@
       .then(r => r.json())
       .then(data => {
         var globalF = data.globalFlights || 3110;
-        var flightHrs = data.flightHours || 650;
+        var flightHrs = data.flightHours || 1000;
         
         var flightMins = flightHrs * 60;
         
         animateCounter('globalFlightsCounter', 2000, globalF, 2000);
-        animateCounter('flightMinutesCounter', 15000, flightMins, 2200);
+        animateCounter('flightMinutesCounter', 40000, flightMins, 2200);
       })
       .catch(e => {
         animateCounter('globalFlightsCounter', 2000, 3110, 2000);
-        animateCounter('flightMinutesCounter', 15000, 39000, 2200);
+        animateCounter('flightMinutesCounter', 40000, 60000, 2200);
       });
   }
 
