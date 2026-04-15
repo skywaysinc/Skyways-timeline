@@ -29,6 +29,7 @@
     --red: #E2334A;
     --green: #34A853;
     --white: #FFFFFF;
+    --thrust-green: #C2F213;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -120,11 +121,13 @@
     position: relative;
     margin-left: auto;
     flex-shrink: 0;
-    width: 220px;
+    width: 280px;
+    display: flex;
+    align-items: center;
   }
 
   .search-input {
-    width: 100%; padding: 7px 32px 7px 12px;
+    width: 100%; padding: 7px 80px 7px 12px;
     border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;
     font-family: 'Founders Grotesk', sans-serif;
     font-size: 13px; font-weight: 450;
@@ -138,22 +141,38 @@
   }
   .search-input::placeholder { color: var(--gray-50); }
 
+  .search-nav {
+    position: absolute; right: 28px; top: 50%; transform: translateY(-50%);
+    display: none; align-items: center; gap: 4px; z-index: 2;
+  }
+  .search-nav.visible { display: flex; }
+  .search-count {
+    font-size: 11px; font-weight: 500; color: var(--gray-50);
+    white-space: nowrap; margin-right: 2px;
+  }
+  .search-nav-btn {
+    background: none; border: none; cursor: pointer; color: var(--gray-50);
+    padding: 2px 4px; font-size: 12px; line-height: 1; outline: none; border-radius: 3px;
+  }
+  .search-nav-btn:hover { color: var(--navy); background: rgba(0,0,0,0.05); }
+
   .search-clear {
-    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
-    background: none; border: none; cursor: pointer; padding: 4px;
+    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; padding: 4px; border-radius: 50%;
     color: var(--gray-50); display: none; align-items: center; justify-content: center;
   }
   .search-clear.visible { display: flex; }
-  .search-clear:hover { color: var(--navy); }
+  .search-clear:hover { color: var(--navy); background: rgba(0,0,0,0.05); }
   .search-clear svg { width: 14px; height: 14px; }
 
-  .search-count {
-    position: absolute; right: 0; top: calc(100% + 4px);
-    font-size: 11px; font-weight: 500; color: var(--gray-50);
-    white-space: nowrap; opacity: 0;
-    transition: opacity 0.2s ease;
+  mark.search-highlight {
+    background: rgba(194, 242, 19, 0.4);
+    color: inherit; border-radius: 2px; padding: 0 1px;
   }
-  .search-count.visible { opacity: 1; }
+  mark.search-highlight.active {
+    background: var(--thrust-green); color: var(--navy);
+    box-shadow: 0 0 0 2px var(--navy);
+  }
 
 
   .brand-bar-inline-title {
@@ -244,18 +263,35 @@
     width: 100%;
   }
 
-  .stat { display: flex; flex-direction: column; align-items: flex-start; }
+  .stat { display: flex; flex-direction: column; align-items: flex-start; position: relative; cursor: default; }
+
+  .stat-menu {
+    position: absolute; top: 100%; left: 0; margin-top: 8px;
+    background: var(--white); color: var(--navy);
+    border: 1px solid var(--gray-15); border-radius: 6px;
+    padding: 12px 14px; min-width: 200px; max-width: 280px;
+    box-shadow: 0 8px 24px rgba(17,30,38,0.15);
+    opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+    z-index: 10; pointer-events: none;
+  }
+  .stat-menu::before {
+    content: ''; position: absolute; bottom: 100%; left: 16px;
+    border: 5px solid transparent; border-bottom-color: var(--white);
+  }
+  .stat:hover .stat-menu {
+    opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto;
+  }
+  .stat-menu-info { font-size: 12px; font-weight: 450; line-height: 1.4; color: var(--navy); }
+  .stat-menu-source { font-size: 10px; font-weight: 600; color: var(--gray-50); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
 
   .stat-value {
-    font-size: 22px; font-weight: 800; color: var(--white);
+    font-size: 22px; font-weight: 800; color: var(--thrust-green);
     letter-spacing: -0.5px; line-height: 1.1;
     transition: font-size 0.35s cubic-bezier(0.4,0,0.2,1);
   }
 
   .sticky-header.minimized .stat-value { font-size: 16px; }
-
-  .stat-value.accent { color: var(--blue); }
-  .stat-value.lime-accent { color: var(--lime); }
 
   .stat-label {
     font-size: 9px; font-weight: 700; text-transform: uppercase;
@@ -783,11 +819,15 @@
     <div class="brand-bar-divider"></div>
     <div class="brand-bar-inline-title">History & Timeline</div>
     <div class="search-wrap">
-      <input type="text" class="search-input" id="searchInput" placeholder="Search events..." oninput="handleSearch()" onkeydown="if(event.key==='Escape')this.blur()">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search events..." oninput="handleSearch()" onkeydown="handleSearchKeydown(event)">
+      <div class="search-nav" id="searchNav">
+        <span class="search-count" id="searchCount"></span>
+        <button class="search-nav-btn" onclick="prevSearchMatch()">&#9650;</button>
+        <button class="search-nav-btn" onclick="nextSearchMatch()">&#9660;</button>
+      </div>
       <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="Clear search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-      <div class="search-count" id="searchCount"></div>
     </div>
   </div></div>
   <div class="hero-wrapper" id="heroWrapper"><div class="hero-section"><div class="hero-inner">
@@ -795,13 +835,27 @@
   </div></div></div>
   <div class="stats-banner"><div class="stats-banner-inner">
     <div class="stats-row">
-      <div class="stat"><div class="stat-value accent">$40M+</div><div class="stat-label">Gov&#8217;t Contracts</div></div>
-      <div class="stat"><div class="stat-value">2,950+</div><div class="stat-label">Flights Logged</div></div>
-      <div class="stat"><div class="stat-value">40,500+</div><div class="stat-label">km Flown</div></div>
-      <div class="stat"><div class="stat-value">20+</div><div class="stat-label">Aircraft Iterations</div></div>
-      <div class="stat"><div class="stat-value">3</div><div class="stat-label">Continents</div></div>
-      <div class="stat"><div class="stat-value lime-accent">1/30th</div><div class="stat-label">Cost of Helicopter</div></div>
-      <div class="stat"><div class="stat-value">7 yrs</div><div class="stat-label">Navy Relationship</div></div>
+      <div class="stat"><div class="stat-value">$40M+</div><div class="stat-label">Gov&#8217;t Contracts</div>
+        <div class="stat-menu"><div class="stat-menu-info">Sum of all government awards</div><div class="stat-menu-source">Verified Source: DoD Awards</div></div>
+      </div>
+      <div class="stat"><div class="stat-value">2,950+</div><div class="stat-label">Flights Logged</div>
+        <div class="stat-menu"><div class="stat-menu-info">Total verifiable flights across all test sites</div><div class="stat-menu-source">Verified Source: SBIR.gov portfolio</div></div>
+      </div>
+      <div class="stat"><div class="stat-value">40,500+</div><div class="stat-label">km Flown</div>
+        <div class="stat-menu"><div class="stat-menu-info">Accumulated distance over test + ops flights</div></div>
+      </div>
+      <div class="stat"><div class="stat-value">20+</div><div class="stat-label">Aircraft Iterations</div>
+        <div class="stat-menu"><div class="stat-menu-info">Hardware versions developed since 2017</div><div class="stat-menu-source">Verified Source: SBIR.gov portfolio</div></div>
+      </div>
+      <div class="stat"><div class="stat-value">3</div><div class="stat-label">Continents</div>
+        <div class="stat-menu"><div class="stat-menu-info">North America, Asia, Europe operations</div></div>
+      </div>
+      <div class="stat"><div class="stat-value">1/30th</div><div class="stat-label">Cost of Helicopter</div>
+        <div class="stat-menu"><div class="stat-menu-info">Operating costs compared to legacy maritime helicopters</div><div class="stat-menu-source">Verified Source: BusinessWire press release</div></div>
+      </div>
+      <div class="stat"><div class="stat-value">7 yrs</div><div class="stat-label">Navy Relationship</div>
+        <div class="stat-menu"><div class="stat-menu-info">Operations spanning ANTX 2019 to present</div></div>
+      </div>
     </div>
     <div class="legend-row">
       <div class="legend-item" data-filter="contracts" onclick="toggleFilter('contracts')"><div class="legend-dot contracts"></div>Contracts<div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
@@ -931,7 +985,12 @@
     fetchPage(baseUrl);
   }
 
-  // ═══ HTML ESCAPING ═══
+  // ═══ HTML ESCAPING & HIGHLIGHTING ═══
+  var currentQuery = '';
+  var searchMatches = [];
+  var currentMatchIdx = -1;
+  var ALL_EVENTS = [];
+
   function esc(str) {
     if (!str) return '';
     var div = document.createElement('div');
@@ -939,13 +998,21 @@
     return div.innerHTML;
   }
 
+  function highlight(str) {
+    var e = esc(str);
+    if (!currentQuery) return e;
+    var q = currentQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var re = new RegExp('(' + q + ')', 'gi');
+    return e.replace(re, '<mark class="search-highlight">$1</mark>');
+  }
+
   // ═══ RENDER A SINGLE EVENT CARD ═══
   function renderCard(ev) {
     var cat = ev.category || 'milestone';
     var title = ev.title || '';
-    var highlight = isHighlight(title);
+    var highlightCard = isHighlight(title);
     var upcoming = isUpcoming(title);
-    var cardClass = 'event-card' + (highlight ? ' highlight' : '') + (upcoming ? ' upcoming' : '');
+    var cardClass = 'event-card' + (highlightCard ? ' highlight' : '') + (upcoming ? ' upcoming' : '');
 
     // Sources
     var sources = ev.sources || [];
@@ -953,7 +1020,7 @@
     var sourceLinks = '';
     for (var s = 0; s < sources.length; s++) {
       var src = sources[s];
-      var label = esc(src.label || 'Source');
+      var label = highlight(src.label || 'Source');
       var url = src.url || '';
       if (url && url !== '#' && url.indexOf('http') === 0) {
         sourceLinks += '<a class="source-link" href="' + esc(url) + '" target="_blank">' + label + '</a>';
@@ -984,11 +1051,11 @@
       thumbHTML +
       '<div class="event-dot ' + esc(cat) + '"></div>' +
       '<div class="event-content">' +
-        '<span class="event-date">' + esc(ev.date_display || '') + '</span>' +
-        '<div class="event-title">' + esc(title) + '</div>' +
-        '<div class="event-detail">' + esc(ev.detail || '') + '</div>' +
+        '<span class="event-date">' + highlight(ev.date_display || '') + '</span>' +
+        '<div class="event-title">' + highlight(title) + '</div>' +
+        '<div class="event-detail">' + highlight(ev.detail || '') + '</div>' +
         '<div class="event-meta">' +
-          '<span class="event-tag ' + esc(cat) + '">' + esc(tag) + '</span>' +
+          '<span class="event-tag ' + esc(cat) + '">' + highlight(tag) + '</span>' +
           sourcesHTML +
         '</div>' +
       '</div></div>';
@@ -1178,47 +1245,98 @@
   }
 
   // ═══ SEARCH SYSTEM ═══
-  function handleSearch() {
-    var query = document.getElementById('searchInput').value.toLowerCase().trim();
-    var clearBtn = document.getElementById('searchClear');
-    var countEl = document.getElementById('searchCount');
-    var cards = document.querySelectorAll('.event-card');
-    var sections = document.querySelectorAll('.year-section');
+  function handleSearchKeydown(e) {
+    if (e.key === 'Escape') { e.target.blur(); clearSearch(); }
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (e.shiftKey) prevSearchMatch();
+      else nextSearchMatch();
+    }
+  }
 
-    clearBtn.classList.toggle('visible', query.length > 0);
+  function nextSearchMatch() { navigateMatch(1); }
+  function prevSearchMatch() { navigateMatch(-1); }
 
-    if (!query) {
-      cards.forEach(function(c) { c.style.display = ''; c.style.opacity = ''; });
-      sections.forEach(function(s) { s.style.display = ''; });
-      countEl.classList.remove('visible');
-      return;
+  function navigateMatch(dir) {
+    if (!searchMatches || searchMatches.length === 0) return;
+    
+    // Remove active from current
+    if (currentMatchIdx >= 0 && searchMatches[currentMatchIdx]) {
+      searchMatches[currentMatchIdx].classList.remove('active');
+    }
+    
+    currentMatchIdx += dir;
+    if (currentMatchIdx >= searchMatches.length) currentMatchIdx = 0;
+    if (currentMatchIdx < 0) currentMatchIdx = searchMatches.length - 1;
+
+    var target = searchMatches[currentMatchIdx];
+    target.classList.add('active');
+
+    // Drawer Auto-Reveal if inside a source
+    var menu = target.closest('.sources-menu');
+    if (menu) {
+      var trigger = menu.closest('.sources-trigger');
+      var card = menu.closest('.event-card');
+      trigger.classList.add('active');
+      menu.classList.add('active');
+      card.classList.add('sources-open');
     }
 
-    var matchCount = 0;
-    cards.forEach(function(card) {
-      var title = (card.querySelector('.event-title') || {}).textContent || '';
-      var detail = (card.querySelector('.event-detail') || {}).textContent || '';
-      var tag = (card.querySelector('.event-tag') || {}).textContent || '';
-      var date = (card.querySelector('.event-date') || {}).textContent || '';
-      var text = (title + ' ' + detail + ' ' + tag + ' ' + date).toLowerCase();
+    document.getElementById('searchCount').textContent = (currentMatchIdx + 1) + ' of ' + searchMatches.length;
 
-      if (text.indexOf(query) !== -1) {
+    // Scroll into view
+    var headerOffset = document.getElementById('stickyHeader').offsetHeight + 24;
+    var rect = target.getBoundingClientRect();
+    window.scrollTo({
+      top: window.pageYOffset + rect.top - headerOffset - 40,
+      behavior: 'smooth'
+    });
+  }
+
+  function handleSearch() {
+    var query = document.getElementById('searchInput').value.trim();
+    var clearBtn = document.getElementById('searchClear');
+    var navEl = document.getElementById('searchNav');
+    
+    clearBtn.classList.toggle('visible', query.length > 0);
+
+    if (query.toLowerCase() === currentQuery) return;
+    currentQuery = query.toLowerCase();
+
+    // Re-render entirely with new highlights
+    renderTimeline(ALL_EVENTS);
+
+    searchMatches = [];
+    currentMatchIdx = -1;
+
+    var cards = document.querySelectorAll('.event-card');
+    cards.forEach(function(card) {
+      var marks = card.querySelectorAll('mark.search-highlight');
+      if (currentQuery.length === 0 || marks.length > 0) {
         card.style.display = '';
         card.style.opacity = '1';
-        matchCount++;
+        marks.forEach(function(m) { searchMatches.push(m); });
       } else {
         card.style.display = 'none';
       }
     });
 
     // Hide year sections with no visible cards
-    sections.forEach(function(section) {
+    document.querySelectorAll('.year-section').forEach(function(section) {
       var visibleCards = section.querySelectorAll('.event-card:not([style*="display: none"])');
       section.style.display = visibleCards.length === 0 ? 'none' : '';
     });
 
-    countEl.textContent = matchCount + ' result' + (matchCount !== 1 ? 's' : '');
-    countEl.classList.add('visible');
+    if (currentQuery.length > 0) {
+      navEl.classList.add('visible');
+      if (searchMatches.length > 0) {
+        nextSearchMatch();
+      } else {
+        document.getElementById('searchCount').textContent = '0 matches';
+      }
+    } else {
+      navEl.classList.remove('visible');
+    }
   }
 
   function clearSearch() {
@@ -1429,6 +1547,7 @@
         '<div style="text-align:center;padding:80px 0;color:var(--red);font-size:14px;">Failed to load timeline. ' + esc(err) + '</div>';
       return;
     }
+    ALL_EVENTS = events;
     renderTimeline(events);
 
   });
