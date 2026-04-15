@@ -1771,19 +1771,32 @@
       if(el) el.innerHTML = ms + 'ms';
     }, 1500);
 
-    // [PENDING HISTORY INVESTIGATION] - Live API connection temporarily disabled
-    // We will reconnect this once the 40k+ historical flights are properly serialized
-    setTimeout(() => {
-      animateCounter('globalFlightsCounter', 39000, 40500, 2000);
-      animateCounter('activeFlightsCounter', 0, 1382, 2100);
-      animateCounter('distanceKmCounter', 20000, 32552, 2200);
-      
-      // Add the "+" sign manually after animation finishes
-      setTimeout(() => {
-         var glCounter = document.getElementById('globalFlightsCounter');
-         if (glCounter) glCounter.innerHTML += '+';
-      }, 2050);
-    }, 100);
+    fetch('/api/airtable')
+      .then(r => r.json())
+      .then(data => {
+        var globalF = data.globalFlights || 3977;
+        var activeF = data.activeFlights || 1382;
+        
+        animateCounter('globalFlightsCounter', 3100, globalF, 2000);
+        animateCounter('activeFlightsCounter', 0, activeF, 2100);
+        
+        // [MANUAL OVERRIDE] Distance is fixed to historical baseline +40,500 instead of active API sync
+        animateCounter('distanceKmCounter', 39000, 40500, 2200);
+        setTimeout(() => {
+           var dCounter = document.getElementById('distanceKmCounter');
+           if (dCounter) dCounter.innerHTML += '+';
+        }, 2250);
+      })
+      .catch(e => {
+        animateCounter('globalFlightsCounter', 3100, 3977, 2000);
+        animateCounter('activeFlightsCounter', 0, 1382, 2100);
+        
+        animateCounter('distanceKmCounter', 39000, 40500, 2200);
+        setTimeout(() => {
+           var dCounter = document.getElementById('distanceKmCounter');
+           if (dCounter) dCounter.innerHTML += '+';
+        }, 2250);
+      });
   }
 
   function animateCounter(id, start, end, duration) {
