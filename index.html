@@ -1029,14 +1029,9 @@
         
         <div class="telemetry-grid">
           <div class="telemetry-item">
-            <div class="tel-label">GLOBAL FLIGHTS</div>
+            <div class="tel-label">GLOBAL MISSIONS</div>
             <div class="tel-value thrust" id="globalFlightsCounter">---</div>
-            <div class="tel-sub">ALL-TIME LOGBOOK RECORD</div>
-          </div>
-          <div class="telemetry-item">
-            <div class="tel-label">V3-SERIES MISSIONS</div>
-            <div class="tel-value" id="activeFlightsCounter">---</div>
-            <div class="tel-sub">AUTHENTICATED DATABASE RECORDS</div>
+            <div class="tel-sub">ALL-TIME OMNI-TABLE RECORD</div>
           </div>
           <div class="telemetry-item">
             <div class="tel-label">SYSTEM UPTIME (MINS)</div>
@@ -1774,20 +1769,17 @@
     fetch('/api/airtable')
       .then(r => r.json())
       .then(data => {
-        var globalF = data.globalFlights || 3977;
-        var activeF = data.activeFlights || 1382;
-        var flightHrs = data.flightHours || 387;
+        var globalF = data.globalFlights || 3110;
+        var flightHrs = data.flightHours || 650;
         
         var flightMins = flightHrs * 60;
         
-        animateCounter('globalFlightsCounter', 3100, globalF, 2000);
-        animateCounter('activeFlightsCounter', 0, activeF, 2100);
+        animateCounter('globalFlightsCounter', 2000, globalF, 2000);
         animateCounter('flightMinutesCounter', 15000, flightMins, 2200);
       })
       .catch(e => {
-        animateCounter('globalFlightsCounter', 3100, 3977, 2000);
-        animateCounter('activeFlightsCounter', 0, 1382, 2100);
-        animateCounter('flightMinutesCounter', 15000, 23220, 2200);
+        animateCounter('globalFlightsCounter', 2000, 3110, 2000);
+        animateCounter('flightMinutesCounter', 15000, 39000, 2200);
       });
   }
 
