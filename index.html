@@ -752,8 +752,10 @@
     .sticky-header.minimized .logo-wrap { height: 36px; }
     .sticky-header.minimized .brand-bar { height: 52px; }
     .brand-bar-inline-title { font-size: 11px; }
-    .search-wrap { width: 160px; }
-    .search-input { font-size: 12px; padding: 6px 28px 6px 10px; }
+    .search-wrap { width: 190px; }
+    .search-nav { right: 26px; }
+    .search-count { display: none; } /* Hide count on narrow screens to save space */
+    .search-input { font-size: 12px; padding: 6px 54px 6px 10px; }
 
     .hero-section { padding: 28px 0 16px; }
     .hero-inner { padding: 0 20px; }
@@ -764,10 +766,10 @@
 
     .stats-banner-inner { padding: 8px 20px; }
     .sticky-header.minimized .stats-banner-inner { padding: 6px 20px; }
-    .stats-row { grid-template-columns: repeat(3, 1fr); gap: 4px 0; }
-    .stat-value { font-size: 13px; }
-    .sticky-header.minimized .stat-value { font-size: 11px; }
-    .stat-label { font-size: 6.5px; letter-spacing: 0.8px; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); gap: 10px 12px; }
+    .stat-value { font-size: 14px; }
+    .sticky-header.minimized .stat-value { font-size: 12px; }
+    .stat-label { font-size: 7px; letter-spacing: 0.8px; }
 
     .legend-row { flex-wrap: wrap; gap: 4px; padding-top: 4px; padding-bottom: 4px; }
     .legend-item { font-size: 8px; padding: 2px 6px 2px 0; }
@@ -1427,6 +1429,19 @@
   // Set initial year label offset on load
   var initOffset = (header.getBoundingClientRect().height + 16) + 'px';
   document.querySelectorAll('.year-label').forEach(function(l) { l.style.top = initOffset; });
+
+  window.addEventListener('resize', function() {
+    if (!isMinimized) {
+      heroWrapper.style.height = 'auto';
+      heroHeight = heroWrapper.offsetHeight;
+      heroWrapper.style.height = heroHeight + 'px';
+    } else {
+      heroWrapper.style.height = 'auto';
+      heroHeight = heroWrapper.offsetHeight;
+      heroWrapper.style.height = '0px';
+    }
+    updateHeader();
+  });
 
   // ═══ YEAR LABEL SCROLL TRANSITION ═══
   function updateYearLabels() {
