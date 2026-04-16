@@ -49,11 +49,15 @@
     transition: background 1s ease;
   }
 
-  .sticky-header, .timeline-wrapper, .footer { position: relative; z-index: 1; }
+  .timeline-wrapper, .footer { position: relative; z-index: 1; }
 
   /* ══ STICKY HEADER ══ */
   .sticky-header {
-    position: sticky; top: 0; z-index: 100; will-change: transform;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    will-change: transform;
   }
 
   .sticky-header.minimized {
@@ -1195,7 +1199,7 @@
     fetchPage(baseUrl);
   }
 
-  // ═══ HTML ESCAPING & HIGHLIGHTING ═══
+  // ═══ HTML ESCAPING ═══
   var currentQuery = '';
   var searchMatches = [];
   var currentMatchIdx = -1;
@@ -1206,14 +1210,6 @@
     var div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
-  }
-
-  function highlight(str) {
-    var e = esc(str);
-    if (!currentQuery) return e;
-    var q = currentQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    var re = new RegExp('(' + q + ')', 'gi');
-    return e.replace(re, '<mark class="search-highlight">$1</mark>');
   }
 
   // ═══ RENDER A SINGLE EVENT CARD ═══
@@ -1230,7 +1226,7 @@
     var sourceLinks = '';
     for (var s = 0; s < sources.length; s++) {
       var src = sources[s];
-      var label = highlight(src.label || 'Source');
+      var label = esc(src.label || 'Source');
       var url = src.url || '';
       if (url && url !== '#' && url.indexOf('http') === 0) {
         sourceLinks += '<a class="source-link" href="' + esc(url) + '" target="_blank">' + label + '</a>';
@@ -1261,11 +1257,11 @@
       thumbHTML +
       '<div class="event-dot ' + esc(cat) + '"></div>' +
       '<div class="event-content">' +
-        '<span class="event-date">' + highlight(ev.date_display || '') + '</span>' +
-        '<div class="event-title">' + highlight(title) + '</div>' +
-        '<div class="event-detail">' + highlight(ev.detail || '') + '</div>' +
+        '<span class="event-date">' + esc(ev.date_display || '') + '</span>' +
+        '<div class="event-title">' + esc(title) + '</div>' +
+        '<div class="event-detail">' + esc(ev.detail || '') + '</div>' +
         '<div class="event-meta">' +
-          '<span class="event-tag ' + esc(cat) + '">' + highlight(tag) + '</span>' +
+          '<span class="event-tag ' + esc(cat) + '">' + esc(tag) + '</span>' +
           sourcesHTML +
         '</div>' +
       '</div></div>';
@@ -1455,7 +1451,11 @@
     window.addEventListener('scroll', function() { closeAllSourceMenus(); }, { passive: true });
   }
 
-  // ═══ SEARCH SYSTEM ═══
+  // ═══ SEARCH SYSTEM (in-place DOM highlighting — preserves scroll position) ═══
+  // Searchable fields inside each card. Sources are included so that queries
+  // matching a source label/URL still count as hits.
+  var SEARCH_SELECTORS = '.event-title, .event-date, .event-detail, .event-tag, .source-link';
+
   function handleSearchKeydown(e) {
     if (e.key === 'Escape') { e.target.blur(); clearSearch(); }
     if (e.key === 'Enter') {
@@ -1468,17 +1468,86 @@
   function nextSearchMatch() { navigateMatch(1); }
   function prevSearchMatch() { navigateMatch(-1); }
 
+  // Remove all existing <mark class="search-highlight"> wrappers, merging text nodes back.
+  function clearHighlights(root) {
+    var marks = (root || document).querySelectorAll('mark.search-highlight');
+    marks.forEach(function(m) {
+      var parent = m.parentNode;
+      if (!parent) return;
+      while (m.firstChild) { parent.insertBefore(m.firstChild, m); }
+      parent.removeChild(m);
+      parent.normalize();
+    });
+  }
+
+  // Walk text nodes under `root` and wrap every query match in a <mark>.
+  // Returns array of created <mark> elements in document order.
+  function applyHighlights(root, query) {
+    var matches = [];
+    if (!query) return matches;
+
+    var escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(node) {
+        if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        // Skip text nodes inside existing marks or inside <script>/<style>
+        var p = node.parentNode;
+        while (p && p !== root) {
+          var tn = p.nodeName;
+          if (tn === 'SCRIPT' || tn === 'STYLE' || tn === 'MARK') return NodeFilter.FILTER_REJECT;
+          p = p.parentNode;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    var textNodes = [];
+    var n;
+    while ((n = walker.nextNode())) { textNodes.push(n); }
+
+    textNodes.forEach(function(textNode) {
+      var text = textNode.nodeValue;
+      var re = new RegExp(escaped, 'gi');
+      var m;
+      var lastIdx = 0;
+      var frag = null;
+      var localMarks = [];
+      while ((m = re.exec(text)) !== null) {
+        if (!frag) frag = document.createDocumentFragment();
+        if (m.index > lastIdx) {
+          frag.appendChild(document.createTextNode(text.slice(lastIdx, m.index)));
+        }
+        var mark = document.createElement('mark');
+        mark.className = 'search-highlight';
+        mark.textContent = m[0];
+        frag.appendChild(mark);
+        localMarks.push(mark);
+        lastIdx = m.index + m[0].length;
+        if (m[0].length === 0) re.lastIndex++; // guard against zero-length match
+      }
+      if (frag) {
+        if (lastIdx < text.length) {
+          frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+        }
+        textNode.parentNode.replaceChild(frag, textNode);
+        for (var i = 0; i < localMarks.length; i++) matches.push(localMarks[i]);
+      }
+    });
+
+    return matches;
+  }
+
   function navigateMatch(dir) {
     if (!searchMatches || searchMatches.length === 0) return;
-    
+
     // Remove active from current
     if (currentMatchIdx >= 0 && searchMatches[currentMatchIdx]) {
       searchMatches[currentMatchIdx].classList.remove('active');
     }
 
-    // Close all source menus before opening a new one
+    // Close any source drawers that were opened by the previous match
     closeAllSourceMenus();
-    
+
     currentMatchIdx += dir;
     if (currentMatchIdx >= searchMatches.length) currentMatchIdx = 0;
     if (currentMatchIdx < 0) currentMatchIdx = searchMatches.length - 1;
@@ -1486,19 +1555,19 @@
     var target = searchMatches[currentMatchIdx];
     target.classList.add('active');
 
-    // Drawer Auto-Reveal if inside a source
+    // Drawer auto-reveal: only when navigating to a match that lives inside a source drawer
     var menu = target.closest('.sources-menu');
     if (menu) {
       var trigger = menu.closest('.sources-trigger');
       var card = menu.closest('.event-card');
-      trigger.classList.add('active');
+      if (trigger) trigger.classList.add('active');
       menu.classList.add('active');
-      card.classList.add('sources-open');
+      if (card) card.classList.add('sources-open');
     }
 
     document.getElementById('searchCount').textContent = (currentMatchIdx + 1) + ' of ' + searchMatches.length;
 
-    // Scroll into view
+    // Scroll target into view, accounting for sticky header height
     var headerOffset = document.getElementById('stickyHeader').offsetHeight + 24;
     var rect = target.getBoundingClientRect();
     window.scrollTo({
@@ -1507,49 +1576,80 @@
     });
   }
 
+  // Live search: fires on every input event. Uses in-place DOM highlighting so
+  // scroll position (and therefore the minimized header state) is preserved.
   function handleSearch() {
-    var query = document.getElementById('searchInput').value.trim();
+    var inputEl = document.getElementById('searchInput');
+    var query = inputEl.value.trim();
     var clearBtn = document.getElementById('searchClear');
     var navEl = document.getElementById('searchNav');
-    
+    var countEl = document.getElementById('searchCount');
+
     clearBtn.classList.toggle('visible', query.length > 0);
 
-    if (query.toLowerCase() === currentQuery) return;
-    currentQuery = query.toLowerCase();
+    var newQuery = query.toLowerCase();
+    if (newQuery === currentQuery) return;
+    currentQuery = newQuery;
 
-    // Re-render entirely with new highlights
-    renderTimeline(ALL_EVENTS);
+    // Wipe previous highlights and close any drawers they opened
+    var timelineRoot = document.getElementById('timeline-container');
+    clearHighlights(timelineRoot);
+    closeAllSourceMenus();
 
     searchMatches = [];
     currentMatchIdx = -1;
 
-    var cards = document.querySelectorAll('.event-card');
-    cards.forEach(function(card) {
-      var marks = card.querySelectorAll('mark.search-highlight');
-      if (currentQuery.length === 0 || marks.length > 0) {
+    if (query.length === 0) {
+      // Reset visibility
+      document.querySelectorAll('.event-card').forEach(function(card) {
         card.style.display = '';
         card.style.opacity = '1';
-        marks.forEach(function(m) { searchMatches.push(m); });
+      });
+      document.querySelectorAll('.year-section').forEach(function(section) {
+        section.style.display = '';
+      });
+      navEl.classList.remove('visible');
+      countEl.textContent = '';
+      return;
+    }
+
+    // Apply highlights card-by-card so we can collect per-card match state
+    var cards = document.querySelectorAll('.event-card');
+    cards.forEach(function(card) {
+      var cardMarks = [];
+      var fields = card.querySelectorAll(SEARCH_SELECTORS);
+      fields.forEach(function(field) {
+        var newMarks = applyHighlights(field, query);
+        for (var i = 0; i < newMarks.length; i++) cardMarks.push(newMarks[i]);
+      });
+
+      if (cardMarks.length > 0) {
+        card.style.display = '';
+        card.style.opacity = '1';
+        for (var j = 0; j < cardMarks.length; j++) searchMatches.push(cardMarks[j]);
       } else {
         card.style.display = 'none';
       }
     });
 
-    // Hide year sections with no visible cards
+    // Hide year sections that have no visible cards
     document.querySelectorAll('.year-section').forEach(function(section) {
-      var visibleCards = section.querySelectorAll('.event-card:not([style*="display: none"])');
-      section.style.display = visibleCards.length === 0 ? 'none' : '';
+      var anyVisible = false;
+      section.querySelectorAll('.event-card').forEach(function(c) {
+        if (c.style.display !== 'none') anyVisible = true;
+      });
+      section.style.display = anyVisible ? '' : 'none';
     });
 
-    if (currentQuery.length > 0) {
-      navEl.classList.add('visible');
-      if (searchMatches.length > 0) {
-        nextSearchMatch();
-      } else {
-        document.getElementById('searchCount').textContent = '0 matches';
-      }
+    navEl.classList.add('visible');
+    if (searchMatches.length > 0) {
+      // Show total count but do NOT auto-navigate — keeps scroll position
+      // stable while typing and leaves source drawers closed until the user
+      // presses Next (Enter) or the arrow button.
+      countEl.textContent = searchMatches.length + (searchMatches.length === 1 ? ' match' : ' matches');
+      currentMatchIdx = -1;
     } else {
-      navEl.classList.remove('visible');
+      countEl.textContent = '0 matches';
     }
   }
 
@@ -1612,32 +1712,33 @@
 
   // ═══ HEADER SCROLL BEHAVIOR ═══
   var header = document.getElementById('stickyHeader');
-  var isMinimized = false;
+
+  function syncYearLabelOffset() {
+    var headerRect = header.getBoundingClientRect();
+    var offset = (headerRect.height + 16) + 'px';
+    document.querySelectorAll('.year-label').forEach(function(l) { l.style.top = offset; });
+  }
 
   function updateHeader() {
-    var shouldMinimize = window.scrollY > 30;
-    if (shouldMinimize === isMinimized) return;
-    
-    isMinimized = shouldMinimize;
-    if (isMinimized) {
-      header.classList.add('minimized');
-    } else {
-      header.classList.remove('minimized');
-    }
+    var shouldMinimize = (window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0) > 30;
+    var isCurrentlyMinimized = header.classList.contains('minimized');
 
-    setTimeout(function() {
-      var headerRect = header.getBoundingClientRect();
-      var offset = (headerRect.height + 16) + 'px';
-      document.querySelectorAll('.year-label').forEach(function(l) { l.style.top = offset; });
-    }, 400); // sync with css transition length
+    if (shouldMinimize && !isCurrentlyMinimized) {
+      header.classList.add('minimized');
+      // Sync year label offset once the height transition finishes
+      setTimeout(syncYearLabelOffset, 400);
+    } else if (!shouldMinimize && isCurrentlyMinimized) {
+      header.classList.remove('minimized');
+      setTimeout(syncYearLabelOffset, 400);
+    }
   }
 
   // Set initial year label offset on load
-  var initOffset = (header.getBoundingClientRect().height + 16) + 'px';
-  document.querySelectorAll('.year-label').forEach(function(l) { l.style.top = initOffset; });
+  syncYearLabelOffset();
 
   window.addEventListener('resize', function() {
     updateHeader();
+    syncYearLabelOffset();
   });
 
   // ═══ YEAR LABEL SCROLL TRANSITION ═══
@@ -1749,8 +1850,13 @@
   var ticking = false;
   window.addEventListener('scroll', function() {
     if (!ticking) {
-      requestAnimationFrame(function() { updateHeader(); updateYearLabels(); updateYearGradient(); ticking = false; });
       ticking = true;
+      requestAnimationFrame(function() {
+        try { updateHeader(); } catch(e) { console.error('updateHeader error', e); }
+        try { updateYearLabels(); } catch(e) { console.error('updateYearLabels error', e); }
+        try { updateYearGradient(); } catch(e) { console.error('updateYearGradient error', e); }
+        ticking = false;
+      });
     }
   }, { passive: true });
 
