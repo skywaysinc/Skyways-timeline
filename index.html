@@ -263,14 +263,68 @@
     grid-template-rows: 0fr;
     opacity: 0;
     pointer-events: none;
+    /* Also collapse horizontally so the aircraft card + telemetry panel can
+       share the row without the title-area eating phantom flex space. */
+    max-width: 0;
+    flex: 0 0 0;
+    overflow: hidden;
+  }
+
+  /* Aircraft hero card — sits to the left of the telemetry panel once the
+     header minimizes, filling what was dead space. Hidden at the top of the
+     page so the H1 title + subtitle can stretch over the full hero row. */
+  .header-aircraft {
+    flex: 0 0 auto;
+    width: 0;
+    max-width: 0;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition:
+      max-width 0.4s cubic-bezier(0.4,0,0.2,1),
+      width 0.4s cubic-bezier(0.4,0,0.2,1),
+      opacity 0.3s ease 0.05s,
+      transform 0.3s ease 0.05s,
+      border-color 0.3s ease;
+    pointer-events: none;
+    background: var(--navy);
+    flex-shrink: 0;
+  }
+  .header-aircraft img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .sticky-header.minimized .header-aircraft {
+    width: 240px;
+    max-width: 240px;
+    opacity: 1;
+    transform: translateX(0);
+    border-color: rgba(194, 242, 19, 0.25);
+    pointer-events: auto;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
   }
 
   .war-room-panel {
     transition: all 0.4s ease;
   }
 
+  .sticky-header.minimized .dashboard-live-area {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
   .sticky-header.minimized .war-room-panel {
-    width: 100%; min-width: 100%;
+    /* Fill whatever space dashboard-live-area has after the aircraft card
+       takes its 240px on the left. No longer forcing width:100% min-width:100%
+       because we're now sharing the row. */
+    width: auto; min-width: 0;
     padding: 12px 24px;
     box-shadow: none; border-color: rgba(194, 242, 19, 0.1);
   }
@@ -927,6 +981,10 @@
     .h1-subtitle { font-size: 18px; }
     .dashboard-hero { flex-direction: column; align-items: flex-start; gap: 40px; }
     .war-room-panel { width: 100%; min-width: 0; }
+    /* Aircraft card is desktop-only — on tablet the hero stacks vertically
+       so it would just create another row instead of filling side space. */
+    .header-aircraft,
+    .sticky-header.minimized .header-aircraft { display: none; }
     .telemetry-grid {
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 20px;
@@ -948,15 +1006,45 @@
   /* ══ MOBILE (<768px) ══ */
   @media (max-width: 767px) {
     .brand-bar { height: 64px; }
-    .brand-bar-inner { padding: 0 20px; gap: 10px; }
-    .logo-wrap { height: 42px; margin-left: -10px; }
-    .sticky-header.minimized .logo-wrap { height: 36px; }
+    /* Tight mobile brand-bar. flex-wrap:nowrap guarantees the search bar
+       stays inline with the logo/title on one row. The title shrinks first
+       (via flex-shrink:1 + overflow) so a long H1 can never push the search
+       off the edge. */
+    .brand-bar-inner {
+      padding: 0 16px;
+      gap: 8px;
+      flex-wrap: nowrap;
+    }
+    .logo-wrap { height: 40px; margin-left: -8px; flex-shrink: 0; }
+    .sticky-header.minimized .logo-wrap { height: 34px; }
     .sticky-header.minimized .brand-bar { height: 52px; }
-    .brand-bar-inline-title { font-size: 11px; }
-    .search-wrap { width: 190px; }
+    /* Inline title gets compact + shrinkable so it can't push search offscreen.
+       At widths under ~360px the title will clip cleanly with ellipsis. */
+    .brand-bar-inline-title {
+      font-size: 11px;
+      letter-spacing: 0.8px;
+      flex-shrink: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    /* Search bar: flexes to fill remaining row width with a sane min+max so
+       it never gets cut off on narrow viewports. */
+    .search-wrap {
+      flex: 1 1 auto;
+      width: auto;
+      min-width: 120px;
+      max-width: 220px;
+      margin-left: auto;
+    }
     .search-nav { right: 26px; }
     .search-count { display: none; } /* Hide count on narrow screens to save space */
-    .search-input { font-size: 12px; padding: 6px 54px 6px 10px; }
+    .search-input { font-size: 12px; padding: 6px 52px 6px 10px; }
+
+    /* Aircraft hero card isn't useful on mobile (hero stacks vertically,
+       telemetry is its own row) — hide to avoid adding vertical space. */
+    .header-aircraft,
+    .sticky-header.minimized .header-aircraft { display: none; }
 
     .hero-section { padding: 28px 0 32px; }
     .hero-inner { padding: 0 20px; }
@@ -1087,8 +1175,16 @@
         <div class="h1-subtitle">9 Years of Flying. Built for the Mission.</div>
       </div>
     </div>
+    <!-- Aircraft hero card. Hidden at the top of the page (the big H1 + war-
+         room telemetry fill the row then). When the header minimizes on
+         scroll it takes the now-empty left side of the dashboard row so the
+         telemetry isn't floating in dead space. Replace aircraft_header.jpg
+         with a higher-res shot any time; no code changes required. -->
+    <div class="header-aircraft" aria-hidden="true">
+      <img src="aircraft_header.jpg" alt="" loading="lazy">
+    </div>
     <div class="dashboard-live-area">
-      
+
       <div class="war-room-panel">
         <div class="panel-corner top-left"></div>
         <div class="panel-corner top-right"></div>
