@@ -234,6 +234,7 @@
   }
 
   .hero-section {
+    position: relative; /* anchors .header-aircraft-bg / .header-aircraft-wash */
     background: var(--navy); padding: 48px 0 64px;
     background-image: linear-gradient(rgba(17, 30, 38, 0.65), rgba(17, 30, 38, 0.92)), url('nasa_bg.png');
     background-size: cover;
@@ -242,9 +243,14 @@
     transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
+  /* Dashboard inner row sits above the background layers. */
+  .hero-inner.dashboard-hero { position: relative; z-index: 2; }
 
   .sticky-header.minimized .hero-section {
-    padding: 16px 0 20px;
+    padding: 14px 0 18px;
+    /* Swap the nasa space image out for solid navy; the aircraft layer
+       (.header-aircraft-bg) + wash (.header-aircraft-wash) render on top of
+       this base color when .minimized is active. */
     background-image: none;
   }
 
@@ -270,64 +276,67 @@
     overflow: hidden;
   }
 
-  /* Aircraft hero card — sits to the left of the telemetry panel once the
-     header minimizes, filling what was dead space. Mirrors the .event-card-bg
-     aesthetic: atmospheric background image with a soft right-side fade mask
-     so the image dissolves into the navy rather than sitting in a framed box.
-     Hidden at the top of the page so the H1 title can take the full row. */
-  .header-aircraft {
-    flex: 0 0 auto;
-    width: 0;
-    max-width: 0;
-    align-self: stretch;
-    min-height: 100px;
-    overflow: hidden;
-    opacity: 0;
+  /* Aircraft hero background — full-bleed background image for the
+     minimized header only. Telemetry panel floats on top on the right;
+     a horizontal gradient in the hero-section background fades the
+     aircraft into navy underneath and around the telemetry box.
+     This replaces the old framed "card" approach. */
+  .header-aircraft-bg {
+    position: absolute;
+    inset: 0;
     background-image: url('aircraft_header.jpg');
     background-size: cover;
-    background-position: 35% 50%;
+    background-position: 25% 50%;
+    opacity: 0;
+    transition: opacity 0.4s ease;
     pointer-events: none;
-    transition:
-      max-width 0.4s cubic-bezier(0.4,0,0.2,1),
-      width 0.4s cubic-bezier(0.4,0,0.2,1),
-      opacity 0.35s ease 0.05s;
-    /* Fade the right 40% of the image into transparency so it blends into the
-       war-room panel next to it. Same pattern as .event-card-bg. */
-    -webkit-mask-image: linear-gradient(to right,
-      rgba(0,0,0,1) 0%,
-      rgba(0,0,0,0.95) 55%,
-      rgba(0,0,0,0) 100%);
-    mask-image: linear-gradient(to right,
-      rgba(0,0,0,1) 0%,
-      rgba(0,0,0,0.95) 55%,
-      rgba(0,0,0,0) 100%);
+    z-index: 0;
   }
-  /* Hides the leftover <img> if this file is served before the cache purge
-     for the old implementation. */
-  .header-aircraft img { display: none; }
+  .sticky-header.minimized .header-aircraft-bg { opacity: 0.85; }
 
-  .sticky-header.minimized .header-aircraft {
-    width: 360px;
-    max-width: 360px;
-    opacity: 0.9;
+  /* Gradient wash sitting above the aircraft, below the telemetry panel.
+     Fades the image from mostly-visible on the left to near-solid navy
+     on the right so the telemetry box can float cleanly on top. */
+  .header-aircraft-wash {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: linear-gradient(
+      to right,
+      rgba(17, 30, 38, 0.15) 0%,
+      rgba(17, 30, 38, 0.35) 30%,
+      rgba(17, 30, 38, 0.7)  55%,
+      rgba(17, 30, 38, 0.94) 75%,
+      rgba(17, 30, 38, 1)    100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
   }
+  .sticky-header.minimized .header-aircraft-wash { opacity: 1; }
 
   .war-room-panel {
     transition: all 0.4s ease;
   }
 
   .sticky-header.minimized .dashboard-live-area {
-    flex: 1 1 auto;
-    min-width: 0;
+    /* Don't grow — hold the war-room panel at its natural width (same as
+       the expanded state). The aircraft background fills whatever is left
+       on the left side of the row. */
+    flex: 0 0 auto;
+    margin-left: auto;
   }
 
   .sticky-header.minimized .war-room-panel {
-    /* Fill whatever space dashboard-live-area has after the aircraft card
-       takes its 240px on the left. No longer forcing width:100% min-width:100%
-       because we're now sharing the row. */
-    width: auto; min-width: 0;
-    padding: 12px 24px;
-    box-shadow: none; border-color: rgba(194, 242, 19, 0.1);
+    /* Keep the panel at the same width it has in the expanded state; just
+     shrink it vertically and soften the glow/shadow so it sits quietly on
+     top of the aircraft background. */
+    width: auto;
+    min-width: 520px;
+    padding: 10px 20px;
+    box-shadow: none;
+    border-color: rgba(194, 242, 19, 0.25);
+    background: rgba(17, 30, 38, 0.82);
   }
 
   .sticky-header.minimized .telemetry-header {
@@ -982,10 +991,10 @@
     .h1-subtitle { font-size: 18px; }
     .dashboard-hero { flex-direction: column; align-items: flex-start; gap: 40px; }
     .war-room-panel { width: 100%; min-width: 0; }
-    /* Aircraft card is desktop-only — on tablet the hero stacks vertically
-       so it would just create another row instead of filling side space. */
-    .header-aircraft,
-    .sticky-header.minimized .header-aircraft { display: none; }
+    /* Aircraft background is desktop-only — on tablet the hero stacks
+       vertically so a horizontal aircraft wash doesn't apply. */
+    .header-aircraft-bg,
+    .header-aircraft-wash { display: none; }
     .telemetry-grid {
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 20px;
@@ -1019,16 +1028,21 @@
     .logo-wrap { height: 40px; margin-left: -8px; flex-shrink: 0; }
     .sticky-header.minimized .logo-wrap { height: 34px; }
     .sticky-header.minimized .brand-bar { height: 52px; }
-    /* Inline title gets compact + shrinkable so it can't push search offscreen.
-       At widths under ~360px the title will clip cleanly with ellipsis. */
+    /* Mobile title: two stacked lines ("HISTORY &" / "TIMELINE") next to
+       the divider. Each .bbit-line becomes a block so they stack; the
+       wrapper sizes to the width of the longer of the two lines and
+       stays left-aligned against the divider. */
     .brand-bar-inline-title {
-      font-size: 11px;
-      letter-spacing: 0.8px;
-      flex-shrink: 1;
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      line-height: 1.15;
+      text-align: left;
+      flex: 0 0 auto;
+      width: max-content;
+      white-space: normal;
     }
+    .brand-bar-inline-title .bbit-line { display: block; }
     /* Search bar: flexes to fill remaining row width with a sane min+max so
        it never gets cut off on narrow viewports. */
     .search-wrap {
@@ -1042,10 +1056,9 @@
     .search-count { display: none; } /* Hide count on narrow screens to save space */
     .search-input { font-size: 12px; padding: 6px 52px 6px 10px; }
 
-    /* Aircraft hero card isn't useful on mobile (hero stacks vertically,
-       telemetry is its own row) — hide to avoid adding vertical space. */
-    .header-aircraft,
-    .sticky-header.minimized .header-aircraft { display: none; }
+    /* Aircraft background not useful on mobile — hero stacks vertically. */
+    .header-aircraft-bg,
+    .header-aircraft-wash { display: none; }
 
     .hero-section { padding: 28px 0 32px; }
     .hero-inner { padding: 0 20px; }
@@ -1076,13 +1089,29 @@
     .sticky-header.minimized .telemetry-status { font-size: 8px; padding: 2px 4px; }
     .sticky-header.minimized .hero-section { padding: 10px 0 14px; }
 
-    /* Stats banner: 3 per row (5 stats total → 3 + 2) to reduce menu height. */
-    .stats-banner-inner { padding: 8px 20px; gap: 8px; }
-    .sticky-header.minimized .stats-banner-inner { padding: 6px 20px; gap: 6px; }
-    .stats-row { grid-template-columns: repeat(3, 1fr); gap: 8px 10px; }
-    .stat-value { font-size: 14px; }
-    .sticky-header.minimized .stat-value { font-size: 12px; }
-    .stat-label { font-size: 7px; letter-spacing: 0.8px; }
+    /* Stats banner: all 5 stats on one row on mobile — tight but it fits. */
+    .stats-banner-inner { padding: 8px 16px; gap: 6px; }
+    .sticky-header.minimized .stats-banner-inner { padding: 6px 16px; gap: 4px; }
+    .stats-row {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0 6px;
+    }
+    .stat { overflow: hidden; }
+    .stat-value {
+      font-size: 13px;
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: clip;
+    }
+    .sticky-header.minimized .stat-value { font-size: 11px; }
+    .stat-label {
+      font-size: 6.5px;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: clip;
+    }
 
     /* Filters: all five categories on a single row. Extended label words
        ("Development", "Milestones", "Major ") collapse via .legend-long so
@@ -1108,6 +1137,27 @@
     .legend-long { display: none; }
     .legend-x { margin-left: 2px; }
     .legend-x svg { width: 7px; height: 7px; }
+
+    /* ── MOBILE SEARCH-FOCUSED STATE ──
+       When the user taps the search input on a phone, collapse everything
+       below the brand bar so the iOS/Android keyboard doesn't have to fight
+       the menu for real estate. The brand bar + search stay pinned at the
+       top; hero, stats, and filters disappear until the user blurs the
+       input or clears the query. Scroll position is preserved by JS. */
+    .sticky-header.search-focused .hero-wrapper,
+    .sticky-header.search-focused .stats-banner {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      pointer-events: none;
+      transition:
+        max-height 0.25s cubic-bezier(0.4,0,0.2,1),
+        opacity 0.2s ease;
+    }
+    /* Collapse the brand-bar bottom border and header fade when search is
+       focused so the transition feels like "zoom to search" not "hide
+       content". */
+    .sticky-header.search-focused::after { opacity: 0 !important; }
 
     .timeline-wrapper { padding: 32px 20px 40px; }
     .year-section { grid-template-columns: 60px 1fr; }
@@ -1153,7 +1203,7 @@
       <img class="logo-img logo-color" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NzUuMzkgMTk5LjkxIj4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiAjYzJmMjEzOwogICAgICB9CgogICAgICAuY2xzLTEsIC5jbHMtMiB7CiAgICAgICAgc3Ryb2tlLXdpZHRoOiAwcHg7CiAgICAgIH0KCiAgICAgIC5jbHMtMiB7CiAgICAgICAgZmlsbDogIzExMWUyNjsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPGc+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik01NjcuNDEsNzEuNTdsLTIyLjE5LDY1LjI3Yy0uNzMsMi4xNi0yLjc2LDMuNjEtNS4wNSwzLjYxaC0xMS40N2w0LjM5LTEyLjg2LTE5LjA0LTU2LjAyaDE1LjNsMTEuMzksMzUuNywxMS4zOS0zNS43aDE1LjI4WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMjYxLjA3LDk4LjI1Yy0xLjU5LTIuNC0zLjUxLTQuMzUtNS43LTUuNzktMi4xNy0xLjQzLTQuNC0yLjQ4LTYuNjEtMy4xNC0yLjE3LS42NC0zLjg5LTEuMDktNS4xLTEuMzMtNC4wOS0xLjA0LTcuNC0xLjg5LTkuOTMtMi41Ni0yLjQ5LS42Ni00LjQ2LTEuMzItNS44NS0xLjk4LTEuMzItLjYyLTIuMjEtMS4yOC0yLjY0LTEuOTgtLjQzLS43LS42NS0xLjY0LS42NS0yLjgxLDAtMS4yOC4yOC0yLjM0LjgyLTMuMTYuNTYtLjg0LDEuMjktMS41NiwyLjE3LTIuMTIuODgtLjU3LDEuODgtLjk3LDIuOTYtMS4yLDIuODUtLjYsNS43NS0uMzksOC4xNC4wOSwxLjQyLjI5LDIuNy43OSwzLjc5LDEuNDgsMS4wNy42OCwxLjk0LDEuNjIsMi41OSwyLjgxLjY2LDEuMiwxLjA1LDIuNzUsMS4xNyw0LjYxbC4wMy41NGgxNS4wNHYtLjU4YzAtMy44Ni0uNzUtNy4yLTIuMjItOS45My0xLjQ3LTIuNzItMy40OS00Ljk5LTUuOTktNi43NS0yLjQ5LTEuNzQtNS4zNy0zLjAyLTguNTctMy44LTUuOTEtMS40My0xMi40OS0xLjY5LTE4LjkyLjA1LTIuOTguODEtNS42OSwyLjA3LTguMDYsMy43NS0yLjM4LDEuNjktNC4zMywzLjgzLTUuOCw2LjM2LTEuNDgsMi41NS0yLjIzLDUuNTktMi4yMyw5LjAzLDAsMy4wOC41OSw1Ljc0LDEuNzYsNy45MiwxLjE2LDIuMTcsMi43MSw0LDQuNiw1LjQ1LDEuODYsMS40Myw0LjAxLDIuNjEsNi4zNywzLjUxLDIuMzQuODksNC43NiwxLjY1LDcuMTksMi4yNiwyLjM1LjY2LDQuNzMsMS4yOCw3LjA3LDEuODQsMi4yOC41NCw0LjM1LDEuMTgsNi4xNCwxLjksMS43NS43LDMuMTgsMS41OCw0LjI1LDIuNjIsMS4wMi45OSwxLjUyLDIuMjcsMS41MiwzLjg5LDAsMS41LS4zOSwyLjc1LTEuMTUsMy43MS0uOCwxLTEuODEsMS43OS0zLDIuMzYtMS4yMi41OC0yLjU1Ljk4LTMuOTUsMS4xOS0zLjUuNTEtNi41LjM5LTkuMzgtLjM2LTEuNjktLjQ0LTMuMTgtMS4xMi00LjQzLTIuMDEtMS4yMy0uODgtMi4yNC0yLjA2LTIuOTgtMy41aDBjLS43NS0xLjQzLTEuMTItMy4yMi0xLjEyLTUuMzJ2LS41OGgtMTUuMDd2LjU3Yy0uMDcsNC4xMS42OSw3LjcxLDIuMjUsMTAuNzEsMS41NiwzLDMuNyw1LjUsNi4zNSw3LjQzLDIuNjQsMS45Myw1LjcyLDMuMzYsOS4xNyw0LjI2LDMuNDIuODksNywxLjM1LDEwLjYzLDEuMzUsNC40OSwwLDguNTEtLjUzLDExLjkzLTEuNTgsMy40NC0xLjA1LDYuMzctMi41NSw4LjcxLTQuNDUsMi4zNS0xLjkxLDQuMTQtNC4yMSw1LjMzLTYuODUsMS4xOS0yLjYzLDEuNzktNS41MSwxLjc5LTguNTcsMC0zLjc2LS44Mi02LjktMi40My05LjM0WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDQ2LjU3LDcxLjU3bC0xMC4zLDM3Ljk1aC0uMjFsLTkuNTQtMzcuOTVoLTE0Ljk2bC05LjMzLDM4LjA3aC0uMjFsLTEwLjMtMzguMDdoLTE2LjI2bDE3Ljc3LDU2LjA2aDE1Ljk1bDkuNTQtMzcuNjNoLjIxbDkuOTcsMzcuNjNoMTUuODRsMTcuNjctNTYuMDZoLTE1Ljg0WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNjE2LjIzLDEwMy4wN2MtMS4wMS0xLjc4LTIuMzUtMy4yNS00LjAyLTQuNDUtMS42Ny0xLjE5LTMuNTYtMi4xNS01LjctMi44OC0yLjEzLS43Mi00LjMxLTEuMzMtNi41NS0xLjg0LTIuMTctLjUxLTQuMzEtLjk4LTYuNC0xLjQyLTIuMDktLjQzLTMuOTUtLjkyLTUuNTgtMS40Ni0xLjYyLS41NC0yLjk1LTEuMjUtMy45Ni0yLjEyLTEuMDEtLjg3LTEuNTEtMS45OC0xLjUxLTMuMzUsMC0xLjE2LjI4LTIuMDguODctMi43Ny41Ny0uNjksMS4yOC0xLjIsMi4xLTEuNTguODMtLjM2LDEuNzYtLjYsMi43Ny0uNywxLjAxLS4xMSwxLjk2LS4xNywyLjgzLS4xNywyLjc1LDAsNS4xMy41Myw3LjE1LDEuNTgsMi4wMywxLjA1LDMuMTUsMy4wNSwzLjM3LDYuMDJoMTQuNjRjLS4yOS0zLjQ4LTEuMTgtNi4zNS0yLjY2LTguNjItMS40OS0yLjI4LTMuMzQtNC4xMS01LjU4LTUuNDgtMi4yNS0xLjM3LTQuNzktMi4zNC03LjY1LTIuOTMtMi44NS0uNTctNS44LS44Ny04Ljg0LS44N3MtNiwuMjctOC44OS44MWMtMi44OS41NC01LjQ5LDEuNDktNy44MSwyLjgzLTIuMzEsMS4zNC00LjE2LDMuMTYtNS41OCw1LjQ3LTEuNDEsMi4zMi0yLjEyLDUuMjgtMi4xMiw4Ljg5LDAsMi40Ny41MSw0LjU0LDEuNTIsNi4yNCwxLjAxLDEuNywyLjM1LDMuMTIsNC4wMiw0LjIzLDEuNjcsMS4xMywzLjU2LDIuMDMsNS43LDIuNzEsMi4xMy42OSw0LjMxLDEuMjgsNi41NSwxLjc5LDUuNSwxLjE2LDkuNzgsMi4zMSwxMi44NSwzLjQ3LDMuMDcsMS4xNiw0LjYxLDIuODksNC42MSw1LjIxLDAsMS4zNy0uMzMsMi41MS0uOTgsMy40MS0uNjUuOS0xLjQ2LDEuNjMtMi40NCwyLjE3LS45OC41NC0yLjA2LjkzLTMuMjUsMS4xOS0xLjE5LjI1LTIuMzMuMzctMy40MS4zNy0xLjUyLDAtMi45OC0uMTgtNC40LS41NC0xLjQxLS4zNi0yLjY2LS45Mi0zLjc0LTEuNjgtMS4wOC0uNzctMS45Ny0xLjczLTIuNjYtMi45My0uNjktMS4xOS0xLjA0LTIuNjItMS4wNC00LjI5aC0xNC42M2MuMTUsMy43Ni45OSw2Ljg5LDIuNTQsOS4zOSwxLjU1LDIuNDksMy41NSw0LjQ5LDUuOTcsNi4wMSwyLjQyLDEuNTIsNS4xOSwyLjYxLDguMywzLjI1LDMuMTEuNjUsNi4yOS45OCw5LjU0Ljk4czYuMy0uMyw5LjM4LS45MmMzLjA3LS42MSw1LjgxLTEuNjgsOC4xOS0zLjIsMi4zOS0xLjUyLDQuMzEtMy41Miw1LjgtNi4wMiwxLjQ5LTIuNDksMi4yMy01LjU4LDIuMjMtOS4yNiwwLTIuNjEtLjUxLTQuOC0xLjUyLTYuNTZaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0zNzUuMjYsNzEuNTdsLTIyLjE5LDY1LjI3Yy0uNzMsMi4xNi0yLjc2LDMuNjEtNS4wNSwzLjYxaC0xMS40N2w0LjM5LTEyLjg2LTE5LjA0LTU2LjAyaDE1LjNsMTEuMzksMzUuNywxMS4zOS0zNS43aDE1LjI4WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNTEwLjk4LDc3LjgxYy0xLjUyLTIuMDYtMy40Ny0zLjY3LTUuODUtNC44My0yLjM5LTEuMTYtNS4wMy0xLjk0LTcuOTEtMi4zMy0yLjg5LS4zOS01Ljc1LS42LTguNTgtLjYtMy4xMSwwLTYuMTkuMy05LjI2LjkyLTMuMDcuNjEtNS44NCwxLjY0LTguMywzLjA4LTIuNDYsMS40NS00LjQ5LDMuMzctNi4wOCw1Ljc1LTEuNTksMi4zOS0yLjQ5LDUuMzgtMi43MSw5aDE1LjRjLjI5LTMuMDQsMS4zMS01LjIxLDMuMDQtNi41MiwxLjczLTEuMjksNC4xMi0xLjk1LDcuMTYtMS45NSwxLjM3LDAsMi42Ni4wOSwzLjg1LjI3LDEuMTkuMTgsMi4yNC41NCwzLjE0LDEuMDguOTEuNTUsMS42MywxLjMxLDIuMTcsMi4yOC44OSwxLjYyLDEuNjQsNS43NS0uNiw3LjU5LTEuMDEuODMtMi4zOSwxLjQ2LTQuMTIsMS45LTEuNzMuNDMtMy43My43NS01Ljk3Ljk3LTIuMjQuMjMtNC41MS41Mi02LjgzLjg4LTIuMzEuMzYtNC42Ljg0LTYuODksMS40Ni0yLjI3LjYxLTQuMywxLjUzLTYuMDcsMi43Ni0xLjc4LDEuMjQtMy4yMiwyLjg4LTQuMzQsNC45NC0xLjExLDIuMDYtMS42OCw0LjY4LTEuNjgsNy44NiwwLDIuODkuNSw1LjM5LDEuNDYsNy40OC45OCwyLjA5LDIuMzMsMy44Myw0LjA2LDUuMiwxLjc0LDEuMzcsMy43NiwyLjM5LDYuMDgsMy4wNCwyLjMyLjY1LDQuODEuOTgsNy40OC45OCwzLjQ3LDAsNi44Ny0uNTEsMTAuMTktMS41MiwzLjA0LS45Miw1LjcyLTIuNDgsOC4wMy00LjY4djQuNzZsMTUuNC4wMnYtNDEuNjNjMC0zLjQtLjc1LTYuMTItMi4yNy04LjE4Wk00OTcuODYsMTA1Ljk0YzAsLjg3LS4wOSwyLjAzLS4yNywzLjQ3LS4xOCwxLjQ1LS42NiwyLjg3LTEuNDYsNC4yOS0uOCwxLjQxLTIuMDMsMi42MS0zLjY4LDMuNjItMS42NywxLjAxLTQuMDIsMS41Mi03LjA2LDEuNTItMS4yMywwLTIuNDItLjExLTMuNTgtLjMzLTEuMTUtLjIxLTIuMTYtLjYtMy4wMy0xLjE0LS44Ny0uNTQtMS41NS0xLjI4LTIuMDYtMi4yMi0uNTEtLjk1LS43Ny0yLjEtLjc3LTMuNDgsMC0xLjQ0LjI2LTIuNjMuNzctMy41OC41MS0uOTMsMS4xNy0xLjcxLDItMi4zMy44My0uNjEsMS44LTEuMSwyLjkzLTEuNDYsMS4xMy0uMzYsMi4yNi0uNjUsMy40MS0uODcsMS4yNC0uMjEsMi40Ni0uMzksMy42OS0uNTQsMS4yMy0uMTUsMi40LS4zMywzLjUyLS41NCwxLjEzLS4yMywyLjE3LS41LDMuMTUtLjgxLjk3LS4zMywxLjc5LS43OCwyLjQzLTEuMzZ2NS43NVoiLz4KICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIzMDAuMTcgOTkuNTUgMzIxLjY4IDEyNy41OCAzMDQuNyAxMjcuNTggMjg0LjMyIDk5LjU1IDMwNC43IDcxLjUxIDMyMS42OCA3MS41MSAzMDAuMTcgOTkuNTUiLz4KICAgIDxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iMjY4LjkyIiB5PSI2MC4yMiIgd2lkdGg9IjE1LjQiIGhlaWdodD0iNjcuNDEiLz4KICA8L2c+CiAgPGc+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik01Ny42Myw5OS45NXYtMTkuMzNjMC0uNTcuNDctMS4wMiwxLjA0LTEuMDIsMjkuMjQsMCw0Mi44MSwwLDcyLjIzLDAsMi45MiwwLDUuNDEtMS4wOSw3LjQ4LTMuMjgsMS45Ny0yLjA4LDMuOTUtNC4xNSw1Ljg3LTYuMjgsMi43MS0yLjk5LDUuNi01LjcxLDkuMTUtNy41MywyLjgzLTEuNDUsNS43OC0yLjkzLDguOTItMy4wMiwyLjg2LS4wOCwxMC40OC0uMDIsMTMuMzMsMCwuODYsMCwuODcuMzQuODcuOTQsMCw2LjQ3LDAsMTIuOTQsMCwxOS40MXEwLC45OS0uOTMuOTljLTEwLjI2LDAtMjUuMzIsMC0zNS41OCwwLTIuNzksMC01LjI1Ljk5LTcuMjYsMy4wOS0yLjM3LDIuNDctNC43Myw0Ljk2LTcuMDMsNy41MS01Ljg4LDYuNS0xMy4wMSw5LjU5LTIxLjQ5LDkuNTctMjAuNTMtLjA3LTI1LjI5LS4wNC00NS41Ny0uMDMtLjU3LDAtMS4wNC0uNDYtMS4wNC0xLjAyWiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTc2LjUzLDk5Ljk2djE5LjMzYzAsLjU3LS40NywxLjAyLTEuMDQsMS4wMi0yOS4yNCwwLTQyLjgxLDAtNzIuMjMsMC0yLjkyLDAtNS40MSwxLjA5LTcuNDgsMy4yOC0xLjk3LDIuMDgtMy45NSw0LjE1LTUuODcsNi4yOC0yLjcxLDIuOTktNS42LDUuNzEtOS4xNSw3LjUzLTIuODMsMS40NS01Ljc4LDIuOTMtOC45MiwzLjAyLTIuODYuMDgtMTAuNDguMDItMTMuMzMsMC0uODYsMC0uODctLjM0LS44Ny0uOTQsMC02LjQ3LDAtMTIuOTQsMC0xOS40MXEwLS45OS45My0uOTljMTAuMjYsMCwyNS4zMiwwLDM1LjU4LDAsMi43OSwwLDUuMjUtLjk5LDcuMjYtMy4wOSwyLjM3LTIuNDcsNC43My00Ljk2LDcuMDMtNy41MSw1Ljg4LTYuNSwxMy4wMS05LjU5LDIxLjQ5LTkuNTcsMjAuNTMuMDcsMjUuMjkuMDQsNDUuNTcuMDMuNTcsMCwxLjA0LjQ2LDEuMDQsMS4wMloiLz4KICA8L2c+Cjwvc3ZnPg==" alt="Skyways">
     </div>
     <div class="brand-bar-divider"></div>
-    <div class="brand-bar-inline-title">History & Timeline</div>
+    <div class="brand-bar-inline-title"><span class="bbit-line">History &amp;</span> <span class="bbit-line">Timeline</span></div>
     <div class="search-wrap">
       <input type="text" class="search-input" id="searchInput" placeholder="Search events..." oninput="handleSearch()" onkeydown="handleSearchKeydown(event)">
       <div class="search-nav" id="searchNav">
@@ -1166,7 +1216,13 @@
       </button>
     </div>
   </div></div>
-  <div class="hero-wrapper" id="heroWrapper"><div class="hero-section"><div class="hero-inner dashboard-hero">
+  <div class="hero-wrapper" id="heroWrapper"><div class="hero-section">
+    <!-- Aircraft background (invisible until .sticky-header.minimized). Covers
+         the entire hero row; .header-aircraft-wash paints a horizontal navy
+         gradient on top that blends the image into the telemetry box area. -->
+    <div class="header-aircraft-bg" aria-hidden="true"></div>
+    <div class="header-aircraft-wash" aria-hidden="true"></div>
+    <div class="hero-inner dashboard-hero">
     <div class="dashboard-title-area">
       <div class="dashboard-title-area-inner">
         <div class="dashboard-eyebrow">
@@ -1176,14 +1232,6 @@
         <div class="h1-subtitle">9 Years of Flying. Built for the Mission.</div>
       </div>
     </div>
-    <!-- Aircraft hero card. Hidden at the top of the page (the big H1 + war-
-         room telemetry fill the row then). When the header minimizes on
-         scroll it takes the now-empty left side of the dashboard row so the
-         telemetry isn't floating in dead space. The image is applied as a
-         background with a right-side gradient mask so it blends into the
-         navy hero rather than sitting in a framed box. Swap the file at
-         aircraft_header.jpg any time; no code change needed. -->
-    <div class="header-aircraft" aria-hidden="true"></div>
     <div class="dashboard-live-area">
 
       <div class="war-room-panel">
