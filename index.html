@@ -286,17 +286,20 @@
     inset: 0;
     background-image: url('aircraft_header.jpg');
     background-size: cover;
-    background-position: 25% 50%;
+    /* Shift vertical crop down so the aircraft silhouette sits in the
+       visible strip instead of the cloud layer above it. */
+    background-position: 30% 68%;
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
     z-index: 0;
   }
-  .sticky-header.minimized .header-aircraft-bg { opacity: 0.85; }
+  .sticky-header.minimized .header-aircraft-bg { opacity: 0.95; }
 
   /* Gradient wash sitting above the aircraft, below the telemetry panel.
-     Fades the image from mostly-visible on the left to near-solid navy
-     on the right so the telemetry box can float cleanly on top. */
+     Left side is nearly clear so the aircraft reads cleanly; the right
+     half ramps quickly into near-solid navy so the telemetry box stays
+     legible on top. */
   .header-aircraft-wash {
     position: absolute;
     inset: 0;
@@ -304,10 +307,11 @@
     z-index: 1;
     background: linear-gradient(
       to right,
-      rgba(17, 30, 38, 0.15) 0%,
-      rgba(17, 30, 38, 0.35) 30%,
-      rgba(17, 30, 38, 0.7)  55%,
-      rgba(17, 30, 38, 0.94) 75%,
+      rgba(17, 30, 38, 0)    0%,
+      rgba(17, 30, 38, 0.05) 20%,
+      rgba(17, 30, 38, 0.18) 40%,
+      rgba(17, 30, 38, 0.55) 60%,
+      rgba(17, 30, 38, 0.9)  78%,
       rgba(17, 30, 38, 1)    100%
     );
     opacity: 0;
