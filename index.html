@@ -286,9 +286,10 @@
     inset: 0;
     background-image: url('aircraft_header.jpg');
     background-size: cover;
-    /* Shift vertical crop down so the aircraft silhouette sits in the
-       visible strip instead of the cloud layer above it. */
-    background-position: 30% 68%;
+    /* Vertical crop pulls the aircraft silhouette into view; horizontal
+       position keeps it on the right side of the row where the wash
+       leaves the image clear. */
+    background-position: 70% 68%;
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
@@ -297,9 +298,9 @@
   .sticky-header.minimized .header-aircraft-bg { opacity: 0.95; }
 
   /* Gradient wash sitting above the aircraft, below the telemetry panel.
-     Left side is nearly clear so the aircraft reads cleanly; the right
-     half ramps quickly into near-solid navy so the telemetry box stays
-     legible on top. */
+     Telemetry now lives on the LEFT, so the gradient starts solid navy on
+     the left (behind the panel) and fades to clear on the right where
+     the aircraft shows through. */
   .header-aircraft-wash {
     position: absolute;
     inset: 0;
@@ -307,12 +308,12 @@
     z-index: 1;
     background: linear-gradient(
       to right,
-      rgba(17, 30, 38, 0)    0%,
-      rgba(17, 30, 38, 0.05) 20%,
-      rgba(17, 30, 38, 0.18) 40%,
-      rgba(17, 30, 38, 0.55) 60%,
-      rgba(17, 30, 38, 0.9)  78%,
-      rgba(17, 30, 38, 1)    100%
+      rgba(17, 30, 38, 1)    0%,
+      rgba(17, 30, 38, 0.9)  22%,
+      rgba(17, 30, 38, 0.55) 40%,
+      rgba(17, 30, 38, 0.18) 60%,
+      rgba(17, 30, 38, 0.05) 80%,
+      rgba(17, 30, 38, 0)    100%
     );
     opacity: 0;
     transition: opacity 0.4s ease;
@@ -324,11 +325,12 @@
   }
 
   .sticky-header.minimized .dashboard-live-area {
-    /* Don't grow — hold the war-room panel at its natural width (same as
-       the expanded state). The aircraft background fills whatever is left
-       on the left side of the row. */
+    /* Telemetry panel sits on the LEFT in the minimized state; the aircraft
+       background fills whatever is left to the right. margin-right:auto
+       pushes everything else to the right (nothing else exists here, so the
+       panel just holds the start edge). */
     flex: 0 0 auto;
-    margin-left: auto;
+    margin-right: auto;
   }
 
   .sticky-header.minimized .war-room-panel {
