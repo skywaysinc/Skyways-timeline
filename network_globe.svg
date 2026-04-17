@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Skyways Autonomous Air Network — hero background.
+
+  Wireframe orthographic globe centered over the Pacific (reflecting Skyways'
+  Austin → Asia-Pacific operational footprint). Nodes mark real Skyways
+  operating / demo sites; arcs are great-circle-style connections in brand
+  lime (#C2F213) with secondary accents in brand blue (#009AEB).
+
+  All colors sourced from the Oct 2025 Brand Addendum. No external assets.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1600 900"
+     preserveAspectRatio="xMidYMid slice"
+     role="img"
+     aria-label="Skyways autonomous air network globe">
+
+  <defs>
+    <!-- Deep-space vignette: fades edges to pure navy so the hero overlay blends cleanly. -->
+    <radialGradient id="spaceFade" cx="55%" cy="50%" r="75%">
+      <stop offset="0%"  stop-color="#1A2B36" stop-opacity="1"/>
+      <stop offset="70%" stop-color="#111E26" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#0A141B" stop-opacity="1"/>
+    </radialGradient>
+
+    <!-- Globe surface tint: subtle navy-to-blueish spherical shading. -->
+    <radialGradient id="globeShade" cx="40%" cy="35%" r="70%">
+      <stop offset="0%"  stop-color="#1E2F3A"/>
+      <stop offset="60%" stop-color="#13222B"/>
+      <stop offset="100%" stop-color="#0A141B"/>
+    </radialGradient>
+
+    <!-- Lime arc glow — primary network color. -->
+    <filter id="glowLime" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Blue arc glow — secondary / long-haul. -->
+    <filter id="glowBlue" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Node pulse glow. -->
+    <filter id="nodeGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+
+    <!-- Reusable node symbol. Scales by setting width/height on <use>. -->
+    <symbol id="node" viewBox="-10 -10 20 20" overflow="visible">
+      <circle r="9" fill="#C2F213" opacity="0.18" filter="url(#nodeGlow)"/>
+      <circle r="4.5" fill="#C2F213" opacity="0.35"/>
+      <circle r="2.2" fill="#C2F213"/>
+      <circle r="1"   fill="#FFFFFF"/>
+    </symbol>
+
+    <symbol id="nodeBlue" viewBox="-10 -10 20 20" overflow="visible">
+      <circle r="9" fill="#009AEB" opacity="0.2" filter="url(#nodeGlow)"/>
+      <circle r="4.5" fill="#009AEB" opacity="0.4"/>
+      <circle r="2.2" fill="#009AEB"/>
+      <circle r="1"   fill="#FFFFFF"/>
+    </symbol>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="900" fill="url(#spaceFade)"/>
+
+  <!-- Faint starfield stipple (generated as a scatter of tiny circles). -->
+  <g fill="#FFFFFF" opacity="0.35">
+    <circle cx="80"   cy="140" r="0.8"/>
+    <circle cx="220"  cy="70"  r="0.6"/>
+    <circle cx="380"  cy="210" r="0.9"/>
+    <circle cx="510"  cy="60"  r="0.7"/>
+    <circle cx="640"  cy="180" r="0.6"/>
+    <circle cx="780"  cy="100" r="0.8"/>
+    <circle cx="120"  cy="340" r="0.7"/>
+    <circle cx="300"  cy="800" r="0.8"/>
+    <circle cx="90"   cy="720" r="0.6"/>
+    <circle cx="1320" cy="80"  r="0.9"/>
+    <circle cx="1460" cy="220" r="0.7"/>
+    <circle cx="1540" cy="380" r="0.6"/>
+    <circle cx="1400" cy="560" r="0.8"/>
+    <circle cx="1510" cy="720" r="0.7"/>
+    <circle cx="1480" cy="110" r="0.5"/>
+    <circle cx="60"   cy="490" r="0.8"/>
+    <circle cx="1570" cy="850" r="0.7"/>
+    <circle cx="45"   cy="860" r="0.6"/>
+  </g>
+
+  <!-- Globe is centered at (900, 450), radius 380 -->
+  <g transform="translate(900 450)">
+
+    <!-- Sphere base -->
+    <circle r="380" fill="url(#globeShade)"/>
+
+    <!-- Atmospheric halo -->
+    <circle r="388" fill="none" stroke="#009AEB" stroke-opacity="0.25" stroke-width="1.5"/>
+    <circle r="398" fill="none" stroke="#009AEB" stroke-opacity="0.1"  stroke-width="2"/>
+
+    <!-- Parallels (latitude lines): horizontal ellipses compressed by latitude.
+         Radii follow sin(lat) so they look correct on an orthographic sphere. -->
+    <g fill="none" stroke="#FFFFFF" stroke-opacity="0.09" stroke-width="0.8">
+      <!-- Equator (solid, slightly stronger) -->
+      <line x1="-380" y1="0" x2="380" y2="0" stroke-opacity="0.18"/>
+      <!-- ±15° -->
+      <ellipse rx="380" ry="98.4" cx="0" cy="-98.4"/>
+      <ellipse rx="380" ry="98.4" cx="0" cy="98.4"/>
+      <!-- ±30° -->
+      <ellipse rx="380" ry="190"  cx="0" cy="-190"/>
+      <ellipse rx="380" ry="190"  cx="0" cy="190"/>
+      <!-- ±45° -->
+      <ellipse rx="380" ry="268.7" cx="0" cy="-268.7"/>
+      <ellipse rx="380" ry="268.7" cx="0" cy="268.7"/>
+      <!-- ±60° -->
+      <ellipse rx="380" ry="329.1" cx="0" cy="-329.1"/>
+      <ellipse rx="380" ry="329.1" cx="0" cy="329.1"/>
+    </g>
+
+    <!-- Meridians (longitude lines): vertical ellipses rotated around center. -->
+    <g fill="none" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="0.8">
+      <!-- Prime + every 22.5° gives a dense-but-clean grid -->
+      <ellipse rx="45"  ry="380" cx="0" cy="0"/>
+      <ellipse rx="90"  ry="380" cx="0" cy="0"/>
+      <ellipse rx="145" ry="380" cx="0" cy="0"/>
+      <ellipse rx="200" ry="380" cx="0" cy="0"/>
+      <ellipse rx="255" ry="380" cx="0" cy="0"/>
+      <ellipse rx="310" ry="380" cx="0" cy="0"/>
+      <ellipse rx="355" ry="380" cx="0" cy="0"/>
+      <!-- Terminator (strong central meridian) -->
+      <line x1="0" y1="-380" x2="0" y2="380" stroke-opacity="0.18"/>
+    </g>
+
+    <!--
+      Simplified continent silhouettes (stylized, not geographically precise).
+      Drawn on an orthographic projection centered near Austin (30°N, 97°W)
+      looking out over the Pacific. Coordinates tuned by hand for brand look,
+      not cartographic accuracy.
+    -->
+    <g fill="#1F3340" stroke="#2A4656" stroke-width="0.7" opacity="0.85">
+      <!-- North America (left half of globe) -->
+      <path d="M -340,-150
+               C -350,-200 -320,-250 -270,-260
+               C -220,-265 -190,-240 -170,-220
+               C -150,-200 -130,-210 -110,-190
+               C -100,-170 -110,-140 -130,-120
+               C -150,-100 -170,-90 -180,-60
+               C -180,-30 -210,-10 -230,20
+               C -260,60 -290,70 -310,50
+               C -330,30 -340,0 -345,-40
+               C -355,-90 -340,-120 -340,-150 Z"/>
+      <!-- Central America sliver -->
+      <path d="M -230,25 C -225,60 -210,100 -195,130 C -185,160 -200,165 -215,145 C -230,120 -240,80 -240,50 Z"/>
+      <!-- South America -->
+      <path d="M -200,140
+               C -180,160 -165,210 -175,270
+               C -185,310 -205,330 -225,320
+               C -245,310 -255,270 -250,220
+               C -245,180 -220,145 -200,140 Z"/>
+
+      <!-- Europe (upper right, small) -->
+      <path d="M 80,-220
+               C 110,-240 150,-230 175,-220
+               C 195,-210 200,-195 185,-185
+               C 170,-175 140,-175 115,-180
+               C 90,-185 70,-205 80,-220 Z"/>
+      <!-- Africa -->
+      <path d="M 85,-150
+               C 115,-140 150,-115 165,-70
+               C 175,-20 160,40  145,80
+               C 130,115 110,140 90,140
+               C 70,140 50,115 45,70
+               C 40,20  55,-30 65,-90
+               C 70,-120 75,-145 85,-150 Z"/>
+
+      <!-- Asia (right) -->
+      <path d="M 190,-225
+               C 240,-240 310,-220 335,-170
+               C 350,-130 345,-90 320,-60
+               C 300,-35 275,-25 250,-40
+               C 225,-55 210,-80 205,-110
+               C 200,-135 180,-160 175,-185
+               C 175,-205 180,-220 190,-225 Z"/>
+      <!-- India subcontinent -->
+      <path d="M 215,-55 C 235,-40 240,-10 225,25 C 215,45 200,40 195,15 C 190,-15 195,-55 215,-55 Z"/>
+      <!-- SE Asia / Japan archipelago dots -->
+      <circle cx="290" cy="-90"  r="5"/>
+      <circle cx="305" cy="-75"  r="4"/>
+      <circle cx="320" cy="-55"  r="3"/>
+      <circle cx="280" cy="-40"  r="4"/>
+      <circle cx="270" cy="-15"  r="3"/>
+      <circle cx="295" cy="-20"  r="3"/>
+
+      <!-- Australia -->
+      <path d="M 270,100
+               C 305,95 340,110 350,135
+               C 355,155 335,175 300,175
+               C 265,175 240,160 240,140
+               C 240,120 250,105 270,100 Z"/>
+    </g>
+
+    <!-- Globe edge highlight -->
+    <circle r="380" fill="none" stroke="#009AEB" stroke-opacity="0.45" stroke-width="1"/>
+
+    <!--
+      NETWORK ARCS
+      Drawn as quadratic Beziers above the globe surface to suggest
+      great-circle paths. Origins/termini correspond to Skyways
+      operational nodes (see node placements below).
+
+      Coordinates are in globe-local space (center = 0,0).
+    -->
+
+    <!-- Austin (HQ) ↔ Okinawa (III MEF TCP demo) -->
+    <path d="M -220,-50 Q 20,-340 290,-75"
+          fill="none" stroke="#C2F213" stroke-width="2"
+          stroke-linecap="round" opacity="0.9"
+          filter="url(#glowLime)"
+          stroke-dasharray="0"/>
+
+    <!-- Austin ↔ Japan / ANA (Tokyo) -->
+    <path d="M -220,-50 Q 60,-380 305,-75"
+          fill="none" stroke="#C2F213" stroke-width="1.5"
+          stroke-linecap="round" opacity="0.7"
+          filter="url(#glowLime)"/>
+
+    <!-- Austin ↔ Hawaii (RIMPAC) -->
+    <path d="M -220,-50 Q -60,-180 135,-45"
+          fill="none" stroke="#C2F213" stroke-width="1.6"
+          stroke-linecap="round" opacity="0.85"
+          filter="url(#glowLime)"/>
+
+    <!-- Hawaii ↔ Okinawa (Pacific relay) -->
+    <path d="M 135,-45 Q 240,-200 290,-75"
+          fill="none" stroke="#009AEB" stroke-width="1.4"
+          stroke-linecap="round" opacity="0.75"
+          filter="url(#glowBlue)"
+          stroke-dasharray="4 4"/>
+
+    <!-- Austin ↔ San Diego (NAWCAD Point Mugu adjacency) -->
+    <path d="M -220,-50 Q -270,-100 -295,-85"
+          fill="none" stroke="#C2F213" stroke-width="1.4"
+          stroke-linecap="round" opacity="0.8"
+          filter="url(#glowLime)"/>
+
+    <!-- Austin ↔ UK (Skyports / partner op sites) -->
+    <path d="M -220,-50 Q 0,-320 130,-210"
+          fill="none" stroke="#009AEB" stroke-width="1.3"
+          stroke-linecap="round" opacity="0.7"
+          filter="url(#glowBlue)"
+          stroke-dasharray="6 6"/>
+
+    <!-- NODES (anchored to approximate globe positions) -->
+    <!-- Austin TX HQ -->
+    <use href="#node" x="-220" y="-50" width="20" height="20"/>
+    <!-- Hawaii / Pearl Harbor -->
+    <use href="#node" x="135" y="-45" width="18" height="18"/>
+    <!-- Okinawa -->
+    <use href="#node" x="290" y="-75" width="18" height="18"/>
+    <!-- Tokyo / ANA -->
+    <use href="#node" x="305" y="-90" width="16" height="16"/>
+    <!-- San Diego -->
+    <use href="#nodeBlue" x="-295" y="-85" width="14" height="14"/>
+    <!-- UK -->
+    <use href="#nodeBlue" x="130"  y="-210" width="14" height="14"/>
+    <!-- Secondary quiet nodes -->
+    <use href="#nodeBlue" x="-260" y="60"  width="12" height="12"/>  <!-- Central/South Am -->
+    <use href="#nodeBlue" x="80"   y="-150" width="12" height="12"/> <!-- Europe center -->
+    <use href="#nodeBlue" x="270"  y="140"  width="12" height="12"/> <!-- Australia -->
+
+    <!-- Thin labels anchor in subtle monospace — small and understated. -->
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+       font-size="9" fill="#FFFFFF" fill-opacity="0.5"
+       letter-spacing="1.5">
+      <text x="-200" y="-58" text-anchor="start">AUSTIN · HQ</text>
+      <text x="155"  y="-51" text-anchor="start">PACIFIC</text>
+      <text x="305"  y="-82" text-anchor="start">OKINAWA</text>
+      <text x="-310" y="-92" text-anchor="end"  >SAN DIEGO</text>
+      <text x="115"  y="-216" text-anchor="end" >EUROPE</text>
+    </g>
+  </g>
+
+  <!-- Corner tick marks — tactical HUD framing -->
+  <g stroke="#C2F213" stroke-width="1.2" fill="none" opacity="0.6">
+    <path d="M 40 40 L 40 70 M 40 40 L 70 40"/>
+    <path d="M 1560 40 L 1560 70 M 1560 40 L 1530 40"/>
+    <path d="M 40 860 L 40 830 M 40 860 L 70 860"/>
+    <path d="M 1560 860 L 1560 830 M 1560 860 L 1530 860"/>
+  </g>
+
+  <!-- Subtle corner labels, tying into the tactical war-room aesthetic. -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+     font-size="10" fill="#FFFFFF" fill-opacity="0.32"
+     letter-spacing="2">
+    <text x="80"  y="55">SKYWAYS //  NET</text>
+    <text x="1520" y="55" text-anchor="end">ORTHO / PAC-01</text>
+    <text x="80"  y="845">AUTONOMOUS AIR NETWORK</text>
+    <text x="1520" y="845" text-anchor="end">LAT 30.27N  LON 97.74W</text>
+  </g>
+</svg>

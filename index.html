@@ -27,7 +27,10 @@
     --teal: #42C6C1;
     --orange: #FF9013;
     --red: #E2334A;
-    --green: #34A853;
+    /* Funding accent — uses brand lime; the Oct 2025 Brand Addendum does not
+       define a distinct green, so the primary thrust color doubles as the
+       positive/growth indicator here. */
+    --green: #C2F213;
     --white: #FFFFFF;
     --thrust-green: #C2F213;
   }
@@ -58,6 +61,11 @@
     top: 0;
     z-index: 100;
     will-change: transform;
+    /* Explicit opaque background so the header never appears "empty" mid-
+       transition if a child's background-image briefly clears. Without this,
+       on some browsers the hero-section's background-image swap during the
+       minimize transition could flash the page background through. */
+    background: var(--navy);
   }
 
   .sticky-header.minimized {
@@ -82,6 +90,7 @@
     max-width: 1440px; margin: 0 auto; padding: 0 64px;
     height: 100%;
     display: flex; align-items: center; gap: 16px;
+    position: relative; z-index: 2;
   }
 
   .logo-wrap {
@@ -217,12 +226,22 @@
 
   .hero-section {
     background: var(--navy); padding: 48px 0 64px;
-    background-image: linear-gradient(rgba(17, 30, 38, 0.65), rgba(17, 30, 38, 0.92)), url('nasa_bg.png');
+    /* Clean vector globe (network_globe.svg) + brand-accurate navy overlay.
+       Overlay is intentionally lighter than the old nasa_bg treatment so the
+       globe's wireframe and network arcs stay legible without washing out. */
+    background-image:
+      linear-gradient(90deg,
+        rgba(17, 30, 38, 0.88) 0%,
+        rgba(17, 30, 38, 0.55) 45%,
+        rgba(17, 30, 38, 0.35) 75%,
+        rgba(17, 30, 38, 0.55) 100%),
+      url('network_globe.svg');
     background-size: cover;
-    background-position: center left;
+    background-position: center right;
+    background-repeat: no-repeat;
     transform: translateY(0); opacity: 1;
     transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
   }
 
   .sticky-header.minimized .hero-section {
@@ -309,7 +328,7 @@
 
   .h1-subtitle {
     display: block; margin-top: 8px;
-    font-weight: 300; font-size: 22px; color: rgba(255,255,255,0.6);
+    font-weight: 300; font-size: 22px; color: rgba(255,255,255,0.82);
     letter-spacing: -0.5px; text-transform: none;
     line-height: 1.4;
   }
@@ -369,7 +388,7 @@
   }
   .tel-label {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 9px; color: rgba(255,255,255,0.5); letter-spacing: 1.5px;
+    font-size: 9px; color: rgba(255,255,255,0.72); letter-spacing: 1.5px;
     margin-bottom: 6px; white-space: nowrap;
   }
   .tel-value {
@@ -392,7 +411,7 @@
 
   .telemetry-footer {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 8px; color: rgba(255,255,255,0.3); text-align: left;
+    font-size: 8px; color: rgba(255,255,255,0.55); text-align: left;
     margin-top: 24px; letter-spacing: 1.5px;
   }
 
@@ -419,13 +438,26 @@
 
   .sticky-header.minimized .stats-banner-inner { padding: 10px 64px; }
 
+  /* Lift the stats row above its sibling .legend-row so the absolutely
+     positioned .stat-menu drawers (which drop below the stats row) render
+     above the legend instead of being clipped by it. */
   .stats-row {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     width: 100%;
+    position: relative;
+    z-index: 3;
   }
 
-  .stat { display: flex; flex-direction: column; align-items: flex-start; position: relative; cursor: default; }
+  .legend-row { position: relative; z-index: 1; }
+
+  .stat {
+    display: flex; flex-direction: column; align-items: flex-start;
+    position: relative; cursor: default;
+  }
+  /* Hovered stat gets a local stacking bump so its drawer wins against
+     any later-painted stat drawer too. */
+  .stat:hover { z-index: 5; }
 
   .stat-menu {
     position: absolute; top: 100%; left: 0; margin-top: 8px;
@@ -435,7 +467,9 @@
     box-shadow: 0 8px 24px rgba(17,30,38,0.15);
     opacity: 0; visibility: hidden; transform: translateY(-4px);
     transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
-    z-index: 10; pointer-events: none;
+    /* Must exceed .sticky-header::after's z-index:99 so the drawer wins
+       against the white fade gradient when the header is minimized. */
+    z-index: 120; pointer-events: none;
   }
   .stat-menu::before {
     content: ''; position: absolute; bottom: 100%; left: 16px;
@@ -462,7 +496,7 @@
 
   .legend-row {
     display: flex; gap: 12px; align-items: center;
-    border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.14); padding-top: 10px;
     transition: padding-top 0.35s ease;
   }
 
@@ -472,7 +506,7 @@
   .legend-item {
     display: flex; align-items: center; gap: 7px;
     font-size: 10px; font-weight: 600; letter-spacing: 0.8px;
-    text-transform: uppercase; color: rgba(255,255,255,0.45);
+    text-transform: uppercase; color: rgba(255,255,255,0.78);
     cursor: pointer;
     padding: 5px 12px;
     border-radius: 4px;
@@ -485,8 +519,8 @@
   .legend-item:first-child { padding-left: 0; }
 
   .legend-item:hover {
-    background: rgba(255,255,255,0.06);
-    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.1);
+    color: var(--white);
   }
 
   .legend-item:active {
@@ -494,13 +528,13 @@
   }
 
   .legend-item.active-filter {
-    background: rgba(255,255,255,0.1);
-    border-color: rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(255,255,255,0.2);
+    color: var(--white);
   }
 
   .legend-item.dimmed {
-    opacity: 0.3;
+    opacity: 0.45;
   }
 
   .legend-item.dimmed:hover {
@@ -680,7 +714,7 @@
   }
 
   .event-tag.contracts { background: rgba(0,154,235,0.08); color: var(--blue); }
-  .event-tag.funding { background: rgba(52,168,83,0.08); color: var(--green); }
+  .event-tag.funding { background: rgba(194,242,19,0.12); color: var(--navy); }
   .event-tag.product { background: rgba(111,82,174,0.08); color: var(--purple); }
   .event-tag.milestone { background: rgba(66,198,193,0.08); color: #2a9e9a; }
   .event-tag.defense { background: rgba(255,144,19,0.08); color: var(--orange); }
@@ -786,7 +820,7 @@
   .event-card.highlight .event-title { color: var(--white); font-size: 24px; }
   .event-card.highlight .event-detail { color: rgba(255,255,255,0.6); }
   .event-card.highlight .event-tag.contracts { background: rgba(0,154,235,0.2); color: var(--blue); }
-  .event-card.highlight .event-tag.funding { background: rgba(52,168,83,0.2); color: var(--green); }
+  .event-card.highlight .event-tag.funding { background: rgba(194,242,19,0.22); color: var(--lime); }
   .event-card.highlight .event-tag.milestone { background: rgba(66,198,193,0.2); color: var(--teal); }
   .event-card.highlight .event-tag.defense { background: rgba(255,144,19,0.2); color: var(--orange); }
   .event-card.highlight .event-dot.contracts { background: var(--blue); }
