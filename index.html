@@ -74,12 +74,13 @@
 
   .brand-bar {
     background: var(--navy); height: 80px;
-    /* Smooth height + background transition when the header toggles between
-       expanded and minimized. Scroll compensation was removed, so a gradual
-       height animation is now safe — and smooths out the visual shift that
-       used to feel like a stutter when the class flipped. */
-    transition: height 0.22s cubic-bezier(0.4,0,0.2,1),
-                background 0.15s ease-out,
+    /* Layout-affecting transitions removed (height). Five header elements
+       animating height/padding/font-size simultaneously at 220ms was the
+       core scroll-stutter source — browser has to re-layout the whole
+       header + cascade to year-sections on every frame. Snap instead:
+       one layout pass per minimize, no stutter. Background + border can
+       still animate since they're paint-only. */
+    transition: background 0.15s ease-out,
                 border-bottom 0.15s ease;
     border-bottom: 1px solid transparent;
   }
@@ -102,8 +103,9 @@
     height: 57px;
     flex-shrink: 0;
     margin-left: -16px;
-    transition: height 0.22s cubic-bezier(0.4,0,0.2,1),
-                margin-left 0.22s cubic-bezier(0.4,0,0.2,1);
+    /* Height + margin snap instantly on minimize — layout-affecting
+       transitions on multiple header elements at once were stuttering
+       the scroll. No transition needed; the size change is small. */
   }
 
   .sticky-header.minimized .logo-wrap {
@@ -267,9 +269,11 @@
     background-position: center, 65% 55%;
     background-repeat: no-repeat;
     transform: translateY(0); opacity: 1;
-    transition: padding 0.22s cubic-bezier(0.4,0,0.2,1),
-                height 0.22s cubic-bezier(0.4,0,0.2,1),
-                transform 0.4s cubic-bezier(0.4,0,0.2,1),
+    /* Padding + height snap instantly on minimize (layout-affecting
+       transitions across the whole header were the scroll-stutter
+       source). Transform + opacity can still transition — they're
+       compositor-only. */
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
                 opacity 0.25s ease;
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
@@ -277,14 +281,13 @@
   .hero-inner.dashboard-hero { position: relative; z-index: 2; }
 
   .sticky-header.minimized .hero-section {
-    /* On scroll minimize, the hero-section height grows ~333% (from
-       ~60px padding-only to a ~200px image band) so the aircraft layer
-       becomes the dominant visual element. The minimized state swaps
-       to a pure image band because the title/telemetry are collapsed
-       away — this is where the V3 hero image earns its real estate. */
-    padding: 0;
-    height: 200px;
-    min-height: 200px;
+    /* Reduced / compact minimized state — the hero-section collapses
+       to a thin aircraft band so the stats row is what the user sees
+       on scroll. No 200px image hero here; this is the "get out of
+       the way" state. */
+    padding: 14px 0 18px;
+    height: auto;
+    min-height: 0;
     background-image: none;
   }
 
@@ -552,7 +555,8 @@
   .stats-banner-inner {
     max-width: 1440px; margin: 0 auto; padding: 16px 64px;
     display: flex; flex-direction: column; gap: 10px;
-    transition: padding 0.22s cubic-bezier(0.4,0,0.2,1);
+    /* Padding snaps; animating it was part of the 5-element
+       layout-transition cluster that was stuttering scroll. */
   }
 
   .sticky-header.minimized .stats-banner-inner { padding: 10px 64px; }
@@ -877,11 +881,11 @@
 
   .stat-value {
     /* Desktop metric punch. 22px → 33px (50%) → 41px (+25%) per Shae.
-       Animated shrink when the header minimizes; scroll compensation was
-       removed, so font-size can transition smoothly. */
+       Font-size snaps on minimize — animating it was one of five
+       simultaneous layout-affecting transitions on the sticky header
+       that were causing scroll stutter. */
     font-size: 41px; font-weight: 800; color: var(--thrust-green);
     letter-spacing: -0.5px; line-height: 1.05;
-    transition: font-size 0.22s cubic-bezier(0.4,0,0.2,1);
   }
 
   .sticky-header.minimized .stat-value { font-size: 16px; }
@@ -1564,10 +1568,8 @@
        .dashboard-live-area, see base rule), so the per-property mobile
        overrides that used to shrink tel-value / tel-label / tel-sub /
        telemetry-status in the minimized state are no longer needed. */
-    /* Minimized hero image band grows ~333% on mobile too (from ~24px
-       padding-only to ~140px image band) so the aircraft reads on
-       phones, not as a thin strip. */
-    .sticky-header.minimized .hero-section { padding: 0; height: 140px; min-height: 140px; }
+    /* Minimized mobile hero: back to the compact aircraft strip. */
+    .sticky-header.minimized .hero-section { padding: 10px 0 14px; height: auto; min-height: 0; }
 
     /* Stats banner: all 5 stats on one row on mobile — tight but it fits. */
     .stats-banner-inner { padding: 8px 16px; gap: 6px; }
