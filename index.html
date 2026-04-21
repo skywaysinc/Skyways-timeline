@@ -269,7 +269,11 @@
   }
   
   .dashboard-title-area-inner {
-    overflow: hidden;
+    /* clip + clip-margin lets the eyebrow's pulse-dot hang a few pixels to
+       the left of the text without being clipped, while still clipping
+       content during the grid-row-0fr collapse animation. */
+    overflow: clip;
+    overflow-clip-margin: 20px;
   }
 
   .sticky-header.minimized .dashboard-title-area {
@@ -388,13 +392,23 @@
   }
   
   .dashboard-eyebrow {
+    /* inline-flex so the pulse-dot + text ride together; negative margin-
+       left pulls the dot into the left gutter so the eyebrow text starts
+       flush with the h1 and subtitle below. 6px dot + 6px gap = 12px. */
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-left: -12px;
     font-size: 11px; font-weight: 700; text-transform: uppercase;
     letter-spacing: 2px; color: var(--thrust-green); margin-bottom: 16px;
   }
 
   .hero-inner h1 {
     font-size: 48px; font-weight: 800;
-    letter-spacing: 2px; line-height: 1.1; color: var(--white);
+    /* letter-spacing dialed back from 2px to 1px and word-spacing pulled
+       tight so "HISTORY & TIMELINE" doesn't render with wide gaps around
+       the ampersand. */
+    letter-spacing: 1px;
+    word-spacing: -0.05em;
+    line-height: 1.1; color: var(--white);
     text-transform: uppercase;
   }
 
@@ -569,15 +583,12 @@
     height: 12px; /* slightly larger than the 8px margin to be safe */
     background: transparent;
   }
-  /* Hover triggers confined to the text elements and the menu itself (plus
-     its ::after bridge) so the empty grid-cell area doesn't spuriously open
-     the drawer. The `~` combinator works because .stat-menu is a later
-     sibling of .stat-value / .stat-label inside .stat. */
-  .stat-value:hover ~ .stat-menu,
-  .stat-label:hover ~ .stat-menu,
-  .stat-menu:hover {
-    opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto;
-  }
+  /* Hover reveal is driven by JS (see bindStatMenus below). CSS-only hover
+     didn't work with visibility:hidden + pointer-events:none on the hidden
+     menu — the ::after bridge couldn't catch the cursor crossing the 8px
+     gap, so the menu collapsed before the user reached it. JS applies
+     .menu-open on mouseenter and clears it after a short delay on
+     mouseleave, which gives the cursor time to traverse the gap. */
   .stat-menu-info { font-size: 12px; font-weight: 450; line-height: 1.4; color: var(--navy); }
   .stat-menu-source { font-size: 10px; font-weight: 600; color: var(--gray-50); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
   .stat-menu-links {
@@ -697,17 +708,19 @@
     animation: contractJumpPulse 1.6s ease-out;
   }
 
-  /* Mobile/touch override: keep the contracts breakdown menu visible after a
-     tap by allowing it to escape the .stat overflow clip on small screens.
-     Also widen and re-anchor so it doesn't blow off-screen. */
+  /* Mobile/touch override: re-anchor every stat drawer to a viewport-fixed
+     position so it can't blow off-screen (each .stat cell is only ~68px
+     wide on a phone, but the drawers are 280–560px). Works for the
+     contracts breakdown and the four source-list drawers alike. */
   @media (max-width: 720px) {
-    #contractsStat { overflow: visible; }
-    .stat-menu.contracts-table {
+    .stat { overflow: visible; }
+    .stat-menu {
       position: fixed; top: auto; left: 8px; right: 8px;
       min-width: 0; max-width: none; width: auto;
-      margin-top: 0;
+      margin-top: 8px;
     }
-    .stat-menu.contracts-table::before { display: none; }
+    .stat-menu::before { display: none; }
+    .stat-menu.contracts-table { margin-top: 0; }
     .contracts-row {
       grid-template-columns: 1.8fr 1.2fr 0.6fr 0.7fr;
       gap: 6px;
@@ -1259,7 +1272,13 @@
     }
     .stats-banner-inner { padding: 16px 32px; }
     .sticky-header.minimized .stats-banner-inner { padding: 10px 32px; }
-    .stats-row { grid-template-columns: repeat(3, 1fr); gap: 12px 0; }
+    /* 5 columns at tablet — ~180px per stat is plenty; keeps parity with
+       desktop so the layout doesn't re-flow awkwardly at the breakpoint. */
+    .stats-row { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0 12px; }
+    /* Dial the stat-value down a touch so it never butts up against
+       its neighbor in the narrower tablet columns. */
+    .stat-value { font-size: 30px; }
+    .stat-label { font-size: 8px; }
     .legend-row { flex-wrap: wrap; gap: 8px; }
     .timeline-wrapper { padding: 40px 32px 48px; }
     .year-section { grid-template-columns: 80px 1fr; }
@@ -1354,21 +1373,25 @@
       grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 0 6px;
     }
-    .stat { overflow: hidden; }
+    /* Do NOT put overflow:hidden on .stat — it would clip the absolutely-
+       positioned .stat-menu drawer. Individual text truncation is handled
+       on the value/label elements themselves. */
     .stat-value {
       font-size: 13px;
       letter-spacing: -0.3px;
       white-space: nowrap;
       overflow: hidden;
-      text-overflow: clip;
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
     .sticky-header.minimized .stat-value { font-size: 11px; }
     .stat-label {
-      font-size: 6.5px;
+      font-size: 7px;
       letter-spacing: 0.4px;
       white-space: nowrap;
       overflow: hidden;
-      text-overflow: clip;
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
 
     /* Filters: all five categories on a single row. Extended label words
@@ -1385,12 +1408,15 @@
       font-size: 8px;
       padding: 3px 5px;
       gap: 4px;
-      flex: 1 1 0;
+      flex: 0 1 auto;
       min-width: 0;
-      justify-content: center;
+      justify-content: flex-start;
       letter-spacing: 0.3px;
     }
-    .legend-item:first-child { padding-left: 5px; }
+    /* Flush the first filter against the container's left padding so it
+       lines up with the stats row above — no extra left padding on the
+       leading item. */
+    .legend-item:first-child { padding-left: 0; }
     .legend-dot { width: 6px; height: 6px; }
     .legend-long { display: none; }
     .legend-x { margin-left: 2px; }
@@ -1483,9 +1509,7 @@
     <div class="hero-inner dashboard-hero">
     <div class="dashboard-title-area">
       <div class="dashboard-title-area-inner">
-        <div class="dashboard-eyebrow">
-          <span class="pulse-dot"></span> AUTONOMOUS AIR NETWORK
-        </div>
+        <div class="dashboard-eyebrow"><span class="pulse-dot"></span><span>AUTONOMOUS AIR NETWORK</span></div>
         <h1>History & Timeline</h1>
         <div class="h1-subtitle">9 Years of Flying. Built for the Mission.</div>
       </div>
@@ -1979,21 +2003,33 @@
     updateHeader();
   }
 
-  // ═══ TAP-TO-OPEN FOR ALL STAT MENUS ═══
-  // Touch devices don't fire :hover reliably, and in the minimized header
-  // the hover targets shrink to a few pixels — so every stat gets an
-  // explicit click/tap toggle. Tapping the value or label toggles
-  // .menu-open on the parent .stat, which force-shows the drawer via CSS
-  // (.stat.menu-open .stat-menu { visibility: visible; ... }). Tapping
-  // anywhere else, or scrolling, dismisses every open drawer.
+  // ═══ STAT DRAWER HOVER + TAP ═══
+  // One handler for both input modes:
+  //   • Desktop hover: mouseenter on value / label / menu opens the drawer,
+  //     mouseleave on all three schedules a 120ms close. The delay lets the
+  //     cursor traverse the 8px gap between the stat text and the menu
+  //     without the drawer snapping shut. CSS :hover can't reliably handle
+  //     this with visibility:hidden on the menu, which is why it's in JS.
+  //   • Click / tap: same value/label target toggles a persistent open
+  //     state that survives mouseleave (useful on touch and for click-
+  //     pinning on desktop). Tapping outside, or scrolling, closes it.
+  //   • Only one drawer is open at a time — stored in openStat so the
+  //     scroll listener can early-return without touching the DOM when
+  //     nothing is open.
   (function() {
     var stats = document.querySelectorAll('.stats-row .stat');
     if (!stats.length) return;
 
-    function closeAll(except) {
-      for (var i = 0; i < stats.length; i++) {
-        if (stats[i] !== except) stats[i].classList.remove('menu-open');
-      }
+    var openStat = null;
+
+    function show(stat) {
+      if (openStat && openStat !== stat) openStat.classList.remove('menu-open');
+      stat.classList.add('menu-open');
+      openStat = stat;
+    }
+    function hide(stat) {
+      stat.classList.remove('menu-open');
+      if (openStat === stat) openStat = null;
     }
 
     stats.forEach(function(stat) {
@@ -2001,26 +2037,53 @@
       var label = stat.querySelector('.stat-label');
       var menu = stat.querySelector('.stat-menu');
       if (!menu) return;
+
+      var hideTimer = null;
+      function cancelHide() { if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; } }
+      function scheduleHide() {
+        cancelHide();
+        hideTimer = setTimeout(function() { hide(stat); hideTimer = null; }, 120);
+      }
+
+      function onEnter() { cancelHide(); show(stat); }
+      function onLeave() { scheduleHide(); }
+
+      [value, label, menu].forEach(function(el) {
+        if (!el) return;
+        el.addEventListener('mouseenter', onEnter);
+        el.addEventListener('mouseleave', onLeave);
+      });
+
       function toggle(e) {
-        // Don't toggle when the tap is inside the menu itself (so link/row
-        // clicks still work — e.g. the contracts-table rows).
+        // Don't toggle when the tap is inside the menu itself (so link and
+        // row clicks still work — e.g. the contracts-table rows).
         if (menu.contains(e.target)) return;
         e.stopPropagation();
-        var willOpen = !stat.classList.contains('menu-open');
-        closeAll(stat);
-        stat.classList.toggle('menu-open', willOpen);
+        cancelHide();
+        if (stat.classList.contains('menu-open') && openStat === stat) {
+          hide(stat);
+        } else {
+          show(stat);
+        }
       }
       if (value) value.addEventListener('click', toggle);
       if (label) label.addEventListener('click', toggle);
     });
 
     document.addEventListener('click', function(e) {
-      for (var i = 0; i < stats.length; i++) {
-        if (!stats[i].contains(e.target)) stats[i].classList.remove('menu-open');
-      }
+      if (openStat && !openStat.contains(e.target)) hide(openStat);
     });
+    // rAF-throttled scroll-dismiss: only touches the DOM on the first frame
+    // after a drawer was actually open. Unthrottled classList.remove on
+    // every scroll event caused stutter when scrolling with the drawer up.
+    var scrollCloseQueued = false;
     window.addEventListener('scroll', function() {
-      closeAll(null);
+      if (!openStat || scrollCloseQueued) return;
+      scrollCloseQueued = true;
+      requestAnimationFrame(function() {
+        if (openStat) hide(openStat);
+        scrollCloseQueued = false;
+      });
     }, { passive: true });
   })();
 
