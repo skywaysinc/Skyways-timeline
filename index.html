@@ -694,6 +694,12 @@
     transition: none;
   }
   .stat-menu-info { font-size: 12px; font-weight: 450; line-height: 1.4; color: var(--navy); }
+  .stat-menu-info p { margin: 0 0 6px 0; }
+  .stat-menu-info p:last-child { margin-bottom: 0; }
+  .stat-menu-info ul { margin: 6px 0 0 0; padding-left: 14px; list-style: disc; }
+  .stat-menu-info ul li { margin: 3px 0; }
+  .stat-menu-info ul li strong { font-weight: 600; }
+  .stat-menu-info .lead { font-weight: 600; margin-bottom: 4px; }
   .stat-menu-source { font-size: 10px; font-weight: 600; color: var(--gray-50); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
   .stat-menu-links {
     display: flex; flex-direction: column; gap: 4px;
@@ -718,10 +724,15 @@
      sits under the stat it belongs to — it was 280px and would spill
      into the neighbouring stat column. Source links wrap onto multiple
      lines if they exceed the width; that's acceptable for the occasional
-     long URL. */
+     long URL. Vertical: if the drawer content exceeds the viewport (long
+     source lists, small windows) the drawer scrolls internally rather
+     than letting the wheel chain through to the page. */
   .stat-menu:not(.contracts-table) {
     min-width: 220px;
     max-width: 260px;
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   /* Right-side stats: flip the drawer to right-anchor so it doesn't
@@ -1837,7 +1848,15 @@
       <!-- km Flown removed — now shown live in the Fleet Flight Telemetry panel -->
       <div class="stat"><div class="stat-value">20+</div><div class="stat-label">UAVs Built</div>
         <div class="stat-menu">
-          <div class="stat-menu-info">Per SBIR.gov: &ldquo;We have built over 20 UAVs and flown over 1,100 flights.&rdquo; Built across approximately 11 design iterations since 2017: V1, V2.0, V2.1, V2.2, V2.5, V2.6, V2.6b, V3 Block 0, V3 Block 1, V3 Block 2, V3 Block 2L.</div>
+          <div class="stat-menu-info">
+            <p>Per SBIR.gov: &ldquo;We have built over 20 UAVs and flown over 1,100 flights.&rdquo;</p>
+            <p class="lead">11 design iterations since 2017:</p>
+            <ul>
+              <li><strong>V1</strong> &mdash; first aircraft (2016)</li>
+              <li><strong>V2.0 &rarr; V2.6b</strong> &mdash; V2 generations (2017&ndash;2024)</li>
+              <li><strong>V3 Block 0 &rarr; V3 Block 2L</strong> &mdash; V3 generations (2023&ndash;present)</li>
+            </ul>
+          </div>
           <div class="stat-menu-source">Verified Sources:</div>
           <div class="stat-menu-links">
             <a href="https://www.sbir.gov/portfolio/1542801" target="_blank" rel="noopener">SBIR.gov &mdash; Skyways portfolio</a>
@@ -1848,7 +1867,13 @@
       </div>
       <div class="stat"><div class="stat-value">3</div><div class="stat-label">Continents</div>
         <div class="stat-menu">
-          <div class="stat-menu-info">North America (U.S. Navy, USMC, USAF, Project ULTRA), Asia (ANA Holdings, JMSDF, JASDF in Japan), Europe (RWE / Skyports offshore wind, Baltic Sea, Germany)</div>
+          <div class="stat-menu-info">
+            <ul>
+              <li><strong>North America</strong> &mdash; U.S. Navy, USMC, USAF, Project ULTRA</li>
+              <li><strong>Asia (Japan)</strong> &mdash; ANA Holdings, JMSDF, JASDF</li>
+              <li><strong>Europe (Germany)</strong> &mdash; RWE / Skyports offshore wind, Baltic Sea</li>
+            </ul>
+          </div>
           <div class="stat-menu-source">Verified Sources:</div>
           <div class="stat-menu-links">
             <a href="https://www.thedronegirl.com/2025/11/21/skyways/" target="_blank" rel="noopener">The Drone Girl &mdash; Inside Skyways (Nov 2025)</a>
@@ -1859,7 +1884,14 @@
       </div>
       <div class="stat"><div class="stat-value">1/30th</div><div class="stat-label">Cost of Helicopter</div>
         <div class="stat-menu">
-          <div class="stat-menu-info">Operating costs compared to legacy maritime helicopters (~$1K/hr vs ~$30K/hr)</div>
+          <div class="stat-menu-info">
+            <p class="lead">Operating cost vs. legacy maritime helicopters:</p>
+            <ul>
+              <li><strong>Skyways V2/V3:</strong> ~$1K/hour</li>
+              <li><strong>Legacy maritime helicopter:</strong> ~$30K/hour</li>
+              <li><strong>30&times; cost advantage at scale</strong></li>
+            </ul>
+          </div>
           <div class="stat-menu-source">Verified Sources:</div>
           <div class="stat-menu-links">
             <a href="https://www.businesswire.com/news/home/20250609862238/en/" target="_blank" rel="noopener">BusinessWire &mdash; Skyways $37M USAF STRATFI (Jun 2025)</a>
@@ -1869,7 +1901,17 @@
       </div>
       <div class="stat"><div class="stat-value">7 yrs</div><div class="stat-label">Navy Relationship</div>
         <div class="stat-menu">
-          <div class="stat-menu-info">Continuous Navy partnership from ANTX 2019 win (beat Boeing, 65 UAS evaluated) through Project ULTRA (2025): Navy OTA, Blue Water Maritime Logistics UAS, NAWCAD spirals, DIU/USN, RIMPAC 2024, III MEF, BWUAS 2.0</div>
+          <div class="stat-menu-info">
+            <p class="lead">Continuous Navy partnership since 2019:</p>
+            <ul>
+              <li><strong>2019</strong> &mdash; ANTX win (beat Boeing, 65 UAS evaluated)</li>
+              <li><strong>2019&ndash;22</strong> &mdash; Navy OTA / Blue Water Maritime Logistics UAS</li>
+              <li><strong>2022&ndash;24</strong> &mdash; DIU/USN spiral mods (W15QKN-22-9-5005)</li>
+              <li><strong>2023&ndash;25</strong> &mdash; NAWCAD BWUAS 2.0 + CLIN 0005 + CLIN 0006</li>
+              <li><strong>2024</strong> &mdash; RIMPAC, III MEF TCP demo</li>
+              <li><strong>2025</strong> &mdash; Project ULTRA, V3 TCP development</li>
+            </ul>
+          </div>
           <div class="stat-menu-source">Verified Sources:</div>
           <div class="stat-menu-links">
             <a href="http://nascsolutions.org/project/n00421-19-9-0007/" target="_blank" rel="noopener">NASC &mdash; N00421-19-9-0007 (Aug 2019)</a>
