@@ -74,9 +74,9 @@
 
   .brand-bar {
     background: var(--navy); height: 80px;
-    transition: height 0.35s cubic-bezier(0.4,0,0.2,1),
-                background 0.35s cubic-bezier(0.4,0,0.2,1),
-                border-bottom 0.35s ease;
+    transition: height 0.15s ease-out,
+                background 0.15s ease-out,
+                border-bottom 0.15s ease;
     border-bottom: 1px solid transparent;
   }
 
@@ -98,8 +98,8 @@
     height: 57px;
     flex-shrink: 0;
     margin-left: -16px;
-    transition: height 0.35s cubic-bezier(0.4,0,0.2,1),
-                margin-left 0.35s cubic-bezier(0.4,0,0.2,1);
+    transition: height 0.15s ease-out,
+                margin-left 0.15s ease-out;
   }
 
   .sticky-header.minimized .logo-wrap {
@@ -502,7 +502,7 @@
   .stats-banner-inner {
     max-width: 1440px; margin: 0 auto; padding: 16px 64px;
     display: flex; flex-direction: column; gap: 10px;
-    transition: padding 0.35s cubic-bezier(0.4,0,0.2,1);
+    transition: padding 0.15s ease-out;
   }
 
   .sticky-header.minimized .stats-banner-inner { padding: 10px 64px; }
@@ -575,10 +575,31 @@
     max-width: 360px;
   }
 
-  /* Wider variant: $40M+ contracts breakdown table */
+  /* Wider variant: $46M+ contracts breakdown table.
+     Constrained to fit the user's viewport — header and footer text stays
+     pinned while the contracts grid scrolls if there's not enough vertical
+     room. */
   .stat-menu.contracts-table {
     min-width: 560px; max-width: 640px;
+    max-height: calc(100vh - 200px);
     padding: 14px 16px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .stat-menu.contracts-table .contracts-grid {
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  /* Slim scrollbar so the table doesn't feel like a heavy modal. */
+  .stat-menu.contracts-table .contracts-grid::-webkit-scrollbar {
+    width: 6px;
+  }
+  .stat-menu.contracts-table .contracts-grid::-webkit-scrollbar-thumb {
+    background: var(--gray-15); border-radius: 3px;
+  }
+  .stat-menu.contracts-table .contracts-grid::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-50);
   }
   .stat-menu.contracts-table .contracts-title {
     font-size: 12px; font-weight: 700; color: var(--navy);
@@ -673,10 +694,12 @@
 
   .stat-value {
     /* Desktop metric punch. 22px → 33px (50%) → 41px (+25%) per Shae.
-       Label below and minimized-on-scroll size deliberately unchanged. */
+       Label below and minimized-on-scroll size deliberately unchanged.
+       Font-size transitions trigger full layout + repaint each frame, so
+       this is intentionally fast (0.1s) to minimize the stutter window. */
     font-size: 41px; font-weight: 800; color: var(--thrust-green);
     letter-spacing: -0.5px; line-height: 1.05;
-    transition: font-size 0.35s cubic-bezier(0.4,0,0.2,1);
+    transition: font-size 0.1s ease-out;
   }
 
   .sticky-header.minimized .stat-value { font-size: 16px; }
@@ -2357,16 +2380,20 @@
   }
 
   function updateHeader() {
-    var shouldMinimize = (window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0) > 30;
+    // Minimize on essentially any scroll down (threshold lowered from 30 → 4
+    // so the header transitions almost immediately rather than triggering a
+    // late, jarring animation mid-scroll).
+    var shouldMinimize = (window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0) > 4;
     var isCurrentlyMinimized = header.classList.contains('minimized');
 
     if (shouldMinimize && !isCurrentlyMinimized) {
       header.classList.add('minimized');
-      // Sync year label offset once the height transition finishes
-      setTimeout(syncYearLabelOffset, 400);
+      // Sync year label offset shortly after — transitions are now ~150ms
+      // instead of 350ms, so we don't need to wait as long.
+      setTimeout(syncYearLabelOffset, 200);
     } else if (!shouldMinimize && isCurrentlyMinimized) {
       header.classList.remove('minimized');
-      setTimeout(syncYearLabelOffset, 400);
+      setTimeout(syncYearLabelOffset, 200);
     }
   }
 
