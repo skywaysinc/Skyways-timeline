@@ -805,6 +805,24 @@
     }
   },
   {
+    "id": 111,
+    "year": "2025",
+    "date": "2025-05",
+    "title": "Navy NAWCAD CLIN 0005 | Project ULTRA Demonstration Contract",
+    "category": "Contracts",
+    "detail": "U.S. Navy Naval Air Warfare Center Aircraft Division (NAWCAD) added Contract Line Item 0005 (CLIN 0005) to Skyways' BWUAS 2.0 contract via Modification P00002 effective May 23, 2025. CLIN 0005 funded Skyways' Project ULTRA Demonstration: shore-to-shore long-range autonomous cargo flights between Grand Forks Air Force Base and Cavalier Space Force Station, North Dakota, in support of the Office of the Under Secretary of Defense's (OUSD) Project ULTRA program. Skyways operated both Government-furnished V2.6B (Government Owned/Contractor Operated) and Skyways-owned V3.0 (Contractor Owned/Contractor Operated). Project ULTRA's overall task order is $3.5M from OUSD and Grand Forks County, with the program ceiling raised from $18.25M to $100M in July 2025.",
+    "tag": "Contract — U.S. Navy / OUSD",
+    "sources": [
+      "Skyways Internal — Contract N00421-23-9-0013 Mod P00002, CLIN 0005 ($361,832.40, signed May 23, 2025, not publicly disclosed)"
+    ],
+    "source_urls": {},
+    "sort_date": "2025-05",
+    "source_thumbnails": {
+      "Skyways (V2 aboard ship)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
+    },
+    "thumbnail_status": "fallback_v2_ship"
+  },
+  {
     "id": 35,
     "year": "2025",
     "date": "2025-06",
