@@ -390,21 +390,33 @@
   }
   
   .dashboard-eyebrow {
-    /* Plain block element so the eyebrow text starts at the same x as
-       the h1 and subtitle below. (Used to host an inline pulse-dot
-       with a negative margin hack — dot has been removed.) */
+    /* Plain block element — eyebrow text starts at the same x as the h1
+       and subtitle below. No decorative elements inline; the HUD energy
+       comes from the telemetry panel, scroll progress line, and panel
+       corners elsewhere in the layout. */
     font-size: 11px; font-weight: 700; text-transform: uppercase;
     letter-spacing: 2px; color: var(--thrust-green); margin-bottom: 16px;
   }
+  /* Thin hairline UNDER the eyebrow, flush-left so it reads as a HUD
+     underline without pushing any text out of alignment with the h1. */
+  .dashboard-eyebrow::after {
+    content: '';
+    display: block;
+    width: 28px; height: 1px;
+    margin-top: 6px;
+    background: var(--thrust-green);
+    opacity: 0.75;
+  }
 
   .hero-inner h1 {
-    font-size: 48px; font-weight: 800;
-    /* letter-spacing dialed back from 2px to 1px and word-spacing pulled
-       tight so "HISTORY & TIMELINE" doesn't render with wide gaps around
-       the ampersand. */
-    letter-spacing: 1px;
+    /* 56px / semibold gives the display presence of "building the future"
+       tech without the shouty feel of 48px/bold. letter-spacing stays
+       tight + word-spacing negative so "HISTORY & TIMELINE" reads as one
+       composed phrase, not three disconnected words. */
+    font-size: 56px; font-weight: 700;
+    letter-spacing: 0.5px;
     word-spacing: -0.05em;
-    line-height: 1.1; color: var(--white);
+    line-height: 1.05; color: var(--white);
     text-transform: uppercase;
   }
 
@@ -419,7 +431,11 @@
     line-height: 1.4;
   }
 
-  .h1-subtitle br { display: none; }
+  /* Desktop + tablet (>720px): render the two sentences on separate
+     lines ("9 Years of Flying." / "Built for the Mission.") both
+     left-aligned. Mobile collapses the break so the subtitle flows
+     on a single line. */
+  .h1-subtitle .subtitle-break { display: inline; }
 
   /* ══ LIVE COUNTER (WAR ROOM / TACTICAL) ══ */
   .war-room-panel {
@@ -453,14 +469,27 @@
     font-size: 11px; color: var(--white); letter-spacing: 2px; text-transform: uppercase;
   }
   .telemetry-status {
+    display: inline-flex; align-items: center; gap: 6px;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 10px; color: var(--thrust-green);
-    background: rgba(194, 242, 19, 0.1); padding: 3px 6px; border-radius: 2px;
-    animation: blink 3s infinite;
+    background: rgba(194, 242, 19, 0.08);
+    border: 1px solid rgba(194, 242, 19, 0.22);
+    padding: 3px 8px; border-radius: 2px;
+    letter-spacing: 1.2px;
   }
-  @keyframes blink {
-    0%, 96%, 98% { opacity: 1; }
-    97%, 99% { opacity: 0; }
+  /* Pulsing dot that reads as a live signal (replaces the whole-pill
+     blink, which looked glitchy). Only the dot pulses; the text
+     stays rock steady. */
+  .telemetry-status::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--thrust-green);
+    box-shadow: 0 0 8px rgba(194, 242, 19, 0.6);
+    animation: liveDotPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes liveDotPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(0.75); }
   }
 
   .telemetry-grid {
@@ -492,13 +521,36 @@
   
   .tel-sub {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 9px; color: var(--blue); margin-top: 6px; letter-spacing: 1px;
+    font-size: 9px; color: var(--blue); margin-top: 6px; letter-spacing: 0.6px;
+    /* Constrain inside the grid column so long descriptors ("AUTONOMOUS
+       FLIGHT DURATION", "CRUISE DISTANCE, ALL-TIME") wrap to a second
+       line instead of pushing the column wider than its 1fr share. Left-
+       aligned, wraps on whitespace, no hard breaks mid-word. */
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: break-word;
+    text-align: left;
+    line-height: 1.3;
   }
 
   .telemetry-footer {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 8px; color: rgba(255,255,255,0.55); text-align: left;
     margin-top: 24px; letter-spacing: 1.5px;
+  }
+
+  /* Scroll progress hairline: 2px lime bar pinned to the very top of the
+     viewport, fills left→right as the user moves through the page.
+     A small, premium "you're here" signal common to modern aerospace /
+     defense-tech sites (Anduril, Shield AI, Saronic). Sits above the
+     sticky header's z-index so it's never obscured. */
+  #scrollProgress {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--thrust-green);
+    transform: scaleX(0); transform-origin: left center;
+    z-index: 200; pointer-events: none;
+    box-shadow: 0 0 8px rgba(194, 242, 19, 0.5);
+    will-change: transform;
   }
 
   .stats-banner {
@@ -976,7 +1028,20 @@
   .event-dot {
     width: 12px; height: 12px; border-radius: 50%;
     margin-top: 4px; flex-shrink: 0; position: relative;
+    /* Subtle scale + glow on card hover — reads as a targeting pulse in
+       the category's own color. Works with the existing card shift
+       (translateX 4px) to give the whole row a "lit" feel without a
+       loud color change on the card body. */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
+  .event-card:hover .event-dot {
+    transform: scale(1.2);
+  }
+  .event-card[data-category="contracts"]:hover .event-dot { box-shadow: 0 0 0 3px rgba(0,154,235,0.2), 0 0 12px rgba(0,154,235,0.55); }
+  .event-card[data-category="funding"]:hover .event-dot   { box-shadow: 0 0 0 3px rgba(52,168,83,0.2),  0 0 12px rgba(52,168,83,0.55); }
+  .event-card[data-category="product"]:hover .event-dot   { box-shadow: 0 0 0 3px rgba(111,82,174,0.2), 0 0 12px rgba(111,82,174,0.55); }
+  .event-card[data-category="milestone"]:hover .event-dot { box-shadow: 0 0 0 3px rgba(66,198,193,0.2), 0 0 12px rgba(66,198,193,0.55); }
+  .event-card[data-category="defense"]:hover .event-dot   { box-shadow: 0 0 0 3px rgba(255,144,19,0.2), 0 0 12px rgba(255,144,19,0.55); }
 
   .event-dot::after {
     content: ''; position: absolute;
@@ -1542,6 +1607,7 @@
 <body>
 
 <div class="year-gradient-overlay" id="yearGradient"></div>
+<div id="scrollProgress" aria-hidden="true"></div>
 <div class="sticky-header" id="stickyHeader">
   <div class="brand-bar"><div class="brand-bar-inner">
     <div class="logo-wrap">
@@ -1573,7 +1639,7 @@
       <div class="dashboard-title-area-inner">
         <div class="dashboard-eyebrow">AUTONOMOUS AIR NETWORK</div>
         <h1>History & Timeline</h1>
-        <div class="h1-subtitle">9 Years of Flying. Built for the Mission.</div>
+        <div class="h1-subtitle">9 Years of Flying.<br class="subtitle-break"> Built for the Mission.</div>
       </div>
     </div>
     <div class="dashboard-live-area">
@@ -1586,7 +1652,7 @@
         
         <div class="telemetry-header">
           <div class="telemetry-title">FLEET FLIGHT TELEMETRY &amp; DATA</div>
-          <div class="telemetry-status">SYS OVERRIDE: OFF</div>
+          <div class="telemetry-status">LIVE</div>
         </div>
         
         <div class="telemetry-grid">
@@ -1608,7 +1674,6 @@
         </div>
         <div class="telemetry-footer">
           // FLIGHT LOG <span id="lastUpdatedText" style="opacity:0.75; margin-left: 8px; font-variant-numeric: tabular-nums;">LAST PULL --</span>
-          <span style="opacity:0.5; margin-left: 12px; font-variant-numeric: tabular-nums;">NET: <span id="msCounter">42ms</span></span>
         </div>
       </div>
 
@@ -2781,6 +2846,24 @@
     }
   }
 
+  // ═══ SCROLL PROGRESS BAR ═══
+  // Updates the thin lime hairline at the top of the viewport that fills
+  // left→right as the user moves through the page. Cheap: one div-by
+  // math + one transform write per scroll frame, caches the last value
+  // to avoid redundant DOM writes.
+  var progressEl = document.getElementById('scrollProgress');
+  var _lastProgress = -1;
+  function updateScrollProgress() {
+    if (!progressEl) return;
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var p = max > 0 ? Math.min(1, Math.max(0, (h.scrollTop || window.scrollY || 0) / max)) : 0;
+    if (Math.abs(p - _lastProgress) < 0.001) return;
+    _lastProgress = p;
+    progressEl.style.transform = 'scaleX(' + p + ')';
+  }
+  updateScrollProgress();
+
   var ticking = false;
   window.addEventListener('scroll', function() {
     if (!ticking) {
@@ -2792,6 +2875,7 @@
         // scroll frame — cheaper and avoids forcing layout every frame.
         try { updateYearLabels(); } catch(e) { console.error('updateYearLabels error', e); }
         try { updateYearGradient(); } catch(e) { console.error('updateYearGradient error', e); }
+        try { updateScrollProgress(); } catch(e) { console.error('updateScrollProgress error', e); }
         ticking = false;
       });
     }
@@ -2917,13 +3001,6 @@
         }
       });
   }
-
-  // Periodic network-ping indicator for visual flavor in the telemetry footer.
-  setInterval(function() {
-    var ms = Math.floor(Math.random() * 20) + 30;
-    var el = document.getElementById('msCounter');
-    if (el) el.innerHTML = ms + 'ms';
-  }, 1500);
 
   // Initial load + real-time polling
   fetchLiveStats(true);
