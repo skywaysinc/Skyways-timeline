@@ -241,10 +241,15 @@
   .hero-section {
     position: relative; /* anchors .header-aircraft-bg / .header-aircraft-wash */
     background: var(--navy);
-    /* Padding restored to original — the main header keeps its compact
-       footprint before the menu minimizes. The V3 aircraft image itself
-       (below) is what carries the visual weight. */
-    padding: 48px 0 64px;
+    /* Landing hero capped at ~25% of the viewport height so it doesn't
+       dominate the fold. Padding is tight; the title-area + telemetry
+       panel determine the actual content height, but the section never
+       tries to exceed 25vh on tall windows. Overflow is clipped so an
+       unusually tall telemetry panel doesn't blow past the ceiling. */
+    padding: 20px 0 24px;
+    height: 25vh;
+    min-height: 200px;
+    overflow: hidden;
     /* Hero image: V3 in flight (aircraft_header.jpg), rendered at 400%
        of its natural fill size so the aircraft dominates the right side
        of the hero. A horizontal navy gradient keeps the title readable
@@ -263,6 +268,7 @@
     background-repeat: no-repeat;
     transform: translateY(0); opacity: 1;
     transition: padding 0.22s cubic-bezier(0.4,0,0.2,1),
+                height 0.22s cubic-bezier(0.4,0,0.2,1),
                 transform 0.4s cubic-bezier(0.4,0,0.2,1),
                 opacity 0.25s ease;
     border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -271,10 +277,14 @@
   .hero-inner.dashboard-hero { position: relative; z-index: 2; }
 
   .sticky-header.minimized .hero-section {
-    padding: 14px 0 18px;
-    /* Swap the nasa space image out for solid navy; the aircraft layer
-       (.header-aircraft-bg) + wash (.header-aircraft-wash) render on top of
-       this base color when .minimized is active. */
+    /* On scroll minimize, the hero-section height grows ~333% (from
+       ~60px padding-only to a ~200px image band) so the aircraft layer
+       becomes the dominant visual element. The minimized state swaps
+       to a pure image band because the title/telemetry are collapsed
+       away — this is where the V3 hero image earns its real estate. */
+    padding: 0;
+    height: 200px;
+    min-height: 200px;
     background-image: none;
   }
 
@@ -1528,9 +1538,9 @@
     .header-aircraft-bg,
     .header-aircraft-wash { display: none; }
 
-    /* Mobile hero padding back to original so the compact phone hero
-       stays compact. */
-    .hero-section { padding: 28px 0 32px; }
+    /* Mobile hero: same 25vh cap as desktop but a smaller absolute
+       floor so it doesn't eat the phone viewport. */
+    .hero-section { padding: 14px 0 18px; height: 25vh; min-height: 170px; }
     .hero-inner { padding: 0 20px; }
     .dashboard-eyebrow { font-size: 9px; margin-bottom: 8px; }
     .hero-inner h1 { font-size: 28px; letter-spacing: 1px; display: block; }
@@ -1554,7 +1564,10 @@
        .dashboard-live-area, see base rule), so the per-property mobile
        overrides that used to shrink tel-value / tel-label / tel-sub /
        telemetry-status in the minimized state are no longer needed. */
-    .sticky-header.minimized .hero-section { padding: 10px 0 14px; }
+    /* Minimized hero image band grows ~333% on mobile too (from ~24px
+       padding-only to ~140px image band) so the aircraft reads on
+       phones, not as a thin strip. */
+    .sticky-header.minimized .hero-section { padding: 0; height: 140px; min-height: 140px; }
 
     /* Stats banner: all 5 stats on one row on mobile — tight but it fits. */
     .stats-banner-inner { padding: 8px 16px; gap: 6px; }
