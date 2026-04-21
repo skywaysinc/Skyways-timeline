@@ -240,7 +240,12 @@
 
   .hero-section {
     position: relative; /* anchors .header-aircraft-bg / .header-aircraft-wash */
-    background: var(--navy); padding: 48px 0 64px;
+    background: var(--navy);
+    /* Expanded-state padding is 4x the previous values (48/64 → 192/256)
+       so the hero image section has real presence. Content sits in the
+       middle; the extra space top and bottom lets the background photo
+       carry visual weight. */
+    padding: 192px 0 256px;
     background-image: linear-gradient(rgba(17, 30, 38, 0.65), rgba(17, 30, 38, 0.92)), url('nasa_bg.png');
     background-size: cover;
     background-position: center left;
@@ -1511,7 +1516,9 @@
     .header-aircraft-bg,
     .header-aircraft-wash { display: none; }
 
-    .hero-section { padding: 28px 0 32px; }
+    /* Mobile hero is 4x its old padding too (28/32 → 112/128) so the
+       hero image section stays proportionally tall on phones. */
+    .hero-section { padding: 112px 0 128px; }
     .hero-inner { padding: 0 20px; }
     .dashboard-eyebrow { font-size: 9px; margin-bottom: 8px; }
     .hero-inner h1 { font-size: 28px; letter-spacing: 1px; display: block; }
