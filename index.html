@@ -549,6 +549,29 @@
   }
   .stat-menu-info { font-size: 12px; font-weight: 450; line-height: 1.4; color: var(--navy); }
   .stat-menu-source { font-size: 10px; font-weight: 600; color: var(--gray-50); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-menu-links {
+    display: flex; flex-direction: column; gap: 4px;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid var(--gray-15);
+  }
+  .stat-menu-links a {
+    font-size: 11px; font-weight: 500;
+    color: var(--blue);
+    text-decoration: none;
+    line-height: 1.35;
+    padding: 2px 0;
+    transition: color 0.12s ease;
+  }
+  .stat-menu-links a:hover {
+    color: var(--navy);
+    text-decoration: underline;
+  }
+  /* Make non-contracts stat-menus wide enough to fit source link text */
+  .stat-menu:not(.contracts-table) {
+    min-width: 280px;
+    max-width: 360px;
+  }
 
   /* Wider variant: $40M+ contracts breakdown table */
   .stat-menu.contracts-table {
@@ -1502,16 +1525,47 @@
       </div>
       <!-- km Flown removed — now shown live in the Fleet Flight Telemetry panel -->
       <div class="stat"><div class="stat-value">20+</div><div class="stat-label">Aircraft Iterations</div>
-        <div class="stat-menu"><div class="stat-menu-info">Hardware versions developed since 2017</div><div class="stat-menu-source">Verified Source: SBIR.gov portfolio</div></div>
+        <div class="stat-menu">
+          <div class="stat-menu-info">Hardware versions developed since 2017: V1, V2.0, V2.1, V2.2, V2.5, V2.6, V2.6b, V3 Block 0, V3 Block 1, V3 Block 2, V3 Block 2L</div>
+          <div class="stat-menu-source">Verified Sources:</div>
+          <div class="stat-menu-links">
+            <a href="https://www.sbir.gov/portfolio/1542801" target="_blank" rel="noopener">SBIR.gov &mdash; Skyways portfolio</a>
+            <a href="https://www.suasnews.com/2024/03/skyways-v3/" target="_blank" rel="noopener">sUAS News &mdash; Skyways V3 (Mar 2024)</a>
+            <a href="https://www.thedronegirl.com/2025/11/21/skyways/" target="_blank" rel="noopener">The Drone Girl &mdash; Inside Skyways (Nov 2025)</a>
+          </div>
+        </div>
       </div>
       <div class="stat"><div class="stat-value">3</div><div class="stat-label">Continents</div>
-        <div class="stat-menu"><div class="stat-menu-info">North America, Asia, Europe operations</div></div>
+        <div class="stat-menu">
+          <div class="stat-menu-info">North America (U.S. Navy, USMC, USAF, Project ULTRA), Asia (ANA Holdings, JMSDF, JASDF in Japan), Europe (RWE / Skyports offshore wind, Baltic Sea, Germany)</div>
+          <div class="stat-menu-source">Verified Sources:</div>
+          <div class="stat-menu-links">
+            <a href="https://www.thedronegirl.com/2025/11/21/skyways/" target="_blank" rel="noopener">The Drone Girl &mdash; Inside Skyways (Nov 2025)</a>
+            <a href="https://www.rwe.com/en/press/rwe-offshore-wind-gmbh/2025-10-15-rwe-successfully-pioneers-cargo-drone-operations-at-offshore-wind-farms/" target="_blank" rel="noopener">RWE Press Release &mdash; Arkona offshore wind farm (Oct 2025)</a>
+            <a href="https://payloadasia.com/2026/03/ana-hd-completes-long-distance-medical-supply-drone-delivery-trials-okinawa/" target="_blank" rel="noopener">Payload Asia &mdash; ANA HD Okinawa medical supply (Mar 2026)</a>
+          </div>
+        </div>
       </div>
       <div class="stat"><div class="stat-value">1/30th</div><div class="stat-label">Cost of Helicopter</div>
-        <div class="stat-menu"><div class="stat-menu-info">Operating costs compared to legacy maritime helicopters</div><div class="stat-menu-source">Verified Source: BusinessWire press release</div></div>
+        <div class="stat-menu">
+          <div class="stat-menu-info">Operating costs compared to legacy maritime helicopters (~$1K/hr vs ~$30K/hr)</div>
+          <div class="stat-menu-source">Verified Sources:</div>
+          <div class="stat-menu-links">
+            <a href="https://www.businesswire.com/news/home/20250609862238/en/" target="_blank" rel="noopener">BusinessWire &mdash; Skyways $37M USAF STRATFI (Jun 2025)</a>
+            <a href="https://dronelife.com/2025/06/09/skyways-afwerx-contract/" target="_blank" rel="noopener">DroneLife &mdash; Skyways AFWERX Contract (Jun 2025)</a>
+          </div>
+        </div>
       </div>
       <div class="stat"><div class="stat-value">7 yrs</div><div class="stat-label">Navy Relationship</div>
-        <div class="stat-menu"><div class="stat-menu-info">Operations spanning ANTX 2019 to present</div></div>
+        <div class="stat-menu">
+          <div class="stat-menu-info">Continuous Navy partnership from ANTX 2019 win (beat Boeing, 65 UAS evaluated) through Project ULTRA (2025): Navy OTA, Blue Water Maritime Logistics UAS, NAWCAD spirals, DIU/USN, RIMPAC 2024, III MEF, BWUAS 2.0</div>
+          <div class="stat-menu-source">Verified Sources:</div>
+          <div class="stat-menu-links">
+            <a href="http://nascsolutions.org/project/n00421-19-9-0007/" target="_blank" rel="noopener">NASC &mdash; N00421-19-9-0007 (Aug 2019)</a>
+            <a href="https://news.usni.org/2021/08/05/navy-considering-drone-delivery-for-essential-parts-at-sea" target="_blank" rel="noopener">USNI News &mdash; Drone Delivery for Essential Parts at Sea (Aug 2021)</a>
+            <a href="https://www.businesswire.com/news/home/20250821576316/en/" target="_blank" rel="noopener">BusinessWire &mdash; Project ULTRA Completion (Aug 2025)</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="legend-row">
