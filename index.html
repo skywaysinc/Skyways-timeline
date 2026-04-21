@@ -507,15 +507,17 @@
 
   .sticky-header.minimized .stats-banner-inner { padding: 10px 64px; }
 
-  /* Lift the stats row above its sibling .legend-row so the absolutely
-     positioned .stat-menu drawers (which drop below the stats row) render
-     above the legend instead of being clipped by it. */
+  /* Lift the stats row above its sibling .legend-row AND above the
+     .sticky-header::after white fade gradient (which sits at z-index:99
+     when the header is minimized). The .stat-menu drawers are nested
+     inside .stat inside .stats-row, so this parent must clear the fade
+     for the drawers to be visible against it. */
   .stats-row {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     width: 100%;
     position: relative;
-    z-index: 3;
+    z-index: 105;
   }
 
   .legend-row { position: relative; z-index: 1; }
@@ -1866,24 +1868,6 @@
     // Update header scroll
     updateHeader();
   }
-
-  // ═══ SUPPRESS STAT MENUS WHILE SCROLLING ═══
-  // Prevents the wide contracts breakdown table from repositioning mid-frame
-  // when the sticky header animates between expanded and minimized states.
-  // Adds body.scrolling-active during scroll, clears it 200ms after scroll
-  // stops; CSS handles the visibility toggle.
-  (function() {
-    var scrollEndTimer = null;
-    window.addEventListener('scroll', function() {
-      if (!document.body.classList.contains('scrolling-active')) {
-        document.body.classList.add('scrolling-active');
-      }
-      if (scrollEndTimer) clearTimeout(scrollEndTimer);
-      scrollEndTimer = setTimeout(function() {
-        document.body.classList.remove('scrolling-active');
-      }, 200);
-    }, { passive: true });
-  })();
 
   // ═══ MOBILE TAP SUPPORT FOR $40M+ STAT MENU ═══
   // Touch devices don't fire :hover reliably. Tapping the $40M+ stat toggles
