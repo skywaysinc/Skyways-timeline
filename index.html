@@ -756,11 +756,17 @@
     padding: 14px 16px;
     display: flex; flex-direction: column;
     overflow: hidden;
+    overscroll-behavior: contain;
   }
   .stat-menu.contracts-table .contracts-grid {
     overflow-y: auto;
     flex: 1 1 auto;
     min-height: 0;
+    /* When the user hits the top or bottom of the grid, keep the wheel
+       events contained in this scroll area instead of chaining up to
+       the page. Fixes the "drawer reads mid-scroll, page jumps instead"
+       bug Shae hit on the $46M table. */
+    overscroll-behavior: contain;
   }
   /* Slim scrollbar so the table doesn't feel like a heavy modal. */
   .stat-menu.contracts-table .contracts-grid::-webkit-scrollbar {
@@ -865,10 +871,17 @@
     .stat { overflow: visible; }
     .stat-menu {
       /* Shrink + clamp so the drawer fits the viewport. Width is the
-         narrower of 240px or (viewport - 20px gutter). */
+         narrower of 240px or (viewport - 20px gutter). Vertical height
+         caps at the viewport minus a gutter so long drawers scroll
+         internally on mobile too, and overscroll-behavior: contain
+         prevents the wheel/touch chain from scrolling the page
+         underneath when the user hits the drawer's top or bottom. */
       min-width: 0;
       width: min(240px, calc(100vw - 20px));
       max-width: calc(100vw - 20px);
+      max-height: calc(100vh - 140px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
       margin-top: 8px;
     }
     /* Stats in the right half of the row: right-anchor the drawer so it
