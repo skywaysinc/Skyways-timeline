@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyways &#8212; Company Timeline</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #111E26;
+    --lime: #C2F213;
+    --blue: #009AEB;
+    --gray-75: #4D575C;
+    --gray-50: #888F92;
+    --gray-15: #DCDEE0;
+    --gray-05: #F3F4F4;
+    --purple: #6F52AE;
+    --teal: #42C6C1;
+    --orange: #FF9013;
+    --red: #E2334A;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ══ STICKY HEADER ══ */
+  .sticky-header {
+    position: sticky; top: 0; z-index: 100; will-change: transform;
+  }
+
+  .sticky-header.minimized {
+    box-shadow: 0 4px 24px rgba(17,30,38,0.15);
+  }
+
+  .brand-bar {
+    background: var(--navy); height: 80px;
+    transition: height 0.35s cubic-bezier(0.4,0,0.2,1),
+                background 0.35s cubic-bezier(0.4,0,0.2,1),
+                border-bottom 0.35s ease;
+    border-bottom: 1px solid transparent;
+  }
+
+  .sticky-header.minimized .brand-bar {
+    height: 60px;
+    background: var(--gray-05);
+    border-bottom: 1px solid var(--gray-15);
+  }
+
+  .brand-bar-inner {
+    max-width: 1440px; margin: 0 auto; padding: 0 64px;
+    height: 100%;
+    display: flex; align-items: center; gap: 16px;
+  }
+
+  .logo-wrap {
+    position: relative;
+    height: 57px;
+    flex-shrink: 0;
+    margin-left: -16px;
+    transition: height 0.35s cubic-bezier(0.4,0,0.2,1),
+                margin-left 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .sticky-header.minimized .logo-wrap {
+    height: 42px;
+    margin-left: -12px;
+  }
+
+  .logo-img {
+    height: 100%;
+    width: auto;
+    transition: opacity 0.35s ease;
+    display: block;
+  }
+
+  .logo-white { opacity: 1; }
+
+  .logo-color {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: auto;
+    opacity: 0;
+  }
+
+  .sticky-header.minimized .logo-white { opacity: 0; }
+  .sticky-header.minimized .logo-color { opacity: 1; }
+
+  .brand-bar-label {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-50);
+    transition: color 0.35s ease;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .sticky-header.minimized .brand-bar-label { color: var(--gray-75); }
+
+
+
+  .brand-bar-inline-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: -0.2px;
+    opacity: 0;
+    transform: translateX(-8px);
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.3s ease 0.15s, transform 0.3s ease 0.15s;
+  }
+
+  .sticky-header.minimized .brand-bar-inline-title {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .brand-bar-divider {
+    width: 1px;
+    height: 18px;
+    background: var(--gray-15);
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.1s;
+  }
+
+  .sticky-header.minimized .brand-bar-divider {
+    opacity: 1;
+  }
+
+  .hero-wrapper {
+    overflow: hidden;
+    transition: height 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .hero-section {
+    background: var(--white); padding: 44px 0 20px;
+    transform: translateY(0); opacity: 1;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
+  }
+
+  .sticky-header.minimized .hero-section {
+    transform: translateY(-100%); opacity: 0; pointer-events: none;
+  }
+
+  .hero-inner { max-width: 1440px; margin: 0 auto; padding: 0 64px; }
+
+  .hero-inner h1 {
+    font-size: 44px; font-weight: 800;
+    letter-spacing: -1.8px; line-height: 1.05; color: var(--navy);
+  }
+
+  .hero-inner .subtitle {
+    font-size: 15px; font-weight: 400; color: var(--gray-50); margin-top: 8px;
+  }
+
+  .stats-banner {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    overflow-x: clip;
+  }
+
+  .stats-banner-inner {
+    max-width: 1440px; margin: 0 auto; padding: 16px 64px;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: padding 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .sticky-header.minimized .stats-banner-inner { padding: 10px 64px; }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 100%;
+  }
+
+  .stat { display: flex; flex-direction: column; align-items: flex-start; }
+
+  .stat-value {
+    font-size: 22px; font-weight: 800; color: var(--white);
+    letter-spacing: -0.5px; line-height: 1.1;
+    transition: font-size 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .sticky-header.minimized .stat-value { font-size: 16px; }
+
+  .stat-value.accent { color: var(--blue); }
+  .stat-value.lime-accent { color: var(--lime); }
+
+  .stat-label {
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.2px; color: var(--gray-50); margin-top: 2px;
+  }
+
+  .legend-row {
+    display: flex; gap: 12px; justify-content: flex-start;
+    border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px;
+    transition: padding-top 0.35s ease;
+  }
+
+  .sticky-header.minimized .legend-row { padding-top: 6px; }
+
+  .legend-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.8px;
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
+    cursor: pointer;
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    user-select: none;
+    position: relative;
+  }
+
+  .legend-item:first-child { padding-left: 0; }
+
+  .legend-item:hover {
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.7);
+  }
+
+  .legend-item:active {
+    transform: scale(0.95);
+  }
+
+  .legend-item.active-filter {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.85);
+  }
+
+  .legend-item.dimmed {
+    opacity: 0.3;
+  }
+
+  .legend-item.dimmed:hover {
+    opacity: 0.5;
+  }
+
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; transition: opacity 0.15s ease; }
+  .legend-dot.contracts { background: var(--blue); }
+  .legend-dot.product { background: var(--purple); }
+  .legend-dot.milestone { background: var(--teal); }
+  .legend-dot.defense { background: var(--orange); }
+
+  .legend-x {
+    display: none;
+    width: 12px; height: 12px;
+    align-items: center; justify-content: center;
+    margin-left: 4px;
+    flex-shrink: 0;
+  }
+
+  .legend-x svg {
+    width: 9px; height: 9px;
+    fill: var(--gray-50);
+    transition: fill 0.15s ease;
+  }
+
+  .legend-item.active-filter .legend-x {
+    display: flex;
+  }
+
+  .legend-item.active-filter:hover .legend-x svg {
+    fill: rgba(255,255,255,0.8);
+  }
+
+  /* ══ HEADER FADE-OUT OVERLAY ══ */
+  .sticky-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
+    transform: translateY(100%);
+    background: linear-gradient(
+      to bottom,
+      rgba(255,255,255, 0.95) 0%,
+      rgba(255,255,255, 0.8) 25%,
+      rgba(255,255,255, 0.5) 50%,
+      rgba(255,255,255, 0.2) 75%,
+      rgba(255,255,255, 0) 100%
+    );
+    pointer-events: none;
+    z-index: 99;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .sticky-header.minimized::after {
+    opacity: 1;
+  }
+
+
+
+  /* ══ TIMELINE ══ */
+  .timeline-wrapper { max-width: 1440px; margin: 0 auto; padding: 56px 64px 64px; overflow-x: clip; }
+
+  .year-section {
+    display: grid; grid-template-columns: 100px 1fr; gap: 0; position: relative;
+  }
+
+  .year-label-col { position: relative; padding: 0 0 48px 0; }
+
+  .year-label {
+    font-size: 32px; font-weight: 800; color: var(--navy);
+    letter-spacing: -1px; position: sticky; line-height: 1;
+  }
+
+  .year-label-col::after {
+    content: ''; position: absolute;
+    top: 0; right: 0; bottom: 0; width: 2px; background: var(--gray-15);
+  }
+
+  .year-section:last-child .year-label-col::after { bottom: 48px; }
+
+  .events-col { padding: 0 0 48px 40px; display: flex; flex-direction: column; gap: 16px; }
+
+  .event-card {
+    display: grid; grid-template-columns: 12px 1fr;
+    gap: 16px; align-items: start;
+    padding: 16px 20px; border-radius: 8px;
+    transition: background 0.2s ease, transform 0.25s ease, opacity 0.25s ease;
+    cursor: default;
+    opacity: 1;
+  }
+
+  .event-card:hover { background: var(--gray-05); transform: translateX(4px); }
+
+  .event-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    margin-top: 4px; flex-shrink: 0; position: relative;
+  }
+
+  .event-dot::after {
+    content: ''; position: absolute;
+    top: -3px; left: -3px; width: 18px; height: 18px;
+    border-radius: 50%; opacity: 0.15;
+  }
+
+  .event-dot.contracts { background: var(--blue); }
+  .event-dot.contracts::after { background: var(--blue); }
+  .event-dot.product { background: var(--purple); }
+  .event-dot.product::after { background: var(--purple); }
+  .event-dot.milestone { background: var(--teal); }
+  .event-dot.milestone::after { background: var(--teal); }
+  .event-dot.defense { background: var(--orange); }
+  .event-dot.defense::after { background: var(--orange); }
+
+  .event-content { display: flex; flex-direction: column; gap: 4px; }
+
+  .event-date {
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--gray-50);
+  }
+
+  .event-title {
+    font-size: 15px; font-weight: 700;
+    color: var(--navy); line-height: 1.35; letter-spacing: -0.2px;
+  }
+
+  .event-detail {
+    font-size: 13px; font-weight: 400;
+    color: var(--gray-75); line-height: 1.5; max-width: 640px;
+  }
+
+  /* Tag row — tag + sources trigger inline */
+  .event-meta {
+    display: flex; align-items: center; gap: 12px; margin-top: 4px;
+  }
+
+  .event-tag {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px;
+    padding: 3px 8px; border-radius: 3px; width: fit-content;
+  }
+
+  .event-tag.contracts { background: rgba(0,154,235,0.08); color: var(--blue); }
+  .event-tag.product { background: rgba(111,82,174,0.08); color: var(--purple); }
+  .event-tag.milestone { background: rgba(66,198,193,0.08); color: #2a9e9a; }
+  .event-tag.defense { background: rgba(255,144,19,0.08); color: var(--orange); }
+
+  /* Sources trigger */
+  .sources-trigger {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 3px 0;
+  }
+
+  .sources-label {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--gray-50);
+    transition: color 0.15s ease;
+  }
+
+  .sources-trigger:hover .sources-label,
+  .sources-trigger.active .sources-label { color: var(--blue); }
+
+  .sources-icon {
+    width: 12px; height: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .sources-icon svg {
+    width: 10px; height: 10px;
+    fill: var(--gray-50);
+    transition: fill 0.15s ease;
+  }
+
+  .sources-trigger:hover .sources-icon svg,
+  .sources-trigger.active .sources-icon svg { fill: var(--blue); }
+
+  /* Sources dropdown */
+  .sources-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 6px;
+    background: var(--navy);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 10px 14px;
+    min-width: 260px;
+    max-width: 380px;
+    box-shadow: 0 8px 24px rgba(17,30,38,0.35);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .sources-menu.active {
+    opacity: 1; visibility: visible;
+    transform: translateY(0); pointer-events: auto;
+  }
+
+  .sources-menu::before {
+    content: '';
+    position: absolute;
+    bottom: 100%; left: 16px;
+    border: 5px solid transparent;
+    border-bottom-color: var(--navy);
+  }
+
+  .source-link {
+    display: block;
+    font-size: 11px; font-weight: 500;
+    color: var(--blue);
+    text-decoration: none;
+    padding: 5px 0;
+    line-height: 1.4;
+    transition: color 0.12s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .source-link:hover { color: var(--lime); }
+
+  .source-link + .source-link {
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Highlights */
+  .event-card.highlight {
+    background: var(--navy); border-radius: 10px; padding: 20px 24px;
+  }
+
+  .event-card.highlight:hover { background: #1a2d38; transform: translateX(4px); }
+  .event-card.highlight .event-date { color: var(--gray-50); }
+  .event-card.highlight .event-title { color: var(--white); font-size: 17px; }
+  .event-card.highlight .event-detail { color: rgba(255,255,255,0.6); }
+  .event-card.highlight .event-tag.contracts { background: rgba(0,154,235,0.2); color: var(--blue); }
+  .event-card.highlight .event-tag.milestone { background: rgba(66,198,193,0.2); color: var(--teal); }
+  .event-card.highlight .event-tag.defense { background: rgba(255,144,19,0.2); color: var(--orange); }
+  .event-card.highlight .event-dot.contracts { background: var(--blue); }
+  .event-card.highlight .event-dot.milestone { background: var(--teal); }
+  .event-card.highlight .event-dot.defense { background: var(--orange); }
+  .event-card.highlight .sources-label { color: var(--gray-50); }
+  .event-card.highlight .sources-icon svg { fill: var(--gray-50); }
+  .event-card.highlight .sources-trigger:hover .sources-label,
+  .event-card.highlight .sources-trigger.active .sources-label { color: var(--lime); }
+  .event-card.highlight .sources-trigger:hover .sources-icon svg,
+  .event-card.highlight .sources-trigger.active .sources-icon svg { fill: var(--lime); }
+
+  .event-value { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; margin-top: 4px; }
+  .event-card.highlight .event-value.blue { color: var(--blue); }
+
+  .event-card.upcoming {
+    border: 2px dashed var(--gray-15); border-radius: 10px; background: var(--gray-05);
+  }
+  .event-card.upcoming:hover { background: var(--gray-05); transform: translateX(4px); }
+  .event-card.upcoming .event-dot { opacity: 0.4; }
+  .event-card.upcoming .event-title { color: var(--gray-75); }
+  .event-card.upcoming .event-tag { opacity: 0.6; }
+  .event-card.upcoming .sources-trigger { opacity: 0.6; }
+
+  /* ══ FILTER STATES ══ */
+  .event-card.filter-fading {
+    opacity: 0;
+    transform: translateX(-8px) scale(0.98);
+    pointer-events: none;
+  }
+
+  .event-card.filter-hidden {
+    display: none !important;
+  }
+
+  .event-card.filter-showing {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  .year-section {
+    transition: opacity 0.3s ease;
+  }
+
+  .year-section.filter-empty {
+    display: none !important;
+  }
+
+  /* ══ FOOTER ══ */
+  .footer { max-width: 1440px; margin: 0 auto; padding: 0 64px; }
+
+  .footer-inner {
+    border-top: 1px solid var(--gray-15); padding: 24px 0;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .footer-note {
+    font-size: 11px; color: var(--gray-50);
+    letter-spacing: 0.3px; max-width: 600px; line-height: 1.5;
+  }
+
+  .footer-logo { height: 20px; width: auto; opacity: 0.6; }
+
+  /* ══ PRESS CONTACT ══ */
+  .press-contact { max-width: 1440px; margin: 0 auto; padding: 0 64px; }
+
+  .press-contact-inner {
+    border-top: 1px solid var(--gray-15); padding: 14px 0;
+    font-size: 11px; color: var(--gray-50); letter-spacing: 0.3px; line-height: 1.5;
+  }
+
+  .bottom-bar { background: var(--navy); }
+
+  .bottom-bar-inner {
+    max-width: 1440px; margin: 0 auto; padding: 16px 64px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .bottom-bar-text { font-size: 10px; font-weight: 500; letter-spacing: 0.5px; color: var(--gray-50); }
+
+  /* ══ ANIMATIONS ══ */
+  @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  .year-section { animation: fadeSlideIn 0.5s ease forwards; opacity: 0; }
+  .year-section:nth-child(1) { animation-delay: 0.05s; }
+  .year-section:nth-child(2) { animation-delay: 0.1s; }
+  .year-section:nth-child(3) { animation-delay: 0.15s; }
+  .year-section:nth-child(4) { animation-delay: 0.2s; }
+  .year-section:nth-child(5) { animation-delay: 0.25s; }
+  .year-section:nth-child(6) { animation-delay: 0.3s; }
+  .year-section:nth-child(7) { animation-delay: 0.35s; }
+  .year-section:nth-child(8) { animation-delay: 0.4s; }
+  .year-section:nth-child(9) { animation-delay: 0.45s; }
+  .year-section:nth-child(10) { animation-delay: 0.5s; }
+  .year-section:nth-child(11) { animation-delay: 0.55s; }
+  .year-section:nth-child(12) { animation-delay: 0.6s; }
+  .year-section:nth-child(13) { animation-delay: 0.65s; }
+
+  /* ══ TABLET (768px – 1024px) ══ */
+  @media (max-width: 1024px) {
+    .brand-bar-inner { padding: 0 32px; }
+    .hero-inner { padding: 0 32px; }
+    .hero-inner h1 { font-size: 36px; letter-spacing: -1.2px; }
+    .stats-banner-inner { padding: 16px 32px; }
+    .sticky-header.minimized .stats-banner-inner { padding: 10px 32px; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); gap: 12px 0; }
+    .legend-row { flex-wrap: wrap; gap: 8px; }
+    .timeline-wrapper { padding: 40px 32px 48px; }
+    .year-section { grid-template-columns: 80px 1fr; }
+    .year-label { font-size: 26px; }
+    .year-label-col { padding-top: 16px; }
+    .events-col { padding-left: 28px; }
+    .footer { padding: 0 32px; }
+    .press-contact { padding: 0 32px; }
+    .bottom-bar-inner { padding: 16px 32px; }
+  }
+
+  /* ══ MOBILE (<768px) ══ */
+  @media (max-width: 767px) {
+    .brand-bar { height: 64px; }
+    .brand-bar-inner { padding: 0 20px; gap: 10px; }
+    .logo-wrap { height: 42px; margin-left: -10px; }
+    .sticky-header.minimized .logo-wrap { height: 36px; }
+    .sticky-header.minimized .brand-bar { height: 52px; }
+    .brand-bar-inline-title { font-size: 11px; }
+    .brand-bar-label { display: none; }
+
+    .hero-section { padding: 28px 0 16px; }
+    .hero-inner { padding: 0 20px; }
+    .hero-inner h1 { font-size: 28px; letter-spacing: -0.8px; }
+    .hero-inner .subtitle { font-size: 13px; }
+
+    .stats-banner-inner { padding: 14px 20px; }
+    .sticky-header.minimized .stats-banner-inner { padding: 10px 20px; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); gap: 10px 0; }
+    .stat-value { font-size: 18px; }
+    .sticky-header.minimized .stat-value { font-size: 14px; }
+    .stat-label { font-size: 8px; letter-spacing: 1px; }
+
+    .legend-row { flex-wrap: wrap; gap: 6px; }
+    .legend-item { font-size: 9px; padding: 4px 8px 4px 0; }
+
+    .timeline-wrapper { padding: 32px 20px 40px; }
+    .year-section { grid-template-columns: 60px 1fr; }
+    .year-label-col { padding-top: 12px; }
+    .year-label { font-size: 22px; }
+    .events-col { padding-left: 20px; }
+
+    .event-card { grid-template-columns: 10px 1fr; gap: 12px; padding: 12px 16px; }
+    .event-card.highlight { padding: 16px 18px; }
+    .event-title { font-size: 14px; }
+    .event-detail { font-size: 12px; }
+    .event-value { font-size: 20px; }
+    .event-card.highlight .event-title { font-size: 15px; }
+
+    .sources-menu { min-width: 0; max-width: calc(100vw - 80px); width: max-content; }
+
+    .footer { padding: 0 20px; }
+    .press-contact { padding: 0 20px; }
+    .press-contact-inner { padding: 12px 0; font-size: 10px; }
+    .footer-inner { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .footer-note { font-size: 10px; }
+    .bottom-bar-inner { padding: 14px 20px; flex-direction: column; gap: 8px; }
+  }
+
+  @media print {
+    .sticky-header { position: relative !important; }
+    .hero-section { transform: none !important; opacity: 1 !important; }
+    .hero-wrapper { height: auto !important; }
+    .event-card:hover { background: none; transform: none; }
+    .year-section { animation: none; opacity: 1; }
+    .sources-trigger { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sticky-header" id="stickyHeader">
+  <div class="brand-bar"><div class="brand-bar-inner">
+    <div class="logo-wrap">
+      <img class="logo-img logo-white" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NzUuMzkgMTk5LjkxIj4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiAjYzJmMjEzOwogICAgICB9CgogICAgICAuY2xzLTEsIC5jbHMtMiB7CiAgICAgICAgc3Ryb2tlLXdpZHRoOiAwcHg7CiAgICAgIH0KCiAgICAgIC5jbHMtMiB7CiAgICAgICAgZmlsbDogI2ZmZmZmZjsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPGc+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik01NjcuNDEsNzEuNTdsLTIyLjE5LDY1LjI3Yy0uNzMsMi4xNi0yLjc2LDMuNjEtNS4wNSwzLjYxaC0xMS40N2w0LjM5LTEyLjg2LTE5LjA0LTU2LjAyaDE1LjNsMTEuMzksMzUuNywxMS4zOS0zNS43aDE1LjI4WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMjYxLjA3LDk4LjI1Yy0xLjU5LTIuNC0zLjUxLTQuMzUtNS43LTUuNzktMi4xNy0xLjQzLTQuNC0yLjQ4LTYuNjEtMy4xNC0yLjE3LS42NC0zLjg5LTEuMDktNS4xLTEuMzMtNC4wOS0xLjA0LTcuNC0xLjg5LTkuOTMtMi41Ni0yLjQ5LS42Ni00LjQ2LTEuMzItNS44NS0xLjk4LTEuMzItLjYyLTIuMjEtMS4yOC0yLjY0LTEuOTgtLjQzLS43LS42NS0xLjY0LS42NS0yLjgxLDAtMS4yOC4yOC0yLjM0LjgyLTMuMTYuNTYtLjg0LDEuMjktMS41NiwyLjE3LTIuMTIuODgtLjU3LDEuODgtLjk3LDIuOTYtMS4yLDIuODUtLjYsNS43NS0uMzksOC4xNC4wOSwxLjQyLjI5LDIuNy43OSwzLjc5LDEuNDgsMS4wNy42OCwxLjk0LDEuNjIsMi41OSwyLjgxLjY2LDEuMiwxLjA1LDIuNzUsMS4xNyw0LjYxbC4wMy41NGgxNS4wNHYtLjU4YzAtMy44Ni0uNzUtNy4yLTIuMjItOS45My0xLjQ3LTIuNzItMy40OS00Ljk5LTUuOTktNi43NS0yLjQ5LTEuNzQtNS4zNy0zLjAyLTguNTctMy44LTUuOTEtMS40My0xMi40OS0xLjY5LTE4LjkyLjA1LTIuOTguODEtNS42OSwyLjA3LTguMDYsMy43NS0yLjM4LDEuNjktNC4zMywzLjgzLTUuOCw2LjM2LTEuNDgsMi41NS0yLjIzLDUuNTktMi4yMyw5LjAzLDAsMy4wOC41OSw1Ljc0LDEuNzYsNy45MiwxLjE2LDIuMTcsMi43MSw0LDQuNiw1LjQ1LDEuODYsMS40Myw0LjAxLDIuNjEsNi4zNywzLjUxLDIuMzQuODksNC43NiwxLjY1LDcuMTksMi4yNiwyLjM1LjY2LDQuNzMsMS4yOCw3LjA3LDEuODQsMi4yOC41NCw0LjM1LDEuMTgsNi4xNCwxLjksMS43NS43LDMuMTgsMS41OCw0LjI1LDIuNjIsMS4wMi45OSwxLjUyLDIuMjcsMS41MiwzLjg5LDAsMS41LS4zOSwyLjc1LTEuMTUsMy43MS0uOCwxLTEuODEsMS43OS0zLDIuMzYtMS4yMi41OC0yLjU1Ljk4LTMuOTUsMS4xOS0zLjUuNTEtNi41LjM5LTkuMzgtLjM2LTEuNjktLjQ0LTMuMTgtMS4xMi00LjQzLTIuMDEtMS4yMy0uODgtMi4yNC0yLjA2LTIuOTgtMy41aDBjLS43NS0xLjQzLTEuMTItMy4yMi0xLjEyLTUuMzJ2LS41OGgtMTUuMDd2LjU3Yy0uMDcsNC4xMS42OSw3LjcxLDIuMjUsMTAuNzEsMS41NiwzLDMuNyw1LjUsNi4zNSw3LjQzLDIuNjQsMS45Myw1LjcyLDMuMzYsOS4xNyw0LjI2LDMuNDIuODksNywxLjM1LDEwLjYzLDEuMzUsNC40OSwwLDguNTEtLjUzLDExLjkzLTEuNTgsMy40NC0xLjA1LDYuMzctMi41NSw4LjcxLTQuNDUsMi4zNS0xLjkxLDQuMTQtNC4yMSw1LjMzLTYuODUsMS4xOS0yLjYzLDEuNzktNS41MSwxLjc5LTguNTcsMC0zLjc2LS44Mi02LjktMi40My05LjM0WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDQ2LjU3LDcxLjU3bC0xMC4zLDM3Ljk1aC0uMjFsLTkuNTQtMzcuOTVoLTE0Ljk2bC05LjMzLDM4LjA3aC0uMjFsLTEwLjMtMzguMDdoLTE2LjI2bDE3Ljc3LDU2LjA2aDE1Ljk1bDkuNTQtMzcuNjNoLjIxbDkuOTcsMzcuNjNoMTUuODRsMTcuNjctNTYuMDZoLTE1Ljg0WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNjE2LjIzLDEwMy4wN2MtMS4wMS0xLjc4LTIuMzUtMy4yNS00LjAyLTQuNDUtMS42Ny0xLjE5LTMuNTYtMi4xNS01LjctMi44OC0yLjEzLS43Mi00LjMxLTEuMzMtNi41NS0xLjg0LTIuMTctLjUxLTQuMzEtLjk4LTYuNC0xLjQyLTIuMDktLjQzLTMuOTUtLjkyLTUuNTgtMS40Ni0xLjYyLS41NC0yLjk1LTEuMjUtMy45Ni0yLjEyLTEuMDEtLjg3LTEuNTEtMS45OC0xLjUxLTMuMzUsMC0xLjE2LjI4LTIuMDguODctMi43Ny41Ny0uNjksMS4yOC0xLjIsMi4xLTEuNTguODMtLjM2LDEuNzYtLjYsMi43Ny0uNywxLjAxLS4xMSwxLjk2LS4xNywyLjgzLS4xNywyLjc1LDAsNS4xMy41Myw3LjE1LDEuNTgsMi4wMywxLjA1LDMuMTUsMy4wNSwzLjM3LDYuMDJoMTQuNjRjLS4yOS0zLjQ4LTEuMTgtNi4zNS0yLjY2LTguNjItMS40OS0yLjI4LTMuMzQtNC4xMS01LjU4LTUuNDgtMi4yNS0xLjM3LTQuNzktMi4zNC03LjY1LTIuOTMtMi44NS0uNTctNS44LS44Ny04Ljg0LS44N3MtNiwuMjctOC44OS44MWMtMi44OS41NC01LjQ5LDEuNDktNy44MSwyLjgzLTIuMzEsMS4zNC00LjE2LDMuMTYtNS41OCw1LjQ3LTEuNDEsMi4zMi0yLjEyLDUuMjgtMi4xMiw4Ljg5LDAsMi40Ny41MSw0LjU0LDEuNTIsNi4yNCwxLjAxLDEuNywyLjM1LDMuMTIsNC4wMiw0LjIzLDEuNjcsMS4xMywzLjU2LDIuMDMsNS43LDIuNzEsMi4xMy42OSw0LjMxLDEuMjgsNi41NSwxLjc5LDUuNSwxLjE2LDkuNzgsMi4zMSwxMi44NSwzLjQ3LDMuMDcsMS4xNiw0LjYxLDIuODksNC42MSw1LjIxLDAsMS4zNy0uMzMsMi41MS0uOTgsMy40MS0uNjUuOS0xLjQ2LDEuNjMtMi40NCwyLjE3LS45OC41NC0yLjA2LjkzLTMuMjUsMS4xOS0xLjE5LjI1LTIuMzMuMzctMy40MS4zNy0xLjUyLDAtMi45OC0uMTgtNC40LS41NC0xLjQxLS4zNi0yLjY2LS45Mi0zLjc0LTEuNjgtMS4wOC0uNzctMS45Ny0xLjczLTIuNjYtMi45My0uNjktMS4xOS0xLjA0LTIuNjItMS4wNC00LjI5aC0xNC42M2MuMTUsMy43Ni45OSw2Ljg5LDIuNTQsOS4zOSwxLjU1LDIuNDksMy41NSw0LjQ5LDUuOTcsNi4wMSwyLjQyLDEuNTIsNS4xOSwyLjYxLDguMywzLjI1LDMuMTEuNjUsNi4yOS45OCw5LjU0Ljk4czYuMy0uMyw5LjM4LS45MmMzLjA3LS42MSw1LjgxLTEuNjgsOC4xOS0zLjIsMi4zOS0xLjUyLDQuMzEtMy41Miw1LjgtNi4wMiwxLjQ5LTIuNDksMi4yMy01LjU4LDIuMjMtOS4yNiwwLTIuNjEtLjUxLTQuOC0xLjUyLTYuNTZaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0zNzUuMjYsNzEuNTdsLTIyLjE5LDY1LjI3Yy0uNzMsMi4xNi0yLjc2LDMuNjEtNS4wNSwzLjYxaC0xMS40N2w0LjM5LTEyLjg2LTE5LjA0LTU2LjAyaDE1LjNsMTEuMzksMzUuNywxMS4zOS0zNS43aDE1LjI4WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNTEwLjk4LDc3LjgxYy0xLjUyLTIuMDYtMy40Ny0zLjY3LTUuODUtNC44My0yLjM5LTEuMTYtNS4wMy0xLjk0LTcuOTEtMi4zMy0yLjg5LS4zOS01Ljc1LS42LTguNTgtLjYtMy4xMSwwLTYuMTkuMy05LjI2LjkyLTMuMDcuNjEtNS44NCwxLjY0LTguMywzLjA4LTIuNDYsMS40NS00LjQ5LDMuMzctNi4wOCw1Ljc1LTEuNTksMi4zOS0yLjQ5LDUuMzgtMi43MSw5aDE1LjRjLjI5LTMuMDQsMS4zMS01LjIxLDMuMDQtNi41MiwxLjczLTEuMjksNC4xMi0xLjk1LDcuMTYtMS45NSwxLjM3LDAsMi42Ni4wOSwzLjg1LjI3LDEuMTkuMTgsMi4yNC41NCwzLjE0LDEuMDguOTEuNTUsMS42MywxLjMxLDIuMTcsMi4yOC44OSwxLjYyLDEuNjQsNS43NS0uNiw3LjU5LTEuMDEuODMtMi4zOSwxLjQ2LTQuMTIsMS45LTEuNzMuNDMtMy43My43NS01Ljk3Ljk3LTIuMjQuMjMtNC41MS41Mi02LjgzLjg4LTIuMzEuMzYtNC42Ljg0LTYuODksMS40Ni0yLjI3LjYxLTQuMywxLjUzLTYuMDcsMi43Ni0xLjc4LDEuMjQtMy4yMiwyLjg4LTQuMzQsNC45NC0xLjExLDIuMDYtMS42OCw0LjY4LTEuNjgsNy44NiwwLDIuODkuNSw1LjM5LDEuNDYsNy40OC45OCwyLjA5LDIuMzMsMy44Myw0LjA2LDUuMiwxLjc0LDEuMzcsMy43NiwyLjM5LDYuMDgsMy4wNCwyLjMyLjY1LDQuODEuOTgsNy40OC45OCwzLjQ3LDAsNi44Ny0uNTEsMTAuMTktMS41MiwzLjA0LS45Miw1LjcyLTIuNDgsOC4wMy00LjY4djQuNzZsMTUuNC4wMnYtNDEuNjNjMC0zLjQtLjc1LTYuMTItMi4yNy04LjE4Wk00OTcuODYsMTA1Ljk0YzAsLjg3LS4wOSwyLjAzLS4yNywzLjQ3LS4xOCwxLjQ1LS42NiwyLjg3LTEuNDYsNC4yOS0uOCwxLjQxLTIuMDMsMi42MS0zLjY4LDMuNjItMS42NywxLjAxLTQuMDIsMS41Mi03LjA2LDEuNTItMS4yMywwLTIuNDItLjExLTMuNTgtLjMzLTEuMTUtLjIxLTIuMTYtLjYtMy4wMy0xLjE0LS44Ny0uNTQtMS41NS0xLjI4LTIuMDYtMi4yMi0uNTEtLjk1LS43Ny0yLjEtLjc3LTMuNDgsMC0xLjQ0LjI2LTIuNjMuNzctMy41OC41MS0uOTMsMS4xNy0xLjcxLDItMi4zMy44My0uNjEsMS44LTEuMSwyLjkzLTEuNDYsMS4xMy0uMzYsMi4yNi0uNjUsMy40MS0uODcsMS4yNC0uMjEsMi40Ni0uMzksMy42OS0uNTQsMS4yMy0uMTUsMi40LS4zMywzLjUyLS41NCwxLjEzLS4yMywyLjE3LS41LDMuMTUtLjgxLjk3LS4zMywxLjc5LS43OCwyLjQzLTEuMzZ2NS43NVoiLz4KICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIzMDAuMTcgOTkuNTUgMzIxLjY4IDEyNy41OCAzMDQuNyAxMjcuNTggMjg0LjMyIDk5LjU1IDMwNC43IDcxLjUxIDMyMS42OCA3MS41MSAzMDAuMTcgOTkuNTUiLz4KICAgIDxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iMjY4LjkyIiB5PSI2MC4yMiIgd2lkdGg9IjE1LjQiIGhlaWdodD0iNjcuNDEiLz4KICA8L2c+CiAgPGc+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik01Ny42Myw5OS45NXYtMTkuMzNjMC0uNTcuNDctMS4wMiwxLjA0LTEuMDIsMjkuMjQsMCw0Mi44MSwwLDcyLjIzLDAsMi45MiwwLDUuNDEtMS4wOSw3LjQ4LTMuMjgsMS45Ny0yLjA4LDMuOTUtNC4xNSw1Ljg3LTYuMjgsMi43MS0yLjk5LDUuNi01LjcxLDkuMTUtNy41MywyLjgzLTEuNDUsNS43OC0yLjkzLDguOTItMy4wMiwyLjg2LS4wOCwxMC40OC0uMDIsMTMuMzMsMCwuODYsMCwuODcuMzQuODcuOTQsMCw2LjQ3LDAsMTIuOTQsMCwxOS40MXEwLC45OS0uOTMuOTljLTEwLjI2LDAtMjUuMzIsMC0zNS41OCwwLTIuNzksMC01LjI1Ljk5LTcuMjYsMy4wOS0yLjM3LDIuNDctNC43Myw0Ljk2LTcuMDMsNy41MS01Ljg4LDYuNS0xMy4wMSw5LjU5LTIxLjQ5LDkuNTctMjAuNTMtLjA3LTI1LjI5LS4wNC00NS41Ny0uMDMtLjU3LDAtMS4wNC0uNDYtMS4wNC0xLjAyWiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTc2LjUzLDk5Ljk2djE5LjMzYzAsLjU3LS40NywxLjAyLTEuMDQsMS4wMi0yOS4yNCwwLTQyLjgxLDAtNzIuMjMsMC0yLjkyLDAtNS40MSwxLjA5LTcuNDgsMy4yOC0xLjk3LDIuMDgtMy45NSw0LjE1LTUuODcsNi4yOC0yLjcxLDIuOTktNS42LDUuNzEtOS4xNSw3LjUzLTIuODMsMS40NS01Ljc4LDIuOTMtOC45MiwzLjAyLTIuODYuMDgtMTAuNDguMDItMTMuMzMsMC0uODYsMC0uODctLjM0LS44Ny0uOTQsMC02LjQ3LDAtMTIuOTQsMC0xOS40MXEwLS45OS45My0uOTljMTAuMjYsMCwyNS4zMiwwLDM1LjU4LDAsMi43OSwwLDUuMjUtLjk5LDcuMjYtMy4wOSwyLjM3LTIuNDcsNC43My00Ljk2LDcuMDMtNy41MSw1Ljg4LTYuNSwxMy4wMS05LjU5LDIxLjQ5LTkuNTcsMjAuNTMuMDcsMjUuMjkuMDQsNDUuNTcuMDMuNTcsMCwxLjA0LjQ2LDEuMDQsMS4wMloiLz4KICA8L2c+Cjwvc3ZnPg==" alt="Skyways">
+      <img class="logo-img logo-color" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NzUuMzkgMTk5LjkxIj4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiAjYzJmMjEzOwogICAgICB9CgogICAgICAuY2xzLTEsIC5jbHMtMiB7CiAgICAgICAgc3Ryb2tlLXdpZHRoOiAwcHg7CiAgICAgIH0KCiAgICAgIC5jbHMtMiB7CiAgICAgICAgZmlsbDogIzExMWUyNjsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPGc+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik01NjcuNDEsNzEuNTdsLTIyLjE5LDY1LjI3Yy0uNzMsMi4xNi0yLjc2LDMuNjEtNS4wNSwzLjYxaC0xMS40N2w0LjM5LTEyLjg2LTE5LjA0LTU2LjAyaDE1LjNsMTEuMzksMzUuNywxMS4zOS0zNS43aDE1LjI4WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMjYxLjA3LDk4LjI1Yy0xLjU5LTIuNC0zLjUxLTQuMzUtNS43LTUuNzktMi4xNy0xLjQzLTQuNC0yLjQ4LTYuNjEtMy4xNC0yLjE3LS42NC0zLjg5LTEuMDktNS4xLTEuMzMtNC4wOS0xLjA0LTcuNC0xLjg5LTkuOTMtMi41Ni0yLjQ5LS42Ni00LjQ2LTEuMzItNS44NS0xLjk4LTEuMzItLjYyLTIuMjEtMS4yOC0yLjY0LTEuOTgtLjQzLS43LS42NS0xLjY0LS42NS0yLjgxLDAtMS4yOC4yOC0yLjM0LjgyLTMuMTYuNTYtLjg0LDEuMjktMS41NiwyLjE3LTIuMTIuODgtLjU3LDEuODgtLjk3LDIuOTYtMS4yLDIuODUtLjYsNS43NS0uMzksOC4xNC4wOSwxLjQyLjI5LDIuNy43OSwzLjc5LDEuNDgsMS4wNy42OCwxLjk0LDEuNjIsMi41OSwyLjgxLjY2LDEuMiwxLjA1LDIuNzUsMS4xNyw0LjYxbC4wMy41NGgxNS4wNHYtLjU4YzAtMy44Ni0uNzUtNy4yLTIuMjItOS45My0xLjQ3LTIuNzItMy40OS00Ljk5LTUuOTktNi43NS0yLjQ5LTEuNzQtNS4zNy0zLjAyLTguNTctMy44LTUuOTEtMS40My0xMi40OS0xLjY5LTE4LjkyLjA1LTIuOTguODEtNS42OSwyLjA3LTguMDYsMy43NS0yLjM4LDEuNjktNC4zMywzLjgzLTUuOCw2LjM2LTEuNDgsMi41NS0yLjIzLDUuNTktMi4yMyw5LjAzLDAsMy4wOC41OSw1Ljc0LDEuNzYsNy45MiwxLjE2LDIuMTcsMi43MSw0LDQuNiw1LjQ1LDEuODYsMS40Myw0LjAxLDIuNjEsNi4zNywzLjUxLDIuMzQuODksNC43NiwxLjY1LDcuMTksMi4yNiwyLjM1LjY2LDQuNzMsMS4yOCw3LjA3LDEuODQsMi4yOC41NCw0LjM1LDEuMTgsNi4xNCwxLjksMS43NS43LDMuMTgsMS41OCw0LjI1LDIuNjIsMS4wMi45OSwxLjUyLDIuMjcsMS41MiwzLjg5LDAsMS41LS4zOSwyLjc1LTEuMTUsMy43MS0uOCwxLTEuODEsMS43OS0zLDIuMzYtMS4yMi41OC0yLjU1Ljk4LTMuOTUsMS4xOS0zLjUuNTEtNi41LjM5LTkuMzgtLjM2LTEuNjktLjQ0LTMuMTgtMS4xMi00LjQzLTIuMDEtMS4yMy0uODgtMi4yNC0yLjA2LTIuOTgtMy41aDBjLS43NS0xLjQzLTEuMTItMy4yMi0xLjEyLTUuMzJ2LS41OGgtMTUuMDd2LjU3Yy0uMDcsNC4xMS42OSw3LjcxLDIuMjUsMTAuNzEsMS41NiwzLDMuNyw1LjUsNi4zNSw3LjQzLDIuNjQsMS45Myw1LjcyLDMuMzYsOS4xNyw0LjI2LDMuNDIuODksNywxLjM1LDEwLjYzLDEuMzUsNC40OSwwLDguNTEtLjUzLDExLjkzLTEuNTgsMy40NC0xLjA1LDYuMzctMi41NSw4LjcxLTQuNDUsMi4zNS0xLjkxLDQuMTQtNC4yMSw1LjMzLTYuODUsMS4xOS0yLjYzLDEuNzktNS41MSwxLjc5LTguNTcsMC0zLjc2LS44Mi02LjktMi40My05LjM0WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDQ2LjU3LDcxLjU3bC0xMC4zLDM3Ljk1aC0uMjFsLTkuNTQtMzcuOTVoLTE0Ljk2bC05LjMzLDM4LjA3aC0uMjFsLTEwLjMtMzguMDdoLTE2LjI2bDE3Ljc3LDU2LjA2aDE1Ljk1bDkuNTQtMzcuNjNoLjIxbDkuOTcsMzcuNjNoMTUuODRsMTcuNjctNTYuMDZoLTE1Ljg0WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNjE2LjIzLDEwMy4wN2MtMS4wMS0xLjc4LTIuMzUtMy4yNS00LjAyLTQuNDUtMS42Ny0xLjE5LTMuNTYtMi4xNS01LjctMi44OC0yLjEzLS43Mi00LjMxLTEuMzMtNi41NS0xLjg0LTIuMTctLjUxLTQuMzEtLjk4LTYuNC0xLjQyLTIuMDktLjQzLTMuOTUtLjkyLTUuNTgtMS40Ni0xLjYyLS41NC0yLjk1LTEuMjUtMy45Ni0yLjEyLTEuMDEtLjg3LTEuNTEtMS45OC0xLjUxLTMuMzUsMC0xLjE2LjI4LTIuMDguODctMi43Ny41Ny0uNjksMS4yOC0xLjIsMi4xLTEuNTguODMtLjM2LDEuNzYtLjYsMi43Ny0uNywxLjAxLS4xMSwxLjk2LS4xNywyLjgzLS4xNywyLjc1LDAsNS4xMy41Myw3LjE1LDEuNTgsMi4wMywxLjA1LDMuMTUsMy4wNSwzLjM3LDYuMDJoMTQuNjRjLS4yOS0zLjQ4LTEuMTgtNi4zNS0yLjY2LTguNjItMS40OS0yLjI4LTMuMzQtNC4xMS01LjU4LTUuNDgtMi4yNS0xLjM3LTQuNzktMi4zNC03LjY1LTIuOTMtMi44NS0uNTctNS44LS44Ny04Ljg0LS44N3MtNiwuMjctOC44OS44MWMtMi44OS41NC01LjQ5LDEuNDktNy44MSwyLjgzLTIuMzEsMS4zNC00LjE2LDMuMTYtNS41OCw1LjQ3LTEuNDEsMi4zMi0yLjEyLDUuMjgtMi4xMiw4Ljg5LDAsMi40Ny41MSw0LjU0LDEuNTIsNi4yNCwxLjAxLDEuNywyLjM1LDMuMTIsNC4wMiw0LjIzLDEuNjcsMS4xMywzLjU2LDIuMDMsNS43LDIuNzEsMi4xMy42OSw0LjMxLDEuMjgsNi41NSwxLjc5LDUuNSwxLjE2LDkuNzgsMi4zMSwxMi44NSwzLjQ3LDMuMDcsMS4xNiw0LjYxLDIuODksNC42MSw1LjIxLDAsMS4zNy0uMzMsMi41MS0uOTgsMy40MS0uNjUuOS0xLjQ2LDEuNjMtMi40NCwyLjE3LS45OC41NC0yLjA2LjkzLTMuMjUsMS4xOS0xLjE5LjI1LTIuMzMuMzctMy40MS4zNy0xLjUyLDAtMi45OC0uMTgtNC40LS41NC0xLjQxLS4zNi0yLjY2LS45Mi0zLjc0LTEuNjgtMS4wOC0uNzctMS45Ny0xLjczLTIuNjYtMi45My0uNjktMS4xOS0xLjA0LTIuNjItMS4wNC00LjI5aC0xNC42M2MuMTUsMy43Ni45OSw2Ljg5LDIuNTQsOS4zOSwxLjU1LDIuNDksMy41NSw0LjQ5LDUuOTcsNi4wMSwyLjQyLDEuNTIsNS4xOSwyLjYxLDguMywzLjI1LDMuMTEuNjUsNi4yOS45OCw5LjU0Ljk4czYuMy0uMyw5LjM4LS45MmMzLjA3LS42MSw1LjgxLTEuNjgsOC4xOS0zLjIsMi4zOS0xLjUyLDQuMzEtMy41Miw1LjgtNi4wMiwxLjQ5LTIuNDksMi4yMy01LjU4LDIuMjMtOS4yNiwwLTIuNjEtLjUxLTQuOC0xLjUyLTYuNTZaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0zNzUuMjYsNzEuNTdsLTIyLjE5LDY1LjI3Yy0uNzMsMi4xNi0yLjc2LDMuNjEtNS4wNSwzLjYxaC0xMS40N2w0LjM5LTEyLjg2LTE5LjA0LTU2LjAyaDE1LjNsMTEuMzksMzUuNywxMS4zOS0zNS43aDE1LjI4WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNTEwLjk4LDc3LjgxYy0xLjUyLTIuMDYtMy40Ny0zLjY3LTUuODUtNC44My0yLjM5LTEuMTYtNS4wMy0xLjk0LTcuOTEtMi4zMy0yLjg5LS4zOS01Ljc1LS42LTguNTgtLjYtMy4xMSwwLTYuMTkuMy05LjI2LjkyLTMuMDcuNjEtNS44NCwxLjY0LTguMywzLjA4LTIuNDYsMS40NS00LjQ5LDMuMzctNi4wOCw1Ljc1LTEuNTksMi4zOS0yLjQ5LDUuMzgtMi43MSw5aDE1LjRjLjI5LTMuMDQsMS4zMS01LjIxLDMuMDQtNi41MiwxLjczLTEuMjksNC4xMi0xLjk1LDcuMTYtMS45NSwxLjM3LDAsMi42Ni4wOSwzLjg1LjI3LDEuMTkuMTgsMi4yNC41NCwzLjE0LDEuMDguOTEuNTUsMS42MywxLjMxLDIuMTcsMi4yOC44OSwxLjYyLDEuNjQsNS43NS0uNiw3LjU5LTEuMDEuODMtMi4zOSwxLjQ2LTQuMTIsMS45LTEuNzMuNDMtMy43My43NS01Ljk3Ljk3LTIuMjQuMjMtNC41MS41Mi02LjgzLjg4LTIuMzEuMzYtNC42Ljg0LTYuODksMS40Ni0yLjI3LjYxLTQuMywxLjUzLTYuMDcsMi43Ni0xLjc4LDEuMjQtMy4yMiwyLjg4LTQuMzQsNC45NC0xLjExLDIuMDYtMS42OCw0LjY4LTEuNjgsNy44NiwwLDIuODkuNSw1LjM5LDEuNDYsNy40OC45OCwyLjA5LDIuMzMsMy44Myw0LjA2LDUuMiwxLjc0LDEuMzcsMy43NiwyLjM5LDYuMDgsMy4wNCwyLjMyLjY1LDQuODEuOTgsNy40OC45OCwzLjQ3LDAsNi44Ny0uNTEsMTAuMTktMS41MiwzLjA0LS45Miw1LjcyLTIuNDgsOC4wMy00LjY4djQuNzZsMTUuNC4wMnYtNDEuNjNjMC0zLjQtLjc1LTYuMTItMi4yNy04LjE4Wk00OTcuODYsMTA1Ljk0YzAsLjg3LS4wOSwyLjAzLS4yNywzLjQ3LS4xOCwxLjQ1LS42NiwyLjg3LTEuNDYsNC4yOS0uOCwxLjQxLTIuMDMsMi42MS0zLjY4LDMuNjItMS42NywxLjAxLTQuMDIsMS41Mi03LjA2LDEuNTItMS4yMywwLTIuNDItLjExLTMuNTgtLjMzLTEuMTUtLjIxLTIuMTYtLjYtMy4wMy0xLjE0LS44Ny0uNTQtMS41NS0xLjI4LTIuMDYtMi4yMi0uNTEtLjk1LS43Ny0yLjEtLjc3LTMuNDgsMC0xLjQ0LjI2LTIuNjMuNzctMy41OC41MS0uOTMsMS4xNy0xLjcxLDItMi4zMy44My0uNjEsMS44LTEuMSwyLjkzLTEuNDYsMS4xMy0uMzYsMi4yNi0uNjUsMy40MS0uODcsMS4yNC0uMjEsMi40Ni0uMzksMy42OS0uNTQsMS4yMy0uMTUsMi40LS4zMywzLjUyLS41NCwxLjEzLS4yMywyLjE3LS41LDMuMTUtLjgxLjk3LS4zMywxLjc5LS43OCwyLjQzLTEuMzZ2NS43NVoiLz4KICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIzMDAuMTcgOTkuNTUgMzIxLjY4IDEyNy41OCAzMDQuNyAxMjcuNTggMjg0LjMyIDk5LjU1IDMwNC43IDcxLjUxIDMyMS42OCA3MS41MSAzMDAuMTcgOTkuNTUiLz4KICAgIDxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iMjY4LjkyIiB5PSI2MC4yMiIgd2lkdGg9IjE1LjQiIGhlaWdodD0iNjcuNDEiLz4KICA8L2c+CiAgPGc+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik01Ny42Myw5OS45NXYtMTkuMzNjMC0uNTcuNDctMS4wMiwxLjA0LTEuMDIsMjkuMjQsMCw0Mi44MSwwLDcyLjIzLDAsMi45MiwwLDUuNDEtMS4wOSw3LjQ4LTMuMjgsMS45Ny0yLjA4LDMuOTUtNC4xNSw1Ljg3LTYuMjgsMi43MS0yLjk5LDUuNi01LjcxLDkuMTUtNy41MywyLjgzLTEuNDUsNS43OC0yLjkzLDguOTItMy4wMiwyLjg2LS4wOCwxMC40OC0uMDIsMTMuMzMsMCwuODYsMCwuODcuMzQuODcuOTQsMCw2LjQ3LDAsMTIuOTQsMCwxOS40MXEwLC45OS0uOTMuOTljLTEwLjI2LDAtMjUuMzIsMC0zNS41OCwwLTIuNzksMC01LjI1Ljk5LTcuMjYsMy4wOS0yLjM3LDIuNDctNC43Myw0Ljk2LTcuMDMsNy41MS01Ljg4LDYuNS0xMy4wMSw5LjU5LTIxLjQ5LDkuNTctMjAuNTMtLjA3LTI1LjI5LS4wNC00NS41Ny0uMDMtLjU3LDAtMS4wNC0uNDYtMS4wNC0xLjAyWiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTc2LjUzLDk5Ljk2djE5LjMzYzAsLjU3LS40NywxLjAyLTEuMDQsMS4wMi0yOS4yNCwwLTQyLjgxLDAtNzIuMjMsMC0yLjkyLDAtNS40MSwxLjA5LTcuNDgsMy4yOC0xLjk3LDIuMDgtMy45NSw0LjE1LTUuODcsNi4yOC0yLjcxLDIuOTktNS42LDUuNzEtOS4xNSw3LjUzLTIuODMsMS40NS01Ljc4LDIuOTMtOC45MiwzLjAyLTIuODYuMDgtMTAuNDguMDItMTMuMzMsMC0uODYsMC0uODctLjM0LS44Ny0uOTQsMC02LjQ3LDAtMTIuOTQsMC0xOS40MXEwLS45OS45My0uOTljMTAuMjYsMCwyNS4zMiwwLDM1LjU4LDAsMi43OSwwLDUuMjUtLjk5LDcuMjYtMy4wOSwyLjM3LTIuNDcsNC43My00Ljk2LDcuMDMtNy41MSw1Ljg4LTYuNSwxMy4wMS05LjU5LDIxLjQ5LTkuNTcsMjAuNTMuMDcsMjUuMjkuMDQsNDUuNTcuMDMuNTcsMCwxLjA0LjQ2LDEuMDQsMS4wMloiLz4KICA8L2c+Cjwvc3ZnPg==" alt="Skyways">
+    </div>
+    <div class="brand-bar-divider"></div>
+    <div class="brand-bar-inline-title">Born in Stealth. Proven in Theater.</div>
+    <div class="brand-bar-label">Company Timeline</div>
+  </div></div>
+  <div class="hero-wrapper" id="heroWrapper"><div class="hero-section"><div class="hero-inner">
+    <h1>Born in Stealth.<br>Proven in Theater.</h1>
+    <div class="subtitle">Founded 2017 &#183; Stealth exit December 2025 &#183; All publicly verified milestones</div>
+  </div></div></div>
+  <div class="stats-banner"><div class="stats-banner-inner">
+    <div class="stats-row">
+      <div class="stat"><div class="stat-value accent">$39M+</div><div class="stat-label">Gov&#8217;t Contracts</div></div>
+      <div class="stat"><div class="stat-value">1,100+</div><div class="stat-label">Flights Logged</div></div>
+      <div class="stat"><div class="stat-value">20+</div><div class="stat-label">Aircraft Iterations</div></div>
+      <div class="stat"><div class="stat-value">3</div><div class="stat-label">Continents</div></div>
+      <div class="stat"><div class="stat-value lime-accent">1/30th</div><div class="stat-label">Cost of Helicopter</div></div>
+      <div class="stat"><div class="stat-value">6 yrs</div><div class="stat-label">Navy Relationship</div></div>
+    </div>
+    <div class="legend-row">
+      <div class="legend-item" data-filter="contracts" onclick="toggleFilter('contracts')"><div class="legend-dot contracts"></div>Contracts &amp; Funding<div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
+      <div class="legend-item" data-filter="product" onclick="toggleFilter('product')"><div class="legend-dot product"></div>Product Development<div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
+      <div class="legend-item" data-filter="defense" onclick="toggleFilter('defense')"><div class="legend-dot defense"></div>Defense Milestones<div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
+      <div class="legend-item" data-filter="milestone" onclick="toggleFilter('milestone')"><div class="legend-dot milestone"></div>Major Milestones<div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="timeline-wrapper">
+  <div class="year-section">
+    <div class="year-label-col"><div class="year-label">2016</div></div>
+    <div class="events-col">
+      <div class="event-card" data-category="milestone">
+        <div class="event-dot milestone"></div>
+        <div class="event-content">
+          <span class="event-date">Summer 2016</span>
+          <div class="event-title">Charles Acknin Begins Building Skyways with V1 in San Francisco Apartment</div>
+          <div class="event-detail">Charles Acknin began working on Skyways from his apartment in San Francisco and built the first aircraft prototype (V1).</div>
+          <div class="event-meta">
+            <span class="event-tag milestone">Internal</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">1 SOURCE</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="#" onclick="return false">Skyways Internal - No Source</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="year-section">
+    <div class="year-label-col"><div class="year-label">2017</div></div>
+    <div class="events-col">
+      <div class="event-card" data-category="milestone">
+        <div class="event-dot milestone"></div>
+        <div class="event-content">
+          <span class="event-date">Jan 2017</span>
+          <div class="event-title">Skyways Air Transportation Founded</div>
+          <div class="event-detail">Charles Acknin, born near Airbus HQ in southern France, co-founded Skyways in Austin, TX with Chris Craighill after nearly 7 years at Google as a senior software engineer on core search. The company began &#x27;not with a fuselage but with code,&#x27; reflecting Acknin&#x27;s software-first philosophy applied to autonomous flight.</div>
+          <div class="event-meta">
+            <span class="event-tag milestone">Founding</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">4 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.flyeye.io/charles-acknin-skyways-innovator-series/" target="_blank">Fly Eye — Innovator Series</a>
+          <a class="source-link" href="https://www.crunchbase.com/organization/skyways" target="_blank">Crunchbase — Company Profile</a>
+          <a class="source-link" href="https://www.thedronegirl.com/2025/11/21/skyways/" target="_blank">The Drone Girl — Inside Skyways (Nov 2025)</a>
+          <a class="source-link" href="https://www.commercialuavnews.com/infrastructure/skyways-and-the-pursuit-of-fully-autonomous-drone-deliveries" target="_blank">Commercial UAV News — Pursuit of Autonomous Deliveries (May 2020)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="milestone">
+        <div class="event-dot milestone"></div>
+        <div class="event-content">
+          <span class="event-date">Q1 2017</span>
+          <div class="event-title">Used Firefly&#x27;s Office &amp; Rocket Test Site — Cedar Park, TX</div>
+          <div class="event-detail">Co-founder Chris Craighill (formerly at Firefly Aerospace) secured access to Firefly&#x27;s shop and office in Cedar Park and their rocket test site at Briggs, TX for flight testing. The company was incorporated in February 2017. Aircraft were all-electric at this stage.</div>
+          <div class="event-meta">
+            <span class="event-tag milestone">Internal</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">1 SOURCE</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="#" onclick="return false">Skyways Internal — Not Published</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="milestone">
+        <div class="event-dot milestone"></div>
+        <div class="event-content">
+          <span class="event-date">May 2017</span>
+          <div class="event-title">Moved Into Manor Office — 5,000 SF</div>
+          <div class="event-detail">First official Skyways office/shop in Manor, TX at 5,000 SF. Replaced the temporary arrangement using Firefly&#x27;s facilities. Provided space for early aircraft prototyping and the small founding team.</div>
+          <div class="event-meta">
+            <span class="event-tag milestone">Internal</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">2 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="#" onclick="return false">Skyways Internal — Not Published</a>
+          <a class="source-link" href="https://www.thedronegirl.com/2025/11/21/skyways/" target="_blank">The Drone Girl — Inside Skyways</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="milestone">
+        <div class="event-dot milestone"></div>
+        <div class="event-content">
+          <span class="event-date">Jun 2017</span>
+          <div class="event-title">Y Combinator S17 Batch</div>
+          <div class="event-detail">Accepted into Y Combinator&#x27;s Summer 2017 batch. Raised $120K pre-seed from YC and Liquid 2 Ventures (Joe Montana&#x27;s fund). YC provided early validation and network access. Total private equity raised is an estimated $1.7–2.1M.</div>
+          <div class="event-meta">
+            <span class="event-tag milestone">Milestone</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">2 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.crunchbase.com/organization/skyways" target="_blank">Crunchbase — Funding History</a>
+          <a class="source-link" href="https://www.flyeye.io/charles-acknin-skyways-innovator-series/" target="_blank">Fly Eye — CEO Interview</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="contracts">
+        <div class="event-dot contracts"></div>
+        <div class="event-content">
+          <span class="event-date">2017</span>
+          <div class="event-title">Seed Fundraising (Rolling Close)</div>
+          <div class="event-detail">Skyways raised its seed round on a rolling basis over the first several years of the company, bringing in capital as needed rather than in a single close. Early investors included Capital Factory, Social Capital, Liquid 2 Ventures, NextView Ventures, Pi Campus, Graph Ventures, and others. </div>
+          <div class="event-meta">
+            <span class="event-tag contracts">Funding</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">2 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.crunchbase.com/organization/skyways" target="_blank">Crunchbase — Funding Rounds</a>
+          <a class="source-link" href="https://www.thedronegirl.com/2025/11/21/skyways/" target="_blank">The Drone Girl — Inside Skyways</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="product">
+        <div class="event-dot product"></div>
+        <div class="event-content">
+          <span class="event-date">2017</span>
+          <div class="event-title">Early Aircraft Prototyping — All-Electric Phase</div>
+          <div class="event-detail">Skyways iterated through initial all-electric VTOL configurations. Aircraft were entirely battery-powered during this period, achieving approximately 65 miles of range — insufficient for the 250+ mile Navy logistics requirement that would later drive the shift to hybrid propulsion. The trademarked Dual-Hybrid Design (pairing electric motors for VTOL with a fuel-burning IC engine for cruise) was not developed until after winning the Navy contract in 2019.</div>
+          <div class="event-meta">
+            <span class="event-tag product">Product</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">2 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.flyeye.io/skyways-autonomous-long-range-cargo-drones/" target="_blank">Fly Eye — Technical Overview</a>
+          <a class="source-link" href="https://www.commercialuavnews.com/infrastructure/skyways-and-the-pursuit-of-fully-autonomous-drone-deliveries" target="_blank">Commercial UAV News — Pursuit of Autonomous Deliveries</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card highlight" data-category="contracts">
+        <div class="event-dot contracts"></div>
+        <div class="event-content">
+          <span class="event-date">End of 2017</span>
+          <div class="event-title">USMC/GTRI — First Purchase Order for Two V2.2 Aircraft</div>
+          <div class="event-detail">The U.S. Marine Corps, in partnership with the Georgia Institute of Technology / Georgia Tech Research Institute (GTRI), issued Skyways&#x27; very first purchase order — for two V2.2 aircraft. This represented Skyways&#x27; first hardware sale and a critical early validation of the platform&#x27;s readiness for military customers. No published press coverage found; milestone confirmed by CEO Charles Acknin.</div>
+          <div class="event-meta">
+            <span class="event-tag contracts">Contract — USMC</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">1 SOURCE</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="#" onclick="return false">Skyways Internal - No Source</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="year-section">
+    <div class="year-label-col"><div class="year-label">2019</div></div>
+    <div class="events-col">
+      <div class="event-card highlight" data-category="defense">
+        <div class="event-dot defense"></div>
+        <div class="event-content">
+          <span class="event-date">Mar 2019</span>
+          <div class="event-title">ANTX 2019 — Skyways Beats Boeing in Navy Competition</div>
+          <div class="event-detail">Skyways won the ANTX 2019 competition organized by the U.S. Navy to demonstrate ship resupply capability. Published sources report that NAWCAD evaluated approximately 65 UAS platforms and selected Skyways. Per CEO Charles Acknin: of the 65 companies initially identified, 19 responded to the Navy&#x27;s call, 6 were invited to demonstrate, and only 2 actually showed up — Boeing and Skyways. Skyways won with its V2.2 all-electric aircraft, demonstrating autonomous cargo delivery to a Naval vessel on the Patuxent River, MD.</div>
+          <div class="event-meta">
+            <span class="event-tag defense">Defense — U.S. Navy</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">3 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://insideunmannedsystems.com/autonomous-cargo-resupply-operations-meet-critical-milestone/" target="_blank">Inside Unmanned Systems — Autonomous Cargo Resupply Milestone</a>
+          <a class="source-link" href="https://www.commercialuavnews.com/infrastructure/skyways-and-the-pursuit-of-fully-autonomous-drone-deliveries" target="_blank">Commercial UAV News — Pursuit of Autonomous Deliveries</a>
+          <a class="source-link" href="https://news.usni.org/2021/08/05/navy-considering-drone-delivery-for-essential-parts-at-sea" target="_blank">USNI News — Navy Considering Drone Delivery (Aug 2021)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card highlight" data-category="contracts">
+        <div class="event-dot contracts"></div>
+        <div class="event-content">
+          <span class="event-date">Aug 2019</span>
+          <div class="event-title">Navy OTA Contract Awarded — Blue Water Maritime Logistics UAS</div>
+          <div class="event-detail">Following the ANTX 2019 competition win, the U.S. Navy awarded an OTA contract to Skyways in August 2019 for the Blue Water Maritime Logistics UAS program. The scope of work was to convert the V2 aircraft from all-electric to a hybrid propulsion system to dramatically extend range for ship-to-ship and shore-to-ship logistics. This contract launched the Dual-Hybrid Design development and defined the company&#x27;s trajectory for the next six years.</div>
+          <div class="event-meta">
+            <span class="event-tag contracts">Contract — U.S. Navy</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">4 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://news.usni.org/2021/08/05/navy-considering-drone-delivery-for-essential-parts-at-sea" target="_blank">USNI News — Navy Considering Drone Delivery (Aug 2021)</a>
+          <a class="source-link" href="https://www.commercialuavnews.com/infrastructure/skyways-and-the-pursuit-of-fully-autonomous-drone-deliveries" target="_blank">Commercial UAV News — Pursuit of Autonomous Deliveries</a>
+          <a class="source-link" href="https://www.twz.com/39415/navy-tests-autonomous-aerial-supply-drone-from-its-newest-supercarrier" target="_blank">The War Zone — Navy Tests Autonomous Supply Drone (Feb 2021)</a>
+          <a class="source-link" href="https://www.janes.com/osint-insights/defence-news/update-us-navy-acquires-skyways-aircraft-prototype-for-blue-water-maritime-logistics-uas" target="_blank">Janes — Navy acquires Skyways prototype for Blue Water UAS</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="product">
+        <div class="event-dot product"></div>
+        <div class="event-content">
+          <span class="event-date">Oct 2019</span>
+          <div class="event-title">V2 Platform Development Accelerates</div>
+          <div class="event-detail">Navy requirements drive V2 specs: 30-lb payload (1 ft³ cargo), ~450–500 mi range, ~8-hr endurance, JP-5/Jet A-1 fuel (military standard), fully autonomous with no remote pilot. Uses 8 electric motors in 4 coaxial pairs for VTOL and an IC engine for cruise. Empty weight: 125 lbs, MTOW: 155 lbs, wingspan: ~18.5 ft (foldable).</div>
+          <div class="event-meta">
+            <span class="event-tag product">Product</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">2 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.suasnews.com/2024/03/skyways-v3/" target="_blank">sUAS News — Skyways V3 (contains V2 specs as background)</a>
+          <a class="source-link" href="https://www.flyeye.io/skyways-autonomous-long-range-cargo-drones/" target="_blank">Fly Eye — Aircraft Specs</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="year-section">
+    <div class="year-label-col"><div class="year-label">2020</div></div>
+    <div class="events-col">
+      <div class="event-card" data-category="product">
+        <div class="event-dot product"></div>
+        <div class="event-content">
+          <span class="event-date">Apr 2020</span>
+          <div class="event-title">V2 Flight Testing &amp; Continuous Iteration</div>
+          <div class="event-detail">Continuous refinement through sub-variants (V2.2, V2.5, V2.6, V2.6b). Flight testing near Giddings, TX. SkyNav autonomous software (developed starting Q2 2023) would later coordinate multi-aircraft operations and integrate with third-party UTM systems. Starlink connectivity (added end of 2024) transformed operations from &#x27;the AOL days,&#x27; per Acknin.</div>
+          <div class="event-meta">
+            <span class="event-tag product">Product</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">2 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.thedronegirl.com/2025/11/21/skyways/" target="_blank">The Drone Girl — Inside Skyways</a>
+          <a class="source-link" href="https://www.sbir.gov/awards/191434" target="_blank">SBIR.gov — V2.5 referenced</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="contracts">
+        <div class="event-dot contracts"></div>
+        <div class="event-content">
+          <span class="event-date">2020</span>
+          <div class="event-title">Navy OTA Spiral Development — Follow-on Contracts</div>
+          <div class="event-detail">The original August 2019 Navy OTA ($575,141) funded the transition from all-electric to hybrid propulsion. Subsequent spiral development follow-on contracts from 2020 to 2022 grew the total to approximately four times the original value (~$2.3M), funding folding wings development and increasingly complex ship-based operations.</div>
+          <div class="event-meta">
+            <span class="event-tag contracts">Contract — U.S. Navy</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">2 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.janes.com/osint-insights/defence-news/update-skyways-attempting-autonomous-folding-wings-for-us-navy-blue-water-uas" target="_blank">Janes — Skyways folding wings for Blue Water UAS (Nov 2021)</a>
+          <a class="source-link" href="https://www.globaldefensecorp.com/2020/12/30/skyways-developed-autonomous-folding-wings-blue-water-uas/" target="_blank">Global Defense Corp — Skyways Autonomous Folding Wings (Dec 2020)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="year-section">
+    <div class="year-label-col"><div class="year-label">2021</div></div>
+    <div class="events-col">
+      <div class="event-card highlight" data-category="defense">
+        <div class="event-dot defense"></div>
+        <div class="event-content">
+          <span class="event-date">Feb 2021</span>
+          <div class="event-title">Carrier Deck Trials — USS Gerald R. Ford (CVN-78)</div>
+          <div class="event-detail">Two weeks of autonomous VTOL operations on the Navy&#x27;s newest and most advanced aircraft carrier at Norfolk, VA. Blue Water UAS delivered cargo on the CVN-78 flight deck. Part of the ongoing NAWCAD Blue Water Maritime Logistics UAS program that began with Skyways&#x27; selection in 2019.</div>
+          <div class="event-meta">
+            <span class="event-tag defense">Defense — U.S. Navy</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">3 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.twz.com/39415/navy-tests-autonomous-aerial-supply-drone-from-its-newest-supercarrier" target="_blank">The War Zone — Navy Tests Autonomous Supply Drone From Supercarrier</a>
+          <a class="source-link" href="https://news.usni.org/2021/08/05/navy-considering-drone-delivery-for-essential-parts-at-sea" target="_blank">USNI News — Navy Considering Drone Delivery (Aug 2021)</a>
+          <a class="source-link" href="https://www.maritime-executive.com/article/video-carrier-uss-ford-tests-out-air-cargo-drone" target="_blank">Maritime Executive — Carrier USS Ford Tests Air Cargo Drone</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="contracts">
+        <div class="event-dot contracts"></div>
+        <div class="event-content">
+          <span class="event-date">Feb 2021</span>
+          <div class="event-title">SBIR Phase I — $47,775</div>
+          <div class="event-detail">Air Force SBIR topic AF203-CSO1. This $47,775 Phase I award began the AFWERX SBIR pathway that would eventually lead to the USAF awarding Skyways a $37M contract. The SBIR program provides a structured pathway from small exploratory awards to large-scale production contracts through progressive phases.</div>
+          <div class="event-meta">
+            <span class="event-tag contracts">Contract — U.S. Air Force</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">1 SOURCE</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.sbir.gov/awards/191434" target="_blank">SBIR.gov — Award FA8649-21-P-0539</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="milestone">
+        <div class="event-dot milestone"></div>
+        <div class="event-content">
+          <span class="event-date">Apr 2021</span>
+          <div class="event-title">Moved Into Austin Cross Park Drive — 10,000 SF</div>
+          <div class="event-detail">Facility expansion to 10,000 SF on Cross Park Drive in Austin to support Navy contract execution and growing aircraft fleet. This replaced the Manor office as the company scaled operations for Blue Water program deliverables.</div>
+          <div class="event-meta">
+            <span class="event-tag milestone">Internal</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">2 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="#" onclick="return false">Skyways Internal — Not Published</a>
+          <a class="source-link" href="#" onclick="return false">Charles Acknin Source Correction</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="defense">
+        <div class="event-dot defense"></div>
+        <div class="event-content">
+          <span class="event-date">Jul 2021</span>
+          <div class="event-title">Ship-to-Ship Autonomous Flights</div>
+          <div class="event-detail">V2 flies between USS Bainbridge (DDG-96) and USNS Joshua Humphreys (T-AO-188). These flights were conducted entirely by U.S. Navy personnel — no Skyways employees were on either ship, a significant achievement demonstrating the system&#x27;s operational maturity and ease of use by military operators.</div>
+          <div class="event-meta">
+            <span class="event-tag defense">Defense</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">1 SOURCE</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://news.usni.org/2021/08/05/navy-considering-drone-delivery-for-essential-parts-at-sea" target="_blank">USNI News — Navy Considering Drone Delivery (Aug 2021)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="year-section">
+    <div class="year-label-col"><div class="year-label">2022</div></div>
+    <div class="events-col">
+      <div class="event-card" data-category="contracts">
+        <div class="event-dot contracts"></div>
+        <div class="event-content">
+          <span class="event-date">Jul 2022</span>
+          <div class="event-title">SBIR Phase II — $749,711</div>
+          <div class="event-detail">AFWERX SBIR pathway continues with $749,711 Phase II under topic AF203-CSO1. Funds continued V2 development and autonomous systems advancement. A 15× increase from Phase I, reflecting the Air Force&#x27;s growing confidence in Skyways&#x27; technology.</div>
+          <div class="event-meta">
+            <span class="event-tag contracts">Contract — U.S. Air Force</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">1 SOURCE</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.sbir.gov/portfolio/1542801" target="_blank">SBIR.gov — Skyways Portfolio</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="defense">
+        <div class="event-dot defense"></div>
+        <div class="event-content">
+          <span class="event-date">Dec 2022</span>
+          <div class="event-title">200+ NM Cargo Delivery Demonstrations</div>
+          <div class="event-detail">Multi-mode operations at NAS Patuxent River: ship-to-ship, ship-to-shore, shore-to-ship across 200+ nautical miles. Navy publicly confirmed unmanned cargo delivery at sea through official NAVAIR press release, providing critical public validation of autonomous maritime logistics viability.</div>
+          <div class="event-meta">
+            <span class="event-tag defense">Defense</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">3 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.navair.navy.mil/news/Navy-successfully-demonstrated-unmanned-cargo-delivery-systems-ship-sea/Wed-12212022-1419" target="_blank">NAVAIR — Navy Demonstrates Unmanned Cargo Delivery (Dec 2022)</a>
+          <a class="source-link" href="https://news.usni.org/2022/04/12/navy-to-deploy-four-cargo-drones-on-an-aircraft-carrier-this-year" target="_blank">USNI News — Navy to Deploy Four Cargo Drones on Carrier (Apr 2022)</a>
+          <a class="source-link" href="https://dronexl.co/2023/01/04/navy-drone-delivery-trials-ships-shore/" target="_blank">DroneXL — Navy Drone Delivery Trials (Jan 2023)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="contracts">
+        <div class="event-dot contracts"></div>
+        <div class="event-content">
+          <span class="event-date">2022</span>
+          <div class="event-title">DIU/USN/NAMD Contract</div>
+          <div class="event-detail">Skyways secured a contract through the Defense Innovation Unit (DIU) in partnership with the U.S. Navy and NAMD. The award contract was directly issued by Army Contracting Command – New Jersey (ACC-NJ). Specific scope and value not publicly disclosed. No published press coverage found; milestone confirmed by CEO Charles Acknin.</div>
+          <div class="event-meta">
+            <span class="event-tag contracts">Contract — DIU / U.S. Navy</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">1 SOURCE</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="#" onclick="return false">Skyways Internal - No Source</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="year-section">
+    <div class="year-label-col"><div class="year-label">2023</div></div>
+    <div class="events-col">
+      <div class="event-card highlight" data-category="defense">
+        <div class="event-dot defense"></div>
+        <div class="event-content">
+          <span class="event-date">Jun 2023</span>
+          <div class="event-title">Fleet Battle Problem 23-1 — First Logistics Drone in a Fleet Exercise</div>
+          <div class="event-detail">Autonomous flights from USNS Patuxent to Marines at Camp Lejeune, NC during FBP 23-1 (June 9–13). First logistics drone integrated into a U.S. fleet exercise. Five flights completed, demonstrating ship-to-shore resupply in a realistic military exercise with Navy and USMC. NAWCAD partnered with Military Sealift Command and USMC.</div>
+          <div class="event-meta">
+            <span class="event-tag defense">Defense — U.S. Navy / USMC</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">4 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.dvidshub.net/news/447537/naval-air-warfare-center-teams-up-with-military-sealift-command-us-marines-test-unmanned-aerial-system-concept" target="_blank">DVIDS — NAWCAD Teams with MSC, Marines (Jun 2023)</a>
+          <a class="source-link" href="https://www.msc.usff.navy.mil/Press-Room/News-Stories/Article/3443999/naval-air-warfare-center-teams-up-with-military-sealift-command-us-marines-to-t/" target="_blank">MSC/Navy.mil — NAWCAD Teams with MSC, Marines (Jun 2023)</a>
+          <a class="source-link" href="https://insideunmannedsystems.com/navy-demonstrating-programs-for-drone-delivery-at-sea/" target="_blank">Inside Unmanned Systems — Navy Drone Delivery at Sea</a>
+          <a class="source-link" href="https://www.navy.mil/Press-Office/News-Stories/Article/3423142/fleet-battle-problem-2023-1-commences-focuses-on-integrated-maritime-capabiliti/" target="_blank">Navy.mil — Fleet Battle Problem 23-1</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="year-section">
+    <div class="year-label-col"><div class="year-label">2024</div></div>
+    <div class="events-col">
+      <div class="event-card" data-category="product">
+        <div class="event-dot product"></div>
+        <div class="event-content">
+          <span class="event-date">Mar 2024</span>
+          <div class="event-title">V3 Next-Generation Platform Revealed</div>
+          <div class="event-detail">V3 specs: 100-lb payload (5 ft³), 1,000+ mi range, 20+ hr endurance — ~3× V2 capability. Wingspan ~26 ft, heavy-fuel engine + pusher propeller. SBIR designation &#x27;SKYWAYS V3 300LB VTOL UAS&#x27; suggests 300-lb gross weight. V3 development timeline: initial concept (2021), subscale with test flights (Oct 2022), Block 0 full-scale first flew (early 2023), Block 1 full-scale first flew (early 2024), Block 2 first article build (scheduled Jun 2026). Significant resources dedicated from mid-2023 onward. Progresses through Block designations (0 → 1 → 2 → 2+).</div>
+          <div class="event-meta">
+            <span class="event-tag product">Product</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">1 SOURCE</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.suasnews.com/2024/03/skyways-v3/" target="_blank">sUAS News — Skyways V3</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="milestone">
+        <div class="event-dot milestone"></div>
+        <div class="event-content">
+          <span class="event-date">May 2024</span>
+          <div class="event-title">Moved into Austin Tech Ridge — 25,000 SF</div>
+          <div class="event-detail">New 25,000 SF facility at Tech Ridge in North Austin provides manufacturing space needed for V3 production ramp and growing headcount. This facility remains the current headquarters as of 2026.</div>
+          <div class="event-meta">
+            <span class="event-tag milestone">Internal</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">3 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="#" onclick="return false">Skyways Internal — Not Published</a>
+          <a class="source-link" href="https://dronexl.co/2026/02/07/skyways-autonomous-drone-fleet/" target="_blank">DroneXL — Skyways Autonomous Drone Fleet (Feb 2026)</a>
+          <a class="source-link" href="#" onclick="return false">Charles Acknin Source Correction</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="defense">
+        <div class="event-dot defense"></div>
+        <div class="event-content">
+          <span class="event-date">Jun 2024</span>
+          <div class="event-title">RIMPAC 2024 — USS Curtis Wilbur (DDG-54)</div>
+          <div class="event-detail">Three Skyways V2.6 aircraft launched and recovered from USS Curtis Wilbur (DDG-54) alongside PteroDynamics X-P4 drones during Trident Warrior at RIMPAC 2024, the world&#x27;s largest international maritime exercise. Simulated Just-In-Time Delivery of medical supplies and critical parts. Demonstrated capability in a multinational exercise environment.</div>
+          <div class="event-meta">
+            <span class="event-tag defense">Defense</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">6 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.defensenews.com/news/your-navy/2024/07/08/navy-tests-using-drones-for-medical-supply-deliveries-during-rimpac/" target="_blank">Defense News — Navy tests drones for medical supply at RIMPAC (Jul 2024)</a>
+          <a class="source-link" href="https://theaviationist.com/2024/07/11/usn-tests-vtol-drones-for-ship-to-ship-small-cargo-delivery/" target="_blank">The Aviationist — U.S. Navy Tests VTOL Drones for Cargo (Jul 2024)</a>
+          <a class="source-link" href="https://www.eurasiantimes.com/big-milestone-for-us-navy-naval-air-warfare-center-demonstrates/" target="_blank">Eurasian Times — US Navy Demonstrates Unmanned Cargo Delivery</a>
+          <a class="source-link" href="https://www.surfpac.navy.mil/Media/News/Article/3829574/uss-curtis-wilbur-tests-drones-during-rimpacs-trident-warrior-2024/" target="_blank">SURFPAC/Navy.mil — USS Curtis Wilbur Tests Drones During RIMPAC Trident Warrior 2024</a>
+          <a class="source-link" href="https://battle-updates.com/update/unmanned-systems-update-948/" target="_blank">Battle Updates — Unmanned Systems Update</a>
+          <a class="source-link" href="https://www.dvidshub.net/news/474940/uss-curtis-wilbur-tests-drones-during-rimpacs-trident-warrior-2024" target="_blank">DVIDS — USS Curtis Wilbur Tests Drones During RIMPAC Trident Warrior 2024</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="contracts">
+        <div class="event-dot contracts"></div>
+        <div class="event-content">
+          <span class="event-date">Jun 2024</span>
+          <div class="event-title">USAF SBIR Phase 3 IDIQ Contract &amp; STRATFI Selection</div>
+          <div class="event-detail">After submitting the STRATFI package in approximately September 2023, USAF AFWERX issued an RFP to Skyways in early 2024 to begin V3 development. In June 2024, Skyways was awarded a SBIR Phase 3 IDIQ contract to start turning V3 into a product. In the same month, Skyways received notification it had been selected for STRATFI funding, which would ultimately be awarded as the $37M contract in May 2025.</div>
+          <div class="event-meta">
+            <span class="event-tag contracts">Contract — U.S. Air Force</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">1 SOURCE</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.sbir.gov/portfolio/1542801" target="_blank">SBIR.gov — Skyways Portfolio</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="defense">
+        <div class="event-dot defense"></div>
+        <div class="event-content">
+          <span class="event-date">2024</span>
+          <div class="event-title">III MEF — Temperature Controlled Payload (TCP) Demonstration</div>
+          <div class="event-detail">Under a DIU contract modification, Skyways demonstrated Temperature Controlled Payload (TCP) capability with USMC III MEF. Operations were conducted in the US (not overseas). Skyways completed a 6-hour flight covering over 300 miles while keeping 10 bags of blood cool at 3–6°C throughout the entire flight. No published press coverage found; milestone confirmed by CEO Charles Acknin.</div>
+          <div class="event-meta">
+            <span class="event-tag defense">Defense — USMC / III MEF</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">1 SOURCE</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="#" onclick="return false">Skyways Internal - No Source</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="year-section">
+    <div class="year-label-col"><div class="year-label">2025</div></div>
+    <div class="events-col">
+      <div class="event-card highlight" data-category="milestone">
+        <div class="event-dot milestone"></div>
+        <div class="event-content">
+          <span class="event-date">Feb 2025</span>
+          <div class="event-title">Skyports Drone Services — First International Aircraft Delivery</div>
+          <div class="event-detail">Skyports Drone Services takes delivery of Skyways aircraft, marking the first international commercial aircraft delivery in company history.</div>
+          <div class="event-meta">
+            <span class="event-tag milestone">Milestone</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">3 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.thedronegirl.com/2025/11/21/skyways/" target="_blank">The Drone Girl — Inside Skyways (Nov 2025)</a>
+          <a class="source-link" href="https://dronexl.co/2026/02/07/skyways-autonomous-drone-fleet/" target="_blank">DroneXL — Skyways Autonomous Drone Fleet (Feb 2026)</a>
+          <a class="source-link" href="https://www.globenewswire.com/news-release/2026/01/22/3223911/0/en/Skyways-Strengthens-Leadership-Team-to-Accelerate-Rapid-Growth.html" target="_blank">GlobeNewswire — Skyways Strengthens Leadership (Jan 2026)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="milestone">
+        <div class="event-dot milestone"></div>
+        <div class="event-content">
+          <span class="event-date">Apr 2025</span>
+          <div class="event-title">ANA Holdings — Aircraft Delivery</div>
+          <div class="event-detail">ANA Holdings takes delivery of Skyways aircraft for drone logistics operations across Okinawan islands in Japan.</div>
+          <div class="event-meta">
+            <span class="event-tag milestone">Milestone</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">3 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.thedronegirl.com/2025/11/21/skyways/" target="_blank">The Drone Girl — Inside Skyways (Nov 2025)</a>
+          <a class="source-link" href="https://www.thedronegirl.com/2025/12/02/skyways-roadmap-cargo-drones-human-flight/" target="_blank">The Drone Girl — From cargo to commuters (Dec 2025)</a>
+          <a class="source-link" href="https://www.globenewswire.com/news-release/2026/01/22/3223911/0/en/Skyways-Strengthens-Leadership-Team-to-Accelerate-Rapid-Growth.html" target="_blank">GlobeNewswire — Skyways Strengthens Leadership (Jan 2026)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card highlight" data-category="contracts">
+        <div class="event-dot contracts"></div>
+        <div class="event-content">
+          <span class="event-date">May 2025</span>
+          <div class="event-title">$37M U.S. Air Force STRATFI Contract</div>
+          <div class="event-detail">One of the largest AFWERX STRATFI awards ever given to an autonomous drone company and the only STRATFI in the cargo drone industry. STRATFI is a critical pathway to a Program of Record (PoR) — a formal DoD-recognized acquisition program that unlocks large-scale, sustained procurement. Funds V3 transition from prototype to full-rate production. Validates the SBIR pathway from $47K Phase I to $37M STRATFI over four years.</div>
+          <div class="event-meta">
+            <span class="event-tag contracts">Contract — U.S. Air Force</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">9 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.dcvelocity.com/transportation/drone-deliveries/texas-firm-gains-37-million-air-force-backing-for-unmanned-cargo-planes" target="_blank">DC Velocity — Texas firm gains $37M Air Force backing</a>
+          <a class="source-link" href="https://thedefensepost.com/2025/06/10/skyways-usaf-cargo-drone/" target="_blank">The Defense Post — Skyways Lands $37M USAF Deal (Jun 2025)</a>
+          <a class="source-link" href="https://www.bizjournals.com/austin/news/2025/06/09/austin-defense-tech-startup-wins-contract.html" target="_blank">Austin Business Journal — Defense-tech startup wins contract</a>
+          <a class="source-link" href="https://www.businesswire.com/news/home/20250609187498/en/Skyways-Secures-37-Million-U.S.-Air-Force-Contract-to-Rapidly-Scale-Autonomous-Cargo-Drones" target="_blank">Business Wire — Press Release</a>
+          <a class="source-link" href="https://dronelife.com/2025/06/09/skyways-afwerx-contract/" target="_blank">DroneLife — Skyways Lands $37M Contract (Jun 2025)</a>
+          <a class="source-link" href="https://apnews.com/press-release/business-wire/skyways-secures-37-million-us-air-force-contract-to-rapidly-scale-autonomous-cargo-drones-a5c0d62a8c7e419796ad264083223cc6" target="_blank">AP News — Skyways Secures $37M USAF Contract (Jun 2025)</a>
+          <a class="source-link" href="https://www.thedronegirl.com/2025/06/23/skyways-v3/" target="_blank">The Drone Girl — Skyways V3 Autonomous Cargo Drone (Jun 2025)</a>
+          <a class="source-link" href="https://uasweekly.com/2025/06/10/skyways-wins-37m-usaf-contract-to-scale-v3-autonomous-cargo-drones-in-2025/" target="_blank">UAS Weekly — Skyways Wins $37M USAF Contract (Jun 2025)</a>
+          <a class="source-link" href="https://finance.yahoo.com/news/skyways-secures-37-million-us-123000111.html" target="_blank">Yahoo Finance — Skyways Secures $37M Contract (Jun 2025)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="contracts">
+        <div class="event-dot contracts"></div>
+        <div class="event-content">
+          <span class="event-date">Jun 2025</span>
+          <div class="event-title">$7M Equity Raise + $5M Leonid Debt Facility</div>
+          <div class="event-detail">Skyways raised $7M in private equity to provide initial private funding for the STRATFI 1:1:2 Government:SBIR:Private matching structure required for the $37M contract. Separately, Skyways secured a $5M debt facility from defense-specialist lender Leonid Capital Partners for cashflow management during production ramp.</div>
+          <div class="event-meta">
+            <span class="event-tag contracts">Funding</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">3 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.businesswire.com/news/home/20250626667212/en/Skyways-Secures-5-Million-Debt-Facility-to-Accelerate-Production-of-Autonomous-Cargo-Drones-for-U.S.-Department-of-Defense" target="_blank">Business Wire — $5M Debt Facility Announcement</a>
+          <a class="source-link" href="https://dronelife.com/2025/07/02/skyways-secures-5-million-to-boost-production-of-autonomous-cargo-drones/" target="_blank">DroneLife — Skyways Secures $5M for Production (Jul 2025)</a>
+          <a class="source-link" href="https://www.skyways.com/newsroom/skyways-completes-historic-cargo-drone-flights-between-airports-for-us-military/" target="_blank">Skyways Newsroom</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card highlight" data-category="defense">
+        <div class="event-dot defense"></div>
+        <div class="event-content">
+          <span class="event-date">Aug 2025</span>
+          <div class="event-title">Project ULTRA — 20 Operational Flights for DoD</div>
+          <div class="event-detail">Sole UAS provider for Project ULTRA, sponsored by OUSD (Office of the Under Secretary of Defense). At GrandSKY, ND: 10 round trips between Grand Forks AFB and Cavalier SFS over 12 days. All flights were BVLOS (Beyond Visual Line of Sight) in the National Airspace System (NAS). 230 lbs total cargo including temperature-controlled blood products at ~4°C. V3 Block 1 first customer flights. One unplanned emergency landing managed successfully.</div>
+          <div class="event-meta">
+            <span class="event-tag defense">Defense — DoD</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">5 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.kxnet.com/news/top-stories/project-ultra-expands-drone-operations-secures-100m-contract-ceiling/" target="_blank">KX News — Project ULTRA expands, $100M ceiling (Jul 2025)</a>
+          <a class="source-link" href="https://aircargoweek.com/skyways-completes-historic-cargo-drone-flights-in-controlled-airspace/" target="_blank">Air Cargo Week — Skyways completes historic flights (Aug 2025)</a>
+          <a class="source-link" href="https://dronelife.com/2025/08/22/skyways-completes-historic-cargo-drone-flights-for-u-s-military/" target="_blank">DroneLife — Skyways Historic Cargo Drone Flights (Aug 2025)</a>
+          <a class="source-link" href="https://www.businesswire.com/news/home/20250821576316/en/Skyways-Completes-Historic-Cargo-Drone-Flights-Between-Airports-for-U.S.-Military" target="_blank">Business Wire — Project ULTRA Press Release</a>
+          <a class="source-link" href="https://www.skyways.com/newsroom/skyways-completes-historic-cargo-drone-flights-between-airports-for-us-military/" target="_blank">Skyways Newsroom</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="product">
+        <div class="event-dot product"></div>
+        <div class="event-content">
+          <span class="event-date">Aug 2025</span>
+          <div class="event-title">V3 Block 1 — First Customer Flights</div>
+          <div class="event-detail">V3 flies first customer missions during Project ULTRA at GrandSKY, ND. ~200 test flights completed including 8-hour endurance test. Block 1 is the test configuration preceding production-intent Block 2 and operational Block 2+ targeted for full-rate production by end of 2027.</div>
+          <div class="event-meta">
+            <span class="event-tag product">Product</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">5 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://dronelife.com/2025/08/22/skyways-completes-historic-cargo-drone-flights-for-u-s-military/" target="_blank">DroneLife — Skyways Historic Cargo Drone Flights (Aug 2025)</a>
+          <a class="source-link" href="https://dronexl.co/2026/02/07/skyways-autonomous-drone-fleet/" target="_blank">DroneXL — Skyways Autonomous Drone Fleet (Feb 2026)</a>
+          <a class="source-link" href="https://www.skyways.com/newsroom/skyways-completes-historic-cargo-drone-flights-between-airports-for-us-military/" target="_blank">Skyways Newsroom</a>
+          <a class="source-link" href="https://www.thedronegirl.com/2025/11/21/skyways/" target="_blank">The Drone Girl — Inside Skyways (Nov 2025)</a>
+          <a class="source-link" href="https://www.thedronegirl.com/2025/12/02/skyways-roadmap-cargo-drones-human-flight/" target="_blank">The Drone Girl — From Cargo to Commuters Roadmap (Dec 2025)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="product">
+        <div class="event-dot product"></div>
+        <div class="event-content">
+          <span class="event-date">Sep 2025</span>
+          <div class="event-title">11 Consecutive Resupply Flights in One Day</div>
+          <div class="event-detail">V2 operational record: 11 flights, 9.4 hrs, 466 NM, zero human intervention, 8-min avg turnaround. $1K/hr vs $30K/hr for helicopter — a 30× cost reduction that represents the most compelling economic argument for autonomous cargo drones.</div>
+          <div class="event-meta">
+            <span class="event-tag product">Product</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">3 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://dronexl.co/2026/02/07/skyways-autonomous-drone-fleet/" target="_blank">DroneXL — Skyways Autonomous Drone Fleet (Feb 2026)</a>
+          <a class="source-link" href="https://www.thedronegirl.com/2025/11/21/skyways/" target="_blank">The Drone Girl — Inside Skyways (Nov 2025)</a>
+          <a class="source-link" href="https://www.kxan.com/news/austin-aviation-company-looking-to-scale-autonomous-drones/" target="_blank">KXAN Austin — Austin Aviation Company Scaling Drones (Nov 2025)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="contracts">
+        <div class="event-dot contracts"></div>
+        <div class="event-content">
+          <span class="event-date">Sep 2025</span>
+          <div class="event-title">RWE Offshore Wind Farm — Baltic Sea, Germany</div>
+          <div class="event-detail">Germany&#x27;s first long-range BVLOS offshore wind drone delivery. Partnered with RWE and Skyports Drone Services. V2 flew 50-mi round trips from Mukran Port to Arkona Wind Farm, delivering up to 22 lbs to turbine nacelles in 29.7-knot winds. Delivery: 26 min vs 2+ hrs by vessel. RWE plans to scale across global wind portfolio.</div>
+          <div class="event-meta">
+            <span class="event-tag contracts">Contract — RWE (Germany)</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">5 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.rwe.com/en/press/rwe-offshore-wind-gmbh/2025-10-15-rwe-successfully-pioneers-cargo-drone-operations-at-offshore-wind-farms/" target="_blank">RWE — Pioneers cargo drone operations (Oct 2025)</a>
+          <a class="source-link" href="https://www.unmannedsystemstechnology.com/2025/10/autonomous-cargo-drone-completes-offshore-windfarm-deliveries/" target="_blank">Unmanned Systems Technology — Autonomous Cargo Drone (Oct 2025)</a>
+          <a class="source-link" href="https://evtolinsights.com/skyports-drone-services-rwe-and-skyways-complete-germanys-first-long-range-drone-deliveries-to-offshore-wind-turbines/" target="_blank">eVTOL Insights — Germany first long-range deliveries (Oct 2025)</a>
+          <a class="source-link" href="https://dronexl.co/2025/10/16/skyways-autonomous-drone-offshore-wind/" target="_blank">DroneXL — Skyways Drone Cuts Supply Time (Oct 2025)</a>
+          <a class="source-link" href="https://dronelife.com/2025/10/15/germanys-first-long-range-drone-deliveries-reach-offshore-wind-turbines/" target="_blank">DroneLife — Germany First Long-Range Deliveries (Oct 2025)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="contracts">
+        <div class="event-dot contracts"></div>
+        <div class="event-content">
+          <span class="event-date">Oct 2025</span>
+          <div class="event-title">ANA Holdings Partnership &amp; $1M Investment</div>
+          <div class="event-detail">ANA Holdings invested $1M, signed long-term partnership. Drones fly between Okinawan islands carrying pharmaceuticals and blood samples under Japan MLIT oversight. Routes: 89–100 km with temperature-controlled boxes. ANA targets commercial drone delivery across APAC by FY2027–2029 with dedicated Skyways pilot training program. NOTE: Coordinate messaging with Jessica Hogan — ANA has been cautious about public disclosure due to Skyways&#x27; DoD ties.</div>
+          <div class="event-meta">
+            <span class="event-tag contracts">Contract — ANA Holdings (Japan)</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">5 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.yomiuri.co.jp/economy/20260108-GYT1T00337/" target="_blank">Yomiuri Shimbun — ANA builds drone logistics network (Jan 2026)</a>
+          <a class="source-link" href="https://japantoday.com/category/business/ana-to-enter-drone-delivery-business-by-fy-2028-with-eye-on-remote-islands" target="_blank">Japan Today / Kyodo — ANA drone delivery by FY2028</a>
+          <a class="source-link" href="https://payloadasia.com/2026/03/ana-hd-completes-long-distance-medical-supply-drone-delivery-trials-okinawa/" target="_blank">Payload Asia — ANA Okinawa medical drone trials (Mar 2026)</a>
+          <a class="source-link" href="https://www.thedronegirl.com/2025/11/21/skyways/" target="_blank">The Drone Girl — Inside Skyways (Nov 2025)</a>
+          <a class="source-link" href="https://www.thedronegirl.com/2025/12/02/skyways-roadmap-cargo-drones-human-flight/" target="_blank">The Drone Girl — From cargo to commuters (Dec 2025)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card highlight" data-category="milestone">
+        <div class="event-dot milestone"></div>
+        <div class="event-content">
+          <span class="event-date">Nov 2025</span>
+          <div class="event-title">Stealth Exit — Public Emergence</div>
+          <div class="event-detail">First-ever press Demo Day near Austin. Journalist Sally French of The Drone Girl watched V2 and V3 fly from a &#x27;cow-dotted field&#x27; beside a converted trailer hangar. Her two-part feature became the definitive company profile. After 8 years of near-total obscurity, Skyways entered the public conversation. Coverage remains concentrated in drone trade media; mainstream tech, defense, and business press largely unaware.</div>
+          <div class="event-meta">
+            <span class="event-tag milestone">Milestone</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">3 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.thedronegirl.com/2025/11/21/skyways/" target="_blank">The Drone Girl — Inside Skyways aspirations (Nov 2025)</a>
+          <a class="source-link" href="https://www.thedronegirl.com/2025/12/02/skyways-roadmap-cargo-drones-human-flight/" target="_blank">The Drone Girl — From cargo to commuters roadmap (Dec 2025)</a>
+          <a class="source-link" href="https://www.kxan.com/news/austin-aviation-company-looking-to-scale-autonomous-drones/" target="_blank">KXAN Austin/NBC — Austin aviation company scaling drones (Nov 2025)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="year-section">
+    <div class="year-label-col"><div class="year-label">2026</div></div>
+    <div class="events-col">
+      <div class="event-card" data-category="milestone">
+        <div class="event-dot milestone"></div>
+        <div class="event-content">
+          <span class="event-date">Jan 2026</span>
+          <div class="event-title">Leadership Team Expansion</div>
+          <div class="event-detail">Key hires: Jeff Weinstein (VP Production), Bill Wimberley (CCO), Gabrielle Wain (VP Regulatory, ex-Zipline/Iris Automation), Mike Uffelman (Head of Flight Ops, ex-USAF, 2,500+ mil flight hrs). Company finished 2025 at approximately 39 employees (verify with Anthony). Plans to double headcount in 2026.</div>
+          <div class="event-meta">
+            <span class="event-tag milestone">Milestone</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">3 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://www.statesman.com/business/technology/article/austin-skyways-autonomous-drone-aircraft-21311896.php" target="_blank">Austin American-Statesman — In-depth Skyways profile (Feb 2026)</a>
+          <a class="source-link" href="https://dronexl.co/2026/02/07/skyways-autonomous-drone-fleet/" target="_blank">DroneXL — Skyways Plans Worlds Largest Fleet (Feb 2026)</a>
+          <a class="source-link" href="https://www.globenewswire.com/news-release/2026/01/22/3223911/0/en/Skyways-Strengthens-Leadership-Team-to-Accelerate-Rapid-Growth.html" target="_blank">GlobeNewswire — Skyways Strengthens Leadership (Jan 2026)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card" data-category="milestone">
+        <div class="event-dot milestone"></div>
+        <div class="event-content">
+          <span class="event-date">Mar 2026</span>
+          <div class="event-title">ANA Completes Okinawa Medical Delivery Trials</div>
+          <div class="event-detail">Long-distance pharmaceutical and blood sample deliveries across Okinawa Prefecture under Japan MLIT. ANA targets commercial drone delivery across APAC by FY2027–2029, a significant international commercial growth vector. Developing dedicated Skyways pilot training program.</div>
+          <div class="event-meta">
+            <span class="event-tag milestone">Milestone</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">2 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://payloadasia.com/2026/03/ana-hd-completes-long-distance-medical-supply-drone-delivery-trials-okinawa/" target="_blank">Payload Asia — ANA completes Okinawa trials (Mar 2026)</a>
+          <a class="source-link" href="https://japantoday.com/category/business/ana-to-enter-drone-delivery-business-by-fy-2028-with-eye-on-remote-islands" target="_blank">Japan Today — ANA drone delivery by FY2028</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="event-card upcoming" data-category="product">
+        <div class="event-dot product"></div>
+        <div class="event-content">
+          <span class="event-date">H2 2026</span>
+          <div class="event-title">V3 Production Ramp Begins</div>
+          <div class="event-detail">V3 Block 2 (production-intent) expected in service H2 2026. Program of Record designation in progress. Scaling from ~39 employees to full-rate manufacturing is the fundamental execution challenge. Hybrid VTOL drone market projected to grow from $1.34B (2024) to $14.4B by 2034.</div>
+          <div class="event-meta">
+            <span class="event-tag product">Upcoming</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">2 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://dronexl.co/2026/02/07/skyways-autonomous-drone-fleet/" target="_blank">DroneXL — Skyways Autonomous Drone Fleet (Feb 2026)</a>
+          <a class="source-link" href="https://a-drones.com/news/skyways-air-transportation-plans-world-s-largest-autonomous-drone-fleet-with-37m-air-force-backing/" target="_blank">ADrones — Skyways Plans Largest Fleet (Feb 2026)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="year-section">
+    <div class="year-label-col"><div class="year-label">2027</div></div>
+    <div class="events-col">
+      <div class="event-card upcoming" data-category="product">
+        <div class="event-dot product"></div>
+        <div class="event-content">
+          <span class="event-date">End of 2027</span>
+          <div class="event-title">V3 Full-Rate Production Target</div>
+          <div class="event-detail">Full-rate V3 production targeted with Program of Record designation complete. Pentagon FY2026 budget: $9.4B for aerial drones, $13.4B for AI/autonomous systems. Defense-tech VC hit record $49.1B in 2025. Success depends on production execution, Chinese supply chain decoupling (battery cells), and sustained procurement momentum.</div>
+          <div class="event-meta">
+            <span class="event-tag product">Upcoming</span>
+        <div class="sources-trigger" onclick="toggleSources(this)">
+          <span class="sources-label">2 SOURCES</span>
+          <span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>
+          <div class="sources-menu">
+          <a class="source-link" href="https://dronexl.co/2026/02/07/skyways-autonomous-drone-fleet/" target="_blank">DroneXL — Skyways Autonomous Drone Fleet (Feb 2026)</a>
+          <a class="source-link" href="https://a-drones.com/news/skyways-air-transportation-plans-world-s-largest-autonomous-drone-fleet-with-37m-air-force-backing/" target="_blank">ADrones — Skyways Plans Largest Fleet (Feb 2026)</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer"><div class="footer-inner">
+  <div class="footer-note">All data sourced from publicly available information. Hover &#8220;Sources&#8221; on any event for direct links. Compiled March 2026.</div>
+  <img class="footer-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NzUuMzkgMTk5LjkxIj4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiAjYzJmMjEzOwogICAgICB9CgogICAgICAuY2xzLTEsIC5jbHMtMiB7CiAgICAgICAgc3Ryb2tlLXdpZHRoOiAwcHg7CiAgICAgIH0KCiAgICAgIC5jbHMtMiB7CiAgICAgICAgZmlsbDogIzExMWUyNjsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPGc+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik01NjcuNDEsNzEuNTdsLTIyLjE5LDY1LjI3Yy0uNzMsMi4xNi0yLjc2LDMuNjEtNS4wNSwzLjYxaC0xMS40N2w0LjM5LTEyLjg2LTE5LjA0LTU2LjAyaDE1LjNsMTEuMzksMzUuNywxMS4zOS0zNS43aDE1LjI4WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMjYxLjA3LDk4LjI1Yy0xLjU5LTIuNC0zLjUxLTQuMzUtNS43LTUuNzktMi4xNy0xLjQzLTQuNC0yLjQ4LTYuNjEtMy4xNC0yLjE3LS42NC0zLjg5LTEuMDktNS4xLTEuMzMtNC4wOS0xLjA0LTcuNC0xLjg5LTkuOTMtMi41Ni0yLjQ5LS42Ni00LjQ2LTEuMzItNS44NS0xLjk4LTEuMzItLjYyLTIuMjEtMS4yOC0yLjY0LTEuOTgtLjQzLS43LS42NS0xLjY0LS42NS0yLjgxLDAtMS4yOC4yOC0yLjM0LjgyLTMuMTYuNTYtLjg0LDEuMjktMS41NiwyLjE3LTIuMTIuODgtLjU3LDEuODgtLjk3LDIuOTYtMS4yLDIuODUtLjYsNS43NS0uMzksOC4xNC4wOSwxLjQyLjI5LDIuNy43OSwzLjc5LDEuNDgsMS4wNy42OCwxLjk0LDEuNjIsMi41OSwyLjgxLjY2LDEuMiwxLjA1LDIuNzUsMS4xNyw0LjYxbC4wMy41NGgxNS4wNHYtLjU4YzAtMy44Ni0uNzUtNy4yLTIuMjItOS45My0xLjQ3LTIuNzItMy40OS00Ljk5LTUuOTktNi43NS0yLjQ5LTEuNzQtNS4zNy0zLjAyLTguNTctMy44LTUuOTEtMS40My0xMi40OS0xLjY5LTE4LjkyLjA1LTIuOTguODEtNS42OSwyLjA3LTguMDYsMy43NS0yLjM4LDEuNjktNC4zMywzLjgzLTUuOCw2LjM2LTEuNDgsMi41NS0yLjIzLDUuNTktMi4yMyw5LjAzLDAsMy4wOC41OSw1Ljc0LDEuNzYsNy45MiwxLjE2LDIuMTcsMi43MSw0LDQuNiw1LjQ1LDEuODYsMS40Myw0LjAxLDIuNjEsNi4zNywzLjUxLDIuMzQuODksNC43NiwxLjY1LDcuMTksMi4yNiwyLjM1LjY2LDQuNzMsMS4yOCw3LjA3LDEuODQsMi4yOC41NCw0LjM1LDEuMTgsNi4xNCwxLjksMS43NS43LDMuMTgsMS41OCw0LjI1LDIuNjIsMS4wMi45OSwxLjUyLDIuMjcsMS41MiwzLjg5LDAsMS41LS4zOSwyLjc1LTEuMTUsMy43MS0uOCwxLTEuODEsMS43OS0zLDIuMzYtMS4yMi41OC0yLjU1Ljk4LTMuOTUsMS4xOS0zLjUuNTEtNi41LjM5LTkuMzgtLjM2LTEuNjktLjQ0LTMuMTgtMS4xMi00LjQzLTIuMDEtMS4yMy0uODgtMi4yNC0yLjA2LTIuOTgtMy41aDBjLS43NS0xLjQzLTEuMTItMy4yMi0xLjEyLTUuMzJ2LS41OGgtMTUuMDd2LjU3Yy0uMDcsNC4xMS42OSw3LjcxLDIuMjUsMTAuNzEsMS41NiwzLDMuNyw1LjUsNi4zNSw3LjQzLDIuNjQsMS45Myw1LjcyLDMuMzYsOS4xNyw0LjI2LDMuNDIuODksNywxLjM1LDEwLjYzLDEuMzUsNC40OSwwLDguNTEtLjUzLDExLjkzLTEuNTgsMy40NC0xLjA1LDYuMzctMi41NSw4LjcxLTQuNDUsMi4zNS0xLjkxLDQuMTQtNC4yMSw1LjMzLTYuODUsMS4xOS0yLjYzLDEuNzktNS41MSwxLjc5LTguNTcsMC0zLjc2LS44Mi02LjktMi40My05LjM0WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDQ2LjU3LDcxLjU3bC0xMC4zLDM3Ljk1aC0uMjFsLTkuNTQtMzcuOTVoLTE0Ljk2bC05LjMzLDM4LjA3aC0uMjFsLTEwLjMtMzguMDdoLTE2LjI2bDE3Ljc3LDU2LjA2aDE1Ljk1bDkuNTQtMzcuNjNoLjIxbDkuOTcsMzcuNjNoMTUuODRsMTcuNjctNTYuMDZoLTE1Ljg0WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNjE2LjIzLDEwMy4wN2MtMS4wMS0xLjc4LTIuMzUtMy4yNS00LjAyLTQuNDUtMS42Ny0xLjE5LTMuNTYtMi4xNS01LjctMi44OC0yLjEzLS43Mi00LjMxLTEuMzMtNi41NS0xLjg0LTIuMTctLjUxLTQuMzEtLjk4LTYuNC0xLjQyLTIuMDktLjQzLTMuOTUtLjkyLTUuNTgtMS40Ni0xLjYyLS41NC0yLjk1LTEuMjUtMy45Ni0yLjEyLTEuMDEtLjg3LTEuNTEtMS45OC0xLjUxLTMuMzUsMC0xLjE2LjI4LTIuMDguODctMi43Ny41Ny0uNjksMS4yOC0xLjIsMi4xLTEuNTguODMtLjM2LDEuNzYtLjYsMi43Ny0uNywxLjAxLS4xMSwxLjk2LS4xNywyLjgzLS4xNywyLjc1LDAsNS4xMy41Myw3LjE1LDEuNTgsMi4wMywxLjA1LDMuMTUsMy4wNSwzLjM3LDYuMDJoMTQuNjRjLS4yOS0zLjQ4LTEuMTgtNi4zNS0yLjY2LTguNjItMS40OS0yLjI4LTMuMzQtNC4xMS01LjU4LTUuNDgtMi4yNS0xLjM3LTQuNzktMi4zNC03LjY1LTIuOTMtMi44NS0uNTctNS44LS44Ny04Ljg0LS44N3MtNiwuMjctOC44OS44MWMtMi44OS41NC01LjQ5LDEuNDktNy44MSwyLjgzLTIuMzEsMS4zNC00LjE2LDMuMTYtNS41OCw1LjQ3LTEuNDEsMi4zMi0yLjEyLDUuMjgtMi4xMiw4Ljg5LDAsMi40Ny41MSw0LjU0LDEuNTIsNi4yNCwxLjAxLDEuNywyLjM1LDMuMTIsNC4wMiw0LjIzLDEuNjcsMS4xMywzLjU2LDIuMDMsNS43LDIuNzEsMi4xMy42OSw0LjMxLDEuMjgsNi41NSwxLjc5LDUuNSwxLjE2LDkuNzgsMi4zMSwxMi44NSwzLjQ3LDMuMDcsMS4xNiw0LjYxLDIuODksNC42MSw1LjIxLDAsMS4zNy0uMzMsMi41MS0uOTgsMy40MS0uNjUuOS0xLjQ2LDEuNjMtMi40NCwyLjE3LS45OC41NC0yLjA2LjkzLTMuMjUsMS4xOS0xLjE5LjI1LTIuMzMuMzctMy40MS4zNy0xLjUyLDAtMi45OC0uMTgtNC40LS41NC0xLjQxLS4zNi0yLjY2LS45Mi0zLjc0LTEuNjgtMS4wOC0uNzctMS45Ny0xLjczLTIuNjYtMi45My0uNjktMS4xOS0xLjA0LTIuNjItMS4wNC00LjI5aC0xNC42M2MuMTUsMy43Ni45OSw2Ljg5LDIuNTQsOS4zOSwxLjU1LDIuNDksMy41NSw0LjQ5LDUuOTcsNi4wMSwyLjQyLDEuNTIsNS4xOSwyLjYxLDguMywzLjI1LDMuMTEuNjUsNi4yOS45OCw5LjU0Ljk4czYuMy0uMyw5LjM4LS45MmMzLjA3LS42MSw1LjgxLTEuNjgsOC4xOS0zLjIsMi4zOS0xLjUyLDQuMzEtMy41Miw1LjgtNi4wMiwxLjQ5LTIuNDksMi4yMy01LjU4LDIuMjMtOS4yNiwwLTIuNjEtLjUxLTQuOC0xLjUyLTYuNTZaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0zNzUuMjYsNzEuNTdsLTIyLjE5LDY1LjI3Yy0uNzMsMi4xNi0yLjc2LDMuNjEtNS4wNSwzLjYxaC0xMS40N2w0LjM5LTEyLjg2LTE5LjA0LTU2LjAyaDE1LjNsMTEuMzksMzUuNywxMS4zOS0zNS43aDE1LjI4WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNTEwLjk4LDc3LjgxYy0xLjUyLTIuMDYtMy40Ny0zLjY3LTUuODUtNC44My0yLjM5LTEuMTYtNS4wMy0xLjk0LTcuOTEtMi4zMy0yLjg5LS4zOS01Ljc1LS42LTguNTgtLjYtMy4xMSwwLTYuMTkuMy05LjI2LjkyLTMuMDcuNjEtNS44NCwxLjY0LTguMywzLjA4LTIuNDYsMS40NS00LjQ5LDMuMzctNi4wOCw1Ljc1LTEuNTksMi4zOS0yLjQ5LDUuMzgtMi43MSw5aDE1LjRjLjI5LTMuMDQsMS4zMS01LjIxLDMuMDQtNi41MiwxLjczLTEuMjksNC4xMi0xLjk1LDcuMTYtMS45NSwxLjM3LDAsMi42Ni4wOSwzLjg1LjI3LDEuMTkuMTgsMi4yNC41NCwzLjE0LDEuMDguOTEuNTUsMS42MywxLjMxLDIuMTcsMi4yOC44OSwxLjYyLDEuNjQsNS43NS0uNiw3LjU5LTEuMDEuODMtMi4zOSwxLjQ2LTQuMTIsMS45LTEuNzMuNDMtMy43My43NS01Ljk3Ljk3LTIuMjQuMjMtNC41MS41Mi02LjgzLjg4LTIuMzEuMzYtNC42Ljg0LTYuODksMS40Ni0yLjI3LjYxLTQuMywxLjUzLTYuMDcsMi43Ni0xLjc4LDEuMjQtMy4yMiwyLjg4LTQuMzQsNC45NC0xLjExLDIuMDYtMS42OCw0LjY4LTEuNjgsNy44NiwwLDIuODkuNSw1LjM5LDEuNDYsNy40OC45OCwyLjA5LDIuMzMsMy44Myw0LjA2LDUuMiwxLjc0LDEuMzcsMy43NiwyLjM5LDYuMDgsMy4wNCwyLjMyLjY1LDQuODEuOTgsNy40OC45OCwzLjQ3LDAsNi44Ny0uNTEsMTAuMTktMS41MiwzLjA0LS45Miw1LjcyLTIuNDgsOC4wMy00LjY4djQuNzZsMTUuNC4wMnYtNDEuNjNjMC0zLjQtLjc1LTYuMTItMi4yNy04LjE4Wk00OTcuODYsMTA1Ljk0YzAsLjg3LS4wOSwyLjAzLS4yNywzLjQ3LS4xOCwxLjQ1LS42NiwyLjg3LTEuNDYsNC4yOS0uOCwxLjQxLTIuMDMsMi42MS0zLjY4LDMuNjItMS42NywxLjAxLTQuMDIsMS41Mi03LjA2LDEuNTItMS4yMywwLTIuNDItLjExLTMuNTgtLjMzLTEuMTUtLjIxLTIuMTYtLjYtMy4wMy0xLjE0LS44Ny0uNTQtMS41NS0xLjI4LTIuMDYtMi4yMi0uNTEtLjk1LS43Ny0yLjEtLjc3LTMuNDgsMC0xLjQ0LjI2LTIuNjMuNzctMy41OC41MS0uOTMsMS4xNy0xLjcxLDItMi4zMy44My0uNjEsMS44LTEuMSwyLjkzLTEuNDYsMS4xMy0uMzYsMi4yNi0uNjUsMy40MS0uODcsMS4yNC0uMjEsMi40Ni0uMzksMy42OS0uNTQsMS4yMy0uMTUsMi40LS4zMywzLjUyLS41NCwxLjEzLS4yMywyLjE3LS41LDMuMTUtLjgxLjk3LS4zMywxLjc5LS43OCwyLjQzLTEuMzZ2NS43NVoiLz4KICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIzMDAuMTcgOTkuNTUgMzIxLjY4IDEyNy41OCAzMDQuNyAxMjcuNTggMjg0LjMyIDk5LjU1IDMwNC43IDcxLjUxIDMyMS42OCA3MS41MSAzMDAuMTcgOTkuNTUiLz4KICAgIDxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iMjY4LjkyIiB5PSI2MC4yMiIgd2lkdGg9IjE1LjQiIGhlaWdodD0iNjcuNDEiLz4KICA8L2c+CiAgPGc+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik01Ny42Myw5OS45NXYtMTkuMzNjMC0uNTcuNDctMS4wMiwxLjA0LTEuMDIsMjkuMjQsMCw0Mi44MSwwLDcyLjIzLDAsMi45MiwwLDUuNDEtMS4wOSw3LjQ4LTMuMjgsMS45Ny0yLjA4LDMuOTUtNC4xNSw1Ljg3LTYuMjgsMi43MS0yLjk5LDUuNi01LjcxLDkuMTUtNy41MywyLjgzLTEuNDUsNS43OC0yLjkzLDguOTItMy4wMiwyLjg2LS4wOCwxMC40OC0uMDIsMTMuMzMsMCwuODYsMCwuODcuMzQuODcuOTQsMCw2LjQ3LDAsMTIuOTQsMCwxOS40MXEwLC45OS0uOTMuOTljLTEwLjI2LDAtMjUuMzIsMC0zNS41OCwwLTIuNzksMC01LjI1Ljk5LTcuMjYsMy4wOS0yLjM3LDIuNDctNC43Myw0Ljk2LTcuMDMsNy41MS01Ljg4LDYuNS0xMy4wMSw5LjU5LTIxLjQ5LDkuNTctMjAuNTMtLjA3LTI1LjI5LS4wNC00NS41Ny0uMDMtLjU3LDAtMS4wNC0uNDYtMS4wNC0xLjAyWiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTc2LjUzLDk5Ljk2djE5LjMzYzAsLjU3LS40NywxLjAyLTEuMDQsMS4wMi0yOS4yNCwwLTQyLjgxLDAtNzIuMjMsMC0yLjkyLDAtNS40MSwxLjA5LTcuNDgsMy4yOC0xLjk3LDIuMDgtMy45NSw0LjE1LTUuODcsNi4yOC0yLjcxLDIuOTktNS42LDUuNzEtOS4xNSw3LjUzLTIuODMsMS40NS01Ljc4LDIuOTMtOC45MiwzLjAyLTIuODYuMDgtMTAuNDguMDItMTMuMzMsMC0uODYsMC0uODctLjM0LS44Ny0uOTQsMC02LjQ3LDAtMTIuOTQsMC0xOS40MXEwLS45OS45My0uOTljMTAuMjYsMCwyNS4zMiwwLDM1LjU4LDAsMi43OSwwLDUuMjUtLjk5LDcuMjYtMy4wOSwyLjM3LTIuNDcsNC43My00Ljk2LDcuMDMtNy41MSw1Ljg4LTYuNSwxMy4wMS05LjU5LDIxLjQ5LTkuNTcsMjAuNTMuMDcsMjUuMjkuMDQsNDUuNTcuMDMuNTcsMCwxLjA0LjQ2LDEuMDQsMS4wMloiLz4KICA8L2c+Cjwvc3ZnPg==" alt="Skyways">
+</div></div>
+
+<div class="press-contact"><div class="press-contact-inner">
+  Contact: Shae Wilson &#124; Director of Marketing
+</div></div>
+
+<div class="bottom-bar"><div class="bottom-bar-inner">
+  <div class="bottom-bar-text">SKYWAYS AIR TRANSPORTATION INC. &#183; AUSTIN, TX</div>
+  <div class="bottom-bar-text">INFORMATION FOR PUBLIC USE</div>
+</div></div>
+
+<script>
+  // ═══ FILTER SYSTEM ═══
+  var activeFilter = null;
+  var categoriesTagged = false;
+
+  function toggleFilter(category) {
+    var cards = document.querySelectorAll('[class*="event-card"]');
+    var sections = document.querySelectorAll('[class*="year-section"]');
+    var items = document.querySelectorAll('[data-filter]');
+
+    // Tag categories once
+    if (!categoriesTagged) {
+      for (var t = 0; t < cards.length; t++) {
+        var dot = cards[t].querySelector('[class*="event-dot"]');
+        if (dot) {
+          var cl = dot.className || '';
+          if (cl.indexOf('contracts') !== -1) cards[t].setAttribute('data-category', 'contracts');
+          else if (cl.indexOf('product') !== -1) cards[t].setAttribute('data-category', 'product');
+          else if (cl.indexOf('defense') !== -1) cards[t].setAttribute('data-category', 'defense');
+          else if (cl.indexOf('milestone') !== -1) cards[t].setAttribute('data-category', 'milestone');
+        }
+      }
+      categoriesTagged = true;
+    }
+
+    if (activeFilter === category) {
+      // ── CLEAR FILTER ──
+      activeFilter = null;
+      for (var i = 0; i < items.length; i++) {
+        items[i].className = 'legend-item';
+        items[i].setAttribute('data-filter', items[i].getAttribute('data-filter'));
+      }
+      for (var i = 0; i < cards.length; i++) {
+        cards[i].style.display = '';
+        cards[i].style.opacity = '';
+        cards[i].style.pointerEvents = '';
+      }
+      for (var i = 0; i < sections.length; i++) {
+        sections[i].style.display = '';
+      }
+    } else {
+      // ── APPLY FILTER ──
+      activeFilter = category;
+
+      for (var j = 0; j < items.length; j++) {
+        var f = items[j].getAttribute('data-filter');
+        if (f === category) {
+          items[j].className = 'legend-item active-filter';
+        } else {
+          items[j].className = 'legend-item dimmed';
+        }
+      }
+
+      for (var k = 0; k < cards.length; k++) {
+        var cat = cards[k].getAttribute('data-category');
+        if (cat === category) {
+          cards[k].style.display = '';
+          cards[k].style.opacity = '';
+          cards[k].style.pointerEvents = '';
+        } else {
+          cards[k].style.display = 'none';
+        }
+      }
+
+      for (var s = 0; s < sections.length; s++) {
+        var visible = sections[s].querySelectorAll('[class*="event-card"]');
+        var anyVisible = false;
+        for (var v = 0; v < visible.length; v++) {
+          if (visible[v].style.display !== 'none') { anyVisible = true; break; }
+        }
+        sections[s].style.display = anyVisible ? '' : 'none';
+      }
+    }
+  }
+  // ── Header scroll behavior ──
+  const header = document.getElementById('stickyHeader');
+  const heroWrapper = document.getElementById('heroWrapper');
+  const heroHeight = heroWrapper.offsetHeight;
+  let isMinimized = false;
+
+  heroWrapper.style.height = heroHeight + 'px';
+
+  function updateHeader() {
+    const shouldMinimize = window.scrollY > 30;
+    if (shouldMinimize === isMinimized) return;
+    isMinimized = shouldMinimize;
+    if (isMinimized) {
+      header.classList.add('minimized');
+      heroWrapper.style.height = '0px';
+    } else {
+      header.classList.remove('minimized');
+      heroWrapper.style.height = heroHeight + 'px';
+    }
+    const offset = isMinimized ? '175px' : (heroHeight + 170) + 'px';
+    document.querySelectorAll('.year-label').forEach(l => l.style.top = offset);
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { updateHeader(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateHeader();
+
+  // ── Sources menu ──
+  var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  function closeAllSourceMenus(except) {
+    document.querySelectorAll('.sources-trigger').forEach(function(t) {
+      if (t !== except) {
+        var m = t.querySelector('.sources-menu');
+        if (m) m.classList.remove('active');
+        t.classList.remove('active');
+      }
+    });
+  }
+
+  document.querySelectorAll('.sources-trigger').forEach(function(trigger) {
+    var menu = trigger.querySelector('.sources-menu');
+    var card = trigger.closest('[class*="event-card"]');
+
+    if (isTouchDevice) {
+      // Touch: toggle on tap, but allow source link clicks through
+      trigger.addEventListener('click', function(e) {
+        var link = e.target.closest('.source-link');
+        if (link && link.href && link.href !== '#' && !link.href.endsWith('#')) {
+          // Let the link navigate naturally
+          return;
+        }
+        e.preventDefault();
+        e.stopPropagation();
+        var isOpen = menu.classList.contains('active');
+        closeAllSourceMenus();
+        if (!isOpen) {
+          menu.classList.add('active');
+          trigger.classList.add('active');
+        }
+      });
+    } else {
+      // Desktop: open on hover, close on card leave
+      trigger.addEventListener('mouseenter', function() {
+        menu.classList.add('active');
+        trigger.classList.add('active');
+      });
+      if (card) {
+        card.addEventListener('mouseleave', function() {
+          menu.classList.remove('active');
+          trigger.classList.remove('active');
+        });
+      }
+    }
+  });
+
+  // Touch: close on tap outside
+  if (isTouchDevice) {
+    document.addEventListener('click', function() {
+      closeAllSourceMenus();
+    });
+
+    // Touch: close on scroll
+    window.addEventListener('scroll', function() {
+      closeAllSourceMenus();
+    }, { passive: true });
+  }
+</script>
+
+</body>
+</html>
