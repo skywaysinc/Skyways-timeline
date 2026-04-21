@@ -971,6 +971,25 @@
     "date_display": "2025-09"
   },
   {
+    "id": 113,
+    "year": "2025",
+    "date": "2025-03",
+    "title": "Navy LP-CRADA | Aircraft Lease Agreement (V2 AV1-3)",
+    "category": "contracts",
+    "detail": "U.S. Navy and Skyways signed a Lease Program Cooperative Research and Development Agreement (LP-CRADA) effective March 18, 2025. Under this agreement, the Navy gives Skyways formal custody of three Navy-owned V2 aircraft (AV1, AV2, AV3) for use in the V2 aircraft program. Skyways must track every configuration change so the aircraft can be returned to their original Navy-owned state at end of agreement. This is a non-monetary lease arrangement (not a fixed-price development contract), but it represents an active formal Navy partnership separate from the BWUAS 2.0 contract (N00421-23-9-0013) and the original Blue Water OTA (N00421-19-9-0007).",
+    "tag": "Contract — U.S. Navy",
+    "sources": [
+      "Skyways Internal — Navy LP-CRADA agreement signed March 18, 2025 by Charles Acknin (lease arrangement for Navy aircraft AV1-3, no dollar value, not publicly disclosed)"
+    ],
+    "source_urls": {},
+    "sort_date": "2025-03",
+    "source_thumbnails": {
+      "Skyways (V2 aboard ship)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
+    },
+    "thumbnail_status": "fallback_v2_ship",
+    "date_display": "2025-03"
+  },
+  {
     "id": 39,
     "year": "2025",
     "date": "2025-02",
