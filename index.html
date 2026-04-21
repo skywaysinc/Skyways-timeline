@@ -547,11 +547,16 @@
     display: flex; flex-direction: column; align-items: flex-start;
     position: relative; cursor: default;
   }
-  /* Hover-to-open zone should match the actual text, not the full-width
-     grid cell. We scope hover to the value/label elements and the menu
-     itself (plus its invisible bridge pseudo-element) — see the visibility
-     rule below that uses the `~` sibling combinator. */
-  .stat-value, .stat-label { cursor: pointer; }
+  /* Hover-to-open zone is the text ink only, not the full-width grid
+     cell. Explicit width:max-content guarantees the value/label boxes
+     shrink to their rendered text across all browsers (some treat block
+     children of a flex column as full cross-axis width even with
+     align-items: flex-start). */
+  .stat-value, .stat-label {
+    cursor: pointer;
+    width: max-content;
+    max-width: 100%;
+  }
   /* Stacking bump while the tap-opened menu is displayed so the drawer
      wins against any later-painted sibling stat's drawer. Hover-opened
      menus don't need this since only one can be hovered at a time. */
@@ -609,10 +614,15 @@
     color: var(--navy);
     text-decoration: underline;
   }
-  /* Make non-contracts stat-menus wide enough to fit source link text */
+  /* Non-contracts drawers are sized to fit inside a single stat cell at
+     desktop (~262px at 1440px, ~180px at 1024px) so the drawer visually
+     sits under the stat it belongs to — it was 280px and would spill
+     into the neighbouring stat column. Source links wrap onto multiple
+     lines if they exceed the width; that's acceptable for the occasional
+     long URL. */
   .stat-menu:not(.contracts-table) {
-    min-width: 280px;
-    max-width: 360px;
+    min-width: 220px;
+    max-width: 260px;
   }
 
   /* Wider variant: $46M+ contracts breakdown table.
