@@ -1271,12 +1271,12 @@
     /* Spans full card width via negative horizontal margins that cancel
        the card's padding. Left margin matches the enlarged left padding
        that makes room for the category accent bar (24px / 28px highlight
-       / 20px mobile / 22px mobile highlight). Banner sits above the bar
-       visually via z-index since the bar is z-index:2 — the banner's own
-       relative layer without z-index lets the bar's bottom-left rounded
-       corner show through cleanly at the intersection. */
+       / 20px mobile / 22px mobile highlight). Positive top margin pushes
+       the banner clear of the .event-meta row above (tag + sources
+       dropdown) — the previous -4px pulled the banner up and overlapped
+       the source label and tag pill. */
     grid-column: 1 / -1;
-    margin: -4px -20px -16px -24px;
+    margin: 14px -20px -16px -24px;
     padding: 6px 20px;
     background: #d93025;
     color: #fff;
@@ -1287,7 +1287,7 @@
     line-height: 1.2;
   }
   .event-card.highlight .internal-banner {
-    margin: -4px -24px -20px -28px;
+    margin: 18px -24px -20px -28px;
     padding: 8px 24px;
     border-radius: 0 0 10px 10px;
   }
