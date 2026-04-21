@@ -104,7 +104,7 @@
     "id": 5,
     "year": "2017",
     "date": "2017-05",
-    "title": "Moved Into Manor Office, 5,000 Square Feet",
+    "title": "Manor Office | 5,000 SF Expansion",
     "category": "milestone",
     "detail": "First official Skyways office and shop in Manor, TX at 5,000 square feet. Replaced the temporary Firefly shared space with a dedicated facility for aircraft development.",
     "tag": "Internal",
@@ -148,7 +148,7 @@
     "title": "USMC/GTRI | First Purchase Order for Two V2.2 Aircraft",
     "category": "contracts",
     "detail": "The United States Marine Corps (USMC), in partnership with the Georgia Institute of Technology / Georgia Tech Research Institute (GTRI), issued Skyways' very first purchase order for two V2.2 aircraft under federal prime contract FA8075-14-D-0018-0018 (USAF AFLCMC). PO #0000441708 (Nov 2, 2017): two V2.2 UAS, integration and flight tests, USMC training, test support, crating and shipping. PO #0000498568 (Jun 1, 2018): CDR Preparation, CDR Execution, two sets aircraft containers and auxiliary equipment containers. Combined value $272,711.48 across the two POs. This was Skyways' first-ever contract and a critical early validation of the platform's readiness for military customers.",
-    "tag": "Contract — USMC",
+    "tag": "Contract | USMC",
     "sources": [
       "Skyways Internal — Charles Acknin",
       "Skyways Internal — GTRI POs #0000441708 ($213,967.48, Nov 2, 2017) + #0000498568 ($58,744.00, Jun 1, 2018) under FA8075-14-D-0018-0018, not publicly disclosed"
@@ -172,7 +172,7 @@
     "title": "ANTX 2019 | Skyways Beats Boeing in Navy Competition",
     "category": "defense",
     "detail": "Skyways won the Advanced Naval Technology Exercise (ANTX) 2019 competition organized by the U.S. Navy to demonstrate autonomous cargo resupply to a naval vessel on the Patuxent River, MD. The 18.5-ft wingspan drone carried a 20-lb payload 40 miles to a moving vessel, landed, and returned autonomously. Skyways was selected out of 65 companies, beating Boeing's offering.",
-    "tag": "Defense — U.S. Navy",
+    "tag": "Defense | U.S. Navy",
     "sources": [
       "Inside Unmanned Systems",
       "Commercial UAV News (May 2020)"
@@ -195,7 +195,7 @@
     "title": "Navy OTA Contract Awarded | Blue Water Maritime Logistics UAS",
     "category": "contracts",
     "detail": "Following the ANTX 2019 competition win, the U.S. Navy awarded an Other Transaction Authority (OTA) contract to Skyways ($575,141 base) for the Blue Water Maritime Logistics Unmanned Aircraft System (UAS) program. Contract number N00421-19-9-0007, awarded August 29, 2019 by NAWCAD. This first Navy contract specifically funded the development of hybrid propulsion for the V2 platform. Through subsequent modifications including P00003 (Spiral Dev V2.6, Sep 2020), P00005 (AV3, Dec 2020), P00006 (SATCOM Link, Jan 2022), and P00007 (extension and SLINs, Jul 2022), the funded value grew to $2,066,701.73 by July 2022 (Total Potential Amount including CMG Fee: $2,476,005.91).",
-    "tag": "Contract — U.S. Navy",
+    "tag": "Contract | U.S. Navy",
     "sources": [
       "NASC (Naval Aviation Systems Consortium) — N00421-19-9-0007",
       "Janes (2020)",
@@ -222,7 +222,7 @@
     "date": "2019-10",
     "title": "V2 Platform Development Accelerates",
     "category": "product",
-    "detail": "Original Navy requirements drove V2 specs: 20-lb payload (one cubic foot cargo volume) or approximately 400 nautical mile range. Payload and range represent a tradeoff — maximum payload reduces range and vice versa. Hybrid fixed-wing design with 8 electric motors for Vertical Takeoff and Landing (VTOL) plus internal combustion engine for cruise flight. The platform iterates through sub-variants (V2.2, V2.5, V2.6, V2.6b) over subsequent years.",
+    "detail": "Original Navy requirements drove V2 specs: 20-lb payload (one cubic foot cargo volume) or approximately 400 nautical mile range. Payload and range represent a tradeoff: maximum payload reduces range and vice versa. Hybrid fixed-wing design with 8 electric motors for Vertical Takeoff and Landing (VTOL) plus internal combustion engine for cruise flight. The platform iterates through sub-variants (V2.2, V2.5, V2.6, V2.6b) over subsequent years.",
     "tag": "Product",
     "sources": [
       "Commercial UAV News (May 2020)",
@@ -244,8 +244,8 @@
     "date": "2022-12",
     "title": "End of Navy OTA Spiral Development | Follow-on Contracts",
     "category": "contracts",
-    "detail": "After the initial hybrid propulsion contract, the Navy Other Transaction Authority (OTA) expanded through multiple spiral development follow-on awards, growing to approximately four times its original value (approximately $2.3M). These follow-on awards funded progressive capability demonstrations including folding wings development and increasingly complex ship-based operations.",
-    "tag": "Contract — U.S. Navy",
+    "detail": "After the initial hybrid propulsion contract, the Navy Other Transaction Authority (OTA) expanded through multiple spiral development follow-on awards, growing to approximately four times its original value ($2.07M). These follow-on awards funded progressive capability demonstrations including folding wings development and increasingly complex ship-based operations.",
+    "tag": "Contract | U.S. Navy",
     "sources": [
       "Janes (Nov 2021)",
       "USNI News (Aug 2021)"
@@ -268,7 +268,7 @@
     "id": 12,
     "year": "2020",
     "date": "2020-04",
-    "title": "V2 Flight Testing & Continuous Iteration",
+    "title": "V2 Flight Test Campaign | V2.2 → V2.6b Sub-Variants",
     "category": "product",
     "detail": "Continuous refinement through sub-variants (V2.2, V2.5, V2.6, V2.6b). Flight testing near Giddings, TX with progressive capability additions driven by Navy operational requirements.",
     "tag": "Product",
@@ -294,7 +294,7 @@
     "title": "Carrier Deck Trials | USS Gerald R. Ford (CVN-78)",
     "category": "defense",
     "detail": "Two weeks of autonomous Vertical Takeoff and Landing (VTOL) operations on the Navy's newest and most advanced aircraft carrier. V2.5 drone tested on the flight deck of USS Gerald R. Ford. Demonstrated the ability to operate from a carrier environment with hybrid-electric design, AI-driven flight system, 500-mile range, and 30-lb payload capacity. After evaluating 65 candidate Unmanned Aircraft Systems (UAS) in 2019, the Navy selected Skyways for its ability to carry 24 pounds of cargo up to 65 miles, covering roughly 80% of critical spare parts needs.",
-    "tag": "Defense — U.S. Navy",
+    "tag": "Defense | U.S. Navy",
     "sources": [
       "The War Zone (Feb 2021)",
       "USNI News (Aug 2021)",
@@ -322,7 +322,7 @@
     "title": "SBIR Phase I | $47,775",
     "category": "contracts",
     "detail": "Small Business Innovation Research (SBIR) Phase I under topic AF203-CSO1, contract number FA8649-21-P-0539, project title 'Autonomous transportation using AI and a long-range vertical-lift UAS'. Award period February 4, 2021 to May 7, 2021. This $47,775 Phase I award began the Air Force Works (AFWERX) SBIR pathway that would eventually lead to the USAF awarding Skyways a $37M contract.",
-    "tag": "Contract — U.S. Air Force",
+    "tag": "Contract | U.S. Air Force",
     "sources": [
       "SBIR.gov — Award #191434"
     ],
@@ -368,7 +368,7 @@
     "id": 16,
     "year": "2021",
     "date": "2021-04",
-    "title": "Moved Into Austin Cross Park Drive, 10,000 Square Feet",
+    "title": "Cross Park Drive | 10,000 SF Austin Facility",
     "category": "milestone",
     "detail": "Facility expansion to 10,000 square feet on Cross Park Drive in Austin to support Navy contract execution and growing team.",
     "tag": "Internal",
@@ -390,7 +390,7 @@
     "title": "V3 Initial Concept",
     "category": "product",
     "detail": "Skyways begins initial concept work on the V3 next-generation platform. Current performance estimates target 157 nautical miles range with 100 lbs payload, or approximately 35 lbs cargo at 1,000 nautical miles, representing a significant leap in capability over the V2.",
-    "tag": "Product — V3",
+    "tag": "Product | V3",
     "sources": [
       "Skyways Internal — Charles Acknin"
     ],
@@ -437,8 +437,8 @@
     "date": "2022-02",
     "title": "DIU/USN Blue Water Maritime Logistics UAS Contract",
     "category": "contracts",
-    "detail": "Skyways secured a contract through the Defense Innovation Unit (DIU) for the Blue Water Maritime Logistics UAS program in partnership with the U.S. Navy, Naval Air Warfare Center Aircraft Division (NAWCAD), and Military Sealift Command. The award contract was directly issued by Army Contracting Command, New Jersey (ACC-NJ). Base contract $1,429,587.50 (Feb 3, 2022). Through subsequent modifications including P00001 (Temperature Controlled Payload, Nov 2022), P00006 (SATCOM), and P00004 (III MEF demonstration, Mar 2024, +$145,161.72), the funded value grew to $1,807,149.22 as of March 2024. The Blue Water program targets delivery of payloads up to 50 pounds across distances of 250 miles for ship-based logistics — addressing approximately 95% of critical parts needs by weight. DIU partnered with the 4th Fleet and Marine Corps Warfighting Laboratory to develop computer vision technology enabling autonomous navigation and intelligent landing without beacon assistance.",
-    "tag": "Contract — DIU / U.S. Navy",
+    "detail": "Skyways secured a contract through the Defense Innovation Unit (DIU) for the Blue Water Maritime Logistics UAS program in partnership with the U.S. Navy, Naval Air Warfare Center Aircraft Division (NAWCAD), and Military Sealift Command. The award contract was directly issued by Army Contracting Command, New Jersey (ACC-NJ). Base contract $1,429,587.50 (Feb 3, 2022). Through subsequent modifications including P00001 (Temperature Controlled Payload, Nov 2022), P00006 (SATCOM), and P00004 (III MEF demonstration, Mar 2024, +$145,161.72), the funded value grew to $1,807,149.22 as of March 2024. The Blue Water program targets delivery of payloads up to 50 pounds across distances of 250 miles for ship-based logistics, addressing approximately 95% of critical parts needs by weight. DIU partnered with the 4th Fleet and Marine Corps Warfighting Laboratory to develop computer vision technology enabling autonomous navigation and intelligent landing without beacon assistance.",
+    "tag": "Contract | DIU / U.S. Navy",
     "sources": [
       "Skyways Internal — Charles Acknin",
       "Skyways Internal — Contract W15QKN-22-9-5005 (base $1,429,587.50 Feb 3, 2022; P00004 mod brought funded total to $1,807,149.22 as of Mar 20, 2024; not publicly disclosed)",
@@ -467,7 +467,7 @@
     "title": "SBIR Phase II | $749,711",
     "category": "contracts",
     "detail": "Air Force Works (AFWERX) Small Business Innovation Research (SBIR) Phase II under topic AF203-CSO1, contract number FA8649-22-P-0719, project title '12-Hour Continuous Inter-Unit Autonomous UAS Resupply'. Award period March 10, 2022 to June 12, 2023. Funds further development along the pathway that would eventually lead to the $37M Strategic Funding Increase (STRATFI) contract.",
-    "tag": "Contract — U.S. Air Force",
+    "tag": "Contract | U.S. Air Force",
     "sources": [
       "SBIR.gov — Award #195821"
     ],
@@ -488,7 +488,7 @@
     "title": "V3 Subscale | First Test Flights",
     "category": "product",
     "detail": "Skyways builds and flies a subscale version of the V3 platform, culminating in test flights in October 2022. This validates the aerodynamic design and hybrid propulsion concept before committing to full-scale development.",
-    "tag": "Product — V3",
+    "tag": "Product | V3",
     "sources": [
       "Skyways Internal — Charles Acknin"
     ],
@@ -539,7 +539,7 @@
     "title": "V3 Block 0 | Full-Scale First Flight",
     "category": "product",
     "detail": "The first full-scale V3 aircraft (Block 0) achieves its maiden flight. This is a major engineering milestone transitioning from subscale proof-of-concept to a flyable full-size platform.",
-    "tag": "Product — V3",
+    "tag": "Product | V3",
     "sources": [
       "Skyways Internal — Charles Acknin"
     ],
@@ -558,24 +558,19 @@
     "id": 24,
     "year": "2023",
     "date": "2023-04",
-    "title": "SkyNav Autonomous Software Platform Launches",
+    "title": "SkyNav Launch | Autonomous Multi-Aircraft Coordination",
     "category": "product",
     "detail": "Skyways launches SkyNav, its proprietary autonomous software platform that coordinates multi-aircraft operations and integrates with third-party Unmanned Traffic Management (UTM) systems. SkyNav becomes the ground control system used across all Skyways operations.",
     "tag": "Product",
     "sources": [
-      "Skyways Internal — Charles Acknin",
-      "sUAS News — Arkona Milestone Story (Nov 2025)"
+      "Skyways Internal — Charles Acknin"
     ],
     "charles_corrections": [
       "Round III: SkyNav started Q2 2023, not 2020 as previously stated."
     ],
-    "source_urls": {
-      "sUAS News — Arkona Milestone Story (Nov 2025)": "https://www.suasnews.com/2025/11/milestone-story-skyways-delivers-precision-under-pressure-with-historic-long-range-offshore-cargo-drop/"
-    },
+    "source_urls": {},
     "sort_date": "2023-04",
-    "source_thumbnails": {
-      "sUAS News — Arkona Milestone Story (Nov 2025)": "https://i0.wp.com/www.suasnews.com/wp-content/uploads/2025/11/skyways-windfarm.webp?fit=1200%2C672&ssl=1"
-    },
+    "source_thumbnails": {},
     "date_display": "2023-04"
   },
   {
@@ -585,7 +580,7 @@
     "title": "Navy NAWCAD BWUAS 2.0 Prototype Contract Awarded",
     "category": "contracts",
     "detail": "U.S. Navy Naval Air Warfare Center Aircraft Division (NAWCAD) awarded Skyways the Blue Water Maritime Logistics Unmanned Aircraft System 2.0 (BWUAS 2.0) Prototype Project contract through the Naval Aviation Systems Consortium (NASC). Effective May 4, 2023. This base contract follows on from the original 2019 Blue Water work and focuses on autonomous logistical replenishment from shore-to-ship, ship-to-ship, and ship-to-shore in operationally relevant environments. NAWCAD's Rapid Prototyping and Experimentation Division (RPED) leads the program in partnership with PMA-263. Subsequent modifications added work on Project ULTRA Demonstration (May 2025) and V3 Temperature Controlled Payload Development (May 2025).",
-    "tag": "Contract — U.S. Navy",
+    "tag": "Contract | U.S. Navy",
     "sources": [
       "Skyways Internal — Contract N00421-23-9-0013 ($479,052.96, effective May 4, 2023, not publicly disclosed)"
     ],
@@ -601,10 +596,10 @@
     "id": 25,
     "year": "2023",
     "date": "2023-06",
-    "title": "Fleet Battle Problem 23-1 | First Logistics Drone in a Fleet Exercise",
+    "title": "Fleet Battle Problem 23-1 | First Logistics Drone in a Navy Fleet Exercise",
     "category": "defense",
     "detail": "Autonomous flights from USNS Patuxent to Marines at Camp Lejeune, NC during Fleet Battle Problem 23-1. Skyways team worked with Naval Air Warfare Center Aircraft Division (NAWCAD), UX-24 Unmanned Test Squadron, United States Marine Corps (USMC), and Military Sealift Command (MSC). Five test flights with two drones demonstrating autonomous cargo delivery ship-to-shore and shore-to-ship.",
-    "tag": "Defense — U.S. Navy / USMC",
+    "tag": "Defense | U.S. Navy / USMC",
     "sources": [
       "DVIDS (Jun 2023)",
       "Potomac Officers Club (Jun 2023)"
@@ -627,7 +622,7 @@
     "title": "V3 Block 1 | Full-Scale First Flight",
     "category": "product",
     "detail": "V3 Block 1 (full scale) achieves first flight. Significant resources dedicated to V3 from mid-2023 onward. Block 1 incorporates lessons from Block 0 and prepares the platform for customer demonstrations.",
-    "tag": "Product — V3",
+    "tag": "Product | V3",
     "sources": [
       "Skyways Internal — Charles Acknin"
     ],
@@ -672,7 +667,7 @@
     "title": "USAF SBIR Phase 3 IDIQ Contract & STRATFI Selection",
     "category": "contracts",
     "detail": "After submitting the Strategic Funding Increase (STRATFI) package in approximately September 2023, United States Air Force (USAF) Air Force Works (AFWERX) issued a Request for Proposal (RFP) to Skyways in early 2024 to begin V3 development. On June 19, 2024, Skyways was awarded the basic SBIR Phase 3 Indefinite Delivery/Indefinite Quantity (IDIQ) contract FA228024D0003 with a 5-year ordering period and a Government Obligation to Order maximum of $4,999,999. The first Task Order FA228024F0013 was awarded simultaneously with initial obligations growing to approximately $2.2M through Mods #1 (Jun 24, 2024) and #2 (Jul 30, 2024). Mod #3 (Jan 6, 2025) extended CLIN performance dates without changing dollar value. In the same month as the IDIQ award, Skyways received notification it had been selected for STRATFI funding, which would ultimately be awarded as the $37M contract in May 2025.",
-    "tag": "Contract — U.S. Air Force",
+    "tag": "Contract | U.S. Air Force",
     "sources": [
       "SBIR.gov",
       "Skyways Internal — Contract FA228024D0003 / Task Order FA228024F0013 (~$2.2M obligated as of Jul 2024 across Mods #1 and #2; $4.99M IDIQ ceiling; not publicly disclosed)"
@@ -696,8 +691,8 @@
     "date": "2024-08",
     "title": "JMSDF | First Autonomous Resupply to Destroyer Akizuki",
     "category": "defense",
-    "detail": "Skyways conducts Japan's first autonomous Vertical Takeoff and Landing (VTOL) drone cargo resupply to a naval vessel at sea. From August 15–25, 2024, the Skyways V2.6, operated by ANA Holdings, delivered cargo including food supplies to the JMSDF destroyer DD-115 Akizuki, operating 23 kilometers offshore Minami-Boso, Chiba Prefecture. The V2.6 completed the fully autonomous round trip — launch, transit, deck landing on a moving ship, and return — in approximately 40 minutes with no human intervention. All flights conducted Beyond Visual Line of Sight (BVLOS). This marks Skyways' first operational engagement with an allied nation's navy.",
-    "tag": "Defense — JSDF (Japan)",
+    "detail": "Skyways conducts Japan's first autonomous Vertical Takeoff and Landing (VTOL) drone cargo resupply to a naval vessel at sea. From August 15–25, 2024, the Skyways V2.6, operated by ANA Holdings, delivered cargo including food supplies to the JMSDF destroyer DD-115 Akizuki, operating 23 kilometers offshore Minami-Boso, Chiba Prefecture. The V2.6 completed the fully autonomous round trip (launch, transit, deck landing on a moving ship, and return) in approximately 40 minutes with no human intervention. All flights conducted Beyond Visual Line of Sight (BVLOS). This marks Skyways' first operational engagement with an allied nation's navy.",
+    "tag": "Defense | JSDF (Japan)",
     "sources": [
       "Skyways Internal — Charles Acknin",
       "Skyways LinkedIn (video, Sep 25, 2024)",
@@ -716,9 +711,7 @@
       "Skyways LinkedIn (video, Sep 25, 2024)": "https://www.linkedin.com/posts/skyways-air-transportation-inc_skyways-v26-aircraft-autonomously-resupplying-activity-7244709502019604483-_F8Q",
       "JMSDF Public Affairs Office (X/Twitter)": "https://x.com/JMSDF_PAO/status/1850764432063819880",
       "drone.jp — JMSDF Japan's First VTOL Drone Supply to Vessel": "https://www.drone.jp/news/20241028182919101826.html",
-      "Yahoo! Japan News (drone.jp syndication)": "https://article.yahoo.co.jp/detail/442b94c0a9ff357f1315efb5d75a11f18d9bfd48",
-      "Traffic News (trafficnews.jp)": "https://trafficnews.jp/post/135816",
-      "Asagumo Shimbun (Japan defense newspaper)": "https://www.asagumo-news.com/homepage/htdocs/news/newsflash/202411/241118/24111801.html"
+      "Traffic News (trafficnews.jp)": "https://trafficnews.jp/post/135816"
     },
     "sort_date": "2024-08",
     "source_thumbnails": {
@@ -731,10 +724,10 @@
     "id": 30,
     "year": "2024",
     "date": "2024-10",
-    "title": "[NOT PUBLIC / NO EXTERNAL SOURCES] JSDF | Inter-Island Resupply with JASDF",
+    "title": "JASDF Inter-Island Resupply",
     "category": "defense",
     "detail": "Skyways conducts inter-island autonomous cargo resupply with the Japan Air Self-Defense Force (JASDF) through ANA Holdings. All flights conducted Beyond Visual Line of Sight (BVLOS). Demonstrates Skyways' capability for allied nation military logistics across maritime and island environments.",
-    "tag": "Defense — JSDF (Japan)",
+    "tag": "Defense | JSDF (Japan)",
     "sources": [
       "Skyways Internal — Charles Acknin"
     ],
@@ -757,7 +750,7 @@
     "title": "DIU Temperature-Controlled Payload Demo with III MEF",
     "category": "defense",
     "detail": "Under a Defense Innovation Unit (DIU) contract modification, Skyways demonstrated Temperature Controlled Payload (TCP) delivery capability with III Marine Expeditionary Force (III MEF), the U.S. Marine Corps command in Okinawa responsible for Indo-Pacific operations.",
-    "tag": "Defense — USMC / III MEF",
+    "tag": "Defense | USMC / III MEF",
     "sources": [
       "Skyways Internal — Charles Acknin"
     ],
@@ -799,7 +792,7 @@
     "id": 33,
     "year": "2024",
     "date": "2024-05",
-    "title": "Moved into Austin Tech Ridge, 25,000 Square Feet",
+    "title": "Tech Ridge | 25,000 SF North Austin HQ",
     "category": "milestone",
     "detail": "New 25,000 square foot facility at Tech Ridge in North Austin provides manufacturing space for V3 production ramp. 750-acre test site near Giddings, TX used for flight testing.",
     "tag": "Internal",
@@ -824,7 +817,7 @@
     "title": "$37M U.S. Air Force STRATFI Contract",
     "category": "contracts",
     "detail": "Skyways awarded a $37M ceiling contract through Air Force Works (AFWERX) Strategic Funding Increase (STRATFI), one of the largest STRATFI awards ever given to an autonomous drone company. SBIR Phase II contract number FA2280-25-9-9523, awarded May 6, 2025 with period of performance through May 6, 2029, project title 'SKYWAYS V3 300LB Vertical Takeoff and Landing (VTOL) Unmanned Aerial System (UAS) Strategic Funding Increase (STRATFI)'. The SBIR Phase II portion is $3,550,613, with the full $37M ceiling reached through STRATFI's 1:1:2 Government:SBIR:Private matching structure. Funds V3 transition from prototype to full-rate production. STRATFI is a pathway to a Program of Record (PoR), a formal Department of Defense (DoD) acquisition designation that unlocks large-scale, long-term procurement.",
-    "tag": "Contract — U.S. Air Force",
+    "tag": "Contract | U.S. Air Force",
     "sources": [
       "SBIR.gov — Award #220016",
       "BusinessWire (Jun 2025)",
@@ -851,7 +844,7 @@
     "title": "Navy NAWCAD CLIN 0005 | Project ULTRA Demonstration Contract",
     "category": "contracts",
     "detail": "U.S. Navy Naval Air Warfare Center Aircraft Division (NAWCAD) added Contract Line Item 0005 (CLIN 0005) to Skyways' BWUAS 2.0 contract via Modification P00002 effective May 23, 2025. CLIN 0005 funded Skyways' Project ULTRA Demonstration: shore-to-shore long-range autonomous cargo flights between Grand Forks Air Force Base and Cavalier Space Force Station, North Dakota, in support of the Office of the Under Secretary of Defense's (OUSD) Project ULTRA program. Skyways operated both Government-furnished V2.6B (Government Owned/Contractor Operated) and Skyways-owned V3.0 (Contractor Owned/Contractor Operated). Project ULTRA's overall task order is $3.5M from OUSD and Grand Forks County, with the program ceiling raised from $18.25M to $100M in July 2025.",
-    "tag": "Contract — U.S. Navy / OUSD",
+    "tag": "Contract | U.S. Navy / OUSD",
     "sources": [
       "Skyways Internal — Contract N00421-23-9-0013 Mod P00002, CLIN 0005 ($361,832.40, signed May 23, 2025, not publicly disclosed)"
     ],
@@ -867,10 +860,10 @@
     "id": 112,
     "year": "2025",
     "date": "2025-05",
-    "title": "Navy NAWCAD CLIN 0006 | V3 Temperature Controlled Payload Development Contract",
+    "title": "Navy CLIN 0006 | V3 Temperature-Controlled Payload Development",
     "category": "contracts",
     "detail": "U.S. Navy Naval Air Warfare Center Aircraft Division (NAWCAD) added Contract Line Item 0006 (CLIN 0006) to Skyways' BWUAS 2.0 contract via Modification P00002 effective May 23, 2025. CLIN 0006 funds the design and build of a proof of concept of an actively temperature-controlled payload for the V3 Block 2 aircraft. The system is required to maintain 1 to 6 degrees Celsius (with 4 degree Celsius tolerance) for up to 8 hours at external temperatures up to 35 degrees Celsius, and integrate as an end-to-end system powered by an onboard alternator. Deliverables include Preliminary Design Review (PDR) within 6 months and Critical Design Review (CDR) thereafter.",
-    "tag": "Contract — U.S. Navy",
+    "tag": "Contract | U.S. Navy",
     "sources": [
       "Skyways Internal — Contract N00421-23-9-0013 Mod P00002, CLIN 0006 ($982,850.39, signed May 23, 2025, not publicly disclosed)"
     ],
@@ -914,7 +907,7 @@
     "title": "Project ULTRA | 20 Operational Flights for DoD",
     "category": "defense",
     "detail": "Sole Unmanned Aircraft System (UAS) provider for Project ULTRA (UAS Logistics, Traffic, Response and Autonomy), sponsored by the Office of the Under Secretary of Defense (OUSD). 20 operational flights (10 round trips) between Grand Forks Air Force Base and Cavalier Space Force Station, ND. Delivered 230 lbs of cargo including temperature-controlled blood. First flights without a chase plane on a military installation.",
-    "tag": "Defense — DoD",
+    "tag": "Defense | DoD",
     "sources": [
       "BusinessWire (Aug 2025)",
       "DroneLife (Aug 2025)"
@@ -936,7 +929,7 @@
     "title": "V3 Block 1 | First Customer Flights",
     "category": "product",
     "detail": "V3 flies first customer missions during Project ULTRA at GrandSKY, ND. Nearly 200 test flights completed including 8-hour heavy-fuel engine endurance flights. First customer demonstration of V3 Block 1 flying Beyond Visual Line of Sight (BVLOS) in the national airspace.",
-    "tag": "Product — V3",
+    "tag": "Product | V3",
     "sources": [
       "BusinessWire (Aug 2025)"
     ],
@@ -959,16 +952,15 @@
     "detail": "V2 operational record: 11 flights, 9.4 hrs, 466 NM, zero human intervention, 8-min average turnarounds. Demonstrated the operational tempo required for fleet-scale logistics.",
     "tag": "Product",
     "sources": [
-      "DroneVideos.com (Jun 2025)"
+      "Skyways Internal — Charles Acknin (V2 operational record: 11 flights / 9.4 hrs / 466 NM / 8-min turnarounds, Sept 2025)"
     ],
-    "source_urls": {
-      "DroneVideos.com (Jun 2025)": "https://dronevideos.com/skyways-gets-37-million-to-develop-next-gen-military-drones/"
-    },
+    "source_urls": {},
     "sort_date": "2025-09",
     "source_thumbnails": {
-      "DroneVideos.com (Jun 2025)": "https://dronevideos.com/wp-content/uploads/2025/06/Skyway-V3.jpg"
+      "Skyways (V2 aboard ship)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
     },
-    "date_display": "2025-09"
+    "date_display": "2025-09",
+    "thumbnail_status": "fallback_v2_ship"
   },
   {
     "id": 113,
@@ -977,7 +969,7 @@
     "title": "Navy LP-CRADA | Aircraft Lease Agreement (V2 AV1-3)",
     "category": "contracts",
     "detail": "U.S. Navy and Skyways signed a Lease Program Cooperative Research and Development Agreement (LP-CRADA) effective March 18, 2025. Under this agreement, the Navy gives Skyways formal custody of three Navy-owned V2 aircraft (AV1, AV2, AV3) for use in the V2 aircraft program. Skyways must track every configuration change so the aircraft can be returned to their original Navy-owned state at end of agreement. This is a non-monetary lease arrangement (not a fixed-price development contract), but it represents an active formal Navy partnership separate from the BWUAS 2.0 contract (N00421-23-9-0013) and the original Blue Water OTA (N00421-19-9-0007).",
-    "tag": "Contract — U.S. Navy",
+    "tag": "Contract | U.S. Navy",
     "sources": [
       "Skyways Internal — Navy LP-CRADA agreement signed March 18, 2025 by Charles Acknin (lease arrangement for Navy aircraft AV1-3, no dollar value, not publicly disclosed)"
     ],
@@ -1019,7 +1011,7 @@
     "title": "RWE Offshore Wind Farm, Baltic Sea, Germany",
     "category": "contracts",
     "detail": "Germany's first long-range Beyond Visual Line of Sight (BVLOS) offshore wind drone delivery. Partnered with RWE and Skyports Drone Services at the Arkona wind farm in the Baltic Sea. V2 flew 40km routes, up to 10kg cargo, sub-30-minute flights vs. 1+ hour by boat. Over 2,500km total, 65+ flight hours in 3 weeks.",
-    "tag": "Contract — RWE (Germany)",
+    "tag": "Contract | RWE (Germany)",
     "sources": [
       "RWE Press Release (Oct 2025)",
       "Skyports Press Release (Oct 2025)",
@@ -1043,7 +1035,7 @@
     "title": "ANA Holdings Partnership & $1M Investment",
     "category": "funding",
     "detail": "ANA Holdings invested $1M through its corporate venture fund and signed a long-term business partnership agreement. Skyways drones fly between Okinawa islands delivering medical supplies. ANA established internal Skyways-specific pilot training.",
-    "tag": "Contract — ANA Holdings (Japan)",
+    "tag": "Contract | ANA Holdings (Japan)",
     "sources": [
       "The Drone Girl — Inside Skyways (Nov 2025)",
       "Payload Asia (Mar 2026)"
@@ -1135,7 +1127,7 @@
     "title": "V3 Block 2 | First Article Build",
     "category": "product",
     "detail": "V3 Block 2 (production-intent) first article build scheduled for June 2026. This is the production design variant that will enter full-rate manufacturing.",
-    "tag": "Product — V3 / Upcoming",
+    "tag": "Product | V3 / Upcoming",
     "sources": [
       "Skyways Internal — Charles Acknin"
     ],
@@ -1154,7 +1146,7 @@
     "id": 46,
     "year": "2026",
     "date": "2026-07",
-    "title": "V3 Production Ramp Begins",
+    "title": "V3 Production Ramp",
     "category": "product",
     "detail": "V3 Block 2 (production-intent) expected in service second half of 2026. Program of Record designation underway to unlock large-scale Department of Defense (DoD) procurement.",
     "tag": "Upcoming",
@@ -1238,7 +1230,7 @@
     "date_display": "2017-01"
   },
   {
-    "id": 104,
+    "id": 108,
     "year": "2021",
     "date": "2021-10",
     "title": "Orbital UAV Partnership | Heavy Fuel Engine MoU",
@@ -1265,7 +1257,7 @@
     "title": "Start of Navy OTA Spiral Development | Follow-on Contracts",
     "category": "contracts",
     "detail": "Following the initial Navy Other Transaction Authority (OTA) contract award, spiral development began with follow-on awards expanding the scope of Skyways' hybrid propulsion logistics Unmanned Aircraft System (UAS) work. The Naval Air Warfare Center Aircraft Division (NAWCAD) acquired a Skyways prototype to demonstrate long-range ship-to-ship and ship-to-shore cargo transport at Naval Air Station (NAS) Patuxent River.",
-    "tag": "Defense",
+    "tag": "Contract | U.S. Navy",
     "sources": [
       "Skyways Internal — Charles Acknin",
       "FlightGlobal (Nov 2020)",
@@ -1287,7 +1279,7 @@
     "id": 103,
     "year": "2016",
     "date": "2016-06",
-    "title": "Charles Acknin Begins Building Skyways with V1 in San Francisco Apartment",
+    "title": "The First Aircraft | V1 Built in San Francisco",
     "category": "milestone",
     "detail": "V1 was Skyways' first aircraft, a Vertical Takeoff and Landing (VTOL) fixed-wing quadplane with 5 electric motors built on a Commercial Off-The-Shelf (COTS) foam wing modified for VTOL propulsion. Despite its simplicity, V1 flew a fully autonomous multi-point cargo mission: takeoff from point A, fly to point B to pick up a small box, deliver it to point C, and return to A, all without human intervention. An onboard Companion Computer ran an early version of Skyways' precision landing code to execute the mission end-to-end. Endurance was under 30 minutes with a 2-lb cargo capacity.\n\nCharles' father, also passionate about aviation, flew to San Francisco multiple times in 2016 to help build V1, serving as an unofficial co-founder during this earliest phase. For flight testing, Charles would drive almost every day to the Pacifica coast near San Francisco, and later to Livermore where there was more open space to fly.",
     "tag": "Founding",
@@ -1305,12 +1297,12 @@
     "date_display": "2016-06"
   },
   {
-    "id": 104,
+    "id": 107,
     "year": "2017",
     "date": "2017-06",
     "title": "V2.0 Built & Flown | First Carbon Fiber Composite Airframe",
     "category": "product",
-    "detail": "Skyways built and flew V2.0, a small quadplane X8 with a 12ft wingspan — the company's first carbon fiber composite airframe. V2.0 was demonstrated to investors for fundraising purposes as part of the seed round. The aircraft is still displayed on the ceiling of the Tech Ridge shop.",
+    "detail": "Skyways built and flew V2.0, a small quadplane X8 with a 12ft wingspan, the company's first carbon fiber composite airframe. V2.0 was demonstrated to investors for fundraising purposes as part of the seed round. The aircraft is still displayed on the ceiling of the Tech Ridge shop.",
     "tag": "Internal",
     "sources": [
       "Skyways Internal — Charles Acknin"
@@ -1330,7 +1322,7 @@
     "id": 105,
     "year": "2017",
     "date": "2017-07",
-    "title": "V2.1 & V2.2 Build Phase Begins | 18ft Wingspan, Composite Airframe",
+    "title": "V2.1 & V2.2 | First 18ft Composite Airframes",
     "category": "product",
     "detail": "In the second half of 2017, Skyways started building V2.1 and V2.2, a larger 18ft wingspan, 140-lb All-Up Weight (AUW) composite airframe. The team crashed a lot and learned a lot during this intensive build and test phase.",
     "tag": "Internal",
@@ -1371,10 +1363,10 @@
     "date_display": "2018-04"
   },
   {
-    "id": 104,
+    "id": 109,
     "year": "2026",
     "date": "2026-04",
-    "title": "Series B Fundraising Begins",
+    "title": "Series B Round Opens",
     "category": "contracts",
     "detail": "Skyways begins its Series B fundraising round to accelerate V3 production scaling and expand commercial operations.",
     "tag": "Funding",
