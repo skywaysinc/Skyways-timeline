@@ -986,6 +986,14 @@
 
   .year-section {
     display: grid; grid-template-columns: 100px 1fr; gap: 0; position: relative;
+    /* Let the browser skip layout + paint for year-sections that are
+       off-screen during scroll. contain-intrinsic-size gives a height
+       hint so scrollbar position stays stable — tuned to the ~typical
+       year block height so the scrollbar doesn't jump on first paint.
+       This is the biggest single scroll-performance win on this page
+       (50+ cards, heavy inline SVGs, thumbnail tints per card). */
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 900px;
   }
 
   .year-label-col { position: relative; padding: 0 0 48px 0; }
@@ -2771,20 +2779,20 @@
   }
 
   function updateHeader() {
-    // "Hide on scroll, expand only at the absolute top" pattern:
-    //   • The header minimizes the moment the user scrolls past a few px.
-    //   • It stays minimized all the way through the page — including on
-    //     the scroll BACK UP from the bottom — until scrollY reaches 0.
-    //     This avoids the jarring re-expansion that used to fire near the
-    //     top when scrolling up from the lower half of the page.
-    //   • No scroll compensation: the header height change causes a small
-    //     one-time content shift which is acceptable with such a low
-    //     threshold (the user has barely scrolled). Skipping compensation
-    //     also eliminates the bounce-loop that capped how low the trigger
-    //     threshold could go.
+    // "Hide on scroll, expand only at the absolute top" pattern, with
+    // hysteresis so the minimize doesn't oscillate:
+    //   • Expanded → minimize when scrollY goes past 4.
+    //   • Once minimized, stay minimized until scrollY is back at 0
+    //     (strict). Trackpad momentum and rubber-band scrolls
+    //     routinely push scrollY 1–3px back and forth around any low
+    //     threshold; a single threshold re-triggers the 220ms
+    //     transition each bounce, which reads as stutter. The
+    //     hysteresis gap guarantees one minimize per scroll session.
+    //   • No scroll compensation: the header height change causes a
+    //     small one-time content shift at 4px, which is acceptable.
     var scrollY = (window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0);
     var isCurrentlyMinimized = header.classList.contains('minimized');
-    var shouldMinimize = scrollY > 4;
+    var shouldMinimize = isCurrentlyMinimized ? scrollY > 0 : scrollY > 4;
 
     if (shouldMinimize === isCurrentlyMinimized) return;
 
