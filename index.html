@@ -551,6 +551,16 @@
     content: ''; position: absolute; bottom: 100%; left: 16px;
     border: 5px solid transparent; border-bottom-color: var(--white);
   }
+  /* Invisible bridge between .stat and .stat-menu so the cursor can move
+     from the stat down into the dropdown without crossing a "dead zone"
+     where neither element is hovered (which would close the menu). The
+     bridge spans the 8px margin-top gap. */
+  .stat-menu::after {
+    content: ''; position: absolute;
+    bottom: 100%; left: 0; right: 0;
+    height: 12px; /* slightly larger than the 8px margin to be safe */
+    background: transparent;
+  }
   .stat:hover .stat-menu {
     opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto;
   }
@@ -2386,13 +2396,17 @@
 
   function updateHeader() {
     // Hysteresis on the minimize trigger:
-    //   • Collapse to minimized once the user has scrolled past 40px.
-    //   • Restore to expanded only once they're back near the very top
-    //     (within 8px).
-    // The hysteresis prevents rapid toggling near a single boundary.
+    //   • Collapse to minimized once scrollY > 250 (well past the header's
+    //     own height ~200px — must be larger than the cumulative header
+    //     shrink amount, otherwise the scroll-compensation step below would
+    //     push scrollY into the "restore" zone, expand the header, retrigger
+    //     minimize, and bounce-loop. With threshold > shrink amount, the
+    //     compensation always lands safely above the restore boundary.)
+    //   • Restore to expanded only once scrollY <= 60 (well above the post-
+    //     compensation landing zone, plus generous hysteresis).
     var scrollY = (window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0);
     var isCurrentlyMinimized = header.classList.contains('minimized');
-    var shouldMinimize = isCurrentlyMinimized ? scrollY > 8 : scrollY > 40;
+    var shouldMinimize = isCurrentlyMinimized ? scrollY > 60 : scrollY > 250;
 
     if (shouldMinimize === isCurrentlyMinimized) return;
 
