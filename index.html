@@ -269,11 +269,9 @@
   }
   
   .dashboard-title-area-inner {
-    /* clip + clip-margin lets the eyebrow's pulse-dot hang a few pixels to
-       the left of the text without being clipped, while still clipping
-       content during the grid-row-0fr collapse animation. */
-    overflow: clip;
-    overflow-clip-margin: 20px;
+    /* Clips content during the grid-row-0fr collapse animation when the
+       header minimizes. */
+    overflow: hidden;
   }
 
   .sticky-header.minimized .dashboard-title-area {
@@ -392,11 +390,9 @@
   }
   
   .dashboard-eyebrow {
-    /* inline-flex so the pulse-dot + text ride together; negative margin-
-       left pulls the dot into the left gutter so the eyebrow text starts
-       flush with the h1 and subtitle below. 6px dot + 6px gap = 12px. */
-    display: inline-flex; align-items: center; gap: 6px;
-    margin-left: -12px;
+    /* Plain block element so the eyebrow text starts at the same x as
+       the h1 and subtitle below. (Used to host an inline pulse-dot
+       with a negative margin hack — dot has been removed.) */
     font-size: 11px; font-weight: 700; text-transform: uppercase;
     letter-spacing: 2px; color: var(--thrust-green); margin-bottom: 16px;
   }
@@ -503,16 +499,6 @@
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 8px; color: rgba(255,255,255,0.55); text-align: left;
     margin-top: 24px; letter-spacing: 1.5px;
-  }
-
-  .pulse-dot {
-    width: 6px; height: 6px; background: var(--red); border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(226, 51, 74, 0.4); }
-    70% { box-shadow: 0 0 0 6px rgba(226, 51, 74, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(226, 51, 74, 0); }
   }
 
   .stats-banner {
@@ -792,7 +778,7 @@
   }
 
   .legend-row {
-    display: flex; gap: 12px; align-items: center;
+    display: flex; gap: 12px; align-items: center; flex-wrap: nowrap;
     border-top: 1px solid rgba(255,255,255,0.14); padding-top: 10px;
     transition: padding-top 0.35s ease;
   }
@@ -1298,15 +1284,20 @@
     .hero-inner { padding: 0 32px; }
     .hero-inner h1 { font-size: 36px; letter-spacing: 1px; }
     .h1-subtitle { font-size: 18px; }
-    .dashboard-hero { flex-direction: column; align-items: flex-start; gap: 40px; }
-    .war-room-panel { width: 100%; min-width: 0; }
-    /* Aircraft background is desktop-only — on tablet the hero stacks
-       vertically so a horizontal aircraft wash doesn't apply. */
+    /* Keep the title + telemetry panel side-by-side at tablet widths
+       (stacks only under 720px, see the sub-tablet block below). Shrink
+       the panel so it fits next to the title without fighting for space
+       — 520px min was designed for a 1440px desktop. */
+    .dashboard-hero { gap: 24px; }
+    .war-room-panel { min-width: 0; flex: 0 1 auto; }
+    /* Aircraft background stays desktop-only. */
     .header-aircraft-bg,
     .header-aircraft-wash { display: none; }
+    /* Pin telemetry to 3 columns (one line) — auto-fit minmax was
+       allowing the grid to wrap to two rows on narrow tablets. */
     .telemetry-grid {
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
     }
     .stats-banner-inner { padding: 16px 32px; }
     .sticky-header.minimized .stats-banner-inner { padding: 10px 32px; }
@@ -1317,7 +1308,11 @@
        its neighbor in the narrower tablet columns. */
     .stat-value { font-size: 30px; }
     .stat-label { font-size: 8px; }
-    .legend-row { flex-wrap: wrap; gap: 8px; }
+    /* Keep every filter on one line — was wrap, which stacked the
+       legend on narrow desktops. Shrink gap and let items flex down. */
+    .legend-row { flex-wrap: nowrap; gap: 6px; }
+    .legend-item { flex: 0 1 auto; white-space: nowrap; }
+    .legend-long { display: none; }
     .timeline-wrapper { padding: 40px 32px 48px; }
     .year-section { grid-template-columns: 80px 1fr; }
     .year-label { font-size: 26px; }
@@ -1326,6 +1321,19 @@
     .footer { padding: 0 32px; }
     .press-contact { padding: 0 32px; }
     .bottom-bar-inner { padding: 16px 32px; }
+  }
+
+  /* ══ SUB-TABLET (≤720px, i.e. ~50% desktop window) ══
+     Stack the title and telemetry panel vertically here — above this
+     width they share the hero row. Below this width there just isn't
+     enough horizontal room to keep both readable side by side. */
+  @media (max-width: 720px) {
+    .dashboard-hero {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 32px;
+    }
+    .war-room-panel { width: 100%; }
   }
 
   /* ══ MOBILE (<768px) ══ */
@@ -1547,7 +1555,7 @@
     <div class="hero-inner dashboard-hero">
     <div class="dashboard-title-area">
       <div class="dashboard-title-area-inner">
-        <div class="dashboard-eyebrow"><span class="pulse-dot"></span><span>AUTONOMOUS AIR NETWORK</span></div>
+        <div class="dashboard-eyebrow">AUTONOMOUS AIR NETWORK</div>
         <h1>History & Timeline</h1>
         <div class="h1-subtitle">9 Years of Flying. Built for the Mission.</div>
       </div>
@@ -1583,7 +1591,7 @@
           </div>
         </div>
         <div class="telemetry-footer">
-          // SYS: LIVE SYNC <span id="lastUpdatedText" style="opacity:0.6; margin-left: 12px; font-variant-numeric: tabular-nums;">UPDATED --</span>
+          // FLIGHT LOG <span id="lastUpdatedText" style="opacity:0.75; margin-left: 8px; font-variant-numeric: tabular-nums;">LAST PULL --</span>
           <span style="opacity:0.5; margin-left: 12px; font-variant-numeric: tabular-nums;">NET: <span id="msCounter">42ms</span></span>
         </div>
       </div>
@@ -2843,12 +2851,17 @@
       if (stats.updatedAt) {
         try {
           var d = new Date(stats.updatedAt);
-          stamp.textContent = 'UPDATED ' + d.toLocaleString();
+          // Compact date+time for the panel footer, e.g.
+          // "LAST PULL 4/20/2026, 10:25 AM". Uses locale formatting so
+          // international visitors see their own conventions.
+          var datePart = d.toLocaleDateString(undefined, { month: 'numeric', day: 'numeric', year: 'numeric' });
+          var timePart = d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+          stamp.textContent = 'LAST PULL ' + datePart + ' · ' + timePart;
         } catch (e) {
-          stamp.textContent = 'UPDATED ' + stats.updatedAt;
+          stamp.textContent = 'LAST PULL ' + stats.updatedAt;
         }
       } else {
-        stamp.textContent = 'UPDATED (fallback)';
+        stamp.textContent = 'LAST PULL (fallback)';
       }
     }
   }
