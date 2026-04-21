@@ -100,7 +100,7 @@
 | ID 13 "65 candidate UAS / 24 lbs / 65 mi / 80%" | USNI News, FlightGlobal | Both 403 (bot blocking) |
 | ID 22 200 NM in detail | FlightGlobal | 403 (bot blocking) — but DroneDJ confirmed 200 NM separately ✓ |
 | ID 31 TCP III MEF demo "6 hrs / 300+ mi / 10 bags blood / 3-6°C" | Charles internal only | No public source — accept Charles authority |
-| **"1/30th Cost of Helicopter"** ($1K/hr vs $30K/hr) | BusinessWire (timeout), DroneLife (no mention) | DroneLife article does NOT contain the cost claim. BusinessWire timed out. **The claim source is unconfirmed by the verified-sources list.** |
+| ~~"1/30th Cost of Helicopter"~~ **RESOLVED Apr 21**: source confirmed as **DroneXL (Feb 7, 2026)**. Exact text: "helicopter delivery for ship-to-ship logistics costs approximately $30,000 per flight hour, while Skyways' V2 drone operates at roughly $1,000 per flight hour—representing a 30-fold cost reduction. When fully deployed, the company projects operational expenses could drop to approximately $100 per flight hour." Drawer source list updated; DroneLife removed (didn't contain the claim); $100/hr at-scale projection added as a new bullet. URL: `https://dronexl.co/2026/02/07/skyways-autonomous-drone-fleet/` | DroneXL (Feb 2026) |
 
 ---
 
@@ -118,9 +118,10 @@
 
 ## SUMMARY
 
-- **8 PASS**: Banner stats and ID 25, 36 (flight count), 22 (200 NM), 42 verified ✓
-- **3 FLAGGED**: ID 22 payload (20 vs 50 lbs), ID 27 RIMPAC count framing, ID 36 chase-plane vs airport-to-airport claim
-- **4 UNVERIFIABLE**: USNI/FlightGlobal blocked; "1/30th cost" claim source needs identifying; ID 31 Charles-only
+- **9 PASS** (incl. resolved 1/30th cost via DroneXL Feb 2026): Banner stats, ID 25, 36, 22, 42 verified ✓
+- **3 FLAGGED → RESOLVED**: ID 22 payload (Charles attribution added), ID 27 RIMPAC reword applied, ID 36 chase-plane → airport-to-airport applied
+- **3 UNVERIFIABLE remaining** (down from 4): USNI/FlightGlobal blocked (bot 403); ID 31 TCP demo (Charles-only, no public)
+- **Cross-card V3 spec issue** (DroneLife "100 lbs over 1,000 miles" misframing) flagged for next press correction
 
 ## Recommended next steps
 1. Decide on the 3 FLAGGED items (Options A/B/C per item above) → I apply edits
