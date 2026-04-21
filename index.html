@@ -1011,6 +1011,20 @@
   }
   .source-link.source-link-internal:hover { color: #ff5b4a; }
 
+  /* Inline source label for cards whose only citation is an approved-public
+     internal note (e.g., "Skyways Internal — Charles Acknin"). Replaces the
+     dropdown trigger so a single-source attribution doesn't require a click
+     to read. */
+  .source-inline {
+    font-size: 10px; font-weight: 500;
+    color: var(--gray-50);
+    font-style: italic;
+    line-height: 1.35;
+  }
+  .event-card.highlight .source-inline {
+    color: var(--gray-50);
+  }
+
   /* ═══ Non-public information banner ═══
      A single clean red banner at the bottom of any event card whose
      sources include internal-only material. Two message variants:
@@ -1740,7 +1754,12 @@
 
   // ═══ RENDER A SINGLE EVENT CARD ═══
   function renderCard(ev) {
-    var cat = ev.category || 'milestone';
+    // Normalize the category to lowercase so CSS class matching is consistent
+    // regardless of how the category was stored in Firestore. Some docs have
+    // "Contracts" (capitalized) and others "contracts" (lowercase); CSS class
+    // selectors are case-sensitive in HTML5, so without this normalization
+    // capitalized-category cards would render with no dot/tag color.
+    var cat = (ev.category || 'milestone').toLowerCase();
     var title = ev.title || '';
     var highlightCard = isHighlight(title);
     var upcoming = isUpcoming(title);
@@ -1777,8 +1796,22 @@
       bannerHTML = '<div class="internal-banner internal-banner-mixed">EVENT CONTAINS INTERNAL ONLY INFORMATION</div>';
     }
 
+    // Single-source cards whose only citation is "Skyways Internal — Charles
+    // Acknin" (or similar approved-public internal note) don't need a clickable
+    // dropdown — render the source label inline on the card itself instead.
+    var firstLabel = sourceCount === 1
+      ? ((typeof sources[0] === 'string') ? sources[0] : (sources[0].label || ''))
+      : '';
+    var charlesInlineEligible = sourceCount === 1 && (
+      /Skyways Internal\s*[—-]\s*Charles Acknin/i.test(firstLabel) ||
+      /Skyways Internal\s*[—-]\s*No Source/i.test(firstLabel) ||
+      /Skyways Internal\s*[—-]\s*Not Published/i.test(firstLabel)
+    );
+
     var sourcesHTML = '';
-    if (sourceCount > 0) {
+    if (charlesInlineEligible) {
+      sourcesHTML = '<span class="source-inline">Source: ' + esc(firstLabel) + '</span>';
+    } else if (sourceCount > 0) {
       sourcesHTML = '<div class="sources-trigger">' +
         '<span class="sources-label">' + sourceCount + ' SOURCE' + (sourceCount > 1 ? 'S' : '') + '</span>' +
         '<span class="sources-icon"><svg viewBox="0 0 12 12"><path d="M2 4.5L6 8.5L10 4.5"/></svg></span>' +
