@@ -669,6 +669,24 @@
     opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto;
   }
 
+  /* While the user is actively scrolling, suppress the contracts breakdown
+     drawer (and any other stat-menu) so the wide table doesn't follow the
+     mouse jitter or animate alongside the sticky-header minimize transition.
+     The .scrolling-active body class is toggled by JS on scroll + cleared
+     200ms after scroll stops. */
+  body.scrolling-active .stat-menu {
+    opacity: 0 !important; visibility: hidden !important;
+    pointer-events: none !important;
+    transition: none !important;
+  }
+  /* Belt-and-suspenders: while the header is mid-collapse to its minimized
+     state, hide the wide contracts table so it doesn't reposition mid-frame
+     as the .stat container resizes (font-size 41px → 16px is animated). */
+  .sticky-header.minimized .stat-menu.contracts-table {
+    opacity: 0 !important; visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
   .stat-value {
     /* Desktop metric punch. 22px → 33px (50%) → 41px (+25%) per Shae.
        Label below and minimized-on-scroll size deliberately unchanged. */
@@ -1524,9 +1542,9 @@
         </div>
       </div>
       <!-- km Flown removed — now shown live in the Fleet Flight Telemetry panel -->
-      <div class="stat"><div class="stat-value">20+</div><div class="stat-label">Aircraft Iterations</div>
+      <div class="stat"><div class="stat-value">20+</div><div class="stat-label">UAVs Built</div>
         <div class="stat-menu">
-          <div class="stat-menu-info">Hardware versions developed since 2017: V1, V2.0, V2.1, V2.2, V2.5, V2.6, V2.6b, V3 Block 0, V3 Block 1, V3 Block 2, V3 Block 2L</div>
+          <div class="stat-menu-info">Per SBIR.gov: &ldquo;We have built over 20 UAVs and flown over 1,100 flights.&rdquo; Built across approximately 11 design iterations since 2017: V1, V2.0, V2.1, V2.2, V2.5, V2.6, V2.6b, V3 Block 0, V3 Block 1, V3 Block 2, V3 Block 2L.</div>
           <div class="stat-menu-source">Verified Sources:</div>
           <div class="stat-menu-links">
             <a href="https://www.sbir.gov/portfolio/1542801" target="_blank" rel="noopener">SBIR.gov &mdash; Skyways portfolio</a>
