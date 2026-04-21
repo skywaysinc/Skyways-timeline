@@ -2058,10 +2058,15 @@
   //     this with visibility:hidden on the menu, which is why it's in JS.
   //   • Click / tap: same value/label target toggles a persistent open
   //     state that survives mouseleave (useful on touch and for click-
-  //     pinning on desktop). Tapping outside, or scrolling, closes it.
+  //     pinning on desktop). Tapping outside closes it. Contract-row
+  //     clicks inside the contracts-table drawer close via scrollToContract.
   //   • Only one drawer is open at a time — stored in openStat so the
-  //     scroll listener can early-return without touching the DOM when
-  //     nothing is open.
+  //     outside-click listener can early-return without touching the DOM
+  //     when nothing is open.
+  //   • Scroll does NOT auto-close the drawer. The drawer is anchored to a
+  //     sticky header so it travels with the user; auto-closing on every
+  //     scroll event was fighting the scroll animation and caused the
+  //     stutter-then-close that Shae reported on the $46M table.
   (function() {
     var stats = document.querySelectorAll('.stats-row .stat');
     if (!stats.length) return;
@@ -2119,18 +2124,10 @@
     document.addEventListener('click', function(e) {
       if (openStat && !openStat.contains(e.target)) hide(openStat);
     });
-    // rAF-throttled scroll-dismiss: only touches the DOM on the first frame
-    // after a drawer was actually open. Unthrottled classList.remove on
-    // every scroll event caused stutter when scrolling with the drawer up.
-    var scrollCloseQueued = false;
-    window.addEventListener('scroll', function() {
-      if (!openStat || scrollCloseQueued) return;
-      scrollCloseQueued = true;
-      requestAnimationFrame(function() {
-        if (openStat) hide(openStat);
-        scrollCloseQueued = false;
-      });
-    }, { passive: true });
+    // Intentionally no scroll-dismiss listener: the drawer lives inside
+    // the sticky header so it doesn't visually drift on scroll, and the
+    // previous rAF-close-on-scroll fought with the scroll animation —
+    // that was the stutter-then-close Shae saw on the $46M table.
   })();
 
   // ═══ SCROLL TO A CONTRACT CARD (from $40M+ stat-menu) ═══
