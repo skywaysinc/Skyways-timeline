@@ -292,7 +292,12 @@
         rgba(17, 30, 38, 0.22) 100%
       ),
       url('aircraft_header.jpg');
-    background-size: cover, 400%;
+    /* Both layers use cover so the image renders at — or just below —
+       its native 2560x2176 resolution. Previous value `cover, 400%`
+       upscaled the aircraft by ~2.2x on a 1400px container, which
+       made the image look soft at any DPI. `cover` for the image
+       scales it DOWN to fit minimally, preserving pixel sharpness. */
+    background-size: cover;
     background-position: center, 65% 55%;
     background-repeat: no-repeat;
     /* Only compositor-only properties transition on minimize (transform,
@@ -2358,11 +2363,16 @@
     /* Aircraft background only hidden in EXPANDED mobile state (hero
        stacks vertically and the bg would collide with title / telemetry).
        In minimized state the mobile hero compacts into an aircraft strip
-       like desktop, so let the base opacity rules — opacity 0 expanded,
-       opacity 0.95 minimized — cascade through. Shae: "on mobile when the
-       menu reduces the background image should appear like desktop." */
+       like desktop. Explicit `display: block` when minimized is required
+       to override the tablet `.header-aircraft-bg { display: none }` rule
+       at ≤1024px (same-specificity, earlier in source) — without it the
+       cascade still resolves to `none` on mobile-minimized.
+       Shae: "on mobile when the menu reduces the background image should
+       appear like desktop." */
     .sticky-header:not(.minimized) .header-aircraft-bg,
     .sticky-header:not(.minimized) .header-aircraft-wash { display: none; }
+    .sticky-header.minimized .header-aircraft-bg,
+    .sticky-header.minimized .header-aircraft-wash { display: block; }
 
     /* Mobile hero: at least 25vh, grows with content so the telemetry
        footer always has room to render below the grid. */
