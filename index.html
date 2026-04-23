@@ -920,14 +920,26 @@
     color: var(--gray-50);
   }
 
-  /* Highlight pulse for cards reached via contracts-table click */
-  @keyframes contractJumpPulse {
-    0% { box-shadow: 0 0 0 0 rgba(0,154,235,0.55), 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08); }
-    50% { box-shadow: 0 0 0 8px rgba(0,154,235,0.18), 0 2px 12px rgba(0,154,235,0.3), 0 1px 3px rgba(0,0,0,0.08); }
-    100% { box-shadow: 0 0 0 0 rgba(0,154,235,0), 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08); }
-  }
+  /* Highlight for cards reached via contracts-table click.
+     Full-card light-thrust-green tint applied via inset box-shadow so the
+     existing background image / thumbnail tint is never touched. Holds for
+     ~9s, then fades over 1s. If the user scrolls after the smooth-scroll
+     has settled (armed ~900ms after click), the highlight fast-fades over
+     ~350ms. Outer drop-shadow is preserved at every state so the card never
+     visually loses its lift. */
   .event-card.contract-jump-pulse {
-    animation: contractJumpPulse 1.6s ease-out;
+    box-shadow: inset 0 0 0 9999px rgba(194, 242, 19, 0.22),
+                0 2px 8px rgba(0,0,0,0.1),
+                0 1px 3px rgba(0,0,0,0.08);
+    transition: box-shadow 1s ease-out;
+  }
+  .event-card.contract-jump-pulse.faded {
+    box-shadow: inset 0 0 0 9999px rgba(194, 242, 19, 0),
+                0 2px 8px rgba(0,0,0,0.1),
+                0 1px 3px rgba(0,0,0,0.08);
+  }
+  .event-card.contract-jump-pulse.fading-fast {
+    transition: box-shadow 350ms ease-out;
   }
 
   /* Mobile: keep every stat source drawer anchored DIRECTLY UNDER its own
@@ -2722,9 +2734,14 @@
     // that was the stutter-then-close Shae saw on the $46M table.
   })();
 
-  // ═══ SCROLL TO A CONTRACT CARD (from $40M+ stat-menu) ═══
+  // ═══ SCROLL TO A CONTRACT CARD (from $46M+ stat-menu) ═══
   // Triggered by clicks in the contracts-table breakdown drawer.
-  // Scrolls the matching event-card into view and pulses its outline.
+  // Scrolls the matching event-card into view and applies a light
+  // thrust-green full-card highlight that holds for ~9s, then fades over 1s.
+  // If the user scrolls after the smooth-scroll has settled (~900ms post-
+  // click), the highlight fast-fades over ~350ms instead. Always cleans up
+  // both timers + the scroll listener at the end of either path so a
+  // subsequent click can re-trigger from a clean state.
   window.scrollToContract = function(eventId) {
     var card = document.getElementById('event-' + eventId);
     if (!card) {
@@ -2735,20 +2752,52 @@
     var statEl = document.getElementById('contractsStat');
     if (statEl) {
       statEl.classList.remove('menu-open');
-      // Force-collapse the menu by temporarily disabling hover (briefly removing
-      // pointer state via blur on any focused element inside).
       if (document.activeElement && statEl.contains(document.activeElement)) {
         document.activeElement.blur();
       }
     }
     card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    // Pulse highlight after the scroll lands.
-    card.classList.remove('contract-jump-pulse');
-    void card.offsetWidth; // force reflow so animation can re-trigger
+
+    // Reset any prior highlight on this card so the timing restarts cleanly.
+    card.classList.remove('contract-jump-pulse', 'faded', 'fading-fast');
+    void card.offsetWidth; // force reflow so transitions can re-trigger
     card.classList.add('contract-jump-pulse');
-    window.setTimeout(function() {
-      card.classList.remove('contract-jump-pulse');
-    }, 1700);
+
+    var holdTimer = null;
+    var cleanupTimer = null;
+    var armScrollTimer = null;
+    var scrollHandler = null;
+
+    function cleanup() {
+      if (holdTimer) clearTimeout(holdTimer);
+      if (cleanupTimer) clearTimeout(cleanupTimer);
+      if (armScrollTimer) clearTimeout(armScrollTimer);
+      if (scrollHandler) window.removeEventListener('scroll', scrollHandler);
+      card.classList.remove('contract-jump-pulse', 'faded', 'fading-fast');
+    }
+
+    // Auto-fade path: hold 9s at full tint, then 1s fade out, then strip the class.
+    holdTimer = window.setTimeout(function() {
+      card.classList.add('faded');
+      cleanupTimer = window.setTimeout(cleanup, 1100);
+    }, 9000);
+
+    // Scroll-fade path: after the smooth scroll has settled, arm a one-shot
+    // scroll listener that fast-fades the highlight on any user scroll.
+    armScrollTimer = window.setTimeout(function() {
+      scrollHandler = function() {
+        if (card.classList.contains('faded')) return; // already auto-fading
+        card.classList.add('fading-fast');
+        // Force a frame so the new (shorter) transition is in effect before
+        // we change the target value, otherwise the browser may use the old
+        // 1s timing.
+        requestAnimationFrame(function() {
+          card.classList.add('faded');
+          cleanupTimer = window.setTimeout(cleanup, 450);
+        });
+      };
+      window.addEventListener('scroll', scrollHandler, { once: true, passive: true });
+    }, 900);
   };
 
   // ═══ THUMBNAIL COLOR EXTRACTION ═══
