@@ -1218,14 +1218,21 @@
   }
   /* When a source drawer opens on a card at the BOTTOM of a year-section,
      the drawer extends past the section's bottom edge into the next
-     year-section's airspace. Because each .year-section is its own
-     stacking context (due to content-visibility: auto + position: relative),
-     the next year's cards naturally render above it — clipping the drawer.
-     Fix: lift the year-section holding the open drawer above its siblings
-     so the drawer can extend freely across the year boundary. Uses :has()
-     which is supported on iOS Safari 15.4+ and all evergreen desktop browsers. */
+     year-section's airspace. Two layers of clipping fight the drawer:
+     (1) z-index — each .year-section is its own stacking context (due to
+         position: relative + the content-visibility stacking context),
+         so the next year's cards naturally paint above it.
+     (2) content-visibility: auto — implies `contain: paint`, which clips
+         anything overflowing the section to its own paint box. Lifting
+         z-index alone isn't enough; the drawer was still being clipped
+         by the CURRENT section's paint containment before it ever got a
+         chance to overlap the next one.
+     Fix: lift z-index AND disable content-visibility on the active
+     year-section while a drawer is open. Same pattern as the
+     .contract-jump-pulse halo above. */
   .year-section:has(.event-card.sources-open) {
     z-index: 50;
+    content-visibility: visible;
   }
 
   .year-label-col { position: relative; padding: 0 0 48px 0; }
