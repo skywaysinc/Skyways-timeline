@@ -919,56 +919,52 @@
     animation: contractJumpPulse 1.6s ease-out;
   }
 
-  /* Mobile: every stat drawer pins as a bottom sheet. Two reasons the old
-     anchored-under-stat approach broke:
-       1. Safari's dynamic URL bar eats ~80px of the bottom of the layout
-          viewport — `calc(100vh - N)` includes that area so the drawer's
-          bottom scrollbar ended up behind browser chrome.
-       2. The stat sits inside the minimizing sticky header; its y-position
-          changes as the header animates, and an absolutely-positioned
-          drawer anchored to it either slid mid-scroll or started off-screen.
-     Bottom-sheet positioning sidesteps both — pinned to the visible
-     viewport, dvh tracks browser chrome, scrolls internally if content is
-     taller than the sheet. */
+  /* Mobile: keep every stat source drawer anchored DIRECTLY UNDER its own
+     stat (not viewport-fixed) so a tap on stat N reveals a drawer that
+     visually emanates from stat N. The bottom-sheet variant read as
+     "too high" — covered too much of the screen and floated away from the
+     stat that opened it. Max-height uses dvh so Safari's dynamic URL bar
+     can't clip the bottom of a long drawer; overscroll-behavior: contain
+     keeps wheel/touch inside the drawer.
+     The contracts-table drawer (much wider) stays viewport-fixed because
+     no single stat column can hold its internal table layout. */
   @media (max-width: 720px) {
     .stat { overflow: visible; }
     .stat-menu {
-      position: fixed;
-      top: auto;
-      bottom: 16px;
-      left: 8px;
-      right: 8px;
-      width: auto;
       min-width: 0;
-      max-width: none;
+      width: min(260px, calc(100vw - 20px));
+      max-width: calc(100vw - 20px);
       /* vh fallback first, dvh override for engines that support it
-         (iOS 15.4+). dvh excludes the dynamic toolbar so the sheet
-         always fits the visible area. */
+         (iOS 15.4+). dvh excludes the dynamic toolbar so the drawer
+         never spills into the area behind browser chrome. */
       max-height: calc(100vh - 180px);
       max-height: calc(100dvh - 120px);
       overflow-y: auto;
       overscroll-behavior: contain;
-      margin-top: 0;
+      margin-top: 8px;
       /* Top padding makes room for the close-X that only renders on mobile */
       padding-top: 32px;
-      z-index: 200;
     }
-    /* Tail pointer only made sense when the drawer emanated from a stat.
-       On mobile it's a detached bottom sheet, so hide the pointer. */
-    .stat-menu::before { display: none; }
     /* Show the close-X on mobile (desktop already has hover-dismiss) */
     .stat-menu-close { display: flex; }
-    /* nth-child(n+4) right-anchor rule from desktop is irrelevant for a
-       full-width bottom sheet. Explicit override in case it cascades. */
-    .stats-row .stat:nth-child(n+4) .stat-menu { left: 8px; right: 8px; }
-    /* Contracts table needs the same bottom-sheet treatment as every other
-       drawer. The desktop rule's higher specificity (two classes) would
-       otherwise win the max-height cascade, so restate it here. */
+    /* Stats in the right half of the row: right-anchor the drawer so it
+       doesn't extend off the right edge of the viewport. 1st through
+       3rd keep left-anchor, 4th and 5th flip. */
+    .stats-row .stat:nth-child(n+4) .stat-menu {
+      left: auto; right: 0;
+    }
+    /* Contracts-table drawer stays viewport-fixed because the internal
+       table is wider than any single stat column. dvh max-height keeps
+       the bottom above Safari's toolbar. */
     .stat-menu.contracts-table {
+      position: fixed; top: auto; left: 8px; right: 8px;
+      min-width: 0; max-width: none; width: auto;
+      margin-top: 0;
       padding-top: 34px;
       max-height: calc(100vh - 180px);
       max-height: calc(100dvh - 120px);
     }
+    .stat-menu.contracts-table::before { display: none; }
     .contracts-row {
       grid-template-columns: 1.8fr 1.2fr 0.6fr 0.7fr;
       gap: 6px;
