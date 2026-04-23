@@ -209,7 +209,16 @@ service cloud.firestore {
 - Gradient mask fades left-to-right
 - Opacity: 28% default, 38% hover (desktop) / 20% (mobile)
 - `overflow: hidden` on `.event-card-bg`, NOT on `.event-card`
-- 7 Skyways fallback images rotated for variety, no consecutive repeats
+- **64 cards, 64 unique thumbnails, 0 repeats** (deduped April 22, 2026).
+  Fillers for cards without a usable article photo come from the Skyways
+  newsroom's Sanity CDN (`cdn.sanity.io/images/zlpq6b94/production/…`) —
+  real Skyways marketing assets, authoritative source, no licensing risk.
+- When adding a new timeline card: prefer the source article's own image
+  (check the card's `source_thumbnails` dict — sometimes a better
+  alternative is already there but unused); if no article exists, use a
+  Skyways Sanity asset that isn't already on another card. Run a quick
+  repeat check: `python3 -c "..."` against the Firestore collection
+  before committing.
 
 ## Earned Media Database (Firebase Firestore)
 - **Project ID:** `marketing---earned-media-db`
