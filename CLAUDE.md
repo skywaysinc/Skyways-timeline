@@ -109,11 +109,37 @@
   - `milestone` — Teal (`--teal: #42C6C1`)
   - `defense` — Orange (`--orange: #FF9013`)
 
-## Title Formatting Rules
-- Use `|` as separator before dollar amounts and subtitles (not commas or em dashes)
-- Commas only for geographic/location context (e.g., "Cedar Park, TX")
-- No em dashes (`—`) in titles
-- All acronyms must be spelled out in full within each card's detail text
+## Title / Copy Formatting Rules (user-visible text anywhere on the site)
+- Use `|` as separator before dollar amounts and subtitles, and for "Publisher | Article" source-link labels. Never commas / em dashes / en dashes.
+- Commas only for geographic/location context (e.g., "Cedar Park, TX") or for short list items inside a drawer bullet.
+- **Zero** em dashes (`—`), en dashes (`–`), or arrow symbols (`→`, `←`) in any user-visible copy: card titles / details / tags, stat drawer descriptions, source link labels, contracts-table rows, or HTML entities (`&mdash;`, `&ndash;`, `&rarr;`, `&larr;`). CSS/JS comments are fine to leave alone.
+- Date ranges use hyphens (`2017-18`, `2019-22`), not en dashes.
+- Arrow replacements: `"→"` becomes `" to "` or `" through "` ("V2.0 to V2.6b"), never a literal arrow character or entity.
+- All acronyms must be spelled out in full within each card's detail text.
+
+### Scan before commit (catches regressions in index.html AND Firestore)
+```bash
+# index.html render-path scan (skips <style>, <script>, and <!-- --> blocks)
+python3 -c "
+import re
+src = open('index.html').read()
+for block in [r'<style[^>]*>.*?</style>', r'<script[^>]*>.*?</script>', r'<!--.*?-->']:
+    src = re.sub(block, '', src, flags=re.DOTALL)
+for bad in ['&mdash;', '&ndash;', '&rarr;', '&larr;', '—', '–', '→', '←']:
+    if bad in src: print(f'HIT: {bad}')
+"
+# Firestore scan (user-visible fields only)
+python3 -c "
+import firebase_admin; from firebase_admin import credentials, firestore
+firebase_admin.initialize_app(credentials.Certificate('/path/to/service-account.json'))
+for d in firestore.client().collection('skyways_history_and_story').stream():
+    doc = d.to_dict()
+    for f in ('title','detail','tag','date_display'):
+        for bad in ['—','–','→','←']:
+            if bad in (doc.get(f) or ''):
+                print(f'HIT id={doc.get(\"id\")} [{f}] <{bad}> {doc.get(f)[:80]}')
+"
+```
 
 ## Content Accuracy Notes
 - Cross Park Drive move was April 2021 (per Charles Acknin correction)
