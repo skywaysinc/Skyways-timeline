@@ -1402,19 +1402,25 @@
     white-space: nowrap; border: 0;
   }
 
-  /* Timeline toolbar — sits between the sticky header and the timeline
-     content. Holds the Scan/Full density toggle out in the open where
-     visitors can discover it (previously buried in the header menu,
-     which expanded its height unnecessarily). Static flow: scrolls
-     with the page, doesn't compete with sticky behavior. */
+  /* Timeline toolbar — sits directly beneath the sticky header and
+     stays pinned to it as the user scrolls. `--header-height` is a
+     custom property that syncYearLabelOffset() updates whenever the
+     header resizes (expanded ↔ minimized), so the toolbar's sticky
+     `top` tracks the real header bottom without a per-scroll-frame
+     measurement. Opaque white background + a hairline rule keep the
+     timeline content from visually bleeding through on scroll. */
   .timeline-toolbar {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 14px 64px 0 64px;
-    position: relative;
-    z-index: 2;
+    position: -webkit-sticky;
+    position: sticky;
+    top: var(--header-height, 0px);
+    z-index: 50;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-15);
   }
   .timeline-toolbar-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 10px 64px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -1472,7 +1478,7 @@
   .density-icon-line:nth-child(2) { width: 70%; }
   .density-icon-line:nth-child(3) { width: 85%; }
   @media (max-width: 720px) {
-    .timeline-toolbar { padding: 10px 16px 0 16px; }
+    .timeline-toolbar-inner { padding: 8px 16px; }
     .density-toggle { font-size: 10px; padding: 6px 14px 6px 10px; letter-spacing: 0.6px; }
     .density-icon { width: 12px; height: 9px; }
   }
@@ -4706,10 +4712,20 @@
 
   // Keeps the sticky offset of every .year-label aligned with the bottom
   // of the (animating) header. Skips writes when the offset hasn't changed
-  // so it's cheap to call on every scroll frame.
+  // so it's cheap to call on every scroll frame. Also publishes the raw
+  // header height as a CSS custom property (--header-height) so other
+  // sticky-below-header elements (the timeline toolbar with the Scan
+  // toggle) can pin against it without per-frame JS of their own.
   var _lastYearOffset = null;
+  var _lastHeaderHeight = null;
   function syncYearLabelOffset() {
-    var offset = (header.getBoundingClientRect().height + 16) + 'px';
+    var h = header.getBoundingClientRect().height;
+    var hPx = h + 'px';
+    if (hPx !== _lastHeaderHeight) {
+      _lastHeaderHeight = hPx;
+      document.documentElement.style.setProperty('--header-height', hPx);
+    }
+    var offset = (h + 16) + 'px';
     if (offset === _lastYearOffset) return;
     _lastYearOffset = offset;
     var labels = getYearLabels();
