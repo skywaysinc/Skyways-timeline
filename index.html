@@ -298,7 +298,12 @@
        made the image look soft at any DPI. `cover` for the image
        scales it DOWN to fit minimally, preserving pixel sharpness. */
     background-size: cover;
-    background-position: center, 65% 55%;
+    /* Image Y bumped 55% → 60% so the aircraft silhouette (at ~45% down
+       the source image) sits higher in the hero frame. At 55% it was
+       ~16% from the top of the hero; at 60% it's ~5% from the top, a
+       visible-but-not-cropped shift. .header-aircraft-bg (minimized
+       state, separate layer) is unchanged at 70% 68% per Shae. */
+    background-position: center, 65% 60%;
     background-repeat: no-repeat;
     /* Only compositor-only properties transition on minimize (transform,
        opacity). All layout-affecting transitions on the header were
