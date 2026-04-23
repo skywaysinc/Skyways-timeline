@@ -707,6 +707,35 @@
     color: var(--navy);
     text-decoration: underline;
   }
+
+  /* Close (X) button on stat drawers. Hidden on desktop (hover already
+     closes the drawer on mouseleave); visible on mobile where the drawer
+     can cover most of the screen and tapping outside is awkward. */
+  .stat-menu-close {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: none;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--gray-50);
+    border-radius: 50%;
+    padding: 0;
+    z-index: 3;
+  }
+  .stat-menu-close:hover,
+  .stat-menu-close:focus-visible {
+    color: var(--navy);
+    background: rgba(0,0,0,0.06);
+    outline: none;
+  }
+  .stat-menu-close svg { width: 16px; height: 16px; }
+
   /* Non-contracts drawers are sized to fit inside a single stat cell at
      desktop (~262px at 1440px, ~180px at 1024px) so the drawer visually
      sits under the stat it belongs to — it was 280px and would spill
@@ -871,7 +900,12 @@
       overflow-y: auto;
       overscroll-behavior: contain;
       margin-top: 8px;
+      /* Top padding makes room for the close-X that only renders on mobile */
+      padding-top: 32px;
     }
+    /* Show the close-X on mobile (desktop already has hover-dismiss) */
+    .stat-menu-close { display: flex; }
+    .stat-menu.contracts-table { padding-top: 34px; }
     /* Stats in the right half of the row: right-anchor the drawer so it
        doesn't extend off the right edge of the viewport. 1st through
        3rd keep left-anchor, 4th and 5th flip. */
@@ -1665,8 +1699,11 @@
        When the user taps the search input on a phone, collapse everything
        below the brand bar so the iOS/Android keyboard doesn't have to fight
        the menu for real estate. The brand bar + search stay pinned at the
-       top; hero, stats, and filters disappear until the user blurs the
-       input or clears the query. Scroll position is preserved by JS. */
+       top; hero, stats, and filters disappear until the user clears the
+       query (class is toggled on both body and sticky-header via JS;
+       compact-card rules below read off body.search-focused). */
+    body.search-focused .hero-wrapper,
+    body.search-focused .stats-banner,
     .sticky-header.search-focused .hero-wrapper,
     .sticky-header.search-focused .stats-banner {
       max-height: 0;
@@ -1680,7 +1717,53 @@
     /* Collapse the brand-bar bottom border and header fade when search is
        focused so the transition feels like "zoom to search" not "hide
        content". */
+    body.search-focused .sticky-header::after,
     .sticky-header.search-focused::after { opacity: 0 !important; }
+
+    /* ── MOBILE COMPACT CARDS (search-focused) ──
+       When the query is active, shrink every event card down to just its
+       date + title so the full match list can sit above the keyboard.
+       Thumbnails, detail prose, bullets, tag row, sources trigger, and
+       internal banners are hidden; year labels and column gutter shrink
+       too. Scrolling through next/prev matches keeps surrounding cards
+       on-screen for context. */
+    body.search-focused .sticky-header { z-index: 150; }
+    body.search-focused .timeline-wrapper { padding: 12px 14px 24px; }
+    body.search-focused .year-section { grid-template-columns: 40px 1fr; }
+    body.search-focused .year-label-col { padding-top: 4px; }
+    body.search-focused .year-label { font-size: 14px; letter-spacing: -0.3px; }
+    body.search-focused .events-col { gap: 4px; padding: 0 0 16px 12px; }
+    body.search-focused .event-card { padding: 6px 12px 6px 14px; }
+    body.search-focused .event-card.highlight { padding: 7px 14px 7px 16px; }
+    body.search-focused .event-card-bg { display: none; }
+    body.search-focused .event-title {
+      font-size: 13px; line-height: 1.25; letter-spacing: -0.2px;
+    }
+    body.search-focused .event-card.highlight .event-title { font-size: 14px; }
+    body.search-focused .event-date { font-size: 9px; }
+    /* Keep one truncated line of detail so matches that only land in detail
+       text still show their highlight (otherwise "5 matches" could read as
+       5 identical-looking title-only cards). Bullets, meta, and banners
+       collapse entirely. */
+    body.search-focused .event-detail {
+      font-size: 10.5px;
+      line-height: 1.3;
+      margin-top: 1px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    body.search-focused .event-bullets,
+    body.search-focused .event-meta,
+    body.search-focused .event-value,
+    body.search-focused .event-card .internal-banner { display: none; }
+    body.search-focused .event-card:hover { transform: none; }
+    body.search-focused .event-dot {
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
 
     .timeline-wrapper { padding: 32px 20px 40px; }
     .year-section { grid-template-columns: 60px 1fr; }
@@ -2412,6 +2495,26 @@
       if (!openStat && stickyHeader) stickyHeader.classList.remove('drawer-active');
     }
 
+    // Inject a close (X) button into each drawer — visible on mobile only
+    // via CSS. Desktop closes via mouseleave + outside-click so the button
+    // would just be noise there. On mobile the drawer can cover most of the
+    // screen, so a dedicated close target is a cleaner dismissal path than
+    // hunting for an untapped corner of the page.
+    stats.forEach(function(stat) {
+      var menu = stat.querySelector('.stat-menu');
+      if (!menu || menu.querySelector('.stat-menu-close')) return;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'stat-menu-close';
+      btn.setAttribute('aria-label', 'Close');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        hide(stat);
+      });
+      menu.insertBefore(btn, menu.firstChild);
+    });
+
     stats.forEach(function(stat) {
       var value = stat.querySelector('.stat-value');
       var label = stat.querySelector('.stat-label');
@@ -2732,13 +2835,28 @@
 
     document.getElementById('searchCount').textContent = (currentMatchIdx + 1) + ' of ' + searchMatches.length;
 
-    // Scroll target into view, accounting for sticky header height
-    var headerOffset = document.getElementById('stickyHeader').offsetHeight + 24;
+    // Scroll target into view, accounting for sticky header height AND the
+    // virtual keyboard on mobile. When the iOS/Android keyboard is open,
+    // visualViewport.height shrinks to the visible-above-keyboard area; the
+    // default window.scrollTo offset can leave the target hidden behind the
+    // keyboard, which is what Shae saw as "the menu does not follow". We
+    // detect an open keyboard via the viewport delta and position the match
+    // ~25% down the visible area so it stays well clear of both the sticky
+    // header and the keyboard.
+    var stickyHeaderEl = document.getElementById('stickyHeader');
+    var headerH = stickyHeaderEl ? stickyHeaderEl.offsetHeight : 0;
+    var vv = window.visualViewport;
+    var visibleH = (vv && vv.height) || window.innerHeight;
+    var keyboardOpen = !!vv && (window.innerHeight - vv.height) > 100;
     var rect = target.getBoundingClientRect();
-    window.scrollTo({
-      top: window.pageYOffset + rect.top - headerOffset - 40,
-      behavior: 'smooth'
-    });
+    var scrollY;
+    if (keyboardOpen) {
+      var targetY = headerH + Math.max(40, (visibleH - headerH) * 0.25);
+      scrollY = window.pageYOffset + rect.top - targetY;
+    } else {
+      scrollY = window.pageYOffset + rect.top - headerH - 64;
+    }
+    window.scrollTo({ top: scrollY, behavior: 'smooth' });
   }
 
   // Live search: fires on every input event. Uses in-place DOM highlighting so
@@ -2824,6 +2942,31 @@
     handleSearch();
     input.focus();
   }
+
+  // Toggle body.search-focused (and the matching sticky-header class) based
+  // on focus state OR a non-empty query. This drives the mobile compact-card
+  // CSS: when active, every card shrinks to date + title only so all matches
+  // fit above the keyboard, and hero + stats panels collapse.
+  // Keeps compact mode on through blur so scrolling through matches after
+  // the keyboard dismisses still shows the full list; releases only when the
+  // input is truly empty AND unfocused.
+  (function() {
+    var input = document.getElementById('searchInput');
+    var header = document.getElementById('stickyHeader');
+    if (!input) return;
+    function syncSearchFocusClass() {
+      var isFocused = document.activeElement === input;
+      var hasQuery = input.value.trim().length > 0;
+      var active = isFocused || hasQuery;
+      document.body.classList.toggle('search-focused', active);
+      if (header) header.classList.toggle('search-focused', active);
+    }
+    input.addEventListener('focus', syncSearchFocusClass);
+    input.addEventListener('blur', syncSearchFocusClass);
+    input.addEventListener('input', syncSearchFocusClass);
+    // Expose so handleSearch / clearSearch can call it when they mutate value
+    window._syncSearchFocusClass = syncSearchFocusClass;
+  })();
 
   // ═══ FILTER SYSTEM ═══
   var activeFilter = null;
