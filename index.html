@@ -1664,7 +1664,12 @@
      this year without expanding every card. */
   .year-summary {
     margin: 4px 0 12px 0;
-    padding: 0 0 8px 0;
+    /* Top and bottom hairlines bookend the strip so it reads as its own
+       band, not as a continuation of the era divider above. Without the
+       top rule, a year headline that immediately follows an era tagline
+       looked like part of the era. */
+    padding: 8px 0 8px 0;
+    border-top: 1px solid var(--gray-15);
     border-bottom: 1px solid var(--gray-15);
     font-size: 12.5px; font-weight: 450;
     color: var(--gray-75);
@@ -1694,7 +1699,7 @@
   @media (max-width: 720px) {
     .year-summary {
       margin: 2px 0 10px 0;
-      padding-bottom: 6px;
+      padding: 6px 0;
       font-size: 11px;
       gap: 4px 8px;
     }
