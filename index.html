@@ -2827,40 +2827,53 @@
       }
     }
 
-    // CRITICAL: add the highlight class BEFORE measuring or scrolling. The
-    // :has() rule on .year-section overrides content-visibility: auto, which
-    // forces the section to fully lay out. Without this, the browser uses
-    // contain-intrinsic-size (a 900px guess) to estimate the card's position
-    // for scrollIntoView, then real layout happens mid-scroll and the target
-    // is wrong — worst on first click since the section has never been
-    // rendered. (Bug Shae reported Apr 23: "First click scroll to event
-    // location is over scrolling past the event.")
+    // CRITICAL: snap the sticky header to its MINIMIZED state BEFORE
+    // measuring. The header normally minimizes via scroll listener once
+    // scrollY > 4, animating over 220ms. That animation REFLOWS the
+    // page mid-scroll (sticky reserves space, height shrinks, content
+    // below shifts up by ~360px) which moves the destination card's
+    // document Y position OUT FROM UNDER the smooth scroll's pre-
+    // computed target. By forcing minimize + drawer-active (which
+    // zeros transitions) NOW, the page is in its final layout state
+    // BEFORE we measure / scroll, so the target is stable.
+    var sticky = document.getElementById('stickyHeader');
+    if (sticky) {
+      sticky.classList.add('drawer-active'); // zero layout transitions
+      sticky.classList.add('minimized');     // snap to minimized state
+    }
+
+    // Add the highlight class BEFORE measuring. The :has() rule on
+    // .year-section overrides content-visibility: auto, forcing the
+    // section to fully lay out. Without this, the browser uses
+    // contain-intrinsic-size (a 900px guess) when computing the card's
+    // position for scroll target math, and the actual layout happens
+    // mid-scroll → wrong target. Worst on first click.
     card.classList.remove('contract-jump-pulse', 'faded', 'fading-fast');
     void card.offsetWidth;
     card.classList.add('contract-jump-pulse');
 
-    // Force a synchronous layout pass so the content-visibility flip
-    // completes BEFORE we measure the card's position. Reading offsetHeight
-    // / getBoundingClientRect triggers layout synchronously.
+    // Force a synchronous layout pass so the minimize + content-
+    // visibility flips have committed BEFORE we measure.
     void card.offsetHeight;
 
-    // Manual scroll with sticky-header offset so the card lands in the
-    // visible area below the header (not hidden behind it). Header
-    // minimizes during scroll; we measure its CURRENT height as the
-    // header-area reservation. Slight imprecision during the minimize
-    // transition is acceptable — within ~50px of true center.
-    var headerH = 0;
-    var sticky = document.getElementById('stickyHeader');
-    if (sticky) headerH = sticky.getBoundingClientRect().height;
+    // Now measure with everything in its final state.
+    var headerH = sticky ? sticky.getBoundingClientRect().height : 0;
     var rect = card.getBoundingClientRect();
     var visibleH = window.innerHeight - headerH;
     var targetCardTopInViewport = headerH + Math.max(20, (visibleH - rect.height) / 2);
     var targetScrollY = window.scrollY + (rect.top - targetCardTopInViewport);
-    // Clamp so we never scroll past the bottom of the page.
     var maxScrollY = (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight;
     if (targetScrollY > maxScrollY) targetScrollY = maxScrollY;
     if (targetScrollY < 0) targetScrollY = 0;
     window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
+
+    // Release the drawer-active transition lock after the smooth scroll
+    // has had time to begin. The minimized class STAYS (the page will
+    // be scrolled past 4px so the regular scroll listener keeps the
+    // header minimized naturally — no flash back to full).
+    window.setTimeout(function() {
+      if (sticky) sticky.classList.remove('drawer-active');
+    }, 250);
 
     var holdTimer = null;
     var cleanupTimer = null;
