@@ -1797,7 +1797,7 @@
     <div class="stats-row">
       <div class="stat" id="contractsStat"><div class="stat-value">$46M+</div><div class="stat-label">Gov&#8217;t Contracts</div>
         <div class="stat-menu contracts-table">
-          <div class="contracts-title">U.S. government agreements: 10 funded contracts ($46M+) + 4 additional</div>
+          <div class="contracts-title">U.S. government agreements: 13 funded contracts ($46M+) + 1 lease</div>
           <div class="contracts-grid">
             <div class="contracts-row contracts-head">
               <div class="c-name">Contract</div>
@@ -1835,9 +1835,27 @@
               <div class="c-year">2022</div>
               <div class="c-source"><span class="src-pill src-public">Public</span></div>
             </div>
+            <div class="contracts-row" onclick="scrollToContract(115)">
+              <div class="c-name">Navy DLA PO &mdash; DGPS (SPE8EJ21D0022)</div>
+              <div class="c-amount">$71,070.00</div>
+              <div class="c-year">2023</div>
+              <div class="c-source"><span class="src-pill src-internal">Internal</span></div>
+            </div>
+            <div class="contracts-row" onclick="scrollToContract(116)">
+              <div class="c-name">Navy DLA PO &mdash; SATCOMv2 (SPE8EJ21D0022)</div>
+              <div class="c-amount">$203,735.00</div>
+              <div class="c-year">2023</div>
+              <div class="c-source"><span class="src-pill src-internal">Internal</span></div>
+            </div>
             <div class="contracts-row" onclick="scrollToContract(110)">
               <div class="c-name">Navy NAWCAD BWUAS 2.0 base (N00421-23-9-0013)</div>
               <div class="c-amount">$479,052.96</div>
+              <div class="c-year">2023</div>
+              <div class="c-source"><span class="src-pill src-internal">Internal</span></div>
+            </div>
+            <div class="contracts-row" onclick="scrollToContract(117)">
+              <div class="c-name">Navy DLA PO &mdash; Intelligen (SPE8EJ21D0022)</div>
+              <div class="c-amount">$79,545.00</div>
               <div class="c-year">2023</div>
               <div class="c-source"><span class="src-pill src-internal">Internal</span></div>
             </div>
@@ -1867,39 +1885,21 @@
             </div>
             <div class="contracts-row contracts-total">
               <div class="c-name">Total quantified</div>
-              <div class="c-amount">$45,967,784.18</div>
+              <div class="c-amount">$46,322,134.18</div>
               <div class="c-year"></div>
               <div class="c-source"></div>
             </div>
             <div class="contracts-row contracts-subhead">
-              <div class="c-name" style="grid-column: 1 / -1; opacity: 0.7; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;">Additional U.S. gov agreements (no $ to add to total)</div>
+              <div class="c-name" style="grid-column: 1 / -1; opacity: 0.7; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;">Additional U.S. gov agreement (non-monetary)</div>
             </div>
             <div class="contracts-row" onclick="scrollToContract(113)">
-              <div class="c-name">Navy LP-CRADA Aircraft Lease (V2 AV1-3)</div>
+              <div class="c-name">Navy NSLP-CRADA Aircraft Lease (V2 AV1-3)</div>
               <div class="c-amount">Lease (no $)</div>
               <div class="c-year">2025</div>
-              <div class="c-source"><span class="src-pill src-internal">Internal</span></div>
-            </div>
-            <div class="contracts-row" onclick="scrollToContract(115)">
-              <div class="c-name">Navy DLA PO &mdash; DGPS (SPE8EJ21D0022)</div>
-              <div class="c-amount">Amount pending</div>
-              <div class="c-year">2023</div>
-              <div class="c-source"><span class="src-pill src-internal">Internal</span></div>
-            </div>
-            <div class="contracts-row" onclick="scrollToContract(116)">
-              <div class="c-name">Navy DLA PO &mdash; SATCOMv2 (SPE8EJ21D0022)</div>
-              <div class="c-amount">Amount pending</div>
-              <div class="c-year">2023</div>
-              <div class="c-source"><span class="src-pill src-internal">Internal</span></div>
-            </div>
-            <div class="contracts-row" onclick="scrollToContract(117)">
-              <div class="c-name">Navy DLA PO &mdash; Intelligen (SPE8EJ21D0022)</div>
-              <div class="c-amount">Amount pending</div>
-              <div class="c-year">2023</div>
-              <div class="c-source"><span class="src-pill src-internal">Internal</span></div>
+              <div class="c-source"><span class="src-pill src-public">Public</span></div>
             </div>
           </div>
-          <div class="stat-menu-source">Click any row to jump to its timeline card. <strong>Internal</strong> = signed contract on file, dollar amount not publicly disclosed. <strong>Lease (no $)</strong> = LP-CRADA aircraft lease, non-monetary. <strong>Amount pending</strong> = signed Navy DLA POs under SPE8EJ21D0022 (Skyways component-supplier role), individual PO dollar amounts not yet documented in our records.</div>
+          <div class="stat-menu-source">Click any row to jump to its timeline card. <strong>Internal</strong> = signed contract on file, dollar amount not publicly disclosed. <strong>Public</strong> = contract, press release, or agreement document that is publicly releasable. <strong>Lease (no $)</strong> = NSLP-CRADA Navy aircraft lease, non-monetary.</div>
         </div>
       </div>
       <!-- km Flown removed — now shown live in the Fleet Flight Telemetry panel -->
