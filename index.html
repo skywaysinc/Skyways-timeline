@@ -921,25 +921,36 @@
   }
 
   /* Highlight for cards reached via contracts-table click.
-     Full-card light-thrust-green tint applied via inset box-shadow so the
-     existing background image / thumbnail tint is never touched. Holds for
-     ~9s, then fades over 1s. If the user scrolls after the smooth-scroll
-     has settled (armed ~900ms after click), the highlight fast-fades over
-     ~350ms. Outer drop-shadow is preserved at every state so the card never
-     visually loses its lift. */
+     Outer thrust-green halo (a 5px solid ring + a ~22px diffuse glow) so
+     the card content / thumbnail / category color are never tinted —
+     only the background AROUND the card lights up. Holds for ~9s, then
+     fades over 1s. If the user scrolls after the smooth-scroll has
+     settled (armed ~900ms after click), the highlight fast-fades over
+     ~350ms. Original drop-shadow is preserved at every state.
+     z-index on the card lifts the halo above adjacent sibling cards
+     within the same year section. */
   .event-card.contract-jump-pulse {
-    box-shadow: inset 0 0 0 9999px rgba(194, 242, 19, 0.33),
+    position: relative;
+    z-index: 6;
+    box-shadow: 0 0 0 5px rgba(194, 242, 19, 0.65),
+                0 0 22px 6px rgba(194, 242, 19, 0.55),
                 0 2px 8px rgba(0,0,0,0.1),
                 0 1px 3px rgba(0,0,0,0.08);
     transition: box-shadow 1s ease-out;
   }
   .event-card.contract-jump-pulse.faded {
-    box-shadow: inset 0 0 0 9999px rgba(194, 242, 19, 0),
+    box-shadow: 0 0 0 5px rgba(194, 242, 19, 0),
+                0 0 22px 6px rgba(194, 242, 19, 0),
                 0 2px 8px rgba(0,0,0,0.1),
                 0 1px 3px rgba(0,0,0,0.08);
   }
   .event-card.contract-jump-pulse.fading-fast {
     transition: box-shadow 350ms ease-out;
+  }
+  /* Lift the year section so the halo is not clipped behind the next year's
+     stacking context. Mirrors the same trick used for sources-open drawers. */
+  .year-section:has(.event-card.contract-jump-pulse) {
+    z-index: 50;
   }
 
   /* Mobile: keep every stat source drawer anchored DIRECTLY UNDER its own
