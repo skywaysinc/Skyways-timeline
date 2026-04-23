@@ -921,26 +921,27 @@
   }
 
   /* Highlight for cards reached via contracts-table click.
-     Outer thrust-green halo (an 8px solid ring + a ~33px diffuse glow,
-     ~50% larger than the prior static halo) that PULSES between dim and
-     bright every 1.6s for the 9s hold, then fades over 1s. The card
-     content / thumbnail / category color are never tinted — only the
-     background AROUND the card lights up. If the user scrolls after the
-     smooth-scroll has settled (armed ~900ms after click), the highlight
-     fast-fades over ~350ms instead. Original drop-shadow is preserved at
-     every state.
+     Outer category-colored halo (an 8px solid ring + a ~33px diffuse
+     glow) that PULSES between dim and bright every 1.6s for the 9s
+     hold, then fades over 1s. Card content / thumbnail / category
+     color are never tinted — only the background AROUND the card lights
+     up. If the user scrolls AFTER the smooth-scroll completes, the
+     highlight fast-fades over ~350ms instead. Original drop-shadow
+     preserved at every state.
+     Halo color comes from --halo-rgb, set per data-category below.
+     CSS keyframes resolve var() correctly in modern browsers.
      z-index on the card lifts the halo above adjacent sibling cards
      within the same year section. */
   @keyframes contractJumpHaloPulse {
     0%, 100% {
-      box-shadow: 0 0 0 8px rgba(194, 242, 19, 0.35),
-                  0 0 33px 10px rgba(194, 242, 19, 0.25),
+      box-shadow: 0 0 0 8px rgba(var(--halo-rgb), 0.35),
+                  0 0 33px 10px rgba(var(--halo-rgb), 0.25),
                   0 2px 8px rgba(0,0,0,0.1),
                   0 1px 3px rgba(0,0,0,0.08);
     }
     50% {
-      box-shadow: 0 0 0 8px rgba(194, 242, 19, 0.90),
-                  0 0 33px 10px rgba(194, 242, 19, 0.75),
+      box-shadow: 0 0 0 8px rgba(var(--halo-rgb), 0.90),
+                  0 0 33px 10px rgba(var(--halo-rgb), 0.75),
                   0 2px 8px rgba(0,0,0,0.1),
                   0 1px 3px rgba(0,0,0,0.08);
     }
@@ -948,14 +949,22 @@
   .event-card.contract-jump-pulse {
     position: relative;
     z-index: 6;
+    /* Default = blue (matches contracts category, where most jumps land).
+       Overridden per data-category below. */
+    --halo-rgb: 0, 154, 235;
     animation: contractJumpHaloPulse 1.6s ease-in-out infinite;
   }
+  .event-card.contract-jump-pulse[data-category="contracts"] { --halo-rgb: 0, 154, 235; }
+  .event-card.contract-jump-pulse[data-category="funding"]   { --halo-rgb: 194, 242, 19; }
+  .event-card.contract-jump-pulse[data-category="product"]   { --halo-rgb: 111, 82, 174; }
+  .event-card.contract-jump-pulse[data-category="milestone"] { --halo-rgb: 66, 198, 193; }
+  .event-card.contract-jump-pulse[data-category="defense"]   { --halo-rgb: 255, 144, 19; }
   /* Stop pulsing and fade out the halo. Browser interpolates from the
      animation's current frame to this static transparent state. */
   .event-card.contract-jump-pulse.faded {
     animation: none;
-    box-shadow: 0 0 0 8px rgba(194, 242, 19, 0),
-                0 0 33px 10px rgba(194, 242, 19, 0),
+    box-shadow: 0 0 0 8px rgba(var(--halo-rgb), 0),
+                0 0 33px 10px rgba(var(--halo-rgb), 0),
                 0 2px 8px rgba(0,0,0,0.1),
                 0 1px 3px rgba(0,0,0,0.08);
     transition: box-shadow 1s ease-out;
@@ -2131,7 +2140,7 @@
               <div class="c-name">Navy NSLP-CRADA Aircraft Lease (V2 AV1-3)</div>
               <div class="c-amount">Lease (no $)</div>
               <div class="c-year">2025</div>
-              <div class="c-source"><span class="src-pill src-public">Public</span></div>
+              <div class="c-source"><span class="src-pill src-internal">Internal</span></div>
             </div>
             <div class="contracts-row contracts-total contracts-grand-total">
               <div class="c-name">Grand total</div>
@@ -2425,8 +2434,24 @@
 
     // Source-classification drives the red bottom banner only — no other
     // visual changes to the card so it reads clean.
+    // Special case: some documents (like the NSLP-CRADA) are cited as
+    // internal because no press release exists, but ARE approved for
+    // public release per the document itself. Detect that via an
+    // "approved for public" marker in any source label and use a
+    // clarifying banner instead of the default internal warning.
+    var approvedPublicNoPR = false;
+    for (var ap = 0; ap < sources.length; ap++) {
+      var apSrc = sources[ap];
+      var apLabel = typeof apSrc === 'string' ? apSrc : (apSrc.label || '');
+      if (/approved for public/i.test(apLabel)) {
+        approvedPublicNoPR = true;
+        break;
+      }
+    }
     var bannerHTML = '';
-    if (internalCount > 0 && externalCount === 0) {
+    if (approvedPublicNoPR) {
+      bannerHTML = '<div class="internal-banner internal-banner-approved-public">APPROVED FOR PUBLIC USE, NO PRESS RELEASE</div>';
+    } else if (internalCount > 0 && externalCount === 0) {
       bannerHTML = '<div class="internal-banner internal-banner-only">NOT APPROVED FOR PUBLIC DISTRIBUTION</div>';
     } else if (internalCount > 0 && externalCount > 0) {
       bannerHTML = '<div class="internal-banner internal-banner-mixed">EVENT CONTAINS INTERNAL ONLY INFORMATION</div>';
@@ -2763,12 +2788,18 @@
 
   // ═══ SCROLL TO A CONTRACT CARD (from $46M+ stat-menu) ═══
   // Triggered by clicks in the contracts-table breakdown drawer.
-  // Scrolls the matching event-card into view and applies a light
-  // thrust-green full-card highlight that holds for ~9s, then fades over 1s.
-  // If the user scrolls after the smooth-scroll has settled (~900ms post-
-  // click), the highlight fast-fades over ~350ms instead. Always cleans up
-  // both timers + the scroll listener at the end of either path so a
-  // subsequent click can re-trigger from a clean state.
+  // Scrolls the matching event-card into view and applies a category-
+  // colored pulsing halo that holds for ~9s then fades over 1s. If the
+  // user scrolls AFTER the smooth-scroll has finished, the highlight
+  // fast-fades over ~350ms instead.
+  //
+  // First-click bug fix: previously a 900ms timer armed the user-scroll
+  // listener, but if the smooth scroll took longer than 900ms (long
+  // distance, first click) the listener caught the smooth scroll itself
+  // and instantly fast-faded the halo before the user saw it. Now the
+  // listener arms on the `scrollend` event (with a 1.6s timeout
+  // fallback for browsers without scrollend support), so the user-scroll
+  // listener only ever sees real user scroll input.
   window.scrollToContract = function(eventId) {
     var card = document.getElementById('event-' + eventId);
     if (!card) {
@@ -2792,13 +2823,15 @@
 
     var holdTimer = null;
     var cleanupTimer = null;
-    var armScrollTimer = null;
+    var armFallbackTimer = null;
+    var scrollEndHandler = null;
     var scrollHandler = null;
 
     function cleanup() {
       if (holdTimer) clearTimeout(holdTimer);
       if (cleanupTimer) clearTimeout(cleanupTimer);
-      if (armScrollTimer) clearTimeout(armScrollTimer);
+      if (armFallbackTimer) clearTimeout(armFallbackTimer);
+      if (scrollEndHandler) window.removeEventListener('scrollend', scrollEndHandler);
       if (scrollHandler) window.removeEventListener('scroll', scrollHandler);
       card.classList.remove('contract-jump-pulse', 'faded', 'fading-fast');
     }
@@ -2809,22 +2842,34 @@
       cleanupTimer = window.setTimeout(cleanup, 1100);
     }, 9000);
 
-    // Scroll-fade path: after the smooth scroll has settled, arm a one-shot
-    // scroll listener that fast-fades the highlight on any user scroll.
-    armScrollTimer = window.setTimeout(function() {
+    function armUserScrollListener() {
+      // Cancel the other arm path if both fired.
+      if (armFallbackTimer) { clearTimeout(armFallbackTimer); armFallbackTimer = null; }
+      if (scrollEndHandler) { window.removeEventListener('scrollend', scrollEndHandler); scrollEndHandler = null; }
+      // Already armed once? Don't re-arm.
+      if (scrollHandler) return;
       scrollHandler = function() {
         if (card.classList.contains('faded')) return; // already auto-fading
         card.classList.add('fading-fast');
-        // Force a frame so the new (shorter) transition is in effect before
-        // we change the target value, otherwise the browser may use the old
-        // 1s timing.
+        // Force a frame so the shorter transition takes effect before the
+        // target value flips, otherwise the browser may use the old 1s timing.
         requestAnimationFrame(function() {
           card.classList.add('faded');
           cleanupTimer = window.setTimeout(cleanup, 450);
         });
       };
       window.addEventListener('scroll', scrollHandler, { once: true, passive: true });
-    }, 900);
+    }
+
+    // Modern: arm right after the smooth scroll actually finishes.
+    if ('onscrollend' in window) {
+      scrollEndHandler = function() { armUserScrollListener(); };
+      window.addEventListener('scrollend', scrollEndHandler, { once: true });
+    }
+    // Fallback (covers Safari < 18.2 and the unlikely case scrollend
+    // never fires): arm at 1.6s, generous enough to cover most smooth
+    // scrolls. If scrollend fires first, the fallback is canceled.
+    armFallbackTimer = window.setTimeout(armUserScrollListener, 1600);
   };
 
   // ═══ THUMBNAIL COLOR EXTRACTION ═══
