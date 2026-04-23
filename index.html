@@ -919,12 +919,8 @@
     margin-top: 10px; font-size: 10.5px; line-height: 1.4;
     color: var(--gray-50);
   }
-  /* Mobile: the per-section key (Commercial / Internal / Public / Lease
-     definitions) was overflowing the drawer's cramped viewport. Desktop
-     users still get the legend; mobile keeps only the "Click any row to
-     jump" cue since the pills themselves telegraph the rest. */
+  /* Mobile: tighten the footer cue since it's now a single short line. */
   @media (max-width: 720px) {
-    .stat-menu.contracts-table .stat-menu-source-key { display: none; }
     .stat-menu.contracts-table .stat-menu-source {
       font-size: 10px; margin-top: 6px;
     }
@@ -2753,7 +2749,7 @@
               <div class="c-source"></div>
             </div>
           </div>
-          <div class="stat-menu-source">Click any row to jump to its timeline card.<span class="stat-menu-source-key"> <strong>Commercial</strong> = non-US-government partnerships (RWE, ANA, Skyports); dollar amounts vary in disclosure. <strong>Defense</strong>: <strong>Internal</strong> = signed contract on file, amount not publicly disclosed | <strong>Public</strong> = publicly releasable document | <strong>Lease (no $)</strong> = NSLP-CRADA Navy aircraft lease, non-monetary.</span></div>
+          <div class="stat-menu-source">Click any row to jump to its timeline card.</div>
           <div class="contracts-export-row">
             <button type="button" class="contracts-export-btn" onclick="event.stopPropagation(); exportContractsCSV();" aria-label="Export contracts table to CSV">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
