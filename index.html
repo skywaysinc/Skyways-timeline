@@ -1027,6 +1027,9 @@
     user-select: none;
     position: relative;
     min-width: 0;
+    /* Suppress iOS's default gray tap highlight so the active-filter
+       background is the only visual feedback on tap. */
+    -webkit-tap-highlight-color: transparent;
   }
 
   .legend-item:hover {
@@ -1070,12 +1073,19 @@
     align-items: center; justify-content: center;
     margin-left: 4px;
     flex-shrink: 0;
+    /* The X is a visual cue only — clicks go to the parent .legend-item
+       (onclick="toggleFilter(...)") which handles both select and
+       unselect via the same toggle. Without pointer-events: none an iOS
+       hit-test on the tiny svg path could miss the handler entirely and
+       make it feel like "only the X unselects". */
+    pointer-events: none;
   }
 
   .legend-x svg {
     width: 9px; height: 9px;
     fill: var(--gray-50);
     transition: fill 0.15s ease;
+    pointer-events: none;
   }
 
   .legend-item.active-filter .legend-x {
@@ -1735,7 +1745,10 @@
     }
     .legend-item {
       font-size: 8px;
-      padding: 3px 0;
+      /* Bigger padding on mobile so the tap target is comfortably tappable
+         (target height ~32px). Visual spacing still stays tight because
+         the legend-row itself has small vertical padding above. */
+      padding: 8px 4px;
       gap: 4px;
       min-width: 0;
       justify-content: flex-start;
