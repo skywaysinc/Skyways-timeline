@@ -216,7 +216,7 @@
     "date": "2017-11",
     "title": "$272,711 | USMC/GTRI First Purchase Order (Two V2.2 Aircraft)",
     "category": "contracts",
-    "detail": "The United States Marine Corps (USMC), in partnership with the Georgia Institute of Technology / Georgia Tech Research Institute (GTRI), issued Skyways' very first purchase order for two V2.2 aircraft under federal prime contract FA8075-14-D-0018-0018 (USAF AFLCMC). PO #0000441708 (Nov 2, 2017): two V2.2 UAS, integration and flight tests, USMC training, test support, crating and shipping. PO #0000498568 (Jun 1, 2018): CDR Preparation, CDR Execution, two sets aircraft containers and auxiliary equipment containers. Combined value $272,711.48 across the two POs. This was Skyways' first-ever contract and a critical early validation of the platform's readiness for military customers.",
+    "detail": "The United States Marine Corps (USMC), in partnership with the Georgia Institute of Technology / Georgia Tech Research Institute (GTRI), issued Skyways' very first purchase order for two V2.2 aircraft under federal prime contract FA8075-14-D-0018-0018 (USAF AFLCMC). Combined value $272,711.48 across two purchase orders. This was Skyways' first-ever contract and a critical early validation of the platform's readiness for military customers.",
     "tag": "Contract | USMC",
     "sources": [
       "Skyways Internal | Charles Acknin",
@@ -232,7 +232,11 @@
       "Skyways (fallback)": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp"
     },
     "thumbnail_status": "fallback_skyways",
-    "date_display": "2017-11"
+    "date_display": "2017-11",
+    "bullets": [
+      "PO #0000441708, Nov 2, 2017: two V2.2 UAS, integration and flight tests, USMC training, test support, crating and shipping",
+      "PO #0000498568, Jun 1, 2018: CDR Preparation, CDR Execution, two sets aircraft containers and auxiliary equipment containers"
+    ]
   },
   {
     "id": 106,
@@ -286,7 +290,7 @@
     "date": "2019-08",
     "title": "$575,141 | Navy OTA Award (Blue Water Maritime Logistics UAS)",
     "category": "contracts",
-    "detail": "Following the ANTX 2019 competition win, the U.S. Navy awarded an Other Transaction Authority (OTA) contract to Skyways ($575,141 base) for the Blue Water Maritime Logistics Unmanned Aircraft System (UAS) program. Contract number N00421-19-9-0007, awarded August 29, 2019 by NAWCAD. This first Navy contract specifically funded the development of hybrid propulsion for the V2 platform. Through subsequent modifications including P00003 (Spiral Dev V2.6, Sep 2020), P00005 (AV3, Dec 2020), P00006 (SATCOM Link, Jan 2022), and P00007 (extension and SLINs, Jul 2022), the funded value grew to $2,066,701.73 by July 2022 (Total Potential Amount including CMG Fee: $2,476,005.91).",
+    "detail": "Following the ANTX 2019 competition win, the U.S. Navy awarded an Other Transaction Authority (OTA) contract to Skyways ($575,141 base) for the Blue Water Maritime Logistics Unmanned Aircraft System (UAS) program. Contract number N00421-19-9-0007, awarded August 29, 2019 by NAWCAD. This first Navy contract specifically funded the development of hybrid propulsion for the V2 platform. Through subsequent modifications, the funded value grew to $2,066,701.73 by July 2022 (Total Potential Amount including CMG Fee: $2,476,005.91).",
     "tag": "Contract | U.S. Navy",
     "sources": [
       "NASC (Naval Aviation Systems Consortium) | N00421-19-9-0007",
@@ -307,7 +311,13 @@
       "USNI News (Aug 2021)": "https://news.usni.org/wp-content/uploads/2021/08/skyways.jpeg"
     },
     "date_display": "2019-08",
-    "thumbnail": "https://www.janes.com/images/default-source/news-images/fg_3797467-jni-9077.jpg?sfvrsn=1263cb15_2"
+    "thumbnail": "https://www.janes.com/images/default-source/news-images/fg_3797467-jni-9077.jpg?sfvrsn=1263cb15_2",
+    "bullets": [
+      "P00003 (Sep 2020): Spiral Dev V2.6",
+      "P00005 (Dec 2020): AV3 aircraft build",
+      "P00006 (Jan 2022): SATCOM Link integration",
+      "P00007 (Jul 2022): extension and SLINs"
+    ]
   },
   {
     "id": 10,
@@ -787,7 +797,7 @@
     "date": "2023-03",
     "title": "$71,070 | Navy DLA PO | DGPS (SPE8EJ21D0022 PO 0408)",
     "category": "contracts",
-    "detail": "Defense Logistics Agency (DLA) Purchase Order PFR006115, Order Number PO 0408, under prime contract SPE8EJ21D0022 (Noble Supply and Logistics is prime; Skyways is component supplier). PO dated March 15, 2023. Total funded value $71,070.00 breaks out as: Differential Global Positioning System (DGPS) hardware, 6 units at $1,897.50 = $11,385.00; Engineering services (integration, ground testing, flight testing, quality assurance), $48,185.00; Special Operations Equipment (SOE) freight charges, $11,500.00. Delivery to James Tomasic at Naval Air Warfare Center Aircraft Division Rapid Prototyping Experimentation and Demonstration (NAWCAD RPED), Patuxent River, MD.",
+    "detail": "Defense Logistics Agency (DLA) Purchase Order PFR006115, Order Number PO 0408, under prime contract SPE8EJ21D0022 (Noble Supply and Logistics is prime; Skyways is component supplier). PO dated March 15, 2023. Total funded value $71,070.00. Delivery to James Tomasic at Naval Air Warfare Center Aircraft Division Rapid Prototyping Experimentation and Demonstration (NAWCAD RPED), Patuxent River, MD.",
     "tag": "Contract | U.S. Navy / DLA",
     "sources": [
       "Skyways Internal | Contract on File (Noble Purchase Order PFR006115 under DLA prime SPE8EJ21D0022; PO dated Mar 15, 2023; $71,070.00 total funded to Skyways)"
@@ -800,7 +810,12 @@
     },
     "thumbnail_status": "fallback_v2_ship",
     "date_display": "2023-03",
-    "thumbnail": "https://cdn.sanity.io/images/zlpq6b94/production/9b176eaaed9f4d41377f4fbfff6183f142e7e618-1280x720.jpg?w=1600&fit=max&auto=format"
+    "thumbnail": "https://cdn.sanity.io/images/zlpq6b94/production/9b176eaaed9f4d41377f4fbfff6183f142e7e618-1280x720.jpg?w=1600&fit=max&auto=format",
+    "bullets": [
+      "Differential Global Positioning System (DGPS) hardware, 6 units at $1,897.50 each: $11,385.00",
+      "Engineering services (integration, ground testing, flight testing, quality assurance): $48,185.00",
+      "Special Operations Equipment (SOE) freight charges: $11,500.00"
+    ]
   },
   {
     "id": 24,
@@ -855,7 +870,7 @@
     "date": "2023-05",
     "title": "$203,735 | Navy DLA PO | SATCOMv2 (SPE8EJ21D0022 PO 0463)",
     "category": "contracts",
-    "detail": "Defense Logistics Agency (DLA) Purchase Order PFR007234, Order Number PO 0463, under prime contract SPE8EJ21D0022 (Noble Supply and Logistics is prime; Skyways is component supplier). PO dated May 26, 2023. Total funded value $203,735.00 breaks out as: SKYTRAC DLS-100 SATCOMv2 hardware (3 units per aircraft across 3 aircraft = 9 total) at $28,865.00 each = $86,595.00; V2.6b SATCOMv2 Non-Recurring Engineering and Test (software, mechanical, electrical, test, flight test) = $105,110.00; SKYTRAC DLS-100 Integration across 3 aircraft at $1,610.00 each = $4,830.00; SPP-720M airtime plan (720 MB per month for 12 months) at $600.00 each = $7,200.00. Delivery to James Tomasic at NAWCAD RPED, Patuxent River, MD. Buyer: Tyler Ray (Noble).",
+    "detail": "Defense Logistics Agency (DLA) Purchase Order PFR007234, Order Number PO 0463, under prime contract SPE8EJ21D0022 (Noble Supply and Logistics is prime; Skyways is component supplier). PO dated May 26, 2023. Total funded value $203,735.00. Delivery to James Tomasic at NAWCAD RPED, Patuxent River, MD. Buyer: Tyler Ray (Noble).",
     "tag": "Contract | U.S. Navy / DLA",
     "sources": [
       "Skyways Internal | Contract on File (Noble Purchase Order PFR007234 under DLA prime SPE8EJ21D0022; PO dated May 26, 2023; $203,735.00 total funded to Skyways)"
@@ -868,7 +883,13 @@
     },
     "thumbnail_status": "fallback_v2_ship",
     "date_display": "2023-05",
-    "thumbnail": "https://cdn.sanity.io/images/zlpq6b94/production/1d8ababd19aa2215aac02eb2be9dff64a22a80c2-1000x600.webp?w=1600&fit=max&auto=format"
+    "thumbnail": "https://cdn.sanity.io/images/zlpq6b94/production/1d8ababd19aa2215aac02eb2be9dff64a22a80c2-1000x600.webp?w=1600&fit=max&auto=format",
+    "bullets": [
+      "SKYTRAC DLS-100 SATCOMv2 hardware, 9 units across 3 aircraft at $28,865.00 each: $86,595.00",
+      "V2.6b SATCOMv2 Non-Recurring Engineering and Test (software, mechanical, electrical, test, flight test): $105,110.00",
+      "SKYTRAC DLS-100 Integration across 3 aircraft at $1,610.00 each: $4,830.00",
+      "SPP-720M airtime plan (720 MB per month for 12 months) at $600.00 each: $7,200.00"
+    ]
   },
   {
     "id": 25,
@@ -1178,7 +1199,7 @@
     "date": "2025-03",
     "title": "Aircraft Lease Agreement | Navy NSLP-CRADA-NAWCADPAX-25-533 (V2 AV1-3)",
     "category": "contracts",
-    "detail": "Non-Standard Limited Purpose Cooperative Research and Development Agreement (NSLP-CRADA) between Naval Air Warfare Center Aircraft Division Patuxent River (NAVAIRWARCENACDIV) and Skyways Air Transportation, Inc. Agreement number NSLP-CRADA-NAWCADPAX-25-533, titled \"SKYWAYS V2.6 UNMANNED AERIAL SYSTEM DEMONSTRATION.\" Signed by Charles Acknin (Skyways CEO) on March 18, 2025 and by J.E. Dougherty IV, RDML, USN, Commander NAWCAD on March 20, 2025. Duration up to 4 years from effective date (through ~March 2029). The Navy transfers custody of three V2.6 aircraft (AV1, AV2, AV3) plus 6 Ground Control Stations, 3 Telemetry Station Shore units, 3 Telemetry Station Ship units, 4 VTOL Battery Packs, and 3 Ground Support Equipment kits to Skyways for demonstrations and technology development. No funds are transferred under the agreement (Article 16); Skyways retains title to its own equipment and must return all Navy-owned equipment at termination. Per Article 19, the agreement is approved for public use. No press release has been issued.",
+    "detail": "Non-Standard Limited Purpose Cooperative Research and Development Agreement (NSLP-CRADA) between Naval Air Warfare Center Aircraft Division Patuxent River (NAVAIRWARCENACDIV) and Skyways Air Transportation, Inc. Agreement number NSLP-CRADA-NAWCADPAX-25-533, titled \"SKYWAYS V2.6 UNMANNED AERIAL SYSTEM DEMONSTRATION.\" Signed by Charles Acknin (Skyways CEO) on March 18, 2025 and by J.E. Dougherty IV, RDML, USN, Commander NAWCAD on March 20, 2025. Duration up to 4 years from effective date (through ~March 2029). No funds are transferred under the agreement (Article 16); Skyways retains title to its own equipment and must return all Navy-owned equipment at termination. Per Article 19, the agreement is approved for public use. No press release has been issued. Navy transfers custody of the following equipment to Skyways:",
     "tag": "Contract | U.S. Navy",
     "sources": [
       "Skyways Internal | Contract on File (NSLP-CRADA, approved for public use)"
@@ -1190,7 +1211,15 @@
     },
     "thumbnail_status": "fallback_v2_ship",
     "date_display": "2025-03",
-    "thumbnail": "https://cdn.sanity.io/images/zlpq6b94/production/1d55f12bf912dd8167948e17f7254231fa0b2c33-1600x1066.jpg?w=1600&fit=max&auto=format"
+    "thumbnail": "https://cdn.sanity.io/images/zlpq6b94/production/1d55f12bf912dd8167948e17f7254231fa0b2c33-1600x1066.jpg?w=1600&fit=max&auto=format",
+    "bullets": [
+      "3 V2.6 aircraft (AV1, AV2, AV3)",
+      "6 Ground Control Stations",
+      "3 Telemetry Station Shore units",
+      "3 Telemetry Station Ship units",
+      "4 VTOL Battery Packs",
+      "3 Ground Support Equipment kits"
+    ]
   },
   {
     "id": 34,
@@ -1458,7 +1487,7 @@
     "date": "2026-01",
     "title": "Leadership Team Expansion",
     "category": "milestone",
-    "detail": "Key hires: Jeff Weinstein (VP Production, 25+ years experience), Bill Wimberley (Chief Commercial Officer), Gabrielle Wain (VP Regulatory, ex-Zipline), Mike Uffelman (Head of Flight Ops, ex-United States Air Force, 2,500+ flight hours). Isaac Roberts transitions from Chief Commercial Officer to Chief Strategy Officer. Skyways finished 2025 at approximately 39 employees and has doubled revenue for three consecutive years.",
+    "detail": "Key hires strengthen production, commercial, regulatory, and flight operations leadership. Isaac Roberts transitions from Chief Commercial Officer to Chief Strategy Officer. Skyways finished 2025 at approximately 39 employees and has doubled revenue for three consecutive years.",
     "tag": "Milestone",
     "sources": [
       "GlobeNewswire (Jan 2026)",
@@ -1474,6 +1503,12 @@
     "date_display": "2026-01",
     "charles_corrections": [
       "Round II CA#17 (Mar 20, 2026): Charles asked to verify end-of-2025 headcount (~39). Anthony (Skyways People Ops) confirmed \"yes\" via DM on Mar 19, 2026. Added ~39 employees claim to detail with Anthony as source."
+    ],
+    "bullets": [
+      "Jeff Weinstein, VP Production, 25+ years experience",
+      "Bill Wimberley, Chief Commercial Officer",
+      "Gabrielle Wain, VP Regulatory, ex-Zipline",
+      "Mike Uffelman, Head of Flight Ops, ex-U.S. Air Force, 2,500+ flight hours"
     ]
   },
   {
