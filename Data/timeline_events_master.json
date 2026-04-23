@@ -192,7 +192,7 @@
     "id": 9,
     "year": "2019",
     "date": "2019-08",
-    "title": "$2,066,702 | Navy OTA Award (Blue Water Maritime Logistics UAS)",
+    "title": "$575,141 | Navy OTA Award (Blue Water Maritime Logistics UAS)",
     "category": "contracts",
     "detail": "Following the ANTX 2019 competition win, the U.S. Navy awarded an Other Transaction Authority (OTA) contract to Skyways ($575,141 base) for the Blue Water Maritime Logistics Unmanned Aircraft System (UAS) program. Contract number N00421-19-9-0007, awarded August 29, 2019 by NAWCAD. This first Navy contract specifically funded the development of hybrid propulsion for the V2 platform. Through subsequent modifications including P00003 (Spiral Dev V2.6, Sep 2020), P00005 (AV3, Dec 2020), P00006 (SATCOM Link, Jan 2022), and P00007 (extension and SLINs, Jul 2022), the funded value grew to $2,066,701.73 by July 2022 (Total Potential Amount including CMG Fee: $2,476,005.91).",
     "tag": "Contract | U.S. Navy",
@@ -1438,7 +1438,7 @@
     "year": "2026",
     "date": "2026-04",
     "title": "Series B Round Opens",
-    "category": "contracts",
+    "category": "funding",
     "detail": "Skyways begins its Series B fundraising round to accelerate V3 production scaling and expand commercial operations.",
     "tag": "Funding",
     "sources": [
