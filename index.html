@@ -1206,7 +1206,15 @@
        This is the biggest single scroll-performance win on this page
        (50+ cards, heavy inline SVGs, thumbnail tints per card). */
     content-visibility: auto;
-    contain-intrinsic-size: 1px 900px;
+    /* `auto` (Chrome 109+, Safari 17.4+) makes the browser REMEMBER each
+       section's actual rendered size after first paint. Subsequent
+       content-visibility skips use the remembered size instead of the
+       900px fallback, so re-skipping never causes a layout shift. The
+       900px fallback is only used the very first time the section comes
+       into view. Critical for scrollToContract() — without `auto`, every
+       restore of content-visibility would reflow the page and move the
+       destination card out of view. */
+    contain-intrinsic-size: auto 900px;
   }
   /* When a source drawer opens on a card at the BOTTOM of a year-section,
      the drawer extends past the section's bottom edge into the next
@@ -2876,17 +2884,18 @@
 
     // Release the drawer-active lock after the smooth scroll has begun.
     // The minimized class STAYS (scrollY > 4 keeps it on naturally).
-    // Restore content-visibility on all sections AFTER the scroll has
-    // settled — gives the perf optimization back without disturbing
-    // this scroll. 1500ms covers a long smooth scroll comfortably.
     window.setTimeout(function() {
       if (sticky) sticky.classList.remove('drawer-active');
     }, 250);
-    window.setTimeout(function() {
-      allYearSections.forEach(function(s) {
-        s.style.contentVisibility = '';
-      });
-    }, 1500);
+    // Note: do NOT restore the inline content-visibility on year-sections.
+    // A previous version restored at 1500ms, which caused the destination
+    // card to visibly move OUT of view because off-screen sections shifted
+    // back to their contain-intrinsic-size, reflowing the document under
+    // the now-anchored scroll position. The brute-force "visible" inline
+    // override stays for the rest of the session — small perf cost, zero
+    // layout shift. With `contain-intrinsic-size: auto 900px` in the base
+    // CSS, even sections that DO go back to content-visibility: auto on
+    // future re-skips won't shift layout (browser remembers real size).
 
     var holdTimer = null;
     var cleanupTimer = null;
