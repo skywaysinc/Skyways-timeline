@@ -275,3 +275,28 @@ Cross-referenced from `docs/README.md`. Memory-side rules stay pointed at `memor
 ### Full arrow character audit
 
 The earlier em-dash cleanup scanned only em (U+2014) and en (U+2013) dashes plus simple → ← arrows. It missed ↔ (U+2194 bidirectional) and other arrow Unicode range variants. Full range scan (U+2190–U+2199) now clean across all 65 events' titles, details, bullets, and sources. Added to the CARD_STYLING_RULES.md never-in-copy list so the full arrow range stays out of future content.
+
+---
+
+## Title convention: `Hook | Why it matters`
+
+Shae set the rule: every event card title leads with a hook, then a pipe, then the significance. Money events must have the dollar amount in the hook. Full rule + checklist now in `docs/CARD_STYLING_RULES.md` under "Title Convention." Memory mirror added to `reference_storytelling_framework.md` so future sessions apply it without re-litigating.
+
+| Commit | Summary |
+|---|---|
+| [dfcfc02](https://github.com/skywaysinc/Skyways-timeline/commit/dfcfc02) | Retitled 24 of 65 events to the `Hook | Why it matters` convention. Key moves: money promoted into hook on all funding/contract rows; filler verbs dropped ("Start of," "End of," "Accelerates," "Added"); insider contract numbers pulled out of DLA PO titles; first-of-kind and wow stats promoted (`First 60-Mile BVLOS`, `Zero Skyways Personnel Aboard`, `Three Senior Hires`, `Path to Program of Record`). |
+
+### Before/after sample
+
+| Before | After |
+|---|---|
+| Series A \| $13M (Thursday Ventures Lead) | $13M Series A \| Thursday Ventures Leads |
+| Start of Seed Fundraising \| Rolling Close | $1M Seed Round Begins \| Rolling Close |
+| V2 Platform Development Accelerates | V2 Specs Set by Navy \| 20 lb / 400 NM |
+| Leadership Team Expansion | Leadership Expansion \| Three Senior Hires |
+| Starlink Connectivity Added | Starlink Aboard \| Connectivity Leap |
+| USMC V2.2 Delivery & White Sands BVLOS Demo | First 60-Mile BVLOS at White Sands \| V2.2 Delivered to USMC |
+
+## End-of-session state
+
+All 65 events live on Firestore + JSON + GitHub. 15 bulleted cards, 50 prose. 24 titles retitled to the new convention; remaining 41 already complied. Four-state source visibility enforced. Every Charles + Tom correction honored. Zero em/en dashes or arrows in user-visible fields. Canonical rule docs in place: SOURCE_VISIBILITY_RULES, CARD_STYLING_RULES (incl. title convention), EVENT_CORRECTIONS_AUDIT, STORYTELLING_GAPS, plus the docs/README folder map. Memory mirrors for storytelling framework and Tom Martin + Charles feedback archives.
