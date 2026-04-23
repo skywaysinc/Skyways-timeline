@@ -149,7 +149,66 @@ If Shae wanted to express CRADA value on a service-equivalent basis (rather than
 - **$681,023** — BOM build cost ($227K × 3)
 - **$0** — per CRADA Article 16 ("No funds are transferred")
 
-## Total entries on collection: 64
+## Total entries on collection: 65
 - 60 original (after Apr 21 Tier 1-4 cleanup)
 - +1 V3 Block 2L placeholder (id=114)
 - +3 Navy DLA POs (id=115 DGPS, id=116 SATCOMv2, id=117 Intelligen)
+- +1 CVSI Nov 2024 (id=118, added Apr 23 evening)
+
+---
+
+## Evening session — storytelling rewrite + correction audit
+
+### Copywriting/storytelling overhaul
+
+Applied a framework (HOOK · TURN · STAKES, 7 principles + checklist) to the narrative copy on the timeline. Framework now saved as memory reference at `reference_storytelling_framework.md`.
+
+| Commit | Summary |
+|---|---|
+| [f677471](https://github.com/skywaysinc/Skyways-timeline/commit/f677471) | Rewrite era taglines as prose, fact-checked, in Charles's voice. Fixed Era 1 factual errors (Delaware incorp not Austin, Navy demos are 2019). Era 2-4 taglines restructured to single-arc prose with connective tissue. |
+| [04898f9](https://github.com/skywaysinc/Skyways-timeline/commit/04898f9) | Retitle 3 eras: DoW Operation Molding → **Earning the Navy**, Platform Improvements → **V3 and Allies**, Public Emergence → **Program & Public**. Founding and Scaling kept. |
+| [b609c35](https://github.com/skywaysinc/Skyways-timeline/commit/b609c35) | Rewrite 11 year headlines as prose, single-subject + parallel verbs. Replaced pipe-separated noun lists with story beats. Fixed 2017 false "Navy demos" and 2026 "Japan ops scale" rule violation. |
+
+Current era arc: **Founding → Earning the Navy → V3 and Allies → Program & Public → Scaling**
+
+### Storytelling gaps backlog
+
+| Commit | Summary |
+|---|---|
+| [449e812](https://github.com/skywaysinc/Skyways-timeline/commit/449e812) | Added `docs/STORYTELLING_GAPS.md` — 20-gap table ranked P0-P3 for investor + wider-public story. P0s include capital-efficiency ratio, Charles's hobby-kit origin, mission-impact framing, PoR glossary, competitive moat. |
+
+### Event-by-event correction audit (Tom Martin + Charles Excel rounds)
+
+Gathered Tom Martin ("T-Money," `U04ALK2USCS`, `tom@skyways.com`) identity and his 5 Slack corrections (Apr 2–6, 2026). Extracted all 40 Charles Excel corrections (Rounds II+III, Mar 19 – Apr 1, 2026). Saved consolidated audit to `docs/EVENT_CORRECTIONS_AUDIT.md` with per-item verification status.
+
+**Automated regex sweep across all 64 (now 65) events** against every removal pattern and every required-presence check. Found 3 gaps; resolved all 3.
+
+| Commit | Summary |
+|---|---|
+| [b864a9c](https://github.com/skywaysinc/Skyways-timeline/commit/b864a9c) | Fix id=27 RIMPAC (removed PteroDynamics X-P4 + "3 of 6" framing per Charles R3) and id=31 III MEF (clarified stateside, added 6hr/300+mi/10 bags blood 3-6 °C per Charles R2). Mirrored to Firestore. Added `EVENT_CORRECTIONS_AUDIT.md`. |
+| [faa69b3](https://github.com/skywaysinc/Skyways-timeline/commit/faa69b3) | Add CVSI event (id=118, Nov 2024 Gulf of Mexico demo, Inside Unmanned Systems public source). Update id=43 Leadership to include "~39 employees end of 2025" (Anthony-confirmed via DM Mar 19). |
+| [1953ab8](https://github.com/skywaysinc/Skyways-timeline/commit/1953ab8) | Final era cleanup: CVSI thumbnail swapped to skyways.com fallback (non-Sanity per Shae); id=109 Series B "production scaling" → "production ramp" for Era 5 reservation rule. |
+
+### Era-by-era audit outcome
+
+All 45 Charles/Tom correction items verified across 65 events:
+
+| Era | Events | Status |
+|---|---|---|
+| Era 1 Founding (2016-2018) | 11 | ✓ all honored (pattern sweep clean) |
+| Era 2 Earning the Navy (2019-2022) | 18 | ✓ all honored |
+| Era 3 V3 and Allies (2023-2024) | 14 + CVSI added | ✓ all honored after 3 fixes today |
+| Era 4 Program & Public (2025-2026) | 21 | ✓ all honored after headcount + Series B polish |
+| Era 5 Scaling (2027+) | 0 live | n/a (upcoming) |
+
+### Memory archive updates (Apr 23 evening)
+
+- `reference_tom_martin_feedback.md` — new: Tom Martin identity, voice pattern, V3-OR-not-AND global rule, standing corrections
+- `reference_storytelling_framework.md` — new: HOOK · TURN · STAKES framework + 7 principles + checklist for future narrative copy
+- `MEMORY.md` index — two new reference entries added
+
+### Flagged for separate future session (not Charles/Tom feedback)
+
+- **63 pre-existing em/en dashes live in source labels** (e.g., "Skyways Internal — Charles Acknin"). Violates the no-em-dash user-visible-copy rule. Not part of the audit scope since neither Charles nor Tom raised it.
+- Tom's Apr 23 re-review reaction was `:eyes:`; no new corrections yet at time of writing.
+- ANA Oct 2025 row (id=41) was live before this session; should reconfirm with Jessica before next press cycle (Charles C-16 compliance hold).

@@ -162,7 +162,7 @@ for d in firestore.client().collection('skyways_history_and_story').stream():
 
 ## Timeline Database (Firebase Firestore)
 - **Firebase Project:** `marketing---earned-media-db` (shared with Earned Media DB)
-- **Collection:** `skyways_history_and_story` — **56 documents**
+- **Collection:** `skyways_history_and_story` — **65 documents** (Apr 23, 2026: added CVSI id=118 for Nov 2024 Gulf of Mexico Computer Vision Ship Intercept demo)
 - **Local backup:** `Data/timeline_events_master.json` (always keep in sync with Firestore)
 - **Seed script:** `scripts/seed_firestore.py`
 - **Service account key:** `~/Desktop/Claude/Marketing - Earned Media DB/marketing---earned-media-db-firebase-adminsdk-fbsvc-57c1abc041.json`
