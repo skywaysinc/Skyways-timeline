@@ -2827,36 +2827,43 @@
       }
     }
 
-    // CRITICAL: snap the sticky header to its MINIMIZED state BEFORE
-    // measuring. The header normally minimizes via scroll listener once
-    // scrollY > 4, animating over 220ms. That animation REFLOWS the
-    // page mid-scroll (sticky reserves space, height shrinks, content
-    // below shifts up by ~360px) which moves the destination card's
-    // document Y position OUT FROM UNDER the smooth scroll's pre-
-    // computed target. By forcing minimize + drawer-active (which
-    // zeros transitions) NOW, the page is in its final layout state
-    // BEFORE we measure / scroll, so the target is stable.
+    // FIX (Apr 23 v3): the previous "snap header + flip destination
+    // year-section's content-visibility via :has()" wasn't enough.
+    // EVERY year-section between the user's current scroll position and
+    // the destination still has content-visibility: auto, and the
+    // browser uses each section's contain-intrinsic-size (1px × 900px)
+    // as its layout height when computing rect.top for off-screen
+    // elements. If the real heights differ from 900px (they do — most
+    // are ~400-700px), the cumulative error compounds and rect.top is
+    // off by hundreds of pixels. Result: overshoot by 1-2 cards.
+    //
+    // Brute-force fix: force ALL year-sections to content-visibility:
+    // visible BEFORE measuring. Layout becomes accurate. After the
+    // scroll has settled (~1.5s), restore them so the perf optimization
+    // resumes for any future scroll.
+    //
+    // Also snap the sticky header to its minimized state so it doesn't
+    // animate-reflow during the scroll.
     var sticky = document.getElementById('stickyHeader');
     if (sticky) {
       sticky.classList.add('drawer-active'); // zero layout transitions
       sticky.classList.add('minimized');     // snap to minimized state
     }
+    var allYearSections = document.querySelectorAll('.year-section');
+    allYearSections.forEach(function(s) {
+      s.style.contentVisibility = 'visible';
+    });
 
-    // Add the highlight class BEFORE measuring. The :has() rule on
-    // .year-section overrides content-visibility: auto, forcing the
-    // section to fully lay out. Without this, the browser uses
-    // contain-intrinsic-size (a 900px guess) when computing the card's
-    // position for scroll target math, and the actual layout happens
-    // mid-scroll → wrong target. Worst on first click.
+    // Add the highlight class.
     card.classList.remove('contract-jump-pulse', 'faded', 'fading-fast');
     void card.offsetWidth;
     card.classList.add('contract-jump-pulse');
 
-    // Force a synchronous layout pass so the minimize + content-
-    // visibility flips have committed BEFORE we measure.
-    void card.offsetHeight;
+    // Force a full synchronous layout pass so the content-visibility
+    // flips and header minimize commit BEFORE we measure.
+    void document.body.offsetHeight;
 
-    // Now measure with everything in its final state.
+    // Now measure with the entire page in its real, final layout.
     var headerH = sticky ? sticky.getBoundingClientRect().height : 0;
     var rect = card.getBoundingClientRect();
     var visibleH = window.innerHeight - headerH;
@@ -2867,13 +2874,19 @@
     if (targetScrollY < 0) targetScrollY = 0;
     window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
 
-    // Release the drawer-active transition lock after the smooth scroll
-    // has had time to begin. The minimized class STAYS (the page will
-    // be scrolled past 4px so the regular scroll listener keeps the
-    // header minimized naturally — no flash back to full).
+    // Release the drawer-active lock after the smooth scroll has begun.
+    // The minimized class STAYS (scrollY > 4 keeps it on naturally).
+    // Restore content-visibility on all sections AFTER the scroll has
+    // settled — gives the perf optimization back without disturbing
+    // this scroll. 1500ms covers a long smooth scroll comfortably.
     window.setTimeout(function() {
       if (sticky) sticky.classList.remove('drawer-active');
     }, 250);
+    window.setTimeout(function() {
+      allYearSections.forEach(function(s) {
+        s.style.contentVisibility = '';
+      });
+    }, 1500);
 
     var holdTimer = null;
     var cleanupTimer = null;
