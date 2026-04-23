@@ -244,3 +244,34 @@ Memory rule `feedback_internal_marking_style.md` rewritten with the four-state t
 - 74 unique thumbnails preserved (em-dash fix was purely label text)
 - Render-path scan on index.html: zero em dashes in user-visible HTML (code comments preserved per CLAUDE.md rule)
 - Pre-existing "INTERNAL ONLY" banner logic uncovered and fixed for the pipe separator (regex was em-dash-only, would have silently failed post-cleanup)
+
+---
+
+## Bullet restructuring + card styling rules
+
+Followup work on event card readability and consistency.
+
+| Commit | Summary |
+|---|---|
+| [0fe73e4](https://github.com/skywaysinc/Skyways-timeline/commit/0fe73e4) | Bullet-structure 6 event cards. Discovery: renderer already supports `ev.bullets` array at line 3766 with dedicated `.event-bullets` CSS, no code change needed. Populated the field on id=7 (USMC/GTRI POs), id=9 (Navy OTA mods), id=43 (Leadership hires), id=113 (NSLP-CRADA equipment), id=115 (DLA DGPS line items), id=116 (DLA SATCOMv2 line items). |
+| [56136a7](https://github.com/skywaysinc/Skyways-timeline/commit/56136a7) | Card styling fixes + new `docs/CARD_STYLING_RULES.md` for future cards. Four content fixes: id=114 title simplified `V3 Block 2L (V3.2) | Forthcoming` → `V3.2 | Forthcoming` (drop insider nomenclature); id=111 removed misleading "Program ceiling $18.25M → $100M" bullet (parent-program figure, not Skyways-centric); id=111/36/28 fixed three bullets with arrow characters (↔ and → that earlier em-dash sweep missed). |
+| [5e477a3](https://github.com/skywaysinc/Skyways-timeline/commit/5e477a3) | Extend UPCOMING_KEYWORDS to include "First Article Build" and "Forthcoming" so id=45 (V3 Block 2 Jun 2026) and id=114 (V3.2 Dec 2026) render with dashed-border greyed-out upcoming treatment matching other future cards. |
+| [9275a8e](https://github.com/skywaysinc/Skyways-timeline/commit/9275a8e) | id=43 Leadership: remove Jeff Weinstein VP Production (let go). Also drop "production" from the detail's list of strengthened functions to match the three remaining hires. |
+
+### New project rule doc: `docs/CARD_STYLING_RULES.md`
+
+Documents standing rules for every timeline card so future work doesn't re-introduce the same issues:
+
+- **Bullets vs. prose decision tree** (3+ parallel items → bullets; narrative/emotional → prose; reference examples id=7, id=43, id=103)
+- **Bullet pattern consistency** (label:value preferred, plain descriptive acceptable, never mix inside one card)
+- **Banned character list** for user-visible copy (em/en dashes, all arrows including ↔ bidirectional, HTML tags)
+- **Skyways-centric content rule** — only what Skyways did, earned, delivered, or directly experienced; parent-program ceiling figures don't belong on Skyways cards. Project ULTRA case study included.
+- **Version designation preference** — V3.2 over V3 Block 2L in user-visible copy
+- **V3 capability rule** — `or`, never `and` (Tom + Charles's standing rule)
+- **Card-review checklist** for before-shipping
+
+Cross-referenced from `docs/README.md`. Memory-side rules stay pointed at `memory/reference_tom_martin_feedback.md` and `memory/feedback_internal_marking_style.md`.
+
+### Full arrow character audit
+
+The earlier em-dash cleanup scanned only em (U+2014) and en (U+2013) dashes plus simple → ← arrows. It missed ↔ (U+2194 bidirectional) and other arrow Unicode range variants. Full range scan (U+2190–U+2199) now clean across all 65 events' titles, details, bullets, and sources. Added to the CARD_STYLING_RULES.md never-in-copy list so the full arrow range stays out of future content.

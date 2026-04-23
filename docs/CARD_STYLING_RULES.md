@@ -124,6 +124,10 @@ Always "or," never "and." Any bullet or detail making claims about V3 specs must
 - [ ] Source mix classified correctly (red / orange / beige / no banner per SOURCE_VISIBILITY_RULES.md)
 - [ ] Banner color matches the classification
 
+## Scope Note | Internal Audit Fields
+
+The `charles_corrections` array on event docs is an internal audit trail recording WHICH correction was applied in which round. It is never rendered on the live timeline. Em dashes, arrows, and other no-copy characters are tolerated inside `charles_corrections` entries (you'll often see them when quoting Charles verbatim). All the rules above apply to user-rendered fields: `title`, `detail`, `tag`, `date_display`, `sources`, and `bullets`.
+
 ## Revision History
 
-- **2026-04-23**: Initial file. Documented bullet patterns, arrow prohibition, content-relevance rule, version-designation preference, V3 capability rule, review checklist. Case study of the Project ULTRA program-ceiling bullet removal.
+- **2026-04-23**: Initial file. Documented bullet patterns, arrow prohibition, content-relevance rule, version-designation preference, V3 capability rule, review checklist. Case study of the Project ULTRA program-ceiling bullet removal. Scope note clarifying that `charles_corrections` audit-log field is exempt from the character rules.
