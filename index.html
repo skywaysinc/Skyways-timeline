@@ -1049,6 +1049,17 @@
     content-visibility: auto;
     contain-intrinsic-size: 1px 900px;
   }
+  /* When a source drawer opens on a card at the BOTTOM of a year-section,
+     the drawer extends past the section's bottom edge into the next
+     year-section's airspace. Because each .year-section is its own
+     stacking context (due to content-visibility: auto + position: relative),
+     the next year's cards naturally render above it — clipping the drawer.
+     Fix: lift the year-section holding the open drawer above its siblings
+     so the drawer can extend freely across the year boundary. Uses :has()
+     which is supported on iOS Safari 15.4+ and all evergreen desktop browsers. */
+  .year-section:has(.event-card.sources-open) {
+    z-index: 50;
+  }
 
   .year-label-col { position: relative; padding: 0 0 48px 0; }
 

@@ -1289,9 +1289,11 @@
     "detail": "Skyways began iterating through initial all-electric Vertical Takeoff and Landing (VTOL) configurations, building small-scale aircraft for proof-of-concept testing and autonomous flight validation.",
     "tag": "Product",
     "sources": [
-      "Skyways Internal — No Source"
+      "Skyways Internal — Charles Acknin"
     ],
-    "charles_corrections": [],
+    "charles_corrections": [
+      "Source attribution updated: this entry exists because Charles flagged the pre-founding all-electric prototyping phase as a missing timeline milestone."
+    ],
     "source_urls": {},
     "sort_date": "2017-01",
     "source_thumbnails": {
@@ -1442,7 +1444,7 @@
     "detail": "Skyways begins its Series B fundraising round to accelerate V3 production scaling and expand commercial operations.",
     "tag": "Funding",
     "sources": [
-      "Skyways Internal — No Source"
+      "Skyways Internal — Shae Wilson"
     ],
     "source_urls": {},
     "sort_date": "2026-04",
