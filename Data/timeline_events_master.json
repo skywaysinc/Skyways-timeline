@@ -1121,7 +1121,9 @@
     "date_display": "2024-11",
     "charles_corrections": [
       "Round II V.2 #7 (Mar 20, 2026): Added per Charles \u2014 'In Nov 2024 we FINALLY did CVSI, full Computer Vision Ship Intercept, demo to USN on a ship in the Gulf of Mexico. No other company has ever done this.' Date and location per Charles (trumps the June 2024 RIMPAC framing in the Inside Unmanned Systems article, which covers the earlier phase of the same DIU CVSI program)."
-    ]
+    ],
+    "thumbnail": "https://www.skyways.com/_astro/v2-aboard-ship.Dm1shnLv_ZVithb.webp",
+    "thumbnail_status": "fallback_skyways_v2_aboard_ship"
   },
   {
     "id": 32,
@@ -1507,7 +1509,7 @@
     "date": "2026-04",
     "title": "Series B Round Opens",
     "category": "funding",
-    "detail": "Skyways begins its Series B fundraising round to accelerate V3 production scaling and expand commercial operations.",
+    "detail": "Skyways begins its Series B fundraising round to accelerate V3 production ramp and expand commercial operations.",
     "tag": "Funding",
     "sources": [
       "Skyways Internal \u2014 Shae Wilson"
