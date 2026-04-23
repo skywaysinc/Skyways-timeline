@@ -953,16 +953,16 @@
     .stats-row .stat:nth-child(n+4) .stat-menu {
       left: auto; right: 0;
     }
-    /* Contracts-table drawer stays viewport-fixed because the internal
-       table is wider than any single stat column. dvh max-height keeps
-       the bottom above Safari's toolbar. */
+    /* Contracts-table drawer: JS pinDrawer() anchors it via position:fixed
+       with an EXPLICIT top = stat.bottom + 8 so it sits directly under the
+       contracts stat (never a bottom sheet, never floating). CSS just
+       provides the horizontal gutters as a fallback in case JS hasn't run
+       yet, and resets the desktop min-width/max-width that would otherwise
+       leave it wider than the viewport. */
     .stat-menu.contracts-table {
-      position: fixed; top: auto; left: 8px; right: 8px;
       min-width: 0; max-width: none; width: auto;
       margin-top: 0;
       padding-top: 34px;
-      max-height: calc(100vh - 180px);
-      max-height: calc(100dvh - 120px);
     }
     .stat-menu.contracts-table::before { display: none; }
     .contracts-row {
@@ -1722,15 +1722,23 @@
       overflow: hidden;
       text-overflow: ellipsis;
       max-width: 100%;
+      /* Flex items default to min-width: min-content which can push a
+         stat wider than its 1fr grid column — breaking the 5-equal-cols
+         layout and making adjacent labels overlap. Force 0 so the grid's
+         minmax(0, 1fr) actually caps each cell. */
+      min-width: 0;
+      width: 100%;
     }
     .sticky-header.minimized .stat-value { font-size: 11px; }
     .stat-label {
       font-size: 7px;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       max-width: 100%;
+      min-width: 0;
+      width: 100%;
     }
 
     /* Filters: same 5-column grid as the stats row so each filter sits
@@ -1815,29 +1823,21 @@
     .event-value { font-size: 20px; }
     .event-card.highlight .event-title { font-size: 20px; }
 
-    /* Source drawer on event cards — pin as a bottom sheet on mobile. The
-       previous absolute-positioned dropdown inherited `left: 0` from desktop
-       and could extend off the right edge when the `.sources-trigger` sat
-       mid-card. Bottom sheet avoids the positioning cascade entirely;
-       max-height uses dvh so Safari's toolbar can't clip the bottom. */
+    /* Source drawer on event cards — anchors directly under the trigger
+       (per Shae: drawer must go DOWN from the card, never a bottom sheet,
+       never floating). JS `positionSourceMenuMobile()` caps max-height off
+       visualViewport and auto-scrolls the page up when the trigger is too
+       low on the screen to leave room below. Horizontal shift (negative
+       `left`) handled by the same JS so the drawer never extends past the
+       right edge of narrow viewports. */
     .sources-menu {
-      position: fixed;
-      top: auto;
-      bottom: 16px;
-      left: 8px;
-      right: 8px;
-      margin-top: 0;
       min-width: 0;
-      max-width: none;
-      width: auto;
-      max-height: calc(100vh - 180px);
-      max-height: calc(100dvh - 120px);
+      max-width: calc(100vw - 16px);
+      width: max-content;
       overflow-y: auto;
       overscroll-behavior: contain;
-      z-index: 200;
     }
-    .sources-menu::before { display: none; }
-    /* Links wrap inside the bottom sheet — no more ellipsis on small screens */
+    /* Links wrap inside the drawer — no more ellipsis on small screens */
     .sources-menu .source-link {
       white-space: normal;
       overflow: visible;
@@ -2126,7 +2126,7 @@
           </div>
         </div>
       </div>
-      <div class="stat"><div class="stat-value">1/30th</div><div class="stat-label">Cost of Helicopter</div>
+      <div class="stat"><div class="stat-value">1/30th</div><div class="stat-label">Helicopter cost</div>
         <div class="stat-menu">
           <div class="stat-menu-info">
             <p class="lead">Operating cost vs. legacy maritime helicopters:</p>
@@ -2546,37 +2546,39 @@
 
       var isMobile = window.matchMedia('(max-width: 720px)').matches;
       if (isMobile) {
-        // Mobile: CSS max-height: calc(100dvh - N) can't account for WHERE
-        // the drawer starts — a stat low in the header leaves less room
-        // below it than dvh suggests, and the drawer spills past the
-        // visible viewport into Safari's URL-bar area. Compute max-height
-        // dynamically from visualViewport so the drawer always fits above
-        // whatever browser chrome is currently showing.
+        // Mobile: ALL stat drawers anchor directly under their stat. Never
+        // a bottom sheet. Never floating mid-screen. See memory file
+        // feedback_mobile_drawer_placement.md for the full rule set —
+        // Shae has corrected this three times and it's no longer optional.
+        //   • Source-list drawers (stats 2-5): position stays absolute via
+        //     CSS; we only set max-height.
+        //   • Contracts-table (stat 1, wider): pin as position:fixed with
+        //     an EXPLICIT top = stat.bottom + 8, left/right gutters, and
+        //     width: auto so it spans the viewport under its stat.
+        // Max-height in both cases is derived from visualViewport so the
+        // drawer never spills into Safari's dynamic URL-bar area.
         var vv = window.visualViewport;
         var visibleH = (vv && vv.height) || window.innerHeight;
         var vTop = (vv && vv.offsetTop) || 0;
         var visibleBottom = vTop + visibleH;
+        var rectM = stat.getBoundingClientRect();
+        var drawerTop = rectM.bottom + 8; // matches 8px gap between stat and drawer
+        var available = Math.max(180, visibleBottom - drawerTop - 20);
         var isContracts = menu.classList.contains('contracts-table');
 
         if (isContracts) {
-          // Contracts table: too wide to anchor under a single stat. Pin
-          // it as an explicit bottom sheet — fixed to bottom of visible
-          // viewport with a top gap for the sticky header area.
+          // Wider drawer: pinned under its stat, spans the viewport.
           menu.style.position = 'fixed';
-          menu.style.top = 'auto';
-          menu.style.bottom = '16px';
+          menu.style.top = drawerTop + 'px';
+          menu.style.bottom = '';
           menu.style.left = '8px';
           menu.style.right = '8px';
           menu.style.width = 'auto';
           menu.style.marginTop = '0';
-          menu.style.maxHeight = Math.max(320, visibleH - 140) + 'px';
+          menu.style.maxHeight = available + 'px';
         } else {
-          // Source-list drawer: stays absolute-positioned under its stat
-          // (per CSS) — only override max-height so it can't extend past
-          // the visible viewport bottom.
-          var rectM = stat.getBoundingClientRect();
-          var drawerTop = rectM.bottom + 8; // matches CSS margin-top
-          var available = Math.max(160, visibleBottom - drawerTop - 20);
+          // Source-list drawer: CSS handles position:absolute, top:100%.
+          // We only cap max-height so the bottom scrollbar stays visible.
           menu.style.maxHeight = available + 'px';
         }
         return;
@@ -2812,12 +2814,71 @@
     document.querySelectorAll('.sources-trigger').forEach(function(t) {
       if (t !== except) {
         var m = t.querySelector('.sources-menu');
-        if (m) m.classList.remove('active');
+        if (m) {
+          m.classList.remove('active');
+          // Clear inline styles set by positionSourceMenuMobile so next
+          // open re-measures from scratch against the current viewport.
+          m.style.left = '';
+          m.style.right = '';
+          m.style.maxHeight = '';
+        }
         t.classList.remove('active');
         var c = t.closest('.event-card');
         if (c) c.classList.remove('sources-open');
       }
     });
+  }
+
+  // Mobile-only: after a source drawer opens, constrain horizontally so it
+  // can't overflow the right edge, cap max-height so it can't extend past
+  // Safari's URL bar, and scroll the page up if the trigger sits too low
+  // to leave room for the drawer to expand downward.
+  function positionSourceMenuMobile(menu, trigger) {
+    if (!window.matchMedia('(max-width: 720px)').matches) return;
+    // Reset any inline styles from a previous open so measurements are
+    // accurate (menu width can change if viewport was resized).
+    menu.style.left = '';
+    menu.style.right = '';
+    menu.style.maxHeight = '';
+
+    var triggerRect = trigger.getBoundingClientRect();
+    var viewportW = window.innerWidth;
+    var vv = window.visualViewport;
+    var visibleH = (vv && vv.height) || window.innerHeight;
+    var vTop = (vv && vv.offsetTop) || 0;
+    var visibleBottom = vTop + visibleH;
+
+    // Horizontal: menu's natural left in viewport coords is triggerRect.left
+    // (CSS: position:absolute, left:0 relative to trigger). If the menu's
+    // right edge would extend past (viewport width - 8px), shift left.
+    var menuWidth = menu.offsetWidth;
+    var menuNaturalRight = triggerRect.left + menuWidth;
+    if (menuNaturalRight > viewportW - 8) {
+      menu.style.left = (-(menuNaturalRight - (viewportW - 8))) + 'px';
+    }
+
+    // Vertical: cap max-height so the drawer's bottom stays above the
+    // visible viewport bottom. If there's almost no room (<180px) below
+    // the trigger, scroll the page up so the trigger sits higher.
+    var drawerTop = triggerRect.bottom + 6;  // matches CSS margin-top
+    var available = visibleBottom - drawerTop - 20;
+
+    if (available < 180) {
+      var targetTriggerY = 120;  // where we want the trigger to end up
+      var scrollBy = triggerRect.top - targetTriggerY;
+      if (scrollBy > 0) {
+        window.scrollBy({ top: scrollBy, behavior: 'smooth' });
+        // Re-measure after smooth scroll completes, then set max-height.
+        setTimeout(function() {
+          var newRect = trigger.getBoundingClientRect();
+          var newDrawerTop = newRect.bottom + 6;
+          var newAvailable = visibleBottom - newDrawerTop - 20;
+          menu.style.maxHeight = Math.max(180, newAvailable) + 'px';
+        }, 380);
+        return;
+      }
+    }
+    menu.style.maxHeight = Math.max(180, available) + 'px';
   }
 
   // ═══ BIND SOURCE MENUS (after dynamic render) ═══
@@ -2840,6 +2901,7 @@
             menu.classList.add('active');
             trigger.classList.add('active');
             if (card) card.classList.add('sources-open');
+            positionSourceMenuMobile(menu, trigger);
           }
         });
       } else {
@@ -2847,6 +2909,7 @@
           menu.classList.add('active');
           trigger.classList.add('active');
           if (card) card.classList.add('sources-open');
+          positionSourceMenuMobile(menu, trigger);
         });
         if (card) {
           card.addEventListener('mouseleave', function() {
@@ -2859,7 +2922,12 @@
     });
 
     document.addEventListener('click', function() { closeAllSourceMenus(); });
-    window.addEventListener('scroll', function() { closeAllSourceMenus(); }, { passive: true });
+    // No scroll-close on mobile — the page scroll is sometimes INTENTIONAL
+    // (from positionSourceMenuMobile's auto-scroll) and would close the
+    // drawer we just opened. Desktop behavior unchanged.
+    if (!('ontouchstart' in window)) {
+      window.addEventListener('scroll', function() { closeAllSourceMenus(); }, { passive: true });
+    }
   }
 
   // ═══ SEARCH SYSTEM (in-place DOM highlighting — preserves scroll position) ═══
