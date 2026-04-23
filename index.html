@@ -3343,45 +3343,47 @@
 
   // ═══ ERA CHAPTERS ═══
   // 9 years of 64 events reads flat. Era dividers group the timeline
-  // into four narrative acts so a first-time visitor sees the arc of
+  // into five narrative acts so a first-time visitor sees the arc of
   // the company, not just a stream of milestones. `startYear` is the
   // first year of each era; renderTimeline injects the divider right
   // before that year's section. Keep chronological, no gaps, no
   // overlaps. Copy uses `|` separators per the no-em-dashes rule.
+  // Taglines read as prose, not lists, per Charles's voice rules
+  // (reference_charles_feedback_archive.md).
   var ERAS = [
     {
       startYear: 2016,
       range: '2016 | 2018',
       title: 'Founding',
-      tagline: 'V1 built in a San Francisco apartment. Skyways incorporates in Austin. First USMC and Navy demos.',
+      tagline: 'A VTOL quadplane, hand-built in a San Francisco apartment. Y Combinator backed the bet in summer 2017; by 2018, two Skyways aircraft were flying BVLOS over White Sands for the Marines.',
       pills: ['3 years', 'V1 to V2.2', 'First defense POs']
     },
     {
       startYear: 2019,
       range: '2019 | 2022',
       title: 'DoW Operation Molding',
-      tagline: 'First Navy OTA awarded. Blue Water Maritime Logistics UAS. DIU Navy Spiral contract. Series A closes. Navy partnership takes hold.',
+      tagline: 'A win over 65 competitors at Navy ANTX opened Blue Water Maritime Logistics; the OTA grew from $575K to $2M across seven modifications. V2.5 logged two weeks on the USS Gerald R. Ford flight deck, and Thursday Ventures led a $13M Series A.',
       pills: ['4 years', 'V2.3 to V2.6', 'Navy OTA $2M+']
     },
     {
       startYear: 2023,
       range: '2023 | 2024',
       title: 'Platform Improvements',
-      tagline: 'V3 enters flight test. Navy NAWCAD contracts expand. RIMPAC Hawaii. III MEF Okinawa. Japan operations begin.',
+      tagline: 'V3 took to the air: Block 0 in early 2023, Block 1 in early 2024. Skyways flew alongside the Navy at RIMPAC, then completed the first allied-nation resupply, a JMSDF destroyer 23 km offshore. Starlink came aboard by year-end.',
       pills: ['2 years', 'V3 block rollout', 'RIMPAC + III MEF']
     },
     {
       startYear: 2025,
       range: '2025 | 2026',
       title: 'Public Emergence',
-      tagline: 'First public Demo Day. $37M STRATFI. ANA Holdings partnership. Series B round opens. Three continents, one network.',
+      tagline: 'A $37M USAF STRATFI opened the pathway to a Program of Record. Project ULTRA flew temperature-controlled blood between two US airports. ANA Holdings signed on in Japan, Skyways stepped into the public for the first time in November, and Series B opened.',
       pills: ['2 years', '$37M STRATFI', 'Series B open']
     },
     {
       startYear: 2027,
       range: '2027 | beyond',
       title: 'Scaling',
-      tagline: 'Production ramps. Fleet expands across three continents. Operational at scale.',
+      tagline: 'V3 Block 2 enters full-rate production. The fleet operates across the US, Europe, and Asia; the next phase is a Program of Record.',
       pills: ['Production', 'Fleet growth', 'Global ops'],
       upcoming: true
     }
