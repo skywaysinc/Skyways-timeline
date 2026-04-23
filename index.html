@@ -2083,8 +2083,9 @@
        that makes room for the category accent bar (24px / 28px highlight
        / 20px mobile / 22px mobile highlight). Positive top margin pushes
        the banner clear of the .event-meta row above (tag + sources
-       dropdown) — the previous -4px pulled the banner up and overlapped
-       the source label and tag pill. */
+       dropdown). Default background is the strongest warning (red) for
+       NOT APPROVED cards; the mixed + approved-public variants override
+       background + text color below. */
     grid-column: 1 / -1;
     margin: 14px -20px -16px -24px;
     padding: 6px 20px;
@@ -2095,6 +2096,17 @@
     text-align: center;
     border-radius: 0 0 8px 8px;
     line-height: 1.2;
+  }
+  /* Red stays on internal-banner-only (default). Variants: */
+  .internal-banner.internal-banner-mixed {
+    /* Orange | mixed public + internal-only addendum (public validated) */
+    background: #c05621;
+    color: #fff;
+  }
+  .internal-banner.internal-banner-approved-public {
+    /* Beige | Charles-only (approved for public use, no press release) */
+    background: #d4c18c;
+    color: #0f2f53;
   }
   .event-card.highlight .internal-banner {
     margin: 18px -24px -20px -28px;
@@ -2343,9 +2355,14 @@
        iOS minimum keeps the page at its natural scale. */
     .search-input { font-size: 16px; padding: 8px 74px 8px 10px; }
 
-    /* Aircraft background not useful on mobile — hero stacks vertically. */
-    .header-aircraft-bg,
-    .header-aircraft-wash { display: none; }
+    /* Aircraft background only hidden in EXPANDED mobile state (hero
+       stacks vertically and the bg would collide with title / telemetry).
+       In minimized state the mobile hero compacts into an aircraft strip
+       like desktop, so let the base opacity rules — opacity 0 expanded,
+       opacity 0.95 minimized — cascade through. Shae: "on mobile when the
+       menu reduces the background image should appear like desktop." */
+    .sticky-header:not(.minimized) .header-aircraft-bg,
+    .sticky-header:not(.minimized) .header-aircraft-wash { display: none; }
 
     /* Mobile hero: at least 25vh, grows with content so the telemetry
        footer always has room to render below the grid. */
@@ -3557,31 +3574,35 @@
     return div.innerHTML;
   }
 
-  // ═══ HELPER: detect if a source label is internal-only ═══
-  // Approved-for-public-use sources (do NOT trigger the red banner):
-  //   - "Skyways Internal — Charles Acknin" (CEO direct attribution = OK to share)
-  //   - "Skyways Internal — No Source" (general internal info, no sensitive contract data)
-  //   - "Skyways Internal — Not Published" (internal note, not contract data)
-  // Internal-only sources (DO trigger the red banner):
-  //   - "[NOT PUBLIC..." explicit not-public flag
-  //   - Any "Skyways Internal" source that references a government contract
-  //     number, CLIN, mod, or PO without a corresponding press release
-  function isInternalSource(label) {
-    if (!label) return false;
+  // ═══ HELPER: classify a source label ═══
+  // Returns one of three categories:
+  //   'charles-approved' — Skyways Internal attribution that is OK to share
+  //      publicly, just no press release exists. Examples:
+  //        Skyways Internal | Charles Acknin    (CEO direct attribution)
+  //        Skyways Internal | No Source         (general internal info)
+  //        Skyways Internal | Not Published     (internal note)
+  //   'internal'         — Skyways Internal source that is NOT approved for
+  //      public release. Typically references a government contract number,
+  //      CLIN, mod, or PO without a corresponding press release. Also the
+  //      explicit "[NOT PUBLIC..." flag.
+  //   'external'         — public press release, published article, or any
+  //      non-Skyways-Internal source.
+  // Regex accepts `|`, em dash, en dash, or hyphen as separator so both old
+  // (em-dash) and current (pipe) formats match.
+  function classifySource(label) {
+    if (!label) return 'external';
     var l = String(label).trim();
-    // Explicit not-public flag — always internal
-    if (l.indexOf('[NOT PUBLIC') === 0) return true;
-    // Charles Acknin attribution — approved for public use
-    if (l.indexOf('Skyways Internal — Charles Acknin') === 0) return false;
-    if (l.indexOf('Skyways Internal - Charles Acknin') === 0) return false;
-    if (l.indexOf('Skyways Internal — No Source') === 0) return false;
-    if (l.indexOf('Skyways Internal - No Source') === 0) return false;
-    if (l.indexOf('Skyways Internal — Not Published') === 0) return false;
-    if (l.indexOf('Skyways Internal - Not Published') === 0) return false;
-    // Any other "Skyways Internal" source (typically with a contract # or CLIN)
-    // = government-agency citation without a public press release. Internal.
-    if (l.indexOf('Skyways Internal') === 0) return true;
-    return false;
+    if (l.indexOf('[NOT PUBLIC') === 0) return 'internal';
+    if (/^Skyways Internal\s*[|\u2014\u2013-]\s*Charles Acknin/i.test(l)) return 'charles-approved';
+    if (/^Skyways Internal\s*[|\u2014\u2013-]\s*No Source/i.test(l)) return 'charles-approved';
+    if (/^Skyways Internal\s*[|\u2014\u2013-]\s*Not Published/i.test(l)) return 'charles-approved';
+    if (l.indexOf('Skyways Internal') === 0) return 'internal';
+    return 'external';
+  }
+  // Back-compat wrapper — callers that only want the boolean "is internal"
+  // treat charles-approved as not-internal (it's OK to share).
+  function isInternalSource(label) {
+    return classifySource(label) === 'internal';
   }
 
   // ═══ RENDER A SINGLE EVENT CARD ═══
@@ -3597,11 +3618,17 @@
     var upcoming = isUpcoming(title);
     var cardClass = 'event-card' + (highlightCard ? ' highlight' : '') + (upcoming ? ' upcoming' : '');
 
-    // Sources — classify each as internal vs external for visual treatment.
+    // Sources — classify each for visual treatment. Three buckets:
+    //   internalCount       = Skyways Internal source without press release
+    //                         (contract #, CLIN, [NOT PUBLIC flag)
+    //   charlesApprovedCount = Skyways Internal | Charles Acknin / No Source /
+    //                          Not Published (OK to share publicly)
+    //   externalCount        = any other source (press release, article, gov doc)
     var sources = ev.sources || [];
     var sourceCount = sources.length;
     var internalCount = 0;
     var externalCount = 0;
+    var charlesApprovedCount = 0;
     var sourceLinks = '';
     for (var s = 0; s < sources.length; s++) {
       var src = sources[s];
@@ -3609,9 +3636,11 @@
       var rawLabel = (typeof src === 'string') ? src : (src.label || 'Source');
       var label = esc(rawLabel);
       var url = (typeof src === 'string') ? '' : (src.url || '');
-      var isInternal = isInternalSource(rawLabel);
-      if (isInternal) internalCount++; else externalCount++;
-      var linkClass = 'source-link' + (isInternal ? ' source-link-internal' : '');
+      var cls = classifySource(rawLabel);
+      if (cls === 'internal') internalCount++;
+      else if (cls === 'charles-approved') charlesApprovedCount++;
+      else externalCount++;
+      var linkClass = 'source-link' + (cls === 'internal' ? ' source-link-internal' : '');
       if (url && url !== '#' && url.indexOf('http') === 0) {
         sourceLinks += '<a class="' + linkClass + '" href="' + esc(url) + '" target="_blank">' + label + '</a>';
       } else {
@@ -3619,13 +3648,17 @@
       }
     }
 
-    // Source-classification drives the red bottom banner only — no other
-    // visual changes to the card so it reads clean.
-    // Special case: some documents (like the NSLP-CRADA) are cited as
-    // internal because no press release exists, but ARE approved for
-    // public release per the document itself. Detect that via an
-    // "approved for public" marker in any source label and use a
-    // clarifying banner instead of the default internal warning.
+    // Banner decision tree per the source-visibility rules:
+    //   RED    | NOT APPROVED FOR PUBLIC DISTRIBUTION
+    //          (internal-only source with no public press release, e.g. a
+    //           military contract cited only by contract number)
+    //   ORANGE | EVENT CONTAINS INTERNAL ONLY INFORMATION NOT IN A PRESS RELEASE
+    //          (public sources validate the card AND there is internal-only
+    //           addendum that doesn't appear in any press release)
+    //   BEIGE  | APPROVED FOR PUBLIC USE, NO PRESS RELEASE
+    //          (Charles is the only source, or the source doc explicitly says
+    //           "approved for public." OK to share, just no press exists.)
+    //   NONE   fully public (external source(s) only; or external + charles-approved)
     var approvedPublicNoPR = false;
     for (var ap = 0; ap < sources.length; ap++) {
       var apSrc = sources[ap];
@@ -3641,7 +3674,9 @@
     } else if (internalCount > 0 && externalCount === 0) {
       bannerHTML = '<div class="internal-banner internal-banner-only">NOT APPROVED FOR PUBLIC DISTRIBUTION</div>';
     } else if (internalCount > 0 && externalCount > 0) {
-      bannerHTML = '<div class="internal-banner internal-banner-mixed">EVENT CONTAINS INTERNAL ONLY INFORMATION</div>';
+      bannerHTML = '<div class="internal-banner internal-banner-mixed">EVENT CONTAINS INTERNAL ONLY INFORMATION NOT IN A PRESS RELEASE</div>';
+    } else if (charlesApprovedCount > 0 && externalCount === 0 && internalCount === 0) {
+      bannerHTML = '<div class="internal-banner internal-banner-approved-public">APPROVED FOR PUBLIC USE, NO PRESS RELEASE</div>';
     }
 
     // Single-source cards whose only citation is "Skyways Internal — Charles
@@ -3651,9 +3686,9 @@
       ? ((typeof sources[0] === 'string') ? sources[0] : (sources[0].label || ''))
       : '';
     var charlesInlineEligible = sourceCount === 1 && (
-      /Skyways Internal\s*[—-]\s*Charles Acknin/i.test(firstLabel) ||
-      /Skyways Internal\s*[—-]\s*No Source/i.test(firstLabel) ||
-      /Skyways Internal\s*[—-]\s*Not Published/i.test(firstLabel)
+      /Skyways Internal\s*[|\u2014\u2013-]\s*Charles Acknin/i.test(firstLabel) ||
+      /Skyways Internal\s*[|\u2014\u2013-]\s*No Source/i.test(firstLabel) ||
+      /Skyways Internal\s*[|\u2014\u2013-]\s*Not Published/i.test(firstLabel)
     );
 
     var sourcesHTML = '';
