@@ -4,6 +4,27 @@ Running chronicle of meaningful work on the Skyways Timeline site. One entry per
 
 ---
 
+## 2026-04-23 (evening, late) — Contracts drawer mobile polish + doc-rule update
+
+Shorter follow-up session after Shae reviewed the Tier 1/2 work on device. Approved everything; asked for targeted fixes on the $46M+ drawer. Each fix shipped, approval-gated, then docs landed.
+
+**What shipped (approved)**:
+- Contracts-table Amount column standardized — commercial rows now all say "Value not disclosed" (id=39, id=44 had descriptive labels like "Aircraft Deliveries" / "Commercial Trials" that moved into the name column with `|` separators). See `project_timeline_frontend.md` → "Contracts table — Amount column convention."
+- Removed the per-category legend disclaimer from the drawer footer on both desktop and mobile. Only "Click any row to jump to its timeline card." remains. Pills on each row carry the category signal.
+- Visible scrollbar on `.contracts-grid` ≤720px: 10px navy thumb on gray-05 track with Firefox/Safari fallbacks. iOS Safari's auto-hide default left no cue that the drawer scrolled.
+- Contracts-table drawer on mobile auto-snaps the sticky header to `.minimized` when opened, freeing ~100-200px of vertical room. `.drawer-active` already zeros transitions; the snap is instant. Force-sync layout with `void document.body.offsetHeight` so `pinDrawer` measures the post-snap geometry.
+- Scan pill hides whenever any stat drawer is open (keyed to existing `.sticky-header.drawer-active` via a general-sibling selector). Fixes a z-index stacking-context trap: `.stat.menu-open { z-index: 5 }` constrains the drawer's internal z-index of 120 when competing with the floating pill's 110 in the body stacking context.
+
+**Doc-rule update**: Shae revised `feedback_auto_document_after_task.md`. New default: do NOT auto-doc. Wait for an explicit approval signal ("perfect," "good," "great," "ship it," "looks great," "works," "done," etc.) before updating project state files and memory learnings. Documentation captures the FINAL locked-in state, never an intermediate iteration. The five-round Scan-button placement from the previous session was the canonical counterexample — docs written after any of rounds 1-4 would have captured a now-false spec.
+
+**Lessons added to memory**:
+- `reference_timeline_css_quirks.md` → "z-index trap: floating sibling overlays parent-constrained child" (with diagnostic clue)
+- `reference_timeline_css_quirks.md` → "Snap-minimize-then-measure pattern for drawers that want maximum room"
+- `reference_timeline_css_quirks.md` → "iOS Safari auto-hide scrollbar needs explicit override for critical-scroll drawers"
+- `project_timeline_frontend.md` → "Contracts drawer — legend disclaimer removed entirely" + "Contracts drawer — mobile UX polish"
+
+---
+
 ## 2026-04-23 (evening) — Tier 1 + Tier 2 UX improvements, era chapters, Scan toggle
 
 Plan mode produced a tiered UX roadmap (`~/.claude/plans/now-using-any-ui-ux-front-end-design-smooth-pudding.md`). Shipped all five Tier-1 quick wins and all four Tier-2 features in two consecutive sessions.
