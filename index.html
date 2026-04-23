@@ -153,13 +153,24 @@
   }
 
   .search-input {
-    width: 100%; padding: 7px 80px 7px 12px;
+    width: 100%; padding: 7px 96px 7px 12px;
     border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;
     font-family: 'Founders Grotesk', sans-serif;
     font-size: 13px; font-weight: 450;
     background: var(--white); color: var(--navy);
     outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    /* Suppress native webkit/Safari clear X (would collide with our custom nav + clear) */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .search-input::-webkit-search-cancel-button,
+  .search-input::-webkit-search-decoration,
+  .search-input::-webkit-search-results-button,
+  .search-input::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
   }
   .search-input:focus {
     border-color: var(--blue);
@@ -1554,7 +1565,7 @@
     }
     .search-nav { right: 26px; }
     .search-count { display: none; } /* Hide count on narrow screens to save space */
-    .search-input { font-size: 12px; padding: 6px 52px 6px 10px; }
+    .search-input { font-size: 12px; padding: 6px 74px 6px 10px; }
 
     /* Aircraft background not useful on mobile — hero stacks vertically. */
     .header-aircraft-bg,
