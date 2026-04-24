@@ -1,5 +1,7 @@
 # Project: Skyways Timeline
 
+> **Invoke when:** an agent task involves the 65-event Skyways history timeline, its Firestore collection (`skyways_history_and_story`), live flight stats (Airtable → `Data/live_stats.json`), or the published site at `skyways-shaewilson/Skyways-timeline` on GitHub Pages. See also `../../CLAUDE.md` and `../../PROJECTS.md` for filesystem-level navigation.
+
 ## Repository
 - GitHub: `git@github.com:skyways-shaewilson/Skyways-timeline.git`
 - Branch: `main`
@@ -221,7 +223,7 @@ service cloud.firestore {
 | Stat | Value | Source |
 |------|-------|--------|
 | Gov't Contracts | $40M+ | STRATFI $37M + Navy OTA ~$2.3M + SBIRs ~$0.8M + OTA $0.575M |
-| Flights Logged | 2,950+ | Updated per internal data |
+| Flights Logged | 2,984 (live) | Airtable live count + PRE_2024_ARCHIVE_FLIGHTS=1400 (see Live Flight Stats section) |
 | km Flown | 40,500+ | Internal flight logs |
 | Aircraft Iterations | 20+ | SBIR.gov portfolio |
 | Continents | 3 | North America, Asia, Europe |
@@ -311,6 +313,7 @@ service cloud.firestore {
   - Starts with every row in `Merged flights` (already contains SKYWAYS + ANA + SKYPORTS)
   - Adds any rows from `Flights` whose `Flight #` is not already on the SKYWAYS side of Merged (catches recent flights not yet merged)
   - Sums `Flight time (s)` and `Dist Cruise (km)` for flight-time and distance totals
+  - **Adds `PRE_2024_ARCHIVE_FLIGHTS = 1400` constant to `lifetimeFlights`** (only — not to time/km). Airtable only goes back to Jan 3, 2024; Skyways has been flying since 2017. Charles confirmed lifetime was "nearly 3,000" in Apr 2026. The 1,400 constant reconciles the Airtable live total with that. `flightTimeSec` and `kmFlown` remain 2024-onwards (framed that way in the UI since launch — Charles quote "around the earth once since 2024").
 - **Why this dedup:** Merged flights is the rollup, but a tail of ~12 recent Skyways flights can lag behind the merge. The delta ensures archive completeness without double-counting.
 - **Credentials:** `AIRTABLE_PAT` + `AIRTABLE_BASE_ID` in `.env.local` (gitignored)
 - **Scheduled task:** `skyways-timeline-live-stats` runs every 15 min:
