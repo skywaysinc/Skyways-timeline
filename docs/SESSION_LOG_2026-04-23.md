@@ -300,3 +300,30 @@ Shae set the rule: every event card title leads with a hook, then a pipe, then t
 ## End-of-session state
 
 All 65 events live on Firestore + JSON + GitHub. 15 bulleted cards, 50 prose. 24 titles retitled to the new convention; remaining 41 already complied. Four-state source visibility enforced. Every Charles + Tom correction honored. Zero em/en dashes or arrows in user-visible fields. Canonical rule docs in place: SOURCE_VISIBILITY_RULES, CARD_STYLING_RULES (incl. title convention), EVENT_CORRECTIONS_AUDIT, STORYTELLING_GAPS, plus the docs/README folder map. Memory mirrors for storytelling framework and Tom Martin + Charles feedback archives.
+
+---
+
+## Late-evening fixes (Tom's second-round review + UI polish)
+
+| Commit | Summary |
+|---|---|
+| [3d32aa3](https://github.com/skywaysinc/Skyways-timeline/commit/3d32aa3) | fix(sources): renderer now reads URLs from `ev.source_urls` dict. The renderer's `url` extraction only handled `{label, url}` object form; for our string-array sources `url` was always empty so every source link rendered as `href="#" onclick="return false"`. Tom flagged it as "all source links go back to the main page." |
+| [f7e237f](https://github.com/skywaysinc/Skyways-timeline/commit/f7e237f) | Replace 30 Sanity CDN fallback thumbnails with Skyways-owned `_astro/...webp` images. Sanity images carried original-article context (Japan Today photo on Navy OTA card, etc.). |
+| [41a5dfe](https://github.com/skywaysinc/Skyways-timeline/commit/41a5dfe) | id=29 JMSDF: removed two dead Japan source labels (Yahoo + Asagumo) that 404'd with no Wayback archive. Both were syndications of the canonical drone.jp article that remains cited. |
+| [d3275e4](https://github.com/skywaysinc/Skyways-timeline/commit/d3275e4) | Add Newest/Oldest order toggle next to Scan; localStorage `skyways-order`; renderTimeline cached on `window._lastTimelineEvents`; reverse year order + within-year events when desc; upcoming-era forward-look prepended in desc mode. |
+| [252a3a6](https://github.com/skywaysinc/Skyways-timeline/commit/252a3a6) | Move view-controls inline into legend-row to fix overlap with Milestones filter. Refactored legend-row to flex with `.legend-filters` wrapper holding the 5-col grid. |
+| [bfd4b0d](https://github.com/skywaysinc/Skyways-timeline/commit/bfd4b0d) | Slim view-controls pill padding to match filter row height. Insufficient (still grew row by ~6-8px). |
+| [691e4f8](https://github.com/skywaysinc/Skyways-timeline/commit/691e4f8) | Reverted to the original 5-col grid on legend-row + absolute-positioned view-controls. Critical: position:absolute children don't contribute to row height, so the sticky-header overall height is preserved. `.legend-filters` switched to `display: contents` so its children render as direct grid items of legend-row. |
+| [727f77e](https://github.com/skywaysinc/Skyways-timeline/commit/727f77e) | Two fixes: (a) aircraft hidden on tablet/laptop widths regardless of minimization. The `@media (max-width: 1024px) { .header-aircraft-bg { display: none } }` was a blanket hide that affected any browser between 768-1024px (common laptop sizes). Scoped to `:not(.minimized)` only, so aircraft peeks through on minimize across desktop, laptop/tablet, and mobile. (b) Toggle vertical position fix — `top: 50%` was off because legend-row has asymmetric padding-top; changed to `bottom: 0 + translateY(-2px)` so toggles align with filter pills. |
+
+### Lessons captured to memory
+
+`feedback_collaboration_patterns.md` updated with several new failure-mode entries:
+
+- Chased the wrong cause for 2 commits when Shae told me upfront the cause was elsewhere (aircraft / legend-row)
+- Tablet/laptop viewport blindness: `@media (max-width: 1024px)` rules affect a much wider audience than just iPad
+- Concurrent edit collision (her commit absorbed my changes while I was in progress)
+- Source-link renderer bug pattern: when data is split across `ev.sources` (labels) and `ev.source_urls` (keyed URLs), renderer must read both
+- `top: 50%` on absolute children doesn't account for asymmetric parent padding
+- Pattern: position:absolute to add controls to an existing row without growing its height
+- Pattern: prefer subject-tagged Skyways `_astro/` images over context-loaded Sanity CDN images for fallback thumbnails
