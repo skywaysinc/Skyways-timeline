@@ -1169,14 +1169,30 @@
   }
 
   .legend-row {
+    /* Flex container holding the .legend-filters grid (5 filter cells
+       that align with stat columns above) on the left and the inline
+       .view-controls cluster (Scan + Order pills) on the right.
+       flex-wrap allows view-controls to drop below filters when the
+       viewport is too narrow to fit both on one row. */
+    display: flex;
+    align-items: center;
+    gap: 6px 12px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.14); padding-top: 10px;
+    transition: padding-top 0.35s ease;
+  }
+
+  .legend-filters {
     /* Grid match with .stats-row above: 5 equal columns so each filter
-       lines up directly under its stat counterpart. */
+       lines up directly under its stat counterpart. flex:1 lets the
+       grid take the remaining horizontal space after view-controls. */
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 0 12px;
     align-items: center;
-    border-top: 1px solid rgba(255,255,255,0.14); padding-top: 10px;
-    transition: padding-top 0.35s ease;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .sticky-header.minimized .legend-row { padding-top: 6px; }
@@ -1453,23 +1469,15 @@
     white-space: nowrap; border: 0;
   }
 
-  /* View controls cluster — wraps the Scan + Order toggle pills as a
-     single fixed-position group that pokes out of the bottom-right edge
-     of the sticky header. Wrapper handles positioning; inner buttons
-     are inline-flex with a small gap. */
-  .view-controls.floating {
-    position: fixed;
-    top: var(--header-height, 0px);
-    right: 32px;
-    /* Overlap the header edge slightly so the cluster reads as "attached
-       to" the menu rather than "floating under" it. Negative translate
-       lifts it so roughly half the pill height sits above the header
-       bottom rule. */
-    transform: translateY(-50%);
-    z-index: 110;
+  /* View controls cluster — Scan + Order pills inline at the right end
+     of the .legend-row. Sits in the auto-width slot of the legend-row
+     flex container; .legend-filters takes the remaining space on the
+     left. */
+  .view-controls {
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    flex: 0 0 auto;
   }
   /* Density toggle — switches between "Full" (default, current view)
      and "Scan" (cards collapsed to date + title so the 9-year span is
@@ -1529,18 +1537,17 @@
   .density-icon-line:nth-child(3) { width: 85%; }
   @media (max-width: 720px) {
     .density-toggle { font-size: 10px; padding: 6px 14px 6px 10px; letter-spacing: 0.6px; }
-    .view-controls.floating { right: 16px; gap: 4px; }
+    .view-controls { gap: 4px; }
     .density-icon { width: 12px; height: 9px; }
   }
-  /* Hide the view-controls cluster when search is focused so the
-     compact match view keeps every pixel above the keyboard for results. */
-  body.search-focused .view-controls.floating { display: none; }
-  /* Hide the view-controls while any stat drawer is open — otherwise the
-     fixed pill (z-index 110 in the body stacking context) overlays the
-     drawer on mobile, where the drawer's own z-index is constrained by
-     the .stat.menu-open parent's stacking context (z-index: 5). General
-     sibling selector because the sticky header is a sibling of the cluster. */
-  .sticky-header.drawer-active ~ .view-controls.floating { display: none; }
+  /* view-controls used to be fixed-positioned ("floating") and needed
+     hide rules for search-focus and drawer-open. Inline placement in
+     .legend-row eliminates the z-index conflict — kept the original
+     intent in this comment so future regressions don't reintroduce the
+     bug. If view-controls ever floats again, also reapply:
+       body.search-focused .view-controls.floating { display: none; }
+       .sticky-header.drawer-active ~ .view-controls.floating { display: none; }
+  */
 
   /* ── DENSITY: SCAN MODE ──
      When body.density-compact is set, collapse every card to date +
@@ -2301,8 +2308,10 @@
     .stat-value { font-size: 30px; }
     .stat-label { font-size: 8px; }
     /* Keep the 5-column grid at tablet so each filter stays under its
-       stat counterpart. Shrink horizontal gap to fit. */
-    .legend-row { gap: 0 8px; }
+       stat counterpart. Shrink horizontal gap to fit. Vertical gap stays
+       small but non-zero so wrapped view-controls breathe a little. */
+    .legend-row { gap: 4px 8px; }
+    .legend-filters { gap: 0 8px; }
     .legend-item { white-space: nowrap; }
     .legend-long { display: none; }
     .timeline-wrapper { padding: 12px 32px 48px; }
@@ -2464,9 +2473,12 @@
        "Milestones", "Major ") collapse via .legend-long so everything
        fits in the viewport width. */
     .legend-row {
-      gap: 0 6px;
+      gap: 4px 6px;
       padding-top: 6px;
       padding-bottom: 2px;
+    }
+    .legend-filters {
+      gap: 0 6px;
     }
     .legend-item {
       font-size: 8px;
@@ -2920,37 +2932,37 @@
       </div>
     </div>
     <div class="legend-row">
-      <div class="legend-item" data-filter="contracts" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by Contracts" onclick="toggleFilter('contracts')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFilter('contracts');}"><div class="legend-dot contracts"></div><span class="legend-label">Contracts</span><div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
-      <div class="legend-item" data-filter="funding" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by Funding" onclick="toggleFilter('funding')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFilter('funding');}"><div class="legend-dot funding"></div><span class="legend-label">Funding</span><div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
-      <div class="legend-item" data-filter="product" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by Product Development" onclick="toggleFilter('product')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFilter('product');}"><div class="legend-dot product"></div><span class="legend-label">Product<span class="legend-long"> Development</span></span><div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
-      <div class="legend-item" data-filter="defense" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by Defense Milestones" onclick="toggleFilter('defense')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFilter('defense');}"><div class="legend-dot defense"></div><span class="legend-label">Defense<span class="legend-long"> Milestones</span></span><div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
-      <div class="legend-item" data-filter="milestone" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by Major Milestones" onclick="toggleFilter('milestone')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFilter('milestone');}"><div class="legend-dot milestone"></div><span class="legend-label"><span class="legend-long">Major </span>Milestones</span><div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
+      <div class="legend-filters">
+        <div class="legend-item" data-filter="contracts" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by Contracts" onclick="toggleFilter('contracts')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFilter('contracts');}"><div class="legend-dot contracts"></div><span class="legend-label">Contracts</span><div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
+        <div class="legend-item" data-filter="funding" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by Funding" onclick="toggleFilter('funding')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFilter('funding');}"><div class="legend-dot funding"></div><span class="legend-label">Funding</span><div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
+        <div class="legend-item" data-filter="product" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by Product Development" onclick="toggleFilter('product')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFilter('product');}"><div class="legend-dot product"></div><span class="legend-label">Product<span class="legend-long"> Development</span></span><div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
+        <div class="legend-item" data-filter="defense" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by Defense Milestones" onclick="toggleFilter('defense')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFilter('defense');}"><div class="legend-dot defense"></div><span class="legend-label">Defense<span class="legend-long"> Milestones</span></span><div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
+        <div class="legend-item" data-filter="milestone" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by Major Milestones" onclick="toggleFilter('milestone')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFilter('milestone');}"><div class="legend-dot milestone"></div><span class="legend-label"><span class="legend-long">Major </span>Milestones</span><div class="legend-x"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M3.05 3.05a.5.5 0 01.7 0L6 5.29l2.25-2.24a.5.5 0 01.7.7L6.71 6l2.24 2.25a.5.5 0 01-.7.7L6 6.71 3.75 8.95a.5.5 0 01-.7-.7L5.29 6 3.05 3.75a.5.5 0 010-.7z"/></svg></div></div>
+      </div>
+      <!-- View controls cluster — Scan + Order pills inline at the right
+           end of the legend row. Filters take the leftmost grid columns
+           and align under their stat counterparts above; view-controls
+           sit in the auto-width slot at the right. -->
+      <div class="view-controls" id="viewControls">
+        <button type="button" class="density-toggle" id="densityToggle" aria-pressed="false" onclick="toggleDensity()" aria-label="Toggle timeline density">
+          <span class="density-icon" aria-hidden="true">
+            <span class="density-icon-line"></span>
+            <span class="density-icon-line"></span>
+            <span class="density-icon-line"></span>
+          </span>
+          <span class="density-label">Scan</span>
+        </button>
+        <button type="button" class="density-toggle" id="orderToggle" aria-pressed="false" onclick="toggleOrder()" aria-label="Toggle timeline order">
+          <span class="density-icon" aria-hidden="true">
+            <span class="density-icon-line"></span>
+            <span class="density-icon-line"></span>
+            <span class="density-icon-line"></span>
+          </span>
+          <span class="density-label" id="orderLabel">Newest</span>
+        </button>
+      </div>
     </div>
   </div></div>
-</div>
-
-<!-- View controls cluster — Scan + Order pills that poke out of the
-     sticky header's bottom-right edge. The .view-controls wrapper holds
-     the fixed positioning; inner buttons sit inline. Top offset tracks
-     the header's animated height via the --header-height custom property
-     (updated by syncYearLabelOffset). -->
-<div class="view-controls floating" id="viewControls">
-  <button type="button" class="density-toggle" id="densityToggle" aria-pressed="false" onclick="toggleDensity()" aria-label="Toggle timeline density">
-    <span class="density-icon" aria-hidden="true">
-      <span class="density-icon-line"></span>
-      <span class="density-icon-line"></span>
-      <span class="density-icon-line"></span>
-    </span>
-    <span class="density-label">Scan</span>
-  </button>
-  <button type="button" class="density-toggle" id="orderToggle" aria-pressed="false" onclick="toggleOrder()" aria-label="Toggle timeline order">
-    <span class="density-icon" aria-hidden="true">
-      <span class="density-icon-line"></span>
-      <span class="density-icon-line"></span>
-      <span class="density-icon-line"></span>
-    </span>
-    <span class="density-label" id="orderLabel">Newest</span>
-  </button>
 </div>
 
 <!-- Polite ARIA live region — screen readers announce state changes
