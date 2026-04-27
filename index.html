@@ -4704,19 +4704,13 @@
       searchMatches[currentMatchIdx].classList.remove('active');
     }
 
-    // Close source drawers that were opened by the previous match, but
-    // KEEP open any drawer that still contains a search match — those
-    // were auto-opened in handleSearch so every hit is visible. Closing
-    // them here would hide hits the user just saw and re-opening them
-    // selectively (only the active match's drawer) defeats the purpose.
-    document.querySelectorAll('.sources-menu.active').forEach(function(menu) {
-      if (menu.querySelector('mark.search-highlight')) return;
-      menu.classList.remove('active');
-      var trigger = menu.closest('.sources-trigger');
-      var card = menu.closest('.event-card');
-      if (trigger) trigger.classList.remove('active');
-      if (card) card.classList.remove('sources-open');
-    });
+    // Close any source drawer opened by the previous match. Up/down
+    // navigation moves the active hit; the drawer for the new active
+    // match opens below if applicable. Net behavior: at most one source
+    // drawer open at a time during search navigation, tied to the
+    // currently-focused match. Previous drawer closes the moment the
+    // user advances or steps back.
+    closeAllSourceMenus();
 
     currentMatchIdx += dir;
     if (currentMatchIdx >= searchMatches.length) currentMatchIdx = 0;
@@ -4841,21 +4835,10 @@
       section.style.display = anyVisible ? '' : 'none';
     });
 
-    // Auto-open any source drawer that contains a search match. Without
-    // this, matches inside .source-link elements stay invisible because
-    // the parent .sources-menu is visibility:hidden by default. The user
-    // would see "N matches" in the counter but no highlighted text on
-    // the card. closeAllSourceMenus() ran above; re-open the drawers
-    // that have hits so every match is actually visible.
-    document.querySelectorAll('.sources-menu').forEach(function(menu) {
-      if (menu.querySelector('mark.search-highlight')) {
-        menu.classList.add('active');
-        var trigger = menu.closest('.sources-trigger');
-        var card = menu.closest('.event-card');
-        if (trigger) trigger.classList.add('active');
-        if (card) card.classList.add('sources-open');
-      }
-    });
+    // NOTE: source drawers are NOT auto-opened on query type. They open
+    // and close in lockstep with the up/down navigation in navigateMatch
+    // so only the currently-focused match's drawer is visible at any
+    // time. Previous drawers close when navigation moves on.
 
     navEl.classList.add('visible');
     if (searchMatches.length > 0) {
