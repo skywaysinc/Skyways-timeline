@@ -3657,9 +3657,16 @@
     for (var s = 0; s < sources.length; s++) {
       var src = sources[s];
       // src may be a string (from JSON/Firestore array) or {label,url}.
+      // When src is a string, look up the URL in ev.source_urls keyed by the
+      // exact label. This is how source URLs are stored across the corpus
+      // (sources is an array of label strings; source_urls is a {label: url}
+      // dict). Without this lookup every link rendered as href="#" and click
+      // did nothing or scrolled to top — looked like "links to main page."
       var rawLabel = (typeof src === 'string') ? src : (src.label || 'Source');
       var label = esc(rawLabel);
-      var url = (typeof src === 'string') ? '' : (src.url || '');
+      var url = (typeof src === 'string')
+        ? ((ev.source_urls && ev.source_urls[rawLabel]) || '')
+        : (src.url || '');
       var cls = classifySource(rawLabel);
       if (cls === 'internal') internalCount++;
       else if (cls === 'charles-approved') charlesApprovedCount++;
