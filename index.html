@@ -4593,9 +4593,15 @@
     document.addEventListener('click', function() { closeAllSourceMenus(); });
     // No scroll-close on mobile — the page scroll is sometimes INTENTIONAL
     // (from positionSourceMenuMobile's auto-scroll) and would close the
-    // drawer we just opened. Desktop behavior unchanged.
+    // drawer we just opened. Desktop behavior: scroll-close UNLESS the
+    // scroll was started by search navigation (navigateMatch sets a
+    // suppression flag for ~600ms while its smooth-scroll runs, otherwise
+    // the drawer it just opened gets slammed shut by this listener).
     if (!('ontouchstart' in window)) {
-      window.addEventListener('scroll', function() { closeAllSourceMenus(); }, { passive: true });
+      window.addEventListener('scroll', function() {
+        if (window._suppressDrawerScrollClose) return;
+        closeAllSourceMenus();
+      }, { passive: true });
     }
   }
 
@@ -4741,6 +4747,15 @@
       if (trigger && typeof positionSourceMenuMobile === 'function') {
         positionSourceMenuMobile(menu, trigger);
       }
+      // Suppress the desktop scroll-close listener for the duration of the
+      // smooth-scroll below. Without this, the scroll events fired by
+      // window.scrollTo({behavior:'smooth'}) close the drawer we just
+      // opened. 700ms covers a typical smooth scroll on the timeline.
+      window._suppressDrawerScrollClose = true;
+      clearTimeout(window._unsuppressDrawerScrollClose);
+      window._unsuppressDrawerScrollClose = setTimeout(function() {
+        window._suppressDrawerScrollClose = false;
+      }, 700);
     }
 
     document.getElementById('searchCount').textContent = (currentMatchIdx + 1) + ' of ' + searchMatches.length;
