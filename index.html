@@ -4522,9 +4522,11 @@
 
   // Mobile-only: after a source drawer opens, constrain horizontally so it
   // can't overflow the right edge, cap max-height so it can't extend past
-  // Safari's URL bar, and scroll the page up if the trigger sits too low
-  // to leave room for the drawer to expand downward.
-  function positionSourceMenuMobile(menu, trigger) {
+  // Safari's URL bar, and (only when really needed) scroll the page up so
+  // the drawer has enough room to expand downward.
+  // skipScroll: pass true when the caller is going to do its own
+  // window.scrollTo (e.g. navigateMatch), so this fn doesn't fight it.
+  function positionSourceMenuMobile(menu, trigger, skipScroll) {
     if (!window.matchMedia('(max-width: 720px)').matches) return;
     // Reset any inline styles from a previous open so measurements are
     // accurate (menu width can change if viewport was resized).
@@ -4549,15 +4551,22 @@
     }
 
     // Vertical: cap max-height so the drawer's bottom stays above the
-    // visible viewport bottom. If there's almost no room (<180px) below
-    // the trigger, scroll the page up so the trigger sits higher.
+    // visible viewport bottom.
     var drawerTop = triggerRect.bottom + 6;  // matches CSS margin-top
     var available = visibleBottom - drawerTop - 20;
 
-    if (available < 180) {
-      var targetTriggerY = 120;  // where we want the trigger to end up
-      var scrollBy = triggerRect.top - targetTriggerY;
-      if (scrollBy > 0) {
+    // Conservative scroll: only nudge the page up by the deficit needed to
+    // give the drawer ~200px of room, AND cap so the trigger never moves
+    // higher than y=80. The previous logic moved the trigger to a fixed
+    // y=120 from any starting position, which on a mid-screen tap could
+    // scroll the page hundreds of px and throw the user off the card they
+    // just opened. Now: small adjust if needed, no adjust otherwise.
+    if (!skipScroll && available < 180) {
+      var minDrawerHeight = 200;
+      var deficit = minDrawerHeight - available;
+      var maxAllowedScroll = Math.max(0, triggerRect.top - 80);
+      var scrollBy = Math.min(deficit, maxAllowedScroll);
+      if (scrollBy > 16) {
         window.scrollBy({ top: scrollBy, behavior: 'smooth' });
         // Re-measure after smooth scroll completes, then set max-height.
         setTimeout(function() {
@@ -4767,7 +4776,10 @@
       menu.classList.add('active');
       if (card) card.classList.add('sources-open');
       if (trigger && typeof positionSourceMenuMobile === 'function') {
-        positionSourceMenuMobile(menu, trigger);
+        // skipScroll=true: navigateMatch handles its own scroll below.
+        // Letting positionSourceMenuMobile also scrollBy would compound
+        // and overshoot the active match's card on mobile.
+        positionSourceMenuMobile(menu, trigger, true);
       }
       // Suppress the desktop scroll-close listener for the duration of the
       // smooth-scroll below. Without this, the scroll events fired by
