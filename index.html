@@ -2500,11 +2500,33 @@
        directly under its stat. Extended label words ("Development",
        "Milestones", "Major ") collapse via .legend-long so everything
        fits in the viewport width. */
+    /* Mobile: stack view-controls below the filter row instead of fighting
+       for horizontal space. Filter cells get the full width (no right
+       reserve) so labels like "Milestones" don't get crowded by the
+       absolute-positioned toggle pills. View-controls becomes a static
+       second row, right-aligned. */
     .legend-row {
-      gap: 0 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
       padding-top: 6px;
-      padding-bottom: 2px;
-      padding-right: 110px;
+      padding-bottom: 4px;
+      padding-right: 0;
+    }
+    .legend-filters {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0 6px;
+      width: 100%;
+    }
+    .view-controls {
+      position: static;
+      transform: none;
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      margin-top: 0;
     }
     .legend-item {
       font-size: 8px;
